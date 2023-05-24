@@ -19,7 +19,17 @@
 </ul>
 <p> Your group's guesser makes this <b>guess</b>: {{ guess }} </p>
 <p> This guess was <b>{{ result }}.</b>  </p>
-{{ if participant.incentive }} <p> Your group's <b>score</b> is: {{ score }} </p> {{else}} {{ endif }}
+<p> {{ if participant.treatment }} Your groups' <b>score</b> is {{ score }}. {{ else }} {{ endif }} </p>
+
+<p> {{ if participant.treatment }} The current <b>scores of all groups in this round </b> are: {{ else }} {{ endif }} </p>
+
+<ol> {{ if participant.treatment }}
+    {{ for item in overall_score }}
+       <li> Group: <b>{{ item }}</b></li>
+    {{ endfor }}   
+    {{ else }} {{ endif }}
+</ol> 
+
 {{ next_button }}
 {{ endblock }}
 

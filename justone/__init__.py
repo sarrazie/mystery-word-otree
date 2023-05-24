@@ -9,7 +9,7 @@ Your app description
 
 class C(BaseConstants):
     NAME_IN_URL = 'Mystery_Word_Game'
-    NUM_ROUNDS = 3
+    NUM_ROUNDS = 16
     PLAYERS_PER_GROUP = 4
     MYSTERY_WORDS = ['Penguin', 'Window', 'Forest', 'Market', 'Hair', 'Idea', 'Letter', 'Shower', 'Pillow', 'White', 'Chocolate', 'Robot', 'Unicorn', 'Time', 'Passion', 'Cheese']
     LANGUAGE_CODE = 'en'
@@ -19,6 +19,7 @@ class Subsession(BaseSubsession):
 
 class Group(BaseGroup):
     incentive = models.BooleanField()
+    payoff = models.IntegerField(initial=1000)
     
 class Player(BasePlayer): 
     def role(player):
@@ -30,7 +31,7 @@ class Player(BasePlayer):
             return {1: 'cluegiver', 2: 'cluegiver', 3: 'guesser', 4: 'cluegiver'}[player.id_in_group]
         if player.round_number % 4 == 0:
             return {1: 'cluegiver', 2: 'cluegiver', 3: 'cluegiver', 4: 'guesser'}[player.id_in_group]
-    
+        
     guess = models.StringField(label="Your guess:", initial='')
     clues = models.StringField(label="Your clue:", initial='')
     score = models.IntegerField()
@@ -40,19 +41,25 @@ class Player(BasePlayer):
     english = models.StringField(choices=[['strongly agree', 'strongly agree'],[' agree', 'agree'],['neutral', 'neutral'],['disagree', 'disagree'],['strongly disagree', 'strongly disagree']], label='"My limited vocabulary in English made my performance in the game worse."', widget=widgets.RadioSelectHorizontal)
     comments = models.LongStringField(label="Do you have any comments or suggestions for improvement? (optional)", initial='', max_length=500, blank=True)
 
+def creating_session(subsession: Subsession):
+    import itertools
+    incentives = itertools.cycle([True, False])
+    session = subsession.session
+    session.vars['incentive_group_list'] = incentives
+    
 # PAGES
 class GroupWaitPage(WaitPage):
     template_name = 'justone/GroupWaitPage.html'
     group_by_arrival_time = True
     def is_displayed(player):
         return player.round_number == 1
+    @staticmethod
     def after_all_players_arrive(group: Group):
-        import random
-        group.incentive = random.choice([True, False])
-
+        session = group.session
+        group.incentive = next(session.vars['incentive_group_list'])
         for player in group.get_players():
-            participant = player.participant
-            participant.incentive = group.incentive
+            participant= player.participant
+            participant.vars['treatment'] = group.incentive
 
 class Intro(Page):
     timeout_seconds = 180
@@ -69,6 +76,10 @@ class Round(Page):
     def vars_for_template(player):
         round_number = player.round_number 
         remaining_rounds = C.NUM_ROUNDS - round_number 
+        group = player.group
+        # get payoff from last round
+        if round_number > 1:
+            group.payoff = group.in_round(round_number - 1).payoff
         return dict(round_number = round_number, remaining_rounds = remaining_rounds)
 
 class Clue_Page(Page):
@@ -176,8 +187,23 @@ class Results(Page):
             player.result = 'incorrect' 
             player.payoff = 0 
         player.score =  int(player.participant.payoff)
-        return dict(mystery_word = mystery_word, clues = clues, guess = guess, result = player.result, score = player.score)
-  
+        player.group.payoff =  player.score 
+        if player.participant.treatment == False:
+            player.group.payoff = 1000
+        overall_score = score(player.group)
+        return dict(mystery_word = mystery_word, clues = clues, guess = guess, result = player.result, score = player.score, overall_score = overall_score)
+    
+def score (group: Group):
+    subsession = group.subsession
+    groups = subsession.get_groups()
+    overall_score = []
+    for group in groups:
+            overall_score.append(group.payoff)
+            if group.payoff == 1000:
+                overall_score.remove(1000)
+            sorted_overall_score = sorted(overall_score, reverse = True) 
+    return sorted_overall_score
+      
 class TestQuestions(Page):
     template_name = 'justone/TestQuestions.html'
     timeout_seconds = 240
