@@ -1,0 +1,26 @@
+{{ block title }}
+    Results
+{{ endblock }}
+
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+
+<p> The <b>mystery word</b> this round was: {{ mystery_word }} </p>
+<p> Your group's <b>clues </b>were: </p>
+<ul>
+    {{ for item in clues }}
+        <li>{{ item }}</li>
+    {{ endfor }} 
+</ul>
+<p> Your group's guesser makes this <b>guess</b>: {{ guess }} </p>
+<p> This guess was <b>{{ result }}.</b>  </p>
+{{ if participant.incentive }} <p> Your group's <b>score</b> is: {{ score }} </p> {{else}} {{ endif }}
+{{ next_button }}
+{{ endblock }}
+
+

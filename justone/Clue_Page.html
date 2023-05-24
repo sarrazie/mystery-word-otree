@@ -1,0 +1,27 @@
+{{ block title }}
+    Clue
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+
+<p> The <b>mystery word</b> in this round is: </p>
+<p> <b>{{ mystery_word }}</b> </p>   
+<p> Please enter a clue for this word. {{ formfields }} </p>
+
+    {{ next_button }}
+
+<details>
+    <summary> Recap Rules </summary>
+    <ul>    
+        <li> <b><u>Goal:</u></b> One of the players – <i>the guesser</i> – has to guess a mystery word based on clues given by the other players.</li>
+        <li> If two or more players write the same clue, all identical clues (also clues from the same word family) will be canceled before <i>the guesser</i> gets to see them.</li>
+        <li> <b>Invalid clues:</b> Clues that are from the same word family as the mystery word, only a translation of the mystery word, or fictitious.</li>
+</ul>  
+</details>
+
+{{ endblock }}

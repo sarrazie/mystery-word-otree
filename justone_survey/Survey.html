@@ -1,0 +1,56 @@
+{{ block title }}
+    Questions 
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+
+<p> Please answer the following <b>questions:</b></p>
+
+{{ formfields }}
+
+<p>Which family members have played an active role in your major life decisions? (Select all that apply)</p>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" name="choice1">
+  <label class="form-check-label">
+    Mother/Father
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" name="choice2">
+  <label class="form-check-label">
+    Grandmother/Grandfather
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" name="choice3">
+  <label class="form-check-label">
+    Sister/Brother
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" name="choice4">
+  <label class="form-check-label">
+    Aunt/Uncle
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" name="choice5">
+  <label class="form-check-label">
+    Cousins
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" name="choice6">
+  <label class="form-check-label">
+    Other family members
+  </label>
+<p> </p>
+{{ next_button }}
+
+{{ endblock }}
+
