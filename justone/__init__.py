@@ -114,12 +114,7 @@ def clues_error_message(player, value):
         value_trans = GoogleTranslator(source='auto', target='en').translate(value)
         if mystery_word == value_trans:
             return 'Your clue must not be a translation of the mystery word!'
-        import enchant
-        d = enchant.Dict("en_US")
-        d.check(value)
-        if d.check(value) == False:
-            return 'Your clue must be spelled correctly and can not be fictitious!'
-                  
+        
 class ResultsWaitPage(WaitPage):
     title_text = "Thank you for your clue!"
     body_text = "Please wait until all other players have submitted their clues and the guesser has made the guess."
