@@ -31,7 +31,7 @@ class Player(BasePlayer):
 
 class Survey(Page):
     template_name = 'justone_survey/Survey.html'
-    timeout_seconds = 300
+    timeout_seconds = 240
     form_model = 'player'
     form_fields = ['number_family_gathering', 'number_wedding_funeral']
 

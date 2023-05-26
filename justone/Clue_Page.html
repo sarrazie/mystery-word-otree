@@ -9,6 +9,16 @@
     }
 </style>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 15) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+
 <p> The <b>mystery word</b> in this round is: </p>
 <p> <b>{{ mystery_word }}</b> </p>   
 <p> Please enter a clue for this word. {{ formfields }} </p>

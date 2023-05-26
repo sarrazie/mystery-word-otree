@@ -62,12 +62,12 @@ class GroupWaitPage(WaitPage):
             participant.vars['treatment'] = group.incentive
 
 class Intro(Page):
-    timeout_seconds = 180
+    timeout_seconds = 150
     def is_displayed(player):
         return player.round_number == 1
 
 class Instructions(Page):
-    timeout_seconds = 180
+    timeout_seconds = 120
     def is_displayed(player):
         return player.round_number == 1
     
@@ -110,10 +110,18 @@ def clues_error_message(player, value):
             return 'Your clue must only contain one word!'
         if mystery_word in value or value in mystery_word:
             return 'Your clue must not contain parts of the mystery word!'
-        from deep_translator import GoogleTranslator
-        value_trans = GoogleTranslator(source='auto', target='en').translate(value)
-        if mystery_word == value_trans:
-            return 'Your clue must not be a translation of the mystery word!'
+        def num_there(s):
+         return any(i.isdigit() for i in s)
+        if num_there(value) == False:
+            from deep_translator import GoogleTranslator
+            value_trans = GoogleTranslator(source='auto', target='en').translate(value)
+            if mystery_word == value_trans:
+                return 'Your clue must not be a translation of the mystery word!'
+        from textblob import Word
+        word = Word(value)
+        result = word.spellcheck()
+        if word != result [0][0]:
+            return 'Your clue must be spelled correctly and cannot be fictitious!'
         
 class ResultsWaitPage(WaitPage):
     title_text = "Thank you for your clue!"
@@ -157,7 +165,7 @@ class Guess_Page(Page):
             return player.guess
 
 class Results(Page): 
-    timeout_seconds = 45 
+    timeout_seconds = 60
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         if player.role() == 'cluegiver':
@@ -201,14 +209,14 @@ def score (group: Group):
       
 class TestQuestions(Page):
     template_name = 'justone/TestQuestions.html'
-    timeout_seconds = 240
+    timeout_seconds = 180
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
     form_model = 'player'
     form_fields = ['known', 'understanding', 'english', 'comments']
     
 class FinalPage(Page):
-    timeout_seconds = 45
+    timeout_seconds = 30
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
 

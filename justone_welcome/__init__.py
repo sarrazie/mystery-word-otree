@@ -25,7 +25,7 @@ class Player(BasePlayer):
 #PAGES
 
 class Welcome(Page):
-    timeout_seconds = 90
+    timeout_seconds = 180
     pass
 
 page_sequence = [Welcome]

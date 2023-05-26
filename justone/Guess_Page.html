@@ -9,6 +9,16 @@
     }
 </style>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 15) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+
 <p> These are the <b>clues</b> you have received from you three group members: </p> 
 
 <ul>
