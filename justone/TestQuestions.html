@@ -9,6 +9,16 @@
     }
 </style>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 15) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+
  <p> Thank you for playing the game. You will now be asked a series of questions about the game you just played. </p>
  <p> Please answer the following <b>questions</b> or indicate your <b>level of agreement</b> with the following statements. </p>
 
