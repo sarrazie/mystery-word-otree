@@ -9,27 +9,27 @@
         display: none;
     }
 </style>
-
-<p> The <b>mystery word</b> this round was: {{ mystery_word }} </p>
-<p> Your group's <b>clues </b>were: </p>
+</br>
+<p> Mystery word: <b>{{ mystery_word }}</b> </p>
+<p> Your group's clues: </p>
 <ul>
     {{ for item in clues }}
-        <li>{{ item }}</li>
+        <li><b>{{ item }}</b></li>
     {{ endfor }} 
 </ul>
-<p> Your group's guesser makes this <b>guess</b>: {{ guess }} </p>
-<p> This guess was <b>{{ result }}.</b>  </p>
-<p> {{ if participant.treatment }} Your groups' <b>score</b> is {{ score }}. {{ else }} {{ endif }} </p>
+<p> Your group's guess: <b>{{ guess }}</b> </p>
+<p> This guess was {{ result }}.</p>
+<p> {{ if participant.treatment }} Your group's score: <b>{{ score }} point(s) </b> {{ else }} {{ endif }} </p>
 
-<p> {{ if participant.treatment }} The current <b>scores of all groups in this round </b> are: {{ else }} {{ endif }} </p>
+<p> {{ if participant.treatment }} The current scores of all groups in this round: {{ else }} {{ endif }} </p>
 
 <ol> {{ if participant.treatment }}
     {{ for item in overall_score }}
-       <li> Group: <b>{{ item }}</b></li>
+       <li><b>{{ item }} point(s) </b></li>
     {{ endfor }}   
     {{ else }} {{ endif }}
 </ol> 
-
+</br>
 {{ next_button }}
 {{ endblock }}
 

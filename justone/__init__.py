@@ -36,7 +36,7 @@ class Player(BasePlayer):
     clues = models.StringField(label="Your clue:", initial='')
     score = models.IntegerField()
     result = models.StringField()
-    known = models.StringField(choices=[['Yes', 'Yes'], ['No', 'No']], label='Have you ever played the game "Just One"?', widget=widgets.RadioSelect)
+    known = models.StringField(choices=[['Yes', 'Yes'], ['No', 'No']], label='Did you ever play the game "Just One" before?', widget=widgets.RadioSelect)
     understanding = models.StringField(choices=[['strongly agree', 'strongly agree'],[' agree', 'agree'],['neutral', 'neutral'],['disagree', 'disagree'],['strongly disagree', 'strongly disagree']], label='"I quickly understood the procedure and the rules of the game."', widget=widgets.RadioSelectHorizontal)
     english = models.StringField(choices=[['strongly agree', 'strongly agree'],[' agree', 'agree'],['neutral', 'neutral'],['disagree', 'disagree'],['strongly disagree', 'strongly disagree']], label='"My limited vocabulary in English made my performance in the game worse."', widget=widgets.RadioSelectHorizontal)
     comments = models.LongStringField(label="Do you have any comments or suggestions for improvement? (optional)", initial='', max_length=500, blank=True)
@@ -125,7 +125,7 @@ def clues_error_message(player, value):
         
 class ResultsWaitPage(WaitPage):
     title_text = "Thank you for your clue!"
-    body_text = "Please wait until all other players have submitted their clues and the guesser has made the guess."
+    body_text = "Please wait until all other players have submitted their clues and the guesser has made a guess."
     def is_displayed(player):
         return player.role() == 'cluegiver'
 

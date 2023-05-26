@@ -8,29 +8,29 @@
         display: none;
     }
 </style>
-
+</br>
 <p> Dear MIEPP students, let's play a game together! </p>
 
-<p> You are randomly assigned to <b>groups of four.</b> Together in your group you play {{ if group.incentive }} to get the best score
-    {{ else }} {{ endif }} in overall <b>16 turns.</b> </p>  
+<p> You were randomly assigned to <b>groups of four.</b> Together in your group you play {{ if group.incentive }} to get the best score in
+    {{ else }} {{ endif }} a total of <b>16 turns.</b> </p>  
 
 
 <p> <b><u>Goal:</u></b> One of the players – <i>the guesser</i> – has to guess a mystery word based on clues given by the other players. </p>
-<p> If two or more players write the same clue, <b>all identical clues will be canceled</b> before <i>the guesser</i> gets to see them. </p> 
+<p> A clue consists only of a <b>single word.</b> If two or more players write the same word, <b>all identical words will be canceled</b> before <i>the guesser</i> gets to see them. </p> 
 
 <p> {{ if group.incentive }} At the end, the group with the highest score (one point for each correctly guessed mystery word) wins a <b>prize.</b> {{ else }} {{ endif }} </p>
 
 <p> Each turn is divided in <b>four phases:</b></p>
 
 <ol>
-    <li> All players except <i>the guesser</i> are told which mystery word they have to provide a clue for.</li>
-    <li> Without communicating with each other and without showing it to anyone, each cluegiver types one clue in. That <b>clue must be composed of a single word.</b></li>
-    <li> Once all player have written their clues <b>(within max two minutes)</b> and the identical or invalid clues have been cancelled, <i>the guesser</i> is shown all remaining clues and has <b>only one guess to identify the mystery word</b>.</li>
-    <li> The group is told whether <i>the guesser </i> guessed the mystery word correctly or not. The next turn begins with an other player becoming <i>the new guesser.</i></li>
+    <li>  All players except <i>the guesser</i> are told which mystery word they have to provide a clue for.</li>
+    <li>  Without communicating with each other and without showing it to anyone, each <i>cluegiver</i> types one clue in.</li>
+    <li>  Once all player have written their clues, the identical or invalid clues are canceled. <i>The guesser</i> is shown all remaining clues and has <b>only one guess</b> to identify the mystery word.</li>
+    <li>  The group is told whether <i>the guesser </i> guessed the mystery word correctly or not. The next turn begins with another player becoming <i>the guesser.</i></li>
 </ol>
-
-    {{ formfields }}
-    {{ next_button }}
+</br>
+{{ formfields }}
+{{ next_button }}
 
 {{ endblock }}
 
