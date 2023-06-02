@@ -53,7 +53,6 @@ class Survey(Page):
         if num_selected < 1:
             return 'Please select at least one family member.'
 
-
 class FinalPage(Page):
     pass
 
