@@ -19,15 +19,9 @@
   });
 </script>
 </br>
+<p> Please answer the following <b>questions:</b></p>
 
-<p>Which family members have played an active role in your major life decisions? <b>(Select all that apply)</b></p>
-{{for field in C.FAMILY_MEMBERS}}
-<label>
-    <input type="checkbox" name="{{ field.name }}" value="1">
-    {{field.label}}
-</label><br>
-{{endfor}}
-
+{{formfields}}
 </br>
 {{ next_button }}
 

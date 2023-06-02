@@ -9,9 +9,9 @@ Your app description
 
 class C(BaseConstants):
     NAME_IN_URL = 'Mystery_Word_Game'
-    NUM_ROUNDS = 16
+    NUM_ROUNDS = 12
     PLAYERS_PER_GROUP = 4
-    MYSTERY_WORDS = ['Penguin', 'Window', 'Forest', 'Market', 'Hair', 'Idea', 'Letter', 'Shower', 'Pillow', 'White', 'Chocolate', 'Robot', 'Unicorn', 'Time', 'Passion', 'Cheese']
+    MYSTERY_WORDS = ['Robot', 'Hair', 'Cheese', 'Forest', 'Letter', 'Shower', 'Idea', 'White', 'Time', 'Penguin', 'Unicorn', 'Market']
     LANGUAGE_CODE = 'en'
 
 class Subsession(BaseSubsession):
