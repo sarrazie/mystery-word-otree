@@ -33,13 +33,31 @@ class Player(BasePlayer):
             return {1: 'cluegiver', 2: 'cluegiver', 3: 'cluegiver', 4: 'guesser'}[player.id_in_group]
         
     guess = models.StringField(label="Your guess:", initial='')
-    clues = models.StringField(label="Your clue:", initial='')
+    clues = models.StringField(label="Your final clue:", initial='')
     score = models.IntegerField()
     result = models.StringField()
     known = models.StringField(choices=[['Yes', 'Yes'], ['No', 'No']], label='Did you ever play the game "Just One" before?', widget=widgets.RadioSelect)
     understanding = models.StringField(choices=[['strongly agree', 'strongly agree'],[' agree', 'agree'],['neutral', 'neutral'],['disagree', 'disagree'],['strongly disagree', 'strongly disagree']], label='"I quickly understood the procedure and the rules of the game."', widget=widgets.RadioSelectHorizontal)
     english = models.StringField(choices=[['strongly agree', 'strongly agree'],[' agree', 'agree'],['neutral', 'neutral'],['disagree', 'disagree'],['strongly disagree', 'strongly disagree']], label='"My limited vocabulary in English made my performance in the game worse."', widget=widgets.RadioSelectHorizontal)
     comments = models.LongStringField(label="Do you have any comments or suggestions for improvement? (optional)", initial='', max_length=500, blank=True)
+    Idea1 = models.StringField(label= 'Your ideas:', initial='', blank=True)
+    Idea2 = models.StringField(label= '', initial='', blank=True)
+    Idea3 = models.StringField(label= '', initial='', blank=True)
+    Idea4 = models.StringField(label= '', initial='', blank=True)
+    Idea5 = models.StringField(label= '', initial='', blank=True)
+    Idea6 = models.StringField(label= '', initial='', blank=True)
+    Idea7 = models.StringField(label= '', initial='', blank=True)
+    Idea8 = models.StringField(label= '', initial='', blank=True)
+    Idea9 = models.StringField(label= '', initial='', blank=True)
+    Idea10 = models.StringField(label= '', initial='', blank=True)
+    Idea11 = models.StringField(label= '', initial='', blank=True)
+    Idea12 = models.StringField(label= '', initial='', blank=True)
+    Idea13 = models.StringField(label= '', initial='', blank=True)
+    Idea14 = models.StringField(label= '', initial='', blank=True)
+    Idea15 = models.StringField(label= '', initial='', blank=True)
+    Idea16 = models.StringField(label= '', initial='', blank=True)
+    Idea17 = models.StringField(label= '', initial='', blank=True)
+    Idea18 = models.StringField(label= '', initial='', blank=True)
 
 def creating_session(subsession: Subsession):
     import itertools
@@ -83,11 +101,11 @@ class Round(Page):
         return dict(round_number = round_number, remaining_rounds = remaining_rounds)
 
 class Clue_Page(Page):
-    timeout_seconds = 120
+    timeout_seconds = 180
     def is_displayed(player):
         return player.role() == 'cluegiver'   
     form_model = 'player'
-    form_fields = ['clues'] 
+    form_fields = ['clues', 'Idea1', 'Idea2', 'Idea3', 'Idea4', 'Idea5', 'Idea6', 'Idea7', 'Idea8', 'Idea9', 'Idea10', 'Idea11', 'Idea12', 'Idea13', 'Idea14', 'Idea15', 'Idea16', 'Idea17', 'Idea18']
  
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]

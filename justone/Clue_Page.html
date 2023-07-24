@@ -21,9 +21,81 @@
 </br>
 <p> The <b>mystery word</b> in this round is: </p>
 <p> <b>{{ mystery_word }}</b> </p>   
-<p> Please enter a clue for this word.{{ formfields }}
+<p> Please enter <b>all</b> of your ideas for this word (one idea per text box): </p>
+    <b>{{ formfield 'Idea1' }}</b>
+        <details>
+        <summary> Add a second idea </summary>
+        {{ formfield 'Idea2' }}
+            <details>
+            <summary> Add a third idea  </summary>
+            {{ formfield 'Idea3' }}
+                <details>
+                <summary> Add a fourth idea </summary>
+                {{ formfield 'Idea4' }}
+                    <details>
+                    <summary> Add a fifth idea </summary>
+                    {{ formfield 'Idea5' }}
+                        <details>
+                        <summary> Add a sixth idea</summary>
+                        {{ formfield 'Idea6' }}
+                            <details>
+                            <summary> Add a seventh idea</summary> 
+                            {{ formfield 'Idea7' }}
+                                <details>
+                                <summary> Add an eighth idea</summary> 
+                                {{ formfield 'Idea8' }}
+                                    <details>
+                                    <summary> Add a ninth idea</summary> 
+                                    {{ formfield 'Idea9' }}
+                                        <details>
+                                        <summary> Add a tenth idea</summary> 
+                                        {{ formfield 'Idea10' }}
+                                            <details>
+                                            <summary> Add an eleventh idea</summary>
+                                            {{ formfield 'Idea11' }}
+                                                <details>
+                                                <summary> Add a twelfth idea </summary>
+                                                {{ formfield 'Idea12' }}
+                                                    <details>
+                                                    <summary> Add a thirteenth idea </summary>
+                                                    {{ formfield 'Idea13' }}
+                                                        <details>
+                                                        <summary> Add a fourteenth idea </summary>
+                                                        {{ formfield 'Idea14' }}
+                                                        <details>
+                                                            <summary> Add a fifteenth idea </summary>
+                                                            {{ formfield 'Idea15' }}
+                                                            <details>
+                                                                <summary> Add a sixteenth idea </summary>
+                                                                {{ formfield 'Idea16' }}
+                                                                    <details>
+                                                                    <summary> Add a seventeeth idea </summary>
+                                                                    {{ formfield 'Idea17' }}
+                                                                        <details>
+                                                                        <summary> Add an eighteenth idea</summary>
+                                                                        {{ formfield 'Idea18' }}
+                                                                        <p>You've reached the maximum of ideas that can be submitted.</p> 
+                                                                        </details>   
+                                                                    </details>
+                                                                </details>
+                                                            </details>
+                                                        </details>
+                                                    </details>
+                                                </details>
+                                            </details>
+                                        </details>
+                                    </details>
+                                </details>
+                            </details>
+                        </details>
+                    </details>
+                </details>
+            </details>
+        </details>       
 </br>
-{{ next_button }}
+<p> Please decide now for your final clue and enter it here. <b>{{ formfield 'clues' }}</b> </p>
+</br>
+   {{ next_button }}
 </br>
 <details>
     <summary> Recap Rules </summary>
