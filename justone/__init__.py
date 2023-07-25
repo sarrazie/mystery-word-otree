@@ -234,19 +234,19 @@ class Guess_Page(Page):
         if clues_group[1] in clues_group[2] or clues_group[2] in clues_group[1]:
             clues_group[1] = 'Identical clue'
             clues_group[2] = 'Identical clue'
-        import re
-        if re.search("[^a-zA-Z0-9s]", clues_group[0]) and clues_group[0] != 'Identical clue':
-            clues_group[0] = 'Invalid clue (special characters)'
-        if re.search("[^a-zA-Z0-9s]", clues_group[1]) and clues_group[1] != 'Identical clue':
-            clues_group[1] = 'Invalid clue (special characters)'
-        if re.search("[^a-zA-Z0-9s]", clues_group[2]) and clues_group[2] != 'Identical clue':
-            clues_group[2] = 'Invalid clue (special characters)'
-        if ' ' in clues_group[0] and clues_group[0] != 'Identical clue' and clues_group[0] != 'Invalid clue (special characters)':
+        if ' ' in clues_group[0] and clues_group[0] != 'Identical clue':
             clues_group[0] = 'Invalid clue (more than one word)'
-        if ' ' in clues_group[1] and clues_group[1] != 'Identical clue' and clues_group[1] != 'Invalid clue (special characters)':
+        if ' ' in clues_group[1] and clues_group[1] != 'Identical clue':
             clues_group[1] = 'Invalid clue (more than one word)'
-        if ' ' in clues_group[2] and clues_group[2] != 'Identical clue' and clues_group[2] != 'Invalid clue (special characters)':
+        if ' ' in clues_group[2] and clues_group[2] != 'Identical clue':
             clues_group[2] = 'Invalid clue (more than one word)'
+        import re
+        if re.search("[^a-zA-Z0-9s]", clues_group[0]) and clues_group[0] != 'Identical clue' and clues_group[0] != 'Invalid clue (more than one word)': 
+            clues_group[0] = 'Invalid clue (special characters)'
+        if re.search("[^a-zA-Z0-9s]", clues_group[1]) and clues_group[1] != 'Identical clue' and clues_group[1] != 'Invalid clue (more than one word)':
+            clues_group[1] = 'Invalid clue (special characters)'
+        if re.search("[^a-zA-Z0-9s]", clues_group[2]) and clues_group[2] != 'Identical clue' and clues_group[2] != 'Invalid clue (more than one word)':
+            clues_group[2] = 'Invalid clue (special characters)'
         if mystery_word in clues_group[0] or clues_group[0] in mystery_word:
             clues_group[0] = 'Invalid clue (same family as mystery word)'
         if mystery_word in clues_group[1] or clues_group[1] in mystery_word:
