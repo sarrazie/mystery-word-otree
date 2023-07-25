@@ -221,19 +221,32 @@ class Guess_Page(Page):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         mystery_word = mystery_word.lower()
         clues_group = [p.clues for p in player.get_others_in_group()]
-        if ' ' in clues_group[0]:
-            clues_group[0] = 'Invalid clue (more than one word)'
-        if ' ' in clues_group[1]:
-            clues_group[1] = 'Invalid clue (more than one word)'
-        if ' ' in clues_group[2]:
-            clues_group[2] = 'Invalid clue (more than one word)'
+        if (clues_group[0] in clues_group[1] or clues_group[1] in clues_group[0]) and (clues_group[0] in clues_group[2] or clues_group[2] in clues_group[0]) and (clues_group[1] in clues_group[2] or clues_group[2] in clues_group[1]):
+            clues_group[0] = 'Identical clue'
+            clues_group[1] = 'Identical clue'
+            clues_group[2] = 'Identical clue'
+        if clues_group[0] in clues_group[1] or clues_group[1] in clues_group[0]:
+            clues_group[0] = 'Identical clue'
+            clues_group[1] = 'Identical clue'
+        if clues_group[0] in clues_group[2] or  clues_group[2] in clues_group[0]:
+            clues_group[0] = 'Identical clue'
+            clues_group[2] = 'Identical clue'
+        if clues_group[1] in clues_group[2] or clues_group[2] in clues_group[1]:
+            clues_group[1] = 'Identical clue'
+            clues_group[2] = 'Identical clue'
         import re
-        if re.search("[^a-zA-Z0-9s]", clues_group[0]):
+        if re.search("[^a-zA-Z0-9s]", clues_group[0]) and clues_group[0] != 'Identical clue':
             clues_group[0] = 'Invalid clue (special characters)'
-        if re.search("[^a-zA-Z0-9s]", clues_group[1]):
+        if re.search("[^a-zA-Z0-9s]", clues_group[1]) and clues_group[1] != 'Identical clue':
             clues_group[1] = 'Invalid clue (special characters)'
-        if re.search("[^a-zA-Z0-9s]", clues_group[2]):
-            clues_group[2] = 'Invalid clue (special characters)' 
+        if re.search("[^a-zA-Z0-9s]", clues_group[2]) and clues_group[2] != 'Identical clue':
+            clues_group[2] = 'Invalid clue (special characters)'
+        if ' ' in clues_group[0] and clues_group[0] != 'Identical clue' and clues_group[0] != 'Invalid clue (special characters)':
+            clues_group[0] = 'Invalid clue (more than one word)'
+        if ' ' in clues_group[1] and clues_group[1] != 'Identical clue' and clues_group[1] != 'Invalid clue (special characters)':
+            clues_group[1] = 'Invalid clue (more than one word)'
+        if ' ' in clues_group[2] and clues_group[2] != 'Identical clue' and clues_group[2] != 'Invalid clue (special characters)':
+            clues_group[2] = 'Invalid clue (more than one word)'
         if mystery_word in clues_group[0] or clues_group[0] in mystery_word:
             clues_group[0] = 'Invalid clue (same family as mystery word)'
         if mystery_word in clues_group[1] or clues_group[1] in mystery_word:
@@ -268,20 +281,7 @@ class Guess_Page(Page):
         result = word.spellcheck()
         if word != result [0][0]:
             clues_group[2] = 'Invalid clue (spelling mistake/no real word)'
-        if (clues_group[0] in clues_group[1] or clues_group[1] in clues_group[0]) and (clues_group[0] in clues_group[2] or clues_group[2] in clues_group[0]) and (clues_group[1] in clues_group[2] or clues_group[2] in clues_group[1]):
-            clues_group[0] = 'Identical clue'
-            clues_group[1] = 'Identical clue'
-            clues_group[2] = 'Identical clue'
-        if clues_group[0] in clues_group[1] or clues_group[1] in clues_group[0]:
-            clues_group[0] = 'Identical clue'
-            clues_group[1] = 'Identical clue'
-        if clues_group[0] in clues_group[2] or  clues_group[2] in clues_group[0]:
-            clues_group[0] = 'Identical clue'
-            clues_group[2] = 'Identical clue'
-        if clues_group[1] in clues_group[2] or clues_group[2] in clues_group[1]:
-            clues_group[1] = 'Identical clue'
-            clues_group[2] = 'Identical clue'
-        return dict(clues = clues_group) 
+        return dict(clues = clues_group)
     form_model = 'player'
     form_fields = ['guess'] 
     def before_next_page(player, timeout_happened):
