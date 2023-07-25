@@ -117,7 +117,7 @@ class Clue_Page(Page):
         else:  
             player.clues = player.clues.lower()
             return player.clues
-
+        
 def clues_error_message(player, value):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         mystery_word = mystery_word.lower()
@@ -126,6 +126,9 @@ def clues_error_message(player, value):
             return 'Your clue must not be longer than 18 characters!'
         if ' ' in value:
             return 'Your clue must only contain one word!'
+        import re
+        if re.search("[^a-zA-Z0-9s]", value):
+            return 'Your clue must not contain any special characters!'
         if mystery_word in value or value in mystery_word:
             return 'Your clue must not contain parts of the mystery word!'
         def num_there(s):
