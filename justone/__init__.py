@@ -58,6 +58,8 @@ class Player(BasePlayer):
     Idea16 = models.StringField(label= '', initial='', blank=True)
     Idea17 = models.StringField(label= '', initial='', blank=True)
     Idea18 = models.StringField(label= '', initial='', blank=True)
+    identical = models.BooleanField()
+    invalid = models.BooleanField()
 
 def creating_session(subsession: Subsession):
     import itertools
@@ -118,32 +120,87 @@ class Clue_Page(Page):
             player.clues = player.clues.lower()
             return player.clues
         
+def wordlength(player, value):
+    value = value.lower()
+    if len(value) > 18:
+        return True
+    
 def clues_error_message(player, value):
-        mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
-        mystery_word = mystery_word.lower()
-        value = value.lower()
-        if len(value) > 18:
-            return 'Your clue must not be longer than 18 characters!'
-        if ' ' in value:
-            return 'Your clue must only contain one word!'
-        import re
-        if re.search("[^a-zA-Z0-9s]", value):
-            return 'Your clue must not contain any special characters!'
-        if mystery_word in value or value in mystery_word:
-            return 'Your clue must not contain parts of the mystery word!'
-        def num_there(s):
-         return any(i.isdigit() for i in s)
-        if num_there(value) == False:
-            from deep_translator import GoogleTranslator
-            value_trans = GoogleTranslator(source='auto', target='en').translate(value)
-            if mystery_word == value_trans:
-                return 'Your clue must not be a translation of the mystery word!'
-        from textblob import Word
-        word = Word(value)
-        result = word.spellcheck()
-        if word != result [0][0]:
-            return 'Your clue must be spelled correctly and cannot be fictitious!'
-        
+    if wordlength(player, value) == True:
+        return 'Your clue must not be longer than 18 characters!'
+
+def Idea1_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Your idea must not be longer than 18 characters!'
+
+def Idea2_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Your idea must not be longer than 18 characters!'
+
+def Idea3_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Your idea must not be longer than 18 characters!'
+
+def Idea4_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Your idea must not be longer than 18 characters!'
+
+def Idea5_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Your idea must not be longer than 18 characters!'
+
+def Idea6_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Your idea must not be longer than 18 characters!'
+
+def Idea7_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Your idea must not be longer than 18 characters!'
+
+def Idea8_error_message(player, value): 
+    if wordlength(player, value) == True:
+        return 'Your idea must not be longer than 18 characters!'
+
+def Idea9_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Your idea must not be longer than 18 characters!'
+
+def Idea10_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Your idea must not be longer than 18 characters!'
+    
+def Idea11_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Your idea must not be longer than 18 characters!'
+
+def Idea12_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Your idea must not be longer than 18 characters!'
+
+def Idea13_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Your idea must not be longer than 18 characters!'   
+    
+def Idea14_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Your idea must not be longer than 18 characters!'
+
+def Idea15_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Your idea must not be longer than 18 characters!'
+
+def Idea16_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Your idea must not be longer than 18 characters!'
+
+def Idea17_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Your idea must not be longer than 18 characters!'
+
+def Idea18_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Your idea must not be longer than 18 characters!'
+
 class ResultsWaitPage(WaitPage):
     title_text = "Thank you for your clue!"
     body_text = "Please wait until all other players have submitted their clues and the guesser has made a guess."
@@ -155,27 +212,76 @@ class GuesserWaitPage(WaitPage):
     body_text = "Please wait until all players have submitted their clues for you."
     def is_displayed(player): 
         return player.role() == 'guesser'
-    
+       
 class Guess_Page(Page):
     timeout_seconds = 120
     def is_displayed(player):
         return player.role() == 'guesser'
     def vars_for_template(player):
+        mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
+        mystery_word = mystery_word.lower()
         clues_group = [p.clues for p in player.get_others_in_group()]
+        if ' ' in clues_group[0]:
+            clues_group[0] = 'Invalid clue (more than one word)'
+        if ' ' in clues_group[1]:
+            clues_group[1] = 'Invalid clue (more than one word)'
+        if ' ' in clues_group[2]:
+            clues_group[2] = 'Invalid clue (more than one word)'
+        import re
+        if re.search("[^a-zA-Z0-9s]", clues_group[0]):
+            clues_group[0] = 'Invalid clue (special characters)'
+        if re.search("[^a-zA-Z0-9s]", clues_group[1]):
+            clues_group[1] = 'Invalid clue (special characters)'
+        if re.search("[^a-zA-Z0-9s]", clues_group[2]):
+            clues_group[2] = 'Invalid clue (special characters)' 
+        if mystery_word in clues_group[0] or clues_group[0] in mystery_word:
+            clues_group[0] = 'Invalid clue (same family as mystery word)'
+        if mystery_word in clues_group[1] or clues_group[1] in mystery_word:
+            clues_group[1] = 'Invalid clue (same family as mystery word)'
+        if mystery_word in clues_group[2] or clues_group[2] in mystery_word:
+            clues_group[2] = 'Invalid clue (same family as mystery word)'
+        def num_there(s):
+            return any(i.isdigit() for i in s)
+        from deep_translator import GoogleTranslator
+        if num_there(clues_group[0]) == False:
+            clue_trans = GoogleTranslator(source='auto', target='en').translate(clues_group[0])
+            if mystery_word == clue_trans:
+                clues_group[0] = 'Invalid clue (translation)'
+        if num_there(clues_group[1]) == False:
+            clue_trans = GoogleTranslator(source='auto', target='en').translate(clues_group[1])
+            if mystery_word == clue_trans:
+                clues_group[1] = 'Invalid clue (translation)'
+        if num_there(clues_group[2]) == False:
+             clue_trans = GoogleTranslator(source='auto', target='en').translate(clues_group[2])
+             if mystery_word == clue_trans:
+                clues_group[2] = 'Invalid clue (translation)'
+        from textblob import Word
+        word = Word(clues_group[0])
+        result = word.spellcheck()
+        if word != result [0][0]:
+            clues_group[0] = 'Invalid clue (spelling mistake/no real word)'
+        word = Word(clues_group[1])
+        result = word.spellcheck()
+        if word != result [0][0]:
+            clues_group[1] = 'Invalid clue (spelling mistake/no real word)' 
+        word = Word(clues_group[2])
+        result = word.spellcheck()
+        if word != result [0][0]:
+            clues_group[2] = 'Invalid clue (spelling mistake/no real word)'
         if (clues_group[0] in clues_group[1] or clues_group[1] in clues_group[0]) and (clues_group[0] in clues_group[2] or clues_group[2] in clues_group[0]) and (clues_group[1] in clues_group[2] or clues_group[2] in clues_group[1]):
-                clues_group[0] = 'Identical clue'
-                clues_group[1] = 'Identical clue'
-                clues_group[2] = 'Identical clue'
+            clues_group[0] = 'Identical clue'
+            clues_group[1] = 'Identical clue'
+            clues_group[2] = 'Identical clue'
         if clues_group[0] in clues_group[1] or clues_group[1] in clues_group[0]:
-                clues_group[0] = 'Identical clue'
-                clues_group[1] = 'Identical clue'
+            clues_group[0] = 'Identical clue'
+            clues_group[1] = 'Identical clue'
         if clues_group[0] in clues_group[2] or  clues_group[2] in clues_group[0]:
-                clues_group[0] = 'Identical clue'
-                clues_group[2] = 'Identical clue'
+            clues_group[0] = 'Identical clue'
+            clues_group[2] = 'Identical clue'
         if clues_group[1] in clues_group[2] or clues_group[2] in clues_group[1]:
-                clues_group[1] = 'Identical clue'
-                clues_group[2] = 'Identical clue'
-        return dict(clues = clues_group)
+            clues_group[1] = 'Identical clue'
+            clues_group[2] = 'Identical clue'
+        return dict(clues = clues_group) 
     form_model = 'player'
     form_fields = ['guess'] 
     def before_next_page(player, timeout_happened):
@@ -184,7 +290,7 @@ class Guess_Page(Page):
         else:
             player.guess = player.guess.lower()
             return player.guess
-
+        
 class Results(Page): 
     timeout_seconds = 60
     def vars_for_template(player):
@@ -198,7 +304,7 @@ class Results(Page):
                 clues.remove('')
             while '' in guess:
                 guess.remove('')
-            guess = guess[0]
+            guess = guess[0]           
         if player.role() == 'guesser':
             guess = player.guess
             clues = [p.clues for p in player.get_others_in_group()]
@@ -216,7 +322,18 @@ class Results(Page):
             player.group.payoff = 1000
         overall_score = score(player.group)
         return dict(mystery_word = mystery_word, clues = clues, guess = guess, result = player.result, score = player.score, overall_score = overall_score)
-    
+
+def identical(player):
+    if player.role() == 'cluegiver':
+        own_clue = player.clues
+        clues_group = [p.clues for p in player.get_others_in_group()]
+        if own_clue in clues_group or clues_group in own_clue:
+            player.Identical = True
+            return player.Identical
+        else: 
+            player.Identical = False    
+            return player.Identical
+
 def score (group: Group):
     subsession = group.subsession
     groups = subsession.get_groups()
