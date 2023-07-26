@@ -55,9 +55,6 @@ class Player(BasePlayer):
     Idea13 = models.StringField(label= '', initial='', blank=True)
     Idea14 = models.StringField(label= '', initial='', blank=True)
     Idea15 = models.StringField(label= '', initial='', blank=True)
-    Idea16 = models.StringField(label= '', initial='', blank=True)
-    Idea17 = models.StringField(label= '', initial='', blank=True)
-    Idea18 = models.StringField(label= '', initial='', blank=True)
     identical = models.BooleanField()
     invalid = models.BooleanField()
 
@@ -107,7 +104,7 @@ class Clue_Page(Page):
     def is_displayed(player):
         return player.role() == 'cluegiver'   
     form_model = 'player'
-    form_fields = ['clues', 'Idea1', 'Idea2', 'Idea3', 'Idea4', 'Idea5', 'Idea6', 'Idea7', 'Idea8', 'Idea9', 'Idea10', 'Idea11', 'Idea12', 'Idea13', 'Idea14', 'Idea15', 'Idea16', 'Idea17', 'Idea18']
+    form_fields = ['clues', 'Idea1', 'Idea2', 'Idea3', 'Idea4', 'Idea5', 'Idea6', 'Idea7', 'Idea8', 'Idea9', 'Idea10', 'Idea11', 'Idea12', 'Idea13', 'Idea14', 'Idea15']
  
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
@@ -186,18 +183,6 @@ def Idea14_error_message(player, value):
         return 'Your idea must not be longer than 18 characters!'
 
 def Idea15_error_message(player, value):
-    if wordlength(player, value) == True:
-        return 'Your idea must not be longer than 18 characters!'
-
-def Idea16_error_message(player, value):
-    if wordlength(player, value) == True:
-        return 'Your idea must not be longer than 18 characters!'
-
-def Idea17_error_message(player, value):
-    if wordlength(player, value) == True:
-        return 'Your idea must not be longer than 18 characters!'
-
-def Idea18_error_message(player, value):
     if wordlength(player, value) == True:
         return 'Your idea must not be longer than 18 characters!'
 
@@ -297,15 +282,24 @@ class Results(Page):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         if player.role() == 'cluegiver':
             own_clue = player.clues
-            clues = [p.clues for p in player.get_others_in_group()]
+            clues = [p.clues for p in player.get_others_in_group()]  
             guess = [p.guess for p in player.get_others_in_group()]
-            clues.append(own_clue)
             while '' in clues:
                 clues.remove('')
             while '' in guess:
-                guess.remove('')
-            guess = guess[0]           
+                guess.remove('')  
+            guess = guess[0] 
+            player.identical = False
+            if own_clue in clues[0] or clues[0] in own_clue or own_clue in clues[1] or clues[1] in own_clue:
+                player.identical = True
+            clues.append(own_clue)     
+            if player.identical == True:
+                identical = 'Watch out! You gave an identical clue.' 
+            else:
+                identical = ''       
         if player.role() == 'guesser':
+            player.identical = False
+            identical = ''
             guess = player.guess
             clues = [p.clues for p in player.get_others_in_group()]
         mystery_word = mystery_word.lower()
@@ -321,18 +315,7 @@ class Results(Page):
         if player.participant.treatment == False:
             player.group.payoff = 1000
         overall_score = score(player.group)
-        return dict(mystery_word = mystery_word, clues = clues, guess = guess, result = player.result, score = player.score, overall_score = overall_score)
-
-def identical(player):
-    if player.role() == 'cluegiver':
-        own_clue = player.clues
-        clues_group = [p.clues for p in player.get_others_in_group()]
-        if own_clue in clues_group or clues_group in own_clue:
-            player.Identical = True
-            return player.Identical
-        else: 
-            player.Identical = False    
-            return player.Identical
+        return dict(mystery_word = mystery_word, clues = clues, guess = guess, result = player.result, score = player.score, overall_score = overall_score, identical = identical)
 
 def score (group: Group):
     subsession = group.subsession
