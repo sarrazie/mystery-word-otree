@@ -57,6 +57,7 @@ class Player(BasePlayer):
     Idea15 = models.StringField(label= '', initial='', blank=True)
     identical = models.BooleanField()
     invalid = models.BooleanField()
+    missing = models.BooleanField()
 
 def creating_session(subsession: Subsession):
     import itertools
@@ -219,53 +220,53 @@ class Guess_Page(Page):
         if clues_group[1] in clues_group[2] or clues_group[2] in clues_group[1]:
             clues_group[1] = 'Identical clue'
             clues_group[2] = 'Identical clue'
-        if ' ' in clues_group[0] and clues_group[0] != 'Identical clue':
-            clues_group[0] = 'Invalid clue (more than one word)'
-        if ' ' in clues_group[1] and clues_group[1] != 'Identical clue':
-            clues_group[1] = 'Invalid clue (more than one word)'
-        if ' ' in clues_group[2] and clues_group[2] != 'Identical clue':
-            clues_group[2] = 'Invalid clue (more than one word)'
+        if ' ' in clues_group[0] and clues_group[0] != 'Identical clue' and clues_group[0] != 'No clue given':
+            clues_group[0] = 'Invalid clue'
+        if ' ' in clues_group[1] and clues_group[1] != 'Identical clue' and clues_group[1] != 'No clue given':
+            clues_group[1] = 'Invalid clue'
+        if ' ' in clues_group[2] and clues_group[2] != 'Identical clue' and clues_group[2] != 'No clue given':
+            clues_group[2] = 'Invalid clue'
         import re
-        if re.search("[^a-zA-Z0-9s]", clues_group[0]) and clues_group[0] != 'Identical clue' and clues_group[0] != 'Invalid clue (more than one word)': 
-            clues_group[0] = 'Invalid clue (special characters)'
-        if re.search("[^a-zA-Z0-9s]", clues_group[1]) and clues_group[1] != 'Identical clue' and clues_group[1] != 'Invalid clue (more than one word)':
-            clues_group[1] = 'Invalid clue (special characters)'
-        if re.search("[^a-zA-Z0-9s]", clues_group[2]) and clues_group[2] != 'Identical clue' and clues_group[2] != 'Invalid clue (more than one word)':
-            clues_group[2] = 'Invalid clue (special characters)'
+        if re.search("[^a-zA-Z0-9s]", clues_group[0]) and clues_group[0] != 'Identical clue' and clues_group[0] != 'No clue given':
+            clues_group[0] = 'Invalid clue'
+        if re.search("[^a-zA-Z0-9s]", clues_group[1]) and clues_group[1] != 'Identical clue' and clues_group[1] != 'No clue given':
+            clues_group[1] = 'Invalid clue'
+        if re.search("[^a-zA-Z0-9s]", clues_group[2]) and clues_group[2] != 'Identical clue' and clues_group[2] != 'No clue given':
+            clues_group[2] = 'Invalid clue'
         if mystery_word in clues_group[0] or clues_group[0] in mystery_word:
-            clues_group[0] = 'Invalid clue (same family as mystery word)'
+            clues_group[0] = 'Invalid clue' 
         if mystery_word in clues_group[1] or clues_group[1] in mystery_word:
-            clues_group[1] = 'Invalid clue (same family as mystery word)'
+            clues_group[1] = 'Invalid clue' 
         if mystery_word in clues_group[2] or clues_group[2] in mystery_word:
-            clues_group[2] = 'Invalid clue (same family as mystery word)'
+            clues_group[2] = 'Invalid clue'
         def num_there(s):
             return any(i.isdigit() for i in s)
         from deep_translator import GoogleTranslator
         if num_there(clues_group[0]) == False:
             clue_trans = GoogleTranslator(source='auto', target='en').translate(clues_group[0])
             if mystery_word == clue_trans:
-                clues_group[0] = 'Invalid clue (translation)'
+                clues_group[0] = 'Invalid clue'
         if num_there(clues_group[1]) == False:
             clue_trans = GoogleTranslator(source='auto', target='en').translate(clues_group[1])
             if mystery_word == clue_trans:
-                clues_group[1] = 'Invalid clue (translation)'
+                clues_group[1] = 'Invalid clue'
         if num_there(clues_group[2]) == False:
              clue_trans = GoogleTranslator(source='auto', target='en').translate(clues_group[2])
              if mystery_word == clue_trans:
-                clues_group[2] = 'Invalid clue (translation)'
+                clues_group[2] = 'Invalid clue'
         from textblob import Word
         word = Word(clues_group[0])
         result = word.spellcheck()
         if word != result [0][0]:
-            clues_group[0] = 'Invalid clue (spelling mistake/no real word)'
+            clues_group[0] = 'Invalid clue'
         word = Word(clues_group[1])
         result = word.spellcheck()
         if word != result [0][0]:
-            clues_group[1] = 'Invalid clue (spelling mistake/no real word)' 
+            clues_group[1] = 'Invalid clue' 
         word = Word(clues_group[2])
         result = word.spellcheck()
         if word != result [0][0]:
-            clues_group[2] = 'Invalid clue (spelling mistake/no real word)'
+            clues_group[2] = 'Invalid clue'
         return dict(clues = clues_group)
     form_model = 'player'
     form_fields = ['guess'] 
@@ -280,6 +281,7 @@ class Results(Page):
     timeout_seconds = 60
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
+        mystery_word = mystery_word.lower()
         if player.role() == 'cluegiver':
             own_clue = player.clues
             clues = [p.clues for p in player.get_others_in_group()]  
@@ -289,20 +291,53 @@ class Results(Page):
             while '' in guess:
                 guess.remove('')  
             guess = guess[0] 
+            player.missing = False
             player.identical = False
-            if own_clue in clues[0] or clues[0] in own_clue or own_clue in clues[1] or clues[1] in own_clue:
-                player.identical = True
-            clues.append(own_clue)     
-            if player.identical == True:
-                identical = 'Watch out! You gave an identical clue.' 
-            else:
-                identical = ''       
-        if player.role() == 'guesser':
-            player.identical = False
+            player.invalid = False
             identical = ''
+            invalid = ''
+            missing = ''
+            if own_clue == 'No clue given':
+                    player.missing = True
+                    missing = 'Watch out! You did not give a clue.'
+            else:
+                if own_clue in clues[0] or clues[0] in own_clue or own_clue in clues[1] or clues[1] in own_clue:
+                    player.identical = True
+                    identical = 'Watch out! You gave an identical clue.'     
+                import re
+                if re.search("[^a-zA-Z0-9s]", own_clue):
+                    player.invalid = True
+                    invalid = 'Watch out! Your clue was invalid (use of special characters).'
+                if ' ' in own_clue:
+                    player.invalid = True    
+                    invalid = 'Watch out! Your clue was invalid (more than one word).'
+                if own_clue in mystery_word or mystery_word in own_clue:
+                    player.invalid = True
+                    invalid = 'Watch out! Your clue was invalid (same word family as mystery word).'
+                def num_there(s):
+                    return any(i.isdigit() for i in s)
+                from deep_translator import GoogleTranslator
+                if num_there(own_clue) == False:
+                    clue_trans = GoogleTranslator(source='auto', target='en').translate(own_clue)
+                    if mystery_word == clue_trans:
+                        player.invalid = True
+                        invalid = 'Watch out! Your clue was invalid (translation of mystery word).'
+                from textblob import Word
+                word = Word(own_clue)
+                result = word.spellcheck()
+                if word != result [0][0] and player.invalid == False:
+                    player.invalid = True
+                    invalid = 'Watch out! Your clue was invalid (spelling mistake or no real word).'
+            clues.append(own_clue)        
+        if player.role() == 'guesser':
+            player.missing = False
+            player.identical = False
+            player.invalid = False
+            identical = ''
+            invalid = ''
+            missing = ''
             guess = player.guess
             clues = [p.clues for p in player.get_others_in_group()]
-        mystery_word = mystery_word.lower()
         guess = guess.lower()
         if mystery_word == guess:
             player.result = 'correct'
@@ -315,7 +350,7 @@ class Results(Page):
         if player.participant.treatment == False:
             player.group.payoff = 1000
         overall_score = score(player.group)
-        return dict(mystery_word = mystery_word, clues = clues, guess = guess, result = player.result, score = player.score, overall_score = overall_score, identical = identical)
+        return dict(mystery_word = mystery_word, clues = clues, guess = guess, result = player.result, score = player.score, overall_score = overall_score, identical = identical, invalid = invalid, missing = missing)
 
 def score (group: Group):
     subsession = group.subsession
