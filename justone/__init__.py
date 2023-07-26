@@ -58,6 +58,7 @@ class Player(BasePlayer):
     identical = models.BooleanField()
     invalid = models.BooleanField()
     missing = models.BooleanField()
+    quantity = models.IntegerField()
 
 def creating_session(subsession: Subsession):
     import itertools
@@ -328,11 +329,38 @@ class Results(Page):
                 if word != result [0][0] and player.invalid == False:
                     player.invalid = True
                     invalid = 'Watch out! Your clue was invalid (spelling mistake or no real word).'
-            clues.append(own_clue)        
+            clues.append(own_clue)     
+            own_ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12, player.Idea13, player.Idea14, player.Idea15] 
+            while '' in own_ideas:
+                own_ideas.remove('')
+            import re
+            def num_there(s):
+                return any(i.isdigit() for i in s)
+            from deep_translator import GoogleTranslator
+            from textblob import Word
+            i = 0
+            while i < len(own_ideas):
+                if re.search("[^a-zA-Z0-9s]", own_ideas[i]):
+                    own_ideas.pop(i)    
+                if ' ' in own_ideas[i]:
+                    own_ideas.pop(i)
+                if own_ideas[i] in mystery_word or mystery_word in own_ideas[i]:
+                    own_ideas.pop(i)
+                if num_there(own_ideas[i]) == False:
+                    clue_trans = GoogleTranslator(source='auto', target='en').translate(own_ideas[i])
+                    if mystery_word == clue_trans:
+                        own_ideas.pop(i)
+                word = Word(own_ideas[i])
+                result = word.spellcheck() 
+                if word != result [0][0]:
+                    own_ideas.pop(i)
+                i += 1
+            player.quantity = len(own_ideas)
         if player.role() == 'guesser':
             player.missing = False
             player.identical = False
             player.invalid = False
+            player.quantity = 0
             identical = ''
             invalid = ''
             missing = ''
@@ -350,7 +378,7 @@ class Results(Page):
         if player.participant.treatment == False:
             player.group.payoff = 1000
         overall_score = score(player.group)
-        return dict(mystery_word = mystery_word, clues = clues, guess = guess, result = player.result, score = player.score, overall_score = overall_score, identical = identical, invalid = invalid, missing = missing)
+        return dict(mystery_word = mystery_word, clues = clues, guess = guess, result = player.result, score = player.score, overall_score = overall_score, identical = identical, invalid = invalid, missing = missing, number_ideas = player.quantity)
 
 def score (group: Group):
     subsession = group.subsession

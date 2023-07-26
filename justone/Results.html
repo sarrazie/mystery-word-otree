@@ -20,6 +20,7 @@
 <p> {{ identical }} </p>
 <p> {{ invalid }} </p>
 <p> {{ missing }} </p>
+<p> {{ if player.role() == 'cluegiver' }} You deliver {{ number_ideas }} idea(s). {{ else }} {{ endif }} </p>
 <p> Your group's guess: <b>{{ guess }}</b> </p>
 <p> This guess was {{ result }}.</p>
 <p> {{ if participant.treatment }} Your group's score: <b>{{ score }} point(s) </b> {{ else }} {{ endif }} </p>
