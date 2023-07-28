@@ -107,11 +107,10 @@ class Clue_Page(Page):
         return player.role() == 'cluegiver'   
     form_model = 'player'
     form_fields = ['clues', 'Idea1', 'Idea2', 'Idea3', 'Idea4', 'Idea5', 'Idea6', 'Idea7', 'Idea8', 'Idea9', 'Idea10', 'Idea11', 'Idea12', 'Idea13', 'Idea14', 'Idea15']
- 
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         return dict(mystery_word = mystery_word)
-
+        
     def before_next_page(player, timeout_happened):
         if timeout_happened:
             player.clues = 'No clue given'
@@ -305,22 +304,22 @@ class Results(Page):
                 if own_clue in clues[0] or clues[0] in own_clue or own_clue in clues[1] or clues[1] in own_clue:
                     player.identical = True
                     identical = 'Watch out! You gave an identical clue.'     
-                import re
-                if re.search("[^a-zA-Z0-9s]", own_clue):
-                    player.invalid = True
-                    invalid = 'Watch out! Your clue was invalid (use of special characters).'
-                if ' ' in own_clue:
+                if own_clue in mystery_word or mystery_word in own_clue:
+                    player.invalid = True 
+                    invalid = 'Watch out! Your clue was invalid (same word family as mystery word).'
+                if ' ' in own_clue and player.invalid == False:
                     player.invalid = True    
                     invalid = 'Watch out! Your clue was invalid (more than one word).'
-                if own_clue in mystery_word or mystery_word in own_clue:
+                import re
+                if re.search("[^a-zA-Z0-9s]", own_clue) and player.invalid == False:
                     player.invalid = True
-                    invalid = 'Watch out! Your clue was invalid (same word family as mystery word).'
+                    invalid = 'Watch out! Your clue was invalid (use of special characters).'
                 def num_there(s):
                     return any(i.isdigit() for i in s)
                 from deep_translator import GoogleTranslator
                 if num_there(own_clue) == False:
                     clue_trans = GoogleTranslator(source='auto', target='en').translate(own_clue)
-                    if mystery_word == clue_trans:
+                    if mystery_word == clue_trans and player.invalid == False:
                         player.invalid = True
                         invalid = 'Watch out! Your clue was invalid (translation of mystery word).'
                 from textblob import Word
@@ -330,31 +329,56 @@ class Results(Page):
                     player.invalid = True
                     invalid = 'Watch out! Your clue was invalid (spelling mistake or no real word).'
             clues.append(own_clue)     
+            player.Idea1 = player.Idea1.lower()
+            player.Idea2 = player.Idea2.lower()
+            player.Idea3 = player.Idea3.lower()
+            player.Idea4 = player.Idea4.lower()
+            player.Idea5 = player.Idea5.lower()
+            player.Idea6 = player.Idea6.lower()
+            player.Idea7 = player.Idea7.lower()
+            player.Idea8 = player.Idea8.lower()
+            player.Idea9 = player.Idea9.lower()
+            player.Idea10 = player.Idea10.lower()
+            player.Idea11 = player.Idea11.lower()
+            player.Idea12 = player.Idea12.lower()
+            player.Idea13 = player.Idea13.lower()
+            player.Idea14 = player.Idea14.lower()
+            player.Idea15 = player.Idea15.lower()
             own_ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12, player.Idea13, player.Idea14, player.Idea15] 
             while '' in own_ideas:
                 own_ideas.remove('')
             import re
-            def num_there(s):
-                return any(i.isdigit() for i in s)
             from deep_translator import GoogleTranslator
             from textblob import Word
-            i = 0
-            while i < len(own_ideas):
-                if re.search("[^a-zA-Z0-9s]", own_ideas[i]):
-                    own_ideas.pop(i)    
-                if ' ' in own_ideas[i]:
-                    own_ideas.pop(i)
-                if own_ideas[i] in mystery_word or mystery_word in own_ideas[i]:
-                    own_ideas.pop(i)
-                if num_there(own_ideas[i]) == False:
-                    clue_trans = GoogleTranslator(source='auto', target='en').translate(own_ideas[i])
-                    if mystery_word == clue_trans:
-                        own_ideas.pop(i)
-                word = Word(own_ideas[i])
-                result = word.spellcheck() 
-                if word != result [0][0]:
-                    own_ideas.pop(i)
-                i += 1
+            if len(own_ideas) > 0:
+                for i in range(len(own_ideas)):  
+                    if ' ' in own_ideas[i]:
+                        own_ideas[i] = 'false'
+            if len(own_ideas) > 0:
+                for i in range(len(own_ideas)):
+                    if own_ideas[i] in mystery_word or mystery_word in own_ideas[i]:
+                        own_ideas[i] = 'false'
+            if len(own_ideas) > 0:
+                for i in range(len(own_ideas)):
+                    word = Word(own_ideas[i])
+                    result = word.spellcheck() 
+                    if word != result [0][0]:
+                        own_ideas[i] = 'false'
+            if len(own_ideas) > 0:
+                for i in range(len(own_ideas)):
+                    if re.search("[^a-zA-Z0-9s]", own_ideas[i]):
+                        own_ideas[i] = 'false'
+            def has_numbers(s):
+                return bool(re.search(r'\d',s))
+            if len(own_ideas) > 0:
+                for i in range(len(own_ideas)):
+                    if has_numbers(own_ideas[i]) == False:
+                        clue_trans = GoogleTranslator(source='auto', target='en').translate(own_ideas[i])
+                        if mystery_word == clue_trans:
+                            own_ideas[i] = 'false'
+            while 'false' in own_ideas:
+                own_ideas.remove('false')
+            own_ideas = list(dict.fromkeys(own_ideas))
             player.quantity = len(own_ideas)
         if player.role() == 'guesser':
             player.missing = False

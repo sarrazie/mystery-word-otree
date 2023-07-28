@@ -9,7 +9,10 @@
         display: none;
     }
 </style>
-</br>
+<p> <b>{{ identical }}</b> </p>
+<p> <b>{{ invalid }} </b></p>
+<p> <b>{{ missing }}</b> </p>
+<p> {{ if player.role() == 'cluegiver' }} You deliver {{ number_ideas }} <b>valid</b> idea(s). {{ else }} {{ endif }} </p>
 <p> Mystery word: <b>{{ mystery_word }}</b> </p>
 <p> Your group's clues: </p>
 <ul>
@@ -17,10 +20,7 @@
         <li><b>{{ item }}</b></li>
     {{ endfor }} 
 </ul>
-<p> {{ identical }} </p>
-<p> {{ invalid }} </p>
-<p> {{ missing }} </p>
-<p> {{ if player.role() == 'cluegiver' }} You deliver {{ number_ideas }} idea(s). {{ else }} {{ endif }} </p>
+
 <p> Your group's guess: <b>{{ guess }}</b> </p>
 <p> This guess was {{ result }}.</p>
 <p> {{ if participant.treatment }} Your group's score: <b>{{ score }} point(s) </b> {{ else }} {{ endif }} </p>
