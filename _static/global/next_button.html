@@ -1,0 +1,56 @@
+<style>
+    
+</style>
+
+
+
+<script>
+    $('#next').click(function () {
+        var $current = $('.info.active');
+        console.log($current);
+        // get all elements with class info
+        var $info = $('.info');
+        console.log($info.eq(0));
+        console.log($($current).next(".info").length);
+        console.log($('.info.active').length);
+        console.log($('.info').length);
+        // get the index of the current element
+        //var index = $info.index($current);
+        //console.log(index);
+        // get the next element and add active class
+        //$info.eq(index + 1).addClass('active');
+
+        // if we have to open a special info
+        var read_extra = false;
+        var extra_objects = $('.info.extra');
+        if ( extra_objects.length > 0 ) {
+            for ( let extra = 0; extra < extra_objects.length; extra++ ) {
+                console.log(extra_objects[extra].id);
+                if ( $('.info.active').length + 1 == extra_objects[extra].id ) {
+                    console.log(extra_objects[extra]);
+                    extra_objects[extra].className = 'active';
+                    read_extra = true;
+                    break;
+                }
+            }
+        }
+        if ( $($current).next(".info").length > 0 && read_extra == false ) {
+            $current.next().addClass('active');
+        }
+        // if every info is active, hide the next button
+        if ($('.info.active').length == $('.info').length) {
+            $('#next').hide();
+        }
+    });
+
+</script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<style>
+    .info:not(.active) {
+        display: none;
+        visibility: hidden;
+    }
+</style>

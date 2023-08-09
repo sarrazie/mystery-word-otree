@@ -80,6 +80,10 @@ class GroupWaitPage(WaitPage):
             participant= player.participant
             participant.vars['treatment'] = group.incentive
 
+class Introduction(Page):
+    def is_displayed(player):
+        return player.round_number == 1
+    
 class Intro(Page):
     timeout_seconds = 150
     def is_displayed(player):
@@ -428,4 +432,4 @@ class FinalPage(Page):
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
 
-page_sequence = [GroupWaitPage, Intro, Instructions, Round, Clue_Page, GuesserWaitPage, Guess_Page, ResultsWaitPage, Results, TestQuestions, FinalPage]
+page_sequence = [GroupWaitPage, Introduction, Intro, Instructions, Round, Clue_Page, GuesserWaitPage, Guess_Page, ResultsWaitPage, Results, TestQuestions, FinalPage]

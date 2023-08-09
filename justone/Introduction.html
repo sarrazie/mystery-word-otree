@@ -1,0 +1,24 @@
+{% include '_static/global/next_button.html' %}
+{{ block title }}
+    Willkommen zu dieser Studie!
+{{ endblock }}
+{{ block content }}
+<div class="info active">
+<p>
+Vielen Dank, dass Sie teilnehmen! Klicken Sie bitte auf den "Nächste Info"-Button.
+</p>
+</div>
+<div class="info">
+<p>
+    Die folgende Seite wird Ihnen eine Übersicht über den Verlauf dieser Studie bieten.
+    Um dorthin zu gelangen, klicken Sie bitte auf den "Weiter"-Button.<br>
+    {{ next_button }}
+</p>
+</div>
+
+<p style="text-align: center">
+    <button class="otree-btn btn btn-info" type="button" id="next">Nächste Info</button>
+</p>
+
+
+{{ endblock }}
