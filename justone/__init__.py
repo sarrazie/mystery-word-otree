@@ -58,6 +58,7 @@ class Player(BasePlayer):
     identical = models.BooleanField()
     invalid = models.BooleanField()
     missing = models.BooleanField()
+    guess_missing = models.BooleanField()
     quantity = models.IntegerField()
 
 def creating_session(subsession: Subsession):
@@ -93,7 +94,7 @@ class Instructions(Page):
     timeout_seconds = 120
     def is_displayed(player):
         return player.round_number == 1
-    
+
 class Round(Page):
     timeout_seconds = 30
     def vars_for_template(player):
@@ -191,18 +192,23 @@ def Idea15_error_message(player, value):
     if wordlength(player, value) == True:
         return 'Your idea must not be longer than 18 characters!'
 
-class ResultsWaitPage(WaitPage):
+class CluegiverWaitPage(WaitPage):
     title_text = "Thank you for your clue!"
-    body_text = "Please wait until all other players have submitted their clues and the guesser has made a guess."
+    body_text = "Please wait until the other players have submitted their clues and the guesser has made a guess."
     def is_displayed(player):
         return player.role() == 'cluegiver'
 
 class GuesserWaitPage(WaitPage):
     title_text = "You can make your guess very soon!"
-    body_text = "Please wait until all players have submitted their clues for you."
+    body_text = "Please wait until the other players have submitted their clues for you."
     def is_displayed(player): 
         return player.role() == 'guesser'
-       
+    
+class ResultsWaitPage(WaitPage):
+    title_text = "Your group is done!"
+    body_text = "Please wait until all groups have submitted their clues and guesses."
+    wait_for_all_groups = True
+
 class Guess_Page(Page):
     timeout_seconds = 120
     def is_displayed(player):
@@ -282,7 +288,7 @@ class Guess_Page(Page):
             return player.guess
         
 class Results(Page): 
-    timeout_seconds = 60
+    timeout_seconds = 45
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         mystery_word = mystery_word.lower()
@@ -296,11 +302,13 @@ class Results(Page):
                 guess.remove('')  
             guess = guess[0] 
             player.missing = False
+            player.guess_missing = False
             player.identical = False
             player.invalid = False
             identical = ''
             invalid = ''
             missing = ''
+            guess_missing = ''
             if own_clue == 'No clue given':
                     player.missing = True
                     missing = 'Watch out! You did not give a clue.'
@@ -389,12 +397,18 @@ class Results(Page):
             player.identical = False
             player.invalid = False
             player.quantity = 0
+            player.guess_missing = False
             identical = ''
             invalid = ''
             missing = ''
+            guess_missing = ''
             guess = player.guess
             clues = [p.clues for p in player.get_others_in_group()]
-        guess = guess.lower()
+            if guess == 'No guess given':
+                player.guess_missing = True
+                guess_missing = 'Watch out! You did not give a guess.'
+            else:
+                guess = guess.lower()
         if mystery_word == guess:
             player.result = 'correct'
             player.payoff = 1
@@ -405,10 +419,9 @@ class Results(Page):
         player.group.payoff =  player.score 
         if player.participant.treatment == False:
             player.group.payoff = 1000
-        overall_score = score(player.group)
-        return dict(mystery_word = mystery_word, clues = clues, guess = guess, result = player.result, score = player.score, overall_score = overall_score, identical = identical, invalid = invalid, missing = missing, number_ideas = player.quantity)
+        return dict(mystery_word = mystery_word, clues = clues, guess = guess, result = player.result, identical = identical, invalid = invalid, missing = missing, guess_missing = guess_missing, number_ideas = player.quantity)
 
-def score (group: Group):
+def score(group: Group):
     subsession = group.subsession
     groups = subsession.get_groups()
     overall_score = []
@@ -419,6 +432,30 @@ def score (group: Group):
             sorted_overall_score = sorted(overall_score, reverse = True) 
     return sorted_overall_score
       
+class Score(Page):
+    timeout_seconds = 30
+    def is_displayed(player):
+        return player.participant.treatment == True
+    def vars_for_template(player):
+        player.score =  int(player.participant.payoff)
+        overall_score = score(player.group)
+        rank = 0
+        if player.score == overall_score[0]:
+            rank = 1
+        if player.score == overall_score[1] and player.score != overall_score[0]:
+            rank = 2
+        if len(overall_score) > 2:
+            if player.score == overall_score[2] and player.score != overall_score[0] and player.score != overall_score[1]:
+                rank = 3
+        if len(overall_score) > 3:
+            if player.score == overall_score[3] and player.score != overall_score[0] and player.score != overall_score[1] and player.score != overall_score[2]:
+                rank = 4
+        if len(overall_score) > 4:
+            if player.score == overall_score[4] and player.score != overall_score[0] and player.score != overall_score[1] and player.score != overall_score[2] and player.score != overall_score[3]:
+                rank = 5
+        number_groups = len(overall_score)
+        return dict(overall_score = overall_score, score = player.score, rank = rank, number_groups = number_groups)
+
 class TestQuestions(Page):
     template_name = 'justone/TestQuestions.html'
     timeout_seconds = 180
@@ -432,4 +469,4 @@ class FinalPage(Page):
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
 
-page_sequence = [GroupWaitPage, Introduction, Intro, Instructions, Round, Clue_Page, GuesserWaitPage, Guess_Page, ResultsWaitPage, Results, TestQuestions, FinalPage]
+page_sequence = [GroupWaitPage, Introduction, Intro, Instructions, Round, Clue_Page, GuesserWaitPage, Guess_Page, CluegiverWaitPage, ResultsWaitPage, Results, Score, TestQuestions, FinalPage]

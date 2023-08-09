@@ -12,6 +12,7 @@
 <p> <b>{{ identical }}</b> </p>
 <p> <b>{{ invalid }} </b></p>
 <p> <b>{{ missing }}</b> </p>
+<p> <b>{{ guess_missing }}</b> </p>
 <p> {{ if player.role() == 'cluegiver' }} You deliver {{ number_ideas }} <b>valid</b> idea(s). {{ else }} {{ endif }} </p>
 <p> Mystery word: <b>{{ mystery_word }}</b> </p>
 <p> Your group's clues: </p>
@@ -23,17 +24,7 @@
 
 <p> Your group's guess: <b>{{ guess }}</b> </p>
 <p> This guess was {{ result }}.</p>
-<p> {{ if participant.treatment }} Your group's score: <b>{{ score }} point(s) </b> {{ else }} {{ endif }} </p>
 
-<p> {{ if participant.treatment }} The current scores of all groups in this round: {{ else }} {{ endif }} </p>
-
-<ol> {{ if participant.treatment }}
-    {{ for item in overall_score }}
-       <li><b>{{ item }} point(s) </b></li>
-    {{ endfor }}   
-    {{ else }} {{ endif }}
-</ol> 
-</br>
 {{ next_button }}
 {{ endblock }}
 
