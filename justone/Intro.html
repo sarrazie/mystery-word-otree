@@ -1,3 +1,4 @@
+{% include '_static/global/next_button.html' %}
 {{ block title }}
     Mystery Word Game
 {{ endblock }}
@@ -10,17 +11,22 @@
 </style>
 </br>
 
+<div class="info active">
 <p> You were randomly assigned to <b>groups of four.</b> Together in your group you play {{ if group.incentive }} to get the best score in
     {{ else }} {{ endif }} a total of <b>12 turns.</b> </p>  
-
-
+</div>
+<div class="info">
 <p> <b><u>Goal:</u></b> One of the players – <i>the guesser</i> – has to guess a mystery word based on clues given by the other players. </p>
-<p> A clue consists only of a <b>single word.</b> If two or more players write the same word, <b>all identical words will be canceled</b> before <i>the guesser</i> gets to see them. </p> 
-
+<p> A clue consists only of a <b>single word.</b> </p>
+</div>
+<div class="info">
+<p>If two or more players write the same word, <b>all identical words will be canceled</b> before <i>the guesser</i> gets to see them. </p> 
+</div>
+<div class="info">
 <p> {{ if group.incentive }} At the end, the group with the highest score (one point for each correctly guessed mystery word) wins a <b>prize.</b> {{ else }} {{ endif }} </p>
-
+</div>
+<div class="info">
 <p> Each turn is divided in <b>four phases:</b></p>
-
 <ol>
     <li>  All players except <i>the guesser</i> are told which mystery word they have to provide a clue for.</li>
     <li>  Without communicating with each other and without showing it to anyone, each <i>cluegiver</i> types one clue in.</li>
@@ -30,6 +36,11 @@
 </br>
 {{ formfields }}
 {{ next_button }}
+</div>
+
+<p style="text-align: left">
+    <button class="otree-btn btn btn-info" type="button" id="next">Next information</button>
+</p>
 
 {{ endblock }}
 
