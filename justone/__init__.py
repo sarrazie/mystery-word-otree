@@ -55,6 +55,18 @@ class Player(BasePlayer):
     Idea13 = models.StringField(label= '', initial='', blank=True)
     Idea14 = models.StringField(label= '', initial='', blank=True)
     Idea15 = models.StringField(label= '', initial='', blank=True)
+    word1 = models.StringField(label= '', initial='', blank=False)
+    word2 = models.StringField(label= '', initial='', blank=False)
+    word3 = models.StringField(label= '', initial='', blank=False)
+    word4 = models.StringField(label= '', initial='', blank=False)
+    word5 = models.StringField(label= '', initial='', blank=False)
+    word6 = models.StringField(label= '', initial='', blank=False)
+    word7 = models.StringField(label= '', initial='', blank=False)
+    word8 = models.StringField(label= '', initial='', blank=False)
+    word9 = models.StringField(label= '', initial='', blank=False)
+    word10 = models.StringField(label= '', initial='', blank=False)
+    gender = models.IntegerField(choices=[[1, 'Male'],[2, 'Female'],[3, 'Diverse'],], label='Gender:')
+    age = models.IntegerField(min=18, max=100, label='Age:')
     identical = models.BooleanField()
     invalid = models.BooleanField()
     missing = models.BooleanField()
@@ -89,12 +101,19 @@ class Intro(Page):
     timeout_seconds = 150
     def is_displayed(player):
         return player.round_number == 1
-
+    
+class DAT(Page):
+    timeout_seconds = 300
+    def is_displayed(player):
+        return player.round_number == 1
+    form_model = 'player'
+    form_fields = ['word1', 'word2', 'word3', 'word4', 'word5', 'word6', 'word7', 'word8', 'word9', 'word10', 'gender', 'age']
+    
 class Instructions(Page):
     timeout_seconds = 120
     def is_displayed(player):
         return player.round_number == 1
-
+  
 class Round(Page):
     timeout_seconds = 30
     def vars_for_template(player):
@@ -469,4 +488,4 @@ class FinalPage(Page):
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
 
-page_sequence = [GroupWaitPage, Intro, Instructions, Round, Clue_Page, GuesserWaitPage, Guess_Page, CluegiverWaitPage, ResultsWaitPage, Results, Score, TestQuestions, FinalPage]
+page_sequence = [GroupWaitPage, DAT, Intro, Instructions, Round, Clue_Page, GuesserWaitPage, Guess_Page, CluegiverWaitPage, ResultsWaitPage, Results, Score, TestQuestions, FinalPage]
