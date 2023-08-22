@@ -72,7 +72,7 @@ class Player(BasePlayer):
     missing = models.BooleanField()
     guess_missing = models.BooleanField()
     quantity = models.IntegerField()
-    DAT_score = models.FloatField(initial=0)
+    DAT_score = models.FloatField(initial=0, blank=True)
 
 def creating_session(subsession: Subsession):
     import itertools
@@ -80,6 +80,89 @@ def creating_session(subsession: Subsession):
     session = subsession.session
     session.vars['incentive_group_list'] = incentives
 
+import re
+import itertools
+import numpy
+import scipy.spatial.distance
+
+class Model:
+    def __init__(player, model="glove.840B.300d.txt", dictionary="words.txt", pattern="^[a-z][a-z-]*[a-z]$"):
+        """Join model and words matching pattern in dictionary"""
+
+        # Keep unique words matching pattern from file
+        words = set()
+        with open(dictionary, "r", encoding="utf8") as f:
+            for line in f:
+                if re.match(pattern, line):
+                    words.add(line.rstrip("\n"))
+
+        # Join words with model
+        vectors = {}
+        with open(model, "r", encoding="utf8") as f:
+            for line in f:
+                tokens = line.split(" ")
+                word = tokens[0]
+                if word in words:
+                    vector = numpy.asarray(tokens[1:], "float32")
+                    vectors[word] = vector
+        player.vectors = vectors
+
+    def validate(player, word):
+        """Clean up word and find best candidate to use"""
+
+        # Strip unwanted characters
+        clean = re.sub(r"[^a-zA-Z- ]+", "", word).strip().lower()
+        if len(clean) <= 1:
+            return None # Word too short
+
+        # Generate candidates for possible compound words
+        # "valid" -> ["valid"]
+        # "cul de sac" -> ["cul-de-sac", "culdesac"]
+        # "top-hat" -> ["top-hat", "tophat"]
+        candidates = []
+        if " " in clean:
+            candidates.append(re.sub(r" +", "-", clean))
+            candidates.append(re.sub(r" +", "", clean))
+        else:
+            candidates.append(clean)
+            if "-" in clean:
+                candidates.append(re.sub(r"-+", "", clean))
+        for cand in candidates:
+            if cand in player.vectors:
+                return cand # Return first word that is in model
+        return None # Could not find valid word
+
+
+    def distance(player, word1, word2):
+        """Compute cosine distance (0 to 2) between two words"""
+
+        return scipy.spatial.distance.cosine(player.vectors.get(word1), player.vectors.get(word2))
+
+
+    def dat(player, words, minimum=7):
+        """Compute DAT score"""
+        # Keep only valid unique words
+        uniques = []
+        for word in words:
+            valid = player.validate(word)
+            if valid and valid not in uniques:
+                uniques.append(valid)
+
+        # Keep subset of words
+        if len(uniques) >= minimum:
+            subset = uniques[:minimum]
+        else:
+             return None # Not enough valid words
+         
+        # Compute distances between each pair of words
+        distances = []
+        for word1, word2 in itertools.combinations(subset, 2):
+            dist = player.distance(word1, word2)
+            distances.append(dist)
+
+        # Compute the DAT score (average semantic distance multiplied by 100)
+        return (sum(distances) / len(distances)) * 100
+ 
 # PAGES
 class GroupWaitPage(WaitPage):
     template_name = 'justone/GroupWaitPage.html'
@@ -111,14 +194,18 @@ class DAT(Page):
     form_fields = ['word1', 'word2', 'word3', 'word4', 'word5', 'word6', 'word7', 'word8', 'word9', 'word10', 'gender', 'age']
     def before_next_page(player, timeout_happened):
         if timeout_happened:
-            player.DAT_Score = 0
-            return player.DAT_Score
+            player.DAT_score = -1
+            return player.DAT_score
         else:
-            import dat
-            model = dat.Model("glove.840B.300d.txt", "words.txt")
-            player.DAT_Score = model.dat([player.word1, player.word2, player.word3, player.word4, player.word5, player.word6, player.word7, player.word8, player.word9, player.word10])
-            return player.DAT_Score
-        
+            model = Model("glove.840B.300d.txt", "words.txt")
+            player.DAT_score = model.dat([player.word1, player.word2, player.word3, player.word4, player.word5, player.word6, player.word7, player.word8, player.word9, player.word10])
+            return player.DAT_score
+    def error_message(player, values):
+        model = Model("glove.840B.300d.txt", "words.txt")
+        values = [values['word1'], values['word2'], values['word3'], values['word4'], values['word5'], values['word6'], values['word7'], values['word8'], values['word9'], values['word10']]
+        if model.dat(values) == None:
+            return 'Please enter at least 7 valid words!'    
+   
 class Instructions(Page):
     timeout_seconds = 120
     def is_displayed(player):
