@@ -12,4 +12,4 @@ __pycache__/
 .DS_Store
 merge.ps1
 *.otreezip
-glove/
+/glove.840B.300d.txt
