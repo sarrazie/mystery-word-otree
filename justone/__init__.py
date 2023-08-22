@@ -72,13 +72,14 @@ class Player(BasePlayer):
     missing = models.BooleanField()
     guess_missing = models.BooleanField()
     quantity = models.IntegerField()
+    DAT_score = models.FloatField(initial=0)
 
 def creating_session(subsession: Subsession):
     import itertools
     incentives = itertools.cycle([True, False])
     session = subsession.session
     session.vars['incentive_group_list'] = incentives
-    
+
 # PAGES
 class GroupWaitPage(WaitPage):
     template_name = 'justone/GroupWaitPage.html'
@@ -108,7 +109,16 @@ class DAT(Page):
         return player.round_number == 1
     form_model = 'player'
     form_fields = ['word1', 'word2', 'word3', 'word4', 'word5', 'word6', 'word7', 'word8', 'word9', 'word10', 'gender', 'age']
-    
+    def before_next_page(player, timeout_happened):
+        if timeout_happened:
+            player.DAT_Score = 0
+            return player.DAT_Score
+        else:
+            import dat
+            model = dat.Model("glove.840B.300d.txt", "words.txt")
+            player.DAT_Score = model.dat([player.word1, player.word2, player.word3, player.word4, player.word5, player.word6, player.word7, player.word8, player.word9, player.word10])
+            return player.DAT_Score
+        
 class Instructions(Page):
     timeout_seconds = 120
     def is_displayed(player):
