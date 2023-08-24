@@ -86,6 +86,7 @@ import numpy
 import scipy.spatial.distance
 
 class Model:
+    
     def __init__(player, model="glove.840B.300d.txt", dictionary="words.txt", pattern="^[a-z][a-z-]*[a-z]$"):
         """Join model and words matching pattern in dictionary"""
 
@@ -106,7 +107,7 @@ class Model:
                     vector = numpy.asarray(tokens[1:], "float32")
                     vectors[word] = vector
         player.vectors = vectors
-
+    
     def validate(player, word):
         """Clean up word and find best candidate to use"""
 
@@ -187,7 +188,7 @@ class Intro(Page):
         return player.round_number == 1
     
 class DAT(Page):
-    timeout_seconds = 300
+    timeout_seconds = 360
     def is_displayed(player):
         return player.round_number == 1
     form_model = 'player'
