@@ -551,7 +551,7 @@ def score(group: Group):
 class Score(Page):
     timeout_seconds = 30
     def is_displayed(player):
-        return player.participant.treatment == 2
+        return player.participant.treatment == 3
     def vars_for_template(player):
         player.score =  int(player.participant.payoff)
         overall_score = score(player.group)
