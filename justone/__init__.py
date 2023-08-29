@@ -2,10 +2,9 @@ from otree.api import *
 
 from settings import PARTICIPANT_FIELDS
 
-doc = """incentivtre
+doc = """
 Your app description
 """
-
 
 class C(BaseConstants):
     NAME_IN_URL = 'Mystery_Word_Game'
