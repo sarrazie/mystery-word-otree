@@ -2,7 +2,7 @@ from otree.api import *
 
 from settings import PARTICIPANT_FIELDS
 
-doc = """
+doc = """incentivtre
 Your app description
 """
 
@@ -18,7 +18,7 @@ class Subsession(BaseSubsession):
     pass
 
 class Group(BaseGroup):
-    incentive = models.BooleanField()
+    incentive = models.IntegerField()
     payoff = models.IntegerField(initial=1000)
     
 class Player(BasePlayer): 
@@ -76,7 +76,7 @@ class Player(BasePlayer):
 
 def creating_session(subsession: Subsession):
     import itertools
-    incentives = itertools.cycle([True, False])
+    incentives = itertools.cycle([1, 2, 3, 4])
     session = subsession.session
     session.vars['incentive_group_list'] = incentives
 
@@ -190,7 +190,7 @@ class Intro(Page):
 class DAT(Page):
     timeout_seconds = 360
     def is_displayed(player):
-        return player.round_number == 1
+        return player.round_number == C.NUM_ROUNDS
     form_model = 'player'
     form_fields = ['word1', 'word2', 'word3', 'word4', 'word5', 'word6', 'word7', 'word8', 'word9', 'word10', 'gender', 'age']
     def before_next_page(player, timeout_happened):
@@ -534,7 +534,7 @@ class Results(Page):
             player.payoff = 0 
         player.score =  int(player.participant.payoff)
         player.group.payoff =  player.score 
-        if player.participant.treatment == False:
+        if player.participant.treatment == 1:
             player.group.payoff = 1000
         return dict(mystery_word = mystery_word, clues = clues, guess = guess, result = player.result, identical = identical, invalid = invalid, missing = missing, guess_missing = guess_missing, number_ideas = player.quantity)
 
@@ -552,7 +552,7 @@ def score(group: Group):
 class Score(Page):
     timeout_seconds = 30
     def is_displayed(player):
-        return player.participant.treatment == True
+        return player.participant.treatment == 2
     def vars_for_template(player):
         player.score =  int(player.participant.payoff)
         overall_score = score(player.group)
@@ -586,4 +586,4 @@ class FinalPage(Page):
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
 
-page_sequence = [GroupWaitPage, DAT, Intro, Instructions, Round, Clue_Page, GuesserWaitPage, Guess_Page, CluegiverWaitPage, ResultsWaitPage, Results, Score, TestQuestions, FinalPage]
+page_sequence = [GroupWaitPage, Intro, Instructions, Round, Clue_Page, GuesserWaitPage, Guess_Page, CluegiverWaitPage, ResultsWaitPage, Results, Score, TestQuestions, DAT, FinalPage]

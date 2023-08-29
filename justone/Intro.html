@@ -12,7 +12,7 @@
 </br>
 
 <div class="info active">
-<p> You were randomly assigned to <b>groups of four.</b> Together in your group you play {{ if group.incentive }} to get the best score in
+<p> You were randomly assigned to <b>groups of four.</b> Together in your group you play {{ if group.incentive == 2}} to get the best score in
     {{ else }} {{ endif }} a total of <b>12 turns.</b> </p>  
 </div>
 <div class="info">
@@ -23,7 +23,7 @@
 <p>If two or more players write the same word, <b>all identical words will be canceled</b> before <i>the guesser</i> gets to see them. </p> 
 </div>
 <div class="info">
-<p> {{ if group.incentive }} At the end, the group with the highest score (one point for each correctly guessed mystery word) wins a <b>prize.</b> {{ else }} {{ endif }} </p>
+<p> {{ if group.incentive == 2}} At the end, the group with the highest score (one point for each correctly guessed mystery word) wins a <b>prize.</b> {{ else }} {{ endif }} </p>
 </div>
 <div class="info">
 <p> Each turn is divided in <b>four phases:</b></p>
