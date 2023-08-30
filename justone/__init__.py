@@ -17,7 +17,6 @@ class Subsession(BaseSubsession):
     pass
 
 class Group(BaseGroup):
-    incentive = models.IntegerField()
     payoff = models.IntegerField(initial=1000)
     
 class Player(BasePlayer): 
@@ -35,6 +34,7 @@ class Player(BasePlayer):
     clues = models.StringField(label="Your final clue:", initial='')
     score = models.IntegerField()
     result = models.StringField()
+    incentive = models.IntegerField()
     known = models.StringField(choices=[['Yes', 'Yes'], ['No', 'No']], label='Did you ever play the game "Just One" before?', widget=widgets.RadioSelect)
     understanding = models.StringField(choices=[['strongly agree', 'strongly agree'],[' agree', 'agree'],['neutral', 'neutral'],['disagree', 'disagree'],['strongly disagree', 'strongly disagree']], label='"I quickly understood the procedure and the rules of the game."', widget=widgets.RadioSelectHorizontal)
     english = models.StringField(choices=[['strongly agree', 'strongly agree'],[' agree', 'agree'],['neutral', 'neutral'],['disagree', 'disagree'],['strongly disagree', 'strongly disagree']], label='"My limited vocabulary in English made my performance in the game worse."', widget=widgets.RadioSelectHorizontal)
@@ -74,10 +74,11 @@ class Player(BasePlayer):
     DAT_score = models.FloatField(initial=0, blank=True)
 
 def creating_session(subsession: Subsession):
-    import itertools
-    incentives = itertools.cycle([1, 2, 3, 4])
     session = subsession.session
-    session.vars['incentive_group_list'] = incentives
+    for player in subsession.get_players():
+        participant = player.participant
+        participant.vars['treatment'] = session.config['treatment']
+        player.incentive = participant.vars['treatment']
 
 import re
 import itertools
@@ -169,14 +170,7 @@ class GroupWaitPage(WaitPage):
     group_by_arrival_time = True
     def is_displayed(player):
         return player.round_number == 1
-    @staticmethod
-    def after_all_players_arrive(group: Group):
-        session = group.session
-        group.incentive = next(session.vars['incentive_group_list'])
-        for player in group.get_players():
-            participant= player.participant
-            participant.vars['treatment'] = group.incentive
-
+        
 class Introduction(Page):
     def is_displayed(player):
         return player.round_number == 1

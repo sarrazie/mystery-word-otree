@@ -2,9 +2,10 @@ from os import environ
 
 
 SESSION_CONFIGS = [
-    dict(
-        name='eriks_game', display_name= "Mystery Word Game", app_sequence=['justone_welcome', 'justone'], num_demo_participants=24, ),
-    dict(name='eriks_game_2', display_name= "Mystery Word Game 2", app_sequence=['justone_welcome', 'justone_survey'], num_demo_participants=12, ),
+    dict(name='eriks_game', display_name= "Mystery Word Game Control", app_sequence=['justone_welcome', 'justone'], num_demo_participants=24, treatment=1, ),
+    dict(name='eriks_game_2', display_name= "Mystery Word Game Quantity", app_sequence=['justone_welcome', 'justone'], num_demo_participants=24, treatment=2,),
+    dict(name='eriks_game_3', display_name= "Mystery Word Game Quality", app_sequence=['justone_welcome', 'justone'], num_demo_participants=24, treatment=3,),
+    dict(name='eriks_game_4', display_name= "Mystery Word Game Originality", app_sequence=['justone_welcome', 'justone'], num_demo_participants=24, treatment=4,),
     ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs

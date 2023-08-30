@@ -13,3 +13,4 @@ __pycache__/
 merge.ps1
 *.otreezip
 /glove.840B.300d.txt
+/treatments.py
