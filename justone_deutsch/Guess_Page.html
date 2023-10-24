@@ -1,0 +1,43 @@
+{{ block title }}
+    Rateversuch
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 15) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+</br>
+<p> Dies sind die <b>Hinweise</b>, die Sie von Ihren drei Gruppenmitgliedern erhalten haben: </p> 
+<ul>
+
+{{ for item in clues }}
+    <li><b>{{ item }}</b></li>
+{{ endfor }}
+
+</ul>
+<p> Bitte geben Sie Ihre Vermutung für das geheime Wort ein. {{ formfields }} </p>
+</br>
+{{ next_button }}
+</br>
+<details>
+    <summary> Zusammenfassung der Regeln </summary>
+    <ul>    
+        <li> <b><u>Ziel:</u></b> Einer der Spieler – <i>der Ratende</i> – muss ein geheimes Wort basierend auf den Hinweisen der anderen Spieler erraten.</li>
+        <li> Wenn zwei oder mehr Spieler denselben Hinweis schreiben, werden alle identischen Hinweise (auch Hinweise aus derselben Wortfamilie) entfernt, bevor <i>der Ratende</i> sie sieht.</li>
+        <li> <b>Ungültige Hinweise:</b> Hinweise, die aus derselben Wortfamilie wie das geheime Wort stammen, nur eine Übersetzung des geheimen Worts oder erfunden sind.</li>
+    </ul>  
+</details>
+
+{{ endblock }}

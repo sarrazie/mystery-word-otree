@@ -1,0 +1,75 @@
+{% include '_static/global/next_button.html' %}
+{{ block title }}
+    Regeln
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+
+</br>
+<div class="info active">
+<p> 
+    <b><u>Ungültige Hinweise:</u></b>
+</p>
+</div>
+    
+<div class="info">
+<ul>
+    <li> Mehr als ein <b>einzelnes Wort.</b> </li>
+    <li> Das geheime Wort, aber anders geschrieben.</li>
+        <ul>
+            <li> Beispiel: <i>Shurt</i> ist nicht erlaubt, wenn Sie versuchen, 
+            den Spieler <i>Shirt</i> erraten zu lassen.</li>
+        </ul> 
+</ul>   
+</div>
+
+<div class="info">
+<ul>
+    <li> Das geheime Wort in einer <b>anderen Sprache.</b> </li>
+    <li> Ein Wort aus derselben <b>Wortfamilie wie das geheime Wort.</b> </li>
+        <ul>
+            <li> Beispiel: <i>Prinzessin</i> ist nicht erlaubt, wenn das zu erratende Wort 
+            <i>Prinz</i> ist.</li>
+        </ul>
+</ul>
+</div>
+
+<div class="info">
+<ul>
+    <li> Ein <b>erfundenes</b> Wort.</li> 
+    <li> Verwendung von Sonderzeichen.</li>
+</ul>
+</div> 
+
+<div class="info">
+</br>
+<p>
+    <b><u>Identische Hinweise:</u></b>
+</p> 
+</div>
+
+<div class="info">
+<ul>
+    <li> Zwei identische Wörter.</li>
+    <li> Zwei Wörter, die <b>Varianten aus derselben Wortfamilie sind.</b> </li>
+</ul>
+</div>
+
+<div class "info">
+<ul>
+    <li> Zwei Wörter, die <b>Varianten desselben Wortes sind:</b> Plural, Geschlechtsunterscheidungen, 
+         und Rechtschreibfehler. </li>
+</ul>    
+</br>    
+</div>
+
+<p style="text-align: left">
+    <button class="otree-btn btn btn-info" type="button" id="next">Nächste Regel</button>
+</p>
+{{ next_button }}
+{{ endblock }}

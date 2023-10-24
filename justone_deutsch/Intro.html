@@ -1,0 +1,47 @@
+{% include '_static/global/next_button.html' %}
+{{ block title }}
+    Geheimes Wort
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+</br>
+
+<div class="info active">
+<p> Sie wurden <b>zu viert</b> in Gruppen eingeteilt. Zusammen in Ihrer Gruppe spielen Sie insgesamt <b>12 Runden.</b> </p>  
+</div>
+<div class="info">
+<p> <b><u>Ziel:</u></b> Einer der Spieler – <i>der Ratende</i> – muss ein geheimes Wort anhand der Hinweise der anderen Spieler erraten. </p>
+<p> Ein Hinweis besteht nur aus einem <b>einzigen Wort.</b> </p>
+</div>
+<div class="info">
+<p> Wenn zwei oder mehr Spieler dasselbe Wort schreiben, werden <b>alle identischen Wörter entfernt,</b> bevor <i>der Ratende</i> sie sieht. </p> 
+</div>
+<div class="info">
+<p> {{ if player.participant.treatment != 1}} Ihre Auszahlung besteht aus einer Teilnahmegebühr von <b>3,50€</b> und einem Bonus von <b>bis zu 8€,</b> abhängig von Ihrer Leistung. {{ else }} Sie erhalten <b>10€,</b> wenn Sie an allen 12 Runden teilnehmen. {{ endif }} </p>
+<p> {{ if player.participant.treatment == 3}} Sie können den <b>Bonus</b> erhalten, wenn Ihre Gruppe die <b>beste Punktzahl aller Gruppen</b> in dieser Sitzung erreicht. {{ else }} {{ endif }} </p>
+<p> {{ if player.participant.treatment == 2}} Sie können den <b>Bonus</b> erhalten, wenn Ihre Gruppe die <b>meisten Ideen für Hinweise</b> in dieser Sitzung entwickelt. {{ else }} {{ endif }} </p>
+<p> {{ if player.participant.treatment == 4}} Sie können den <b>Bonus</b> erhalten, wenn Ihre Gruppe die <b>exklusivsten und einzigartigsten Hinweise</b> in dieser Sitzung gibt. {{ else }} {{ endif }} </p>
+</div>
+<div class="info">
+<p> Jede Runde ist in <b>vier Phasen unterteilt:</b></p>
+<ol>
+    <li>  Allen Spielern außer <i>dem Ratenden</i> wird mitgeteilt, für welches geheime Wort sie einen Hinweis geben müssen.</li>
+    <li>  Ohne miteinander zu kommunizieren und ohne es jemandem zu zeigen, gibt jeder <i>Hinweisgeber</i> einen Hinweis ein.</li>
+    <li>  Sobald alle Spieler ihre Hinweise geschrieben haben, werden identische oder ungültige Hinweise entfernt. <i>Der Ratende</i> sieht alle verbleibenden Hinweise und hat <b>nur einen Versuch,</b> um das geheime Wort zu erraten.</li>
+    <li>  Der Gruppe wird mitgeteilt, ob <i>der Ratende </i> das geheime Wort korrekt erraten hat oder nicht. Die nächste Runde beginnt, und ein anderer Spieler wird <i>der Ratende.</i></li>
+</ol>
+</br>
+{{ formfields }}
+{{ next_button }}
+</div>
+
+<p style="text-align: left">
+    <button class="otree-btn btn btn-info" type="button" id="next">Nächste Information</button>
+</p>
+
+{{ endblock }}

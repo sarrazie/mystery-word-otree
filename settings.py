@@ -6,6 +6,10 @@ SESSION_CONFIGS = [
     dict(name='eriks_game_2', display_name= "Mystery Word Game Quantity", app_sequence=['justone_welcome', 'justone'], num_demo_participants=24, treatment=2,),
     dict(name='eriks_game_3', display_name= "Mystery Word Game Quality", app_sequence=['justone_welcome', 'justone'], num_demo_participants=24, treatment=3,),
     dict(name='eriks_game_4', display_name= "Mystery Word Game Originality", app_sequence=['justone_welcome', 'justone'], num_demo_participants=24, treatment=4,),
+    dict(name='eriks_game_5', display_name= "Mystery Word Game deutsch Control", app_sequence=['justone_welcome_deutsch', 'justone_deutsch'], num_demo_participants=24, treatment=1,),
+    dict(name='eriks_game_6', display_name= "Mystery Word Game deutsch Quantity", app_sequence=['justone_welcome_deutsch', 'justone_deutsch'], num_demo_participants=24, treatment=2,),
+    dict(name='eriks_game_7', display_name= "Mystery Word Game deutsch Quality", app_sequence=['justone_welcome_deutsch', 'justone_deutsch'], num_demo_participants=24, treatment=3,),
+    dict(name='eriks_game_8', display_name= "Mystery Word Game deutsch Originality", app_sequence=['justone_welcome_deutsch', 'justone_deutsch'], num_demo_participants=24, treatment=4,),
     ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs

@@ -1,0 +1,97 @@
+{{ block title }}
+    Hinweis
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 15) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+</br>
+<p> Das <b>Geheimwort</b> in dieser Runde ist: </p>
+<p> <b>{{ mystery_word }}</b> </p>   
+<p> Bitte geben Sie <b>alle</b> Ihre Ideen zu diesem Wort ein (eine Idee pro Textfeld): </p>
+    <b>{{ formfield 'Idea1' }}</b>
+        <details>
+        <summary> Fügen Sie eine zweite Idee hinzu </summary>
+        {{ formfield 'Idea2' }}
+            <details>
+            <summary> Fügen Sie eine dritte Idee hinzu </summary>
+            {{ formfield 'Idea3' }}
+                <details>
+                <summary> Fügen Sie eine vierte Idee hinzu </summary>
+                {{ formfield 'Idea4' }}
+                    <details>
+                    <summary> Fügen Sie eine fünfte Idee hinzu </summary>
+                    {{ formfield 'Idea5' }}
+                        <details>
+                        <summary> Fügen Sie eine sechste Idee hinzu</summary>
+                        {{ formfield 'Idea6' }}
+                            <details>
+                            <summary> Fügen Sie eine siebte Idee hinzu</summary> 
+                            {{ formfield 'Idea7' }}
+                                <details>
+                                <summary> Fügen Sie eine achte Idee hinzu</summary> 
+                                {{ formfield 'Idea8' }}
+                                    <details>
+                                    <summary> Fügen Sie eine neunte Idee hinzu</summary> 
+                                    {{ formfield 'Idea9' }}
+                                        <details>
+                                        <summary> Fügen Sie eine zehnte Idee hinzu</summary> 
+                                        {{ formfield 'Idea10' }}
+                                            <details>
+                                            <summary> Fügen Sie eine elfte Idee hinzu</summary>
+                                            {{ formfield 'Idea11' }}
+                                                <details>
+                                                <summary> Fügen Sie eine zwölfte Idee hinzu </summary>
+                                                {{ formfield 'Idea12' }}
+                                                    <details>
+                                                    <summary> Fügen Sie eine dreizehnte Idee hinzu </summary>
+                                                    {{ formfield 'Idea13' }}
+                                                        <details>
+                                                        <summary> Fügen Sie eine vierzehnte Idee hinzu </summary>
+                                                        {{ formfield 'Idea14' }}
+                                                            <details>
+                                                            <summary> Fügen Sie eine fünfzehnte Idee hinzu </summary>
+                                                            {{ formfield 'Idea15' }}
+                                                            <p>Sie haben das Maximum an Ideen erreicht, die eingereicht werden können.</p>        
+                                                            </details>
+                                                        </details>
+                                                    </details>
+                                                </details>
+                                            </details>
+                                        </details>
+                                    </details>
+                                </details>
+                            </details>
+                        </details>
+                    </details>
+                </details>
+            </details>
+        </details>       
+</br>
+<p> Bitte entscheiden Sie sich jetzt für Ihren finalen Hinweis und geben Sie ihn hier ein: <b>{{ formfield 'clues' }}</b> </p>
+</br>
+   {{ next_button }}
+</br>
+<details>
+    <summary> Zusammenfassung der Regeln </summary>
+    <ul>    
+        <li> <b><u>Ziel:</u></b> Einer der Spieler – <i>der Ratende</i> – muss ein Geheimwort anhand von von anderen Spielern gegebenen Hinweisen erraten.</li>
+        <li> Wenn zwei oder mehr Spieler denselben Hinweis schreiben, werden alle identischen Hinweise (auch Hinweise aus derselben Wortfamilie) entfernt, bevor <i>der Ratende</i> sie sieht</li>
+        <li> <b>Ungültige Hinweise:</b> Hinweise, die aus derselben Wortfamilie wie das Geheimwort stammen, nur eine Übersetzung des Geheimworts oder erfunden sind.</li>
+</ul>  
+</details>
+
+{{ endblock }}

@@ -1,0 +1,43 @@
+{{ block title }}
+    Aufgabe zur Divergenten Assoziation
+{{ endblock }}
+
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+
+<p>Bitte geben Sie 10 Wörter ein, die so <strong>unterschiedlich</strong> wie möglich voneinander sind,
+in allen Bedeutungen und Verwendungen der Wörter.</p>
+<p><strong>Regeln:</strong></p>
+<ol>
+<li>Nur <strong>einzelne Wörter</strong> auf Englisch.</li>
+<li>Nur <strong>Nomen</strong> (z.B. Dinge, Objekte, Konzepte).</li>
+<li><strong>Keine Eigennamen</strong> (z.B. keine spezifischen Personen oder Orte).</li>
+<li><strong>Kein spezialisiertes Vokabular</strong> (z.B. Fachbegriffe).</li>
+<li>Denken Sie sich die Wörter <strong>selbst aus</strong> (z.B. schauen Sie sich nicht nur in Ihrer Umgebung um).</li>
+</ol>
+<p><strong>Wörter eingeben:</strong></p>
+<ol>
+<li>{{ formfield 'word1' }}</li>
+<li>{{ formfield 'word2' }}</li>
+<li>{{ formfield 'word3' }}</li>
+<li>{{ formfield 'word4' }}</li>
+<li>{{ formfield 'word5' }}</li>
+<li>{{ formfield 'word6' }}</li>
+<li>{{ formfield 'word7' }}</li>
+<li>{{ formfield 'word8' }}</li>
+<li>{{ formfield 'word9' }}</li>
+<li>{{ formfield 'word10' }}</li>
+</ol>
+</br>
+<p><strong>Demografische Informationen:</strong></p>
+<p> {{formfield 'age'}} </p>
+<p> {{formfield 'gender'}} </p>
+</br>  
+    
+{{ next_button }}  
+{{ endblock }}

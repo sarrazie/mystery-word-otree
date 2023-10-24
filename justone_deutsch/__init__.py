@@ -3,15 +3,15 @@ from otree.api import *
 from settings import PARTICIPANT_FIELDS
 
 doc = """
-Your app description
+Ihre App-Beschreibung
 """
 
 class C(BaseConstants):
-    NAME_IN_URL = 'Mystery_Word_Game'
+    NAME_IN_URL = 'Mystery_Word_deutsch'
     NUM_ROUNDS = 12
     PLAYERS_PER_GROUP = 4
-    MYSTERY_WORDS = ['Robot', 'Hair', 'Cheese', 'Forest', 'Letter', 'Shower', 'Idea', 'White', 'Time', 'Penguin', 'Unicorn', 'Market']
-    LANGUAGE_CODE = 'en'
+    MYSTERY_WORDS = ['Roboter', 'Haare', 'Käse', 'Wald', 'Brief', 'Dusche', 'Idee', 'Weiß', 'Zeit', 'Pinguin', 'Einhorn', 'Markt']
+    LANGUAGE_CODE = 'de'
 
 class Subsession(BaseSubsession):
     pass
@@ -22,24 +22,23 @@ class Group(BaseGroup):
 class Player(BasePlayer): 
     def role(player):
         if player.round_number % 4 == 1:
-            return {1: 'guesser', 2: 'cluegiver', 3: 'cluegiver', 4: 'cluegiver'}[player.id_in_group]
+            return {1: 'Ratender', 2: 'Hinweisgeber', 3: 'Hinweisgeber', 4: 'Hinweisgeber'}[player.id_in_group]
         if player.round_number % 4 == 2:
-            return {1: 'cluegiver', 2: 'guesser', 3: 'cluegiver', 4: 'cluegiver'}[player.id_in_group]
+            return {1: 'Hinweisgeber', 2: 'Ratender', 3: 'Hinweisgeber', 4: 'Hinweisgeber'}[player.id_in_group]
         if player.round_number % 4 == 3:
-            return {1: 'cluegiver', 2: 'cluegiver', 3: 'guesser', 4: 'cluegiver'}[player.id_in_group]
+            return {1: 'Hinweisgeber', 2: 'Hinweisgeber', 3: 'Ratender', 4: 'Hinweisgeber'}[player.id_in_group]
         if player.round_number % 4 == 0:
-            return {1: 'cluegiver', 2: 'cluegiver', 3: 'cluegiver', 4: 'guesser'}[player.id_in_group]
+            return {1: 'Hinweisgeber', 2: 'Hinweisgeber', 3: 'Hinweisgeber', 4: 'Ratender'}[player.id_in_group]
         
-    guess = models.StringField(label="Your guess:", initial='')
-    clues = models.StringField(label="Your final clue:", initial='')
+    guess = models.StringField(label="Ihre Vermutung:", initial='')
+    clues = models.StringField(label="Ihr finaler Hinweis:", initial='')
     score = models.IntegerField()
     result = models.StringField()
     incentive = models.IntegerField()
-    known = models.StringField(choices=[['Yes', 'Yes'], ['No', 'No']], label='Did you ever play the game "Just One" before?', widget=widgets.RadioSelect)
-    understanding = models.StringField(choices=[['strongly agree', 'strongly agree'],[' agree', 'agree'],['neutral', 'neutral'],['disagree', 'disagree'],['strongly disagree', 'strongly disagree']], label='"I quickly understood the procedure and the rules of the game."', widget=widgets.RadioSelectHorizontal)
-    english = models.StringField(choices=[['strongly agree', 'strongly agree'],[' agree', 'agree'],['neutral', 'neutral'],['disagree', 'disagree'],['strongly disagree', 'strongly disagree']], label='"My limited vocabulary in English made my performance in the game worse."', widget=widgets.RadioSelectHorizontal)
-    comments = models.LongStringField(label="Do you have any comments or suggestions for improvement? (optional)", initial='', max_length=500, blank=True)
-    Idea1 = models.StringField(label= 'Your ideas:', initial='', blank=True)
+    known = models.StringField(choices=[['Ja', 'Ja'], ['Nein', 'Nein']], label='Haben Sie zuvor das Spiel "Just One" gespielt?', widget=widgets.RadioSelect)
+    understanding = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='"Ich habe die Verfahrensweise und die Regeln des Spiels schnell verstanden."', widget=widgets.RadioSelectHorizontal)
+    comments = models.LongStringField(label="Welche Strategie haben sie im Spiel verfolgt?", initial='', max_length=500, blank=True)
+    Idea1 = models.StringField(label= 'Ihre Ideen:', initial='', blank=True)
     Idea2 = models.StringField(label= '', initial='', blank=True)
     Idea3 = models.StringField(label= '', initial='', blank=True)
     Idea4 = models.StringField(label= '', initial='', blank=True)
@@ -54,24 +53,24 @@ class Player(BasePlayer):
     Idea13 = models.StringField(label= '', initial='', blank=True)
     Idea14 = models.StringField(label= '', initial='', blank=True)
     Idea15 = models.StringField(label= '', initial='', blank=True)
-    word1 = models.StringField(label= '', initial='', blank=False)
-    word2 = models.StringField(label= '', initial='', blank=False)
-    word3 = models.StringField(label= '', initial='', blank=False)
-    word4 = models.StringField(label= '', initial='', blank=False)
-    word5 = models.StringField(label= '', initial='', blank=False)
-    word6 = models.StringField(label= '', initial='', blank=False)
-    word7 = models.StringField(label= '', initial='', blank=False)
-    word8 = models.StringField(label= '', initial='', blank=False)
-    word9 = models.StringField(label= '', initial='', blank=False)
-    word10 = models.StringField(label= '', initial='', blank=False)
-    gender = models.IntegerField(choices=[[1, 'Male'],[2, 'Female'],[3, 'Diverse'],], label='Gender:')
-    age = models.IntegerField(min=18, max=100, label='Age:')
+    word1 = models.StringField(label= '', initial='', blank=True)
+    word2 = models.StringField(label= '', initial='', blank=True)
+    word3 = models.StringField(label= '', initial='', blank=True)
+    word4 = models.StringField(label= '', initial='', blank=True)
+    word5 = models.StringField(label= '', initial='', blank=True)
+    word6 = models.StringField(label= '', initial='', blank=True)
+    word7 = models.StringField(label= '', initial='', blank=True)
+    word8 = models.StringField(label= '', initial='', blank=True)
+    word9 = models.StringField(label= '', initial='', blank=True)
+    word10 = models.StringField(label= '', initial='', blank=True)
+    gender = models.IntegerField(choices=[[1, 'Männlich'],[2, 'Weiblich'],[3, 'Diverse'],], label='Geschlecht:')
+    age = models.IntegerField(min=18, max=100, label='Alter:')
     identical = models.BooleanField()
     invalid = models.BooleanField()
     missing = models.BooleanField()
     guess_missing = models.BooleanField()
     quantity = models.IntegerField()
-    invalid_DAT= models.BooleanField
+    invalid_DAT = models.BooleanField
 
 def creating_session(subsession: Subsession):
     session = subsession.session
@@ -129,7 +128,7 @@ class Round(Page):
 class Clue_Page(Page):
     timeout_seconds = 180
     def is_displayed(player):
-        return player.role() == 'cluegiver'   
+        return player.role() == 'Hinweisgeber'   
     form_model = 'player'
     form_fields = ['clues', 'Idea1', 'Idea2', 'Idea3', 'Idea4', 'Idea5', 'Idea6', 'Idea7', 'Idea8', 'Idea9', 'Idea10', 'Idea11', 'Idea12', 'Idea13', 'Idea14', 'Idea15']
     def vars_for_template(player):
@@ -138,7 +137,7 @@ class Clue_Page(Page):
         
     def before_next_page(player, timeout_happened):
         if timeout_happened:
-            player.clues = 'No clue given'
+            player.clues = 'Kein Hinweis gegeben'
         else:  
             player.clues = player.clues.lower()
             return player.clues
@@ -150,177 +149,177 @@ def wordlength(player, value):
     
 def clues_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Your clue must not be longer than 18 characters!'
+        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def Idea1_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Your idea must not be longer than 18 characters!'
+        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
 
 def Idea2_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Your idea must not be longer than 18 characters!'
+        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
 
 def Idea3_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Your idea must not be longer than 18 characters!'
+        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
 
 def Idea4_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Your idea must not be longer than 18 characters!'
+        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
 
 def Idea5_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Your idea must not be longer than 18 characters!'
+        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
 
 def Idea6_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Your idea must not be longer than 18 characters!'
+        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
 
 def Idea7_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Your idea must not be longer than 18 characters!'
+        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
 
 def Idea8_error_message(player, value): 
     if wordlength(player, value) == True:
-        return 'Your idea must not be longer than 18 characters!'
+        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
 
 def Idea9_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Your idea must not be longer than 18 characters!'
+        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
 
 def Idea10_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Your idea must not be longer than 18 characters!'
+        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
     
 def Idea11_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Your idea must not be longer than 18 characters!'
+        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
 
 def Idea12_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Your idea must not be longer than 18 characters!'
+        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
 
 def Idea13_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Your idea must not be longer than 18 characters!'   
+        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'   
     
 def Idea14_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Your idea must not be longer than 18 characters!'
+        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
 
 def Idea15_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Your idea must not be longer than 18 characters!'
+        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
 
 class CluegiverWaitPage(WaitPage):
-    title_text = "Thank you for your clue!"
-    body_text = "Please wait until the other players have submitted their clues and the guesser has made a guess."
+    title_text = "Vielen Dank für deinen Hinweis!"
+    body_text = "Bitte warte, bis alle ihre Hinweise and Vermutungen abgegeben haben."
     def is_displayed(player):
-        return player.role() == 'cluegiver'
+        return player.role() == 'Hinweisgeber'
 
 class GuesserWaitPage(WaitPage):
-    title_text = "You can make your guess very soon!"
-    body_text = "Please wait until the other players have submitted their clues for you."
+    title_text = "Du kannst deinen Tipp gleich abgeben!"
+    body_text = "Bitte warte, bis die anderen Spieler ihre Hinweise für dich abgegeben haben."
     def is_displayed(player): 
-        return player.role() == 'guesser'
+        return player.role() == 'Ratender'
     
 class ResultsWaitPage(WaitPage):
-    title_text = "Your group is done!"
-    body_text = "Please wait until all groups have submitted their clues and guesses."
+    title_text = "Deine Gruppe ist fertig!"
+    body_text = "Bitte warte, bis alle Gruppen ihre Hinweise und Tipps abgegeben haben."
     wait_for_all_groups = True
 
 class Guess_Page(Page):
     timeout_seconds = 120
     def is_displayed(player):
-        return player.role() == 'guesser'
+        return player.role() == 'Ratender'
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         mystery_word = mystery_word.lower()
         clues_group = [p.clues for p in player.get_others_in_group()]
         if (clues_group[0] in clues_group[1] or clues_group[1] in clues_group[0]) and (clues_group[0] in clues_group[2] or clues_group[2] in clues_group[0]) and (clues_group[1] in clues_group[2] or clues_group[2] in clues_group[1]):
-            clues_group[0] = 'Identical clue'
-            clues_group[1] = 'Identical clue'
-            clues_group[2] = 'Identical clue'
+            clues_group[0] = 'Identischer Hinweis'
+            clues_group[1] = 'Identischer Hinweis'
+            clues_group[2] = 'Identischer Hinweis'
         if clues_group[0] in clues_group[1] or clues_group[1] in clues_group[0]:
-            clues_group[0] = 'Identical clue'
-            clues_group[1] = 'Identical clue'
+            clues_group[0] = 'Identischer Hinweis'
+            clues_group[1] = 'Identischer Hinweis'
         if clues_group[0] in clues_group[2] or  clues_group[2] in clues_group[0]:
-            clues_group[0] = 'Identical clue'
-            clues_group[2] = 'Identical clue'
+            clues_group[0] = 'Identischer Hinweis'
+            clues_group[2] = 'Identischer Hinweis'
         if clues_group[1] in clues_group[2] or clues_group[2] in clues_group[1]:
-            clues_group[1] = 'Identical clue'
-            clues_group[2] = 'Identical clue'
-        if ' ' in clues_group[0] and clues_group[0] != 'Identical clue' and clues_group[0] != 'No clue given':
-            clues_group[0] = 'Invalid clue'
-        if ' ' in clues_group[1] and clues_group[1] != 'Identical clue' and clues_group[1] != 'No clue given':
-            clues_group[1] = 'Invalid clue'
-        if ' ' in clues_group[2] and clues_group[2] != 'Identical clue' and clues_group[2] != 'No clue given':
-            clues_group[2] = 'Invalid clue'
+            clues_group[1] = 'Identischer Hinweis'
+            clues_group[2] = 'Identischer Hinweis'
+        if ' ' in clues_group[0] and clues_group[0] != 'Identischer Hinweis' and clues_group[0] != 'Kein Hinweis gegeben':
+            clues_group[0] = 'Ungültiger Hinweis'
+        if ' ' in clues_group[1] and clues_group[1] != 'Identischer Hinweis' and clues_group[1] != 'Kein Hinweis gegeben':
+            clues_group[1] = 'Ungültiger Hinweis'
+        if ' ' in clues_group[2] and clues_group[2] != 'Identischer Hinweis' and clues_group[2] != 'Kein Hinweis gegeben':
+            clues_group[2] = 'Ungültiger Hinweis'
         import re
-        if re.search("[^a-zA-Z0-9s]", clues_group[0]) and clues_group[0] != 'Identical clue' and clues_group[0] != 'No clue given':
-            clues_group[0] = 'Invalid clue'
-        if re.search("[^a-zA-Z0-9s]", clues_group[1]) and clues_group[1] != 'Identical clue' and clues_group[1] != 'No clue given':
-            clues_group[1] = 'Invalid clue'
-        if re.search("[^a-zA-Z0-9s]", clues_group[2]) and clues_group[2] != 'Identical clue' and clues_group[2] != 'No clue given':
-            clues_group[2] = 'Invalid clue'
+        if re.search("[^a-zA-Z0-9s]", clues_group[0]) and clues_group[0] != 'Identischer Hinweis' and clues_group[0] != 'Kein Hinweis gegeben':
+            clues_group[0] = 'Ungültiger Hinweis'
+        if re.search("[^a-zA-Z0-9s]", clues_group[1]) and clues_group[1] != 'Identischer Hinweis' and clues_group[1] != 'Kein Hinweis gegeben':
+            clues_group[1] = 'Ungültiger Hinweis'
+        if re.search("[^a-zA-Z0-9s]", clues_group[2]) and clues_group[2] != 'Identischer Hinweis' and clues_group[2] != 'Kein Hinweis gegeben':
+            clues_group[2] = 'Ungültiger Hinweis'
         if mystery_word in clues_group[0] or clues_group[0] in mystery_word:
-            clues_group[0] = 'Invalid clue' 
+            clues_group[0] = 'Ungültiger Hinweis' 
         if mystery_word in clues_group[1] or clues_group[1] in mystery_word:
-            clues_group[1] = 'Invalid clue' 
+            clues_group[1] = 'Ungültiger Hinweis' 
         if mystery_word in clues_group[2] or clues_group[2] in mystery_word:
-            clues_group[2] = 'Invalid clue'
+            clues_group[2] = 'Ungültiger Hinweis'
         def num_there(s):
             return any(i.isdigit() for i in s)
         from deep_translator import GoogleTranslator
         if num_there(clues_group[0]) == False:
-            clue_trans = GoogleTranslator(source='auto', target='en').translate(clues_group[0])
+            clue_trans = GoogleTranslator(source='auto', target='de').translate(clues_group[0])
             if mystery_word == clue_trans:
-                clues_group[0] = 'Invalid clue'
+                clues_group[0] = 'Ungültiger Hinweis'
         if num_there(clues_group[1]) == False:
-            clue_trans = GoogleTranslator(source='auto', target='en').translate(clues_group[1])
-            if mystery_word == clue_trans:
-                clues_group[1] = 'Invalid clue'
+            clue_trans = GoogleTranslator(source='auto', target='de').translate(clues_group[1])
+        if mystery_word == clue_trans:
+            clues_group[1] = 'Ungültiger Hinweis'
         if num_there(clues_group[2]) == False:
-             clue_trans = GoogleTranslator(source='auto', target='en').translate(clues_group[2])
-             if mystery_word == clue_trans:
-                clues_group[2] = 'Invalid clue'
+            clue_trans = GoogleTranslator(source='auto', target='de').translate(clues_group[2])
+            if mystery_word == clue_trans:
+                clues_group[2] = 'Ungültiger Hinweis'
         from textblob import Word
         word = Word(clues_group[0])
         result = word.spellcheck()
-        if word != result [0][0]:
-            clues_group[0] = 'Invalid clue'
+        if word != result[0][0]:
+            clues_group[0] = 'Ungültiger Hinweis'
         word = Word(clues_group[1])
         result = word.spellcheck()
-        if word != result [0][0]:
-            clues_group[1] = 'Invalid clue' 
+        if word != result[0][0]:
+            clues_group[1] = 'Ungültiger Hinweis' 
         word = Word(clues_group[2])
         result = word.spellcheck()
-        if word != result [0][0]:
-            clues_group[2] = 'Invalid clue'
+        if word != result[0][0]:
+            clues_group[2] = 'Ungültiger Hinweis'
         return dict(clues = clues_group)
     form_model = 'player'
     form_fields = ['guess'] 
     def before_next_page(player, timeout_happened):
         if timeout_happened:
-            player.guess = 'No guess given'
+            player.guess = 'Keinen Tipp gegeben'
         else:
             player.guess = player.guess.lower()
             return player.guess
         
-class Results(Page): 
+class Results(Page):
     timeout_seconds = 45
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         mystery_word = mystery_word.lower()
-        if player.role() == 'cluegiver':
+        if player.role() == 'Hinweisgeber':
             own_clue = player.clues
-            clues = [p.clues for p in player.get_others_in_group()]  
+            clues = [p.clues for p in player.get_others_in_group()]
             guess = [p.guess for p in player.get_others_in_group()]
             while '' in clues:
                 clues.remove('')
             while '' in guess:
-                guess.remove('')  
-            guess = guess[0] 
+                guess.remove('')
+            guess = guess[0]
             player.missing = False
             player.guess_missing = False
             player.identical = False
@@ -329,38 +328,38 @@ class Results(Page):
             invalid = ''
             missing = ''
             guess_missing = ''
-            if own_clue == 'No clue given':
-                    player.missing = True
-                    missing = 'Watch out! You did not give a clue.'
+            if own_clue == 'Keinen Hinweis gegeben':
+                player.missing = True
+                missing = 'Achtung! Du hast keinen Hinweis gegeben.'
             else:
                 if own_clue in clues[0] or clues[0] in own_clue or own_clue in clues[1] or clues[1] in own_clue:
                     player.identical = True
-                    identical = 'Watch out! You gave an identical clue.'     
+                    identical = 'Achtung! Du hast einen identischen Hinweis gegeben.'
                 if own_clue in mystery_word or mystery_word in own_clue:
-                    player.invalid = True 
-                    invalid = 'Watch out! Your clue was invalid (same word family as mystery word).'
+                    player.invalid = True
+                    invalid = 'Achtung! Dein Hinweis war ungültig (gleiche Wortfamilie wie das geheimnisvolle Wort).'
                 if ' ' in own_clue and player.invalid == False:
-                    player.invalid = True    
-                    invalid = 'Watch out! Your clue was invalid (more than one word).'
+                    player.invalid = True
+                    invalid = 'Achtung! Dein Hinweis war ungültig (mehr als ein Wort).'
                 import re
                 if re.search("[^a-zA-Z0-9s]", own_clue) and player.invalid == False:
                     player.invalid = True
-                    invalid = 'Watch out! Your clue was invalid (use of special characters).'
+                    invalid = 'Achtung! Dein Hinweis war ungültig (Verwendung von Sonderzeichen).'
                 def num_there(s):
                     return any(i.isdigit() for i in s)
                 from deep_translator import GoogleTranslator
                 if num_there(own_clue) == False:
-                    clue_trans = GoogleTranslator(source='auto', target='en').translate(own_clue)
+                    clue_trans = GoogleTranslator(source='auto', target='de').translate(own_clue)
                     if mystery_word == clue_trans and player.invalid == False:
                         player.invalid = True
-                        invalid = 'Watch out! Your clue was invalid (translation of mystery word).'
+                        invalid = 'Achtung! Dein Hinweis war ungültig (Übersetzung des geheimen Wortes).'
                 from textblob import Word
                 word = Word(own_clue)
                 result = word.spellcheck()
-                if word != result [0][0] and player.invalid == False:
+                if word != result[0][0] and player.invalid == False:
                     player.invalid = True
-                    invalid = 'Watch out! Your clue was invalid (spelling mistake or no real word).'
-            clues.append(own_clue)     
+                    invalid = 'Achtung! Dein Hinweis war ungültig (Rechtschreibfehler oder kein echtes Wort).'
+            clues.append(own_clue)
             player.Idea1 = player.Idea1.lower()
             player.Idea2 = player.Idea2.lower()
             player.Idea3 = player.Idea3.lower()
@@ -405,14 +404,14 @@ class Results(Page):
             if len(own_ideas) > 0:
                 for i in range(len(own_ideas)):
                     if has_numbers(own_ideas[i]) == False:
-                        clue_trans = GoogleTranslator(source='auto', target='en').translate(own_ideas[i])
+                        clue_trans = GoogleTranslator(source='auto', target='de').translate(own_ideas[i])
                         if mystery_word == clue_trans:
                             own_ideas[i] = 'false'
             while 'false' in own_ideas:
                 own_ideas.remove('false')
             own_ideas = list(dict.fromkeys(own_ideas))
             player.quantity = len(own_ideas)
-        if player.role() == 'guesser':
+        if player.role() == 'Hinweisgeber':
             player.missing = False
             player.identical = False
             player.invalid = False
@@ -424,16 +423,16 @@ class Results(Page):
             guess_missing = ''
             guess = player.guess
             clues = [p.clues for p in player.get_others_in_group()]
-            if guess == 'No guess given':
+            if guess == 'Keinen Tipp abgegeben':
                 player.guess_missing = True
-                guess_missing = 'Watch out! You did not give a guess.'
+                guess_missing = 'Achtung! Du hast keinen Tipp abgegeben.'
             else:
                 guess = guess.lower()
         if mystery_word == guess:
-            player.result = 'correct'
+            player.result = 'richtig'
             player.payoff = 1
         else:
-            player.result = 'incorrect' 
+            player.result = 'falsch' 
             player.payoff = 0 
         player.score =  int(player.participant.payoff)
         player.group.payoff =  player.score 
@@ -482,7 +481,7 @@ class TestQuestions(Page):
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
     form_model = 'player'
-    form_fields = ['known', 'understanding', 'english', 'comments']
+    form_fields = ['known', 'understanding', 'comments']
     
 class FinalPage(Page):
     timeout_seconds = 30
