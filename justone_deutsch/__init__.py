@@ -8,9 +8,9 @@ Ihre App-Beschreibung
 
 class C(BaseConstants):
     NAME_IN_URL = 'Mystery_Word_deutsch'
-    NUM_ROUNDS = 12
+    NUM_ROUNDS = 2
     PLAYERS_PER_GROUP = 4
-    MYSTERY_WORDS = ['Roboter', 'Haare', 'Käse', 'Wald', 'Brief', 'Dusche', 'Idee', 'Weiß', 'Zeit', 'Pinguin', 'Einhorn', 'Markt']
+    MYSTERY_WORDS = ['Roboter', 'Haare']
     LANGUAGE_CODE = 'de'
 
 class Subsession(BaseSubsession):
@@ -81,7 +81,7 @@ def creating_session(subsession: Subsession):
 
 # PAGES
 class GroupWaitPage(WaitPage):
-    template_name = 'justone/GroupWaitPage.html'
+    template_name = 'justone_deutsch/GroupWaitPage.html'
     group_by_arrival_time = True
     def is_displayed(player):
         return player.round_number == 1
@@ -411,7 +411,7 @@ class Results(Page):
                 own_ideas.remove('false')
             own_ideas = list(dict.fromkeys(own_ideas))
             player.quantity = len(own_ideas)
-        if player.role() == 'Hinweisgeber':
+        if player.role() == 'Ratender':
             player.missing = False
             player.identical = False
             player.invalid = False
@@ -476,7 +476,7 @@ class Score(Page):
         return dict(overall_score = overall_score, score = player.score, rank = rank, number_groups = number_groups)
 
 class TestQuestions(Page):
-    template_name = 'justone/TestQuestions.html'
+    template_name = 'justone_deutsch/TestQuestions.html'
     timeout_seconds = 180
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS

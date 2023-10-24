@@ -14,7 +14,7 @@
 <p> <b>{{ missing }}</b> </p>
 <p> <b>{{ guess_missing }}</b> </p>
 <p> {{ if player.participant.treatment == 2 }} {{ if player.role() == 'cluegiver' }} Sie haben {{ number_ideas }} <b>gültige</b> Idee(n) eingereicht. {{ else }} {{ endif }} {{ else }} {{ endif }}</p>
-<p> Geheimes Wort: <b>{{ geheimes_wort }}</b> </p>
+<p> Geheimes Wort: <b>{{ mystery_word }}</b> </p>
 <p> Die Hinweise Ihrer Gruppe: </p>
 <ul>
     {{ for item in clues }}
