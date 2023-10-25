@@ -10,7 +10,7 @@ class C(BaseConstants):
     NAME_IN_URL = 'Mystery_Word_deutsch'
     NUM_ROUNDS = 2
     PLAYERS_PER_GROUP = 4
-    MYSTERY_WORDS = ['Roboter', 'Haare']
+    MYSTERY_WORDS = ['Treppe', 'Haare']
     LANGUAGE_CODE = 'de'
 
 class Subsession(BaseSubsession):
@@ -236,6 +236,10 @@ class Guess_Page(Page):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         mystery_word = mystery_word.lower()
         clues_group = [p.clues for p in player.get_others_in_group()]
+        special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
+        clues_group[0] = clues_group[0].translate(special_char_map)
+        clues_group[1] = clues_group[1].translate(special_char_map)
+        clues_group[2] = clues_group[2].translate(special_char_map)
         if (clues_group[0] in clues_group[1] or clues_group[1] in clues_group[0]) and (clues_group[0] in clues_group[2] or clues_group[2] in clues_group[0]) and (clues_group[1] in clues_group[2] or clues_group[2] in clues_group[1]):
             clues_group[0] = 'Identischer Hinweis'
             clues_group[1] = 'Identischer Hinweis'
@@ -250,11 +254,17 @@ class Guess_Page(Page):
             clues_group[1] = 'Identischer Hinweis'
             clues_group[2] = 'Identischer Hinweis'
         if ' ' in clues_group[0] and clues_group[0] != 'Identischer Hinweis' and clues_group[0] != 'Kein Hinweis gegeben':
-            clues_group[0] = 'Ungültiger Hinweis'
+            more = clues_group[0].split() 
+            if len(more)>1:
+                clues_group[0] = 'Ungültiger Hinweis'
         if ' ' in clues_group[1] and clues_group[1] != 'Identischer Hinweis' and clues_group[1] != 'Kein Hinweis gegeben':
-            clues_group[1] = 'Ungültiger Hinweis'
+            more = clues_group[1].split() 
+            if len(more)>1:
+                clues_group[1] = 'Ungültiger Hinweis'
         if ' ' in clues_group[2] and clues_group[2] != 'Identischer Hinweis' and clues_group[2] != 'Kein Hinweis gegeben':
-            clues_group[2] = 'Ungültiger Hinweis'
+            more = clues_group[2].split() 
+            if len(more)>1:
+                clues_group[2] = 'Ungültiger Hinweis'
         import re
         if re.search("[^a-zA-Z0-9s]", clues_group[0]) and clues_group[0] != 'Identischer Hinweis' and clues_group[0] != 'Kein Hinweis gegeben':
             clues_group[0] = 'Ungültiger Hinweis'
@@ -270,38 +280,50 @@ class Guess_Page(Page):
             clues_group[2] = 'Ungültiger Hinweis'
         def num_there(s):
             return any(i.isdigit() for i in s)
-        from deep_translator import GoogleTranslator
-        if num_there(clues_group[0]) == False:
-            clue_trans = GoogleTranslator(source='auto', target='de').translate(clues_group[0])
-            if mystery_word == clue_trans:
+        import translators as ts
+        if num_there(clues_group[0]) == False and clues_group[0] != 'Identischer Hinweis' and clues_group[0] != 'Kein Hinweis gegeben':
+            clue_trans = ts.translate_text(query_text=clues_group[0], translator='google', from_language='auto', to_language='de')
+            clue_trans = clue_trans.lower()
+            special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
+            clue_trans = clue_trans.translate(special_char_map)
+            if mystery_word in clue_trans or clue_trans in mystery_word:
                 clues_group[0] = 'Ungültiger Hinweis'
-        if num_there(clues_group[1]) == False:
-            clue_trans = GoogleTranslator(source='auto', target='de').translate(clues_group[1])
-        if mystery_word == clue_trans:
-            clues_group[1] = 'Ungültiger Hinweis'
-        if num_there(clues_group[2]) == False:
-            clue_trans = GoogleTranslator(source='auto', target='de').translate(clues_group[2])
-            if mystery_word == clue_trans:
+        if num_there(clues_group[1]) == False and clues_group[1] != 'Identischer Hinweis' and clues_group[1] != 'Kein Hinweis gegeben':
+            clue_trans = ts.translate_text(query_text=clues_group[1], translator='google', from_language='auto', to_language='de')
+            clue_trans = clue_trans.lower()
+            special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
+            clue_trans = clue_trans.translate(special_char_map)
+            if mystery_word in clue_trans or clue_trans in mystery_word:
+                clues_group[1] = 'Ungültiger Hinweis'
+        if num_there(clues_group[2]) == False and clues_group[2] != 'Identischer Hinweis' and clues_group[2] != 'Kein Hinweis gegeben':
+            clue_trans = ts.translate_text(query_text=clues_group[2], translator='google', from_language='auto', to_language='de')
+            clue_trans = clue_trans.lower()
+            special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
+            clue_trans = clue_trans.translate(special_char_map)
+            if mystery_word in clue_trans or clue_trans in mystery_word:
                 clues_group[2] = 'Ungültiger Hinweis'
-        from textblob import Word
-        word = Word(clues_group[0])
-        result = word.spellcheck()
-        if word != result[0][0]:
-            clues_group[0] = 'Ungültiger Hinweis'
-        word = Word(clues_group[1])
-        result = word.spellcheck()
-        if word != result[0][0]:
-            clues_group[1] = 'Ungültiger Hinweis' 
-        word = Word(clues_group[2])
-        result = word.spellcheck()
-        if word != result[0][0]:
-            clues_group[2] = 'Ungültiger Hinweis'
+        with open('C:/Users/sarrazie/Desktop/otree/testproject/justone_deutsch/wordlist-german.txt', 'r') as file:
+            text = file.read()
+            wordlist= text.split()
+            back_char_map = {'ae':'ä', 'ue':'ü', 'oe':'ö', 'ss':'ß'}
+            clues_group[0] = clues_group[0].translate(back_char_map)
+            clues_group[1] = clues_group[1].translate(back_char_map)
+            clues_group[2] = clues_group[2].translate(back_char_map)
+        if clues_group[0] != 'Identischer Hinweis' and clues_group[0] != 'Kein Hinweis gegeben':
+            if clues_group[0] not in wordlist:
+                clues_group[0] = 'Ungültiger Hinweis'
+        if clues_group[1] != 'Identischer Hinweis' and clues_group[1] != 'Kein Hinweis gegeben':
+            if clues_group[1] not in wordlist:
+                clues_group[1] = 'Ungültiger Hinweis'
+        if clues_group[2] != 'Identischer Hinweis' and clues_group[2] != 'Kein Hinweis gegeben':
+            if clues_group[2] not in wordlist:
+                clues_group[2] = 'Ungültiger Hinweis'
         return dict(clues = clues_group)
     form_model = 'player'
     form_fields = ['guess'] 
     def before_next_page(player, timeout_happened):
         if timeout_happened:
-            player.guess = 'Keinen Tipp gegeben'
+            player.guess = 'Kein Tipp gegeben'
         else:
             player.guess = player.guess.lower()
             return player.guess
@@ -320,6 +342,11 @@ class Results(Page):
             while '' in guess:
                 guess.remove('')
             guess = guess[0]
+            special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
+            clues[0] = clues[0].translate(special_char_map)
+            clues[1] = clues[1].translate(special_char_map)
+            guess = guess.translate(special_char_map)
+            own_clue = own_clue.translate(special_char_map)
             player.missing = False
             player.guess_missing = False
             player.identical = False
@@ -328,7 +355,7 @@ class Results(Page):
             invalid = ''
             missing = ''
             guess_missing = ''
-            if own_clue == 'Keinen Hinweis gegeben':
+            if own_clue == 'Kein Hinweis gegeben':
                 player.missing = True
                 missing = 'Achtung! Du hast keinen Hinweis gegeben.'
             else:
@@ -339,26 +366,33 @@ class Results(Page):
                     player.invalid = True
                     invalid = 'Achtung! Dein Hinweis war ungültig (gleiche Wortfamilie wie das geheimnisvolle Wort).'
                 if ' ' in own_clue and player.invalid == False:
-                    player.invalid = True
-                    invalid = 'Achtung! Dein Hinweis war ungültig (mehr als ein Wort).'
+                    more = own_clue.split() 
+                    if len(more)>1:
+                        player.invalid = True
+                        invalid = 'Achtung! Dein Hinweis war ungültig (mehr als ein Wort).'
                 import re
                 if re.search("[^a-zA-Z0-9s]", own_clue) and player.invalid == False:
                     player.invalid = True
                     invalid = 'Achtung! Dein Hinweis war ungültig (Verwendung von Sonderzeichen).'
                 def num_there(s):
                     return any(i.isdigit() for i in s)
-                from deep_translator import GoogleTranslator
-                if num_there(own_clue) == False:
-                    clue_trans = GoogleTranslator(source='auto', target='de').translate(own_clue)
-                    if mystery_word == clue_trans and player.invalid == False:
+                import translators as ts
+                if num_there(own_clue) == False and player.invalid == False:
+                    clue_trans = ts.translate_text(query_text=own_clue, translator='google', from_language='auto', to_language='de')
+                    clue_trans = clue_trans.lower()
+                    special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
+                    clue_trans = clue_trans.translate(special_char_map)
+                    if mystery_word in clue_trans or clue_trans in mystery_word:
                         player.invalid = True
                         invalid = 'Achtung! Dein Hinweis war ungültig (Übersetzung des geheimen Wortes).'
-                from textblob import Word
-                word = Word(own_clue)
-                result = word.spellcheck()
-                if word != result[0][0] and player.invalid == False:
-                    player.invalid = True
-                    invalid = 'Achtung! Dein Hinweis war ungültig (Rechtschreibfehler oder kein echtes Wort).'
+                with open('C:/Users/sarrazie/Desktop/otree/testproject/justone_deutsch/wordlist-german.txt', 'r') as file:
+                    text = file.read()
+                    wordlist= text.split()
+                    back_char_map = {'ae':'ä', 'ue':'ü', 'oe':'ö', 'ss':'ß'}
+                    own_clue = own_clue.translate(back_char_map)
+                    if own_clue not in wordlist and player.invalid == False:
+                        player.invalid = True
+                        invalid = 'Achtung! Dein Hinweis war ungültig (Rechtschreibfehler oder kein echtes Wort).'
             clues.append(own_clue)
             player.Idea1 = player.Idea1.lower()
             player.Idea2 = player.Idea2.lower()
@@ -378,34 +412,43 @@ class Results(Page):
             own_ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12, player.Idea13, player.Idea14, player.Idea15] 
             while '' in own_ideas:
                 own_ideas.remove('')
-            import re
-            from deep_translator import GoogleTranslator
-            from textblob import Word
+            if len(own_ideas) > 0:
+                for i in range(len(own_ideas)):
+                    special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
+                    own_ideas[i] = own_ideas[i].translate(special_char_map)
             if len(own_ideas) > 0:
                 for i in range(len(own_ideas)):  
                     if ' ' in own_ideas[i]:
-                        own_ideas[i] = 'false'
+                        more = own_ideas[i].split() 
+                        if len(more)>1: 
+                            own_ideas[i] = 'false'
             if len(own_ideas) > 0:
                 for i in range(len(own_ideas)):
                     if own_ideas[i] in mystery_word or mystery_word in own_ideas[i]:
                         own_ideas[i] = 'false'
-            if len(own_ideas) > 0:
-                for i in range(len(own_ideas)):
-                    word = Word(own_ideas[i])
-                    result = word.spellcheck() 
-                    if word != result [0][0]:
-                        own_ideas[i] = 'false'
+            with open('C:/Users/sarrazie/Desktop/otree/testproject/justone_deutsch/wordlist-german.txt', 'r') as file:
+                text = file.read()
+                wordlist= text.split()
+                if len(own_ideas) > 0:
+                    for i in range(len(own_ideas)):
+                        back_char_map = {ord('ae'):'ä', ord('ue'):'ü', ord('oe'):'ö', ord('ss'):'ß'}
+                        own_ideas[i] = own_ideas[i].translate(back_char_map)
+                        if own_ideas[i] not in wordlist:
+                            own_ideas[i] = 'false'
+            import re
             if len(own_ideas) > 0:
                 for i in range(len(own_ideas)):
                     if re.search("[^a-zA-Z0-9s]", own_ideas[i]):
-                        own_ideas[i] = 'false'
+                        own_ideas[i] = 'false'          
             def has_numbers(s):
                 return bool(re.search(r'\d',s))
+            import translators as ts
             if len(own_ideas) > 0:
                 for i in range(len(own_ideas)):
                     if has_numbers(own_ideas[i]) == False:
-                        clue_trans = GoogleTranslator(source='auto', target='de').translate(own_ideas[i])
-                        if mystery_word == clue_trans:
+                        clue_trans = ts.translate_text(query_text=own_ideas[i], translator='google', from_language='auto', to_language='de')
+                        clue_trans = clue_trans.lower()
+                        if mystery_word in clue_trans or clue_trans in mystery_word:  
                             own_ideas[i] = 'false'
             while 'false' in own_ideas:
                 own_ideas.remove('false')
@@ -423,11 +466,9 @@ class Results(Page):
             guess_missing = ''
             guess = player.guess
             clues = [p.clues for p in player.get_others_in_group()]
-            if guess == 'Keinen Tipp abgegeben':
+            if guess == 'Kein Tipp gegeben':
                 player.guess_missing = True
                 guess_missing = 'Achtung! Du hast keinen Tipp abgegeben.'
-            else:
-                guess = guess.lower()
         if mystery_word == guess:
             player.result = 'richtig'
             player.payoff = 1
@@ -484,7 +525,6 @@ class TestQuestions(Page):
     form_fields = ['known', 'understanding', 'comments']
     
 class FinalPage(Page):
-    timeout_seconds = 30
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
 
