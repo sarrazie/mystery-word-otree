@@ -431,7 +431,7 @@ class Results(Page):
                 wordlist= text.split()
                 if len(own_ideas) > 0:
                     for i in range(len(own_ideas)):
-                        back_char_map = {ord('ae'):'ä', ord('ue'):'ü', ord('oe'):'ö', ord('ss'):'ß'}
+                        back_char_map = {'ae':'ä', 'ue':'ü', 'oe':'ö', 'ss':'ß'}
                         own_ideas[i] = own_ideas[i].translate(back_char_map)
                         if own_ideas[i] not in wordlist:
                             own_ideas[i] = 'false'
