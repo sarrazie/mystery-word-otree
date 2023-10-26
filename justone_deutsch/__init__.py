@@ -35,9 +35,13 @@ class Player(BasePlayer):
     score = models.IntegerField()
     result = models.StringField()
     incentive = models.IntegerField()
-    known = models.StringField(choices=[['Ja', 'Ja'], ['Nein', 'Nein']], label='Haben Sie zuvor das Spiel "Just One" gespielt?', widget=widgets.RadioSelect)
-    understanding = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='"Ich habe die Verfahrensweise und die Regeln des Spiels schnell verstanden."', widget=widgets.RadioSelectHorizontal)
-    comments = models.LongStringField(label="Welche Strategie haben sie im Spiel verfolgt?", initial='', max_length=500, blank=True)
+    known = models.StringField(choices=[['Ja', 'Ja'], ['Nein', 'Nein']], label='Kennen Sie das Spiel "Just One"?', widget=widgets.RadioSelect)
+    role_question = models.StringField(choices=[['Hinweisgeber', 'Hinweisgeber'], ['Ratender', 'Ratender']], label='In welcher Rolle haben sie sich wohler gefühlt?', widget=widgets.RadioSelect)
+    understanding = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='"Ich habe die Verfahrensweise und die Regeln schnell verstanden."', widget=widgets.RadioSelectHorizontal)
+    comments = models.LongStringField(label="Welche Strategie haben sie als Hinweisgeber verfolgt?", initial='', max_length=500, blank=True)
+    comments_2 = models.LongStringField(label="Welche Strategie haben sie als Ratender verfolgt?", initial='', max_length=500, blank=True)
+
+
     Idea1 = models.StringField(label= 'Ihre Ideen:', initial='', blank=True)
     Idea2 = models.StringField(label= '', initial='', blank=True)
     Idea3 = models.StringField(label= '', initial='', blank=True)
@@ -522,7 +526,7 @@ class TestQuestions(Page):
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
     form_model = 'player'
-    form_fields = ['known', 'understanding', 'comments']
+    form_fields = ['known', 'understanding', 'role_question', 'comments', 'comments_2']
     
 class FinalPage(Page):
     def is_displayed(player):
