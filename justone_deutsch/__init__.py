@@ -48,6 +48,17 @@ class Player(BasePlayer):
     freda_6 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='"In meinem Job lerne ich häufig dazu, indem ich mich zum Beispiel auf den neuesten Stand bringe oder neue Aufgaben praktisch durchführe (“learning by doing”)."', widget=widgets.RadioSelectHorizontal)
     freda_7 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='"Meine Eltern gaben mir immer alle Freiheiten."', widget=widgets.RadioSelectHorizontal)
     freda_8 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='"Ich versuche, meinem (künftigen) Kind so viele Freiheiten zu geben, wie ich von meinen Eltern erhalten habe."', widget=widgets.RadioSelectHorizontal)
+    understand_1 = models.StringField(choices=[['false', 'Die Hinweise werden dem Ratenden gezeigt'], ['true', 'Die Hinweise werden entfernt, bevor der Ratende sie sieht.'], ['false', 'Die Hinweise zählen doppelt'],['false', 'Der Gewinn der Gruppe wird verdoppelt']], label='Was passiert, wenn Spieler identische Hinweise geben?', widget=widgets.RadioSelect)
+    understand_2 = models.StringField(choices=[['false', 'Unbegrenzt viele Versuche'],['false', 'Zwei Versuche'],['false', 'Drei Versuche'],['true', 'Nur einen Versuch']], label='Wie viele Versuche hat der Ratende, um das geheime Wort zu erraten?', widget=widgets.RadioSelect)
+    understand_3 = models.StringField(choices=[['false,','Zwei'],['false', 'Drei'],['true', 'Vier'],['false', 'Fünf']], label='Wie viele Spieler bilden zusammen eine Gruppe?', widget=widgets.RadioSelect)
+    understand_4 = models.StringField(choices=[['false', 'Die meisten Hinweise aller Gruppen geben'],['true', 'Die meisten geheimen Wörter erraten von allen Gruppen'],['false', 'Die meisten identischen Hinweise aller Gruppen geben'],['false','Die wenigsten geheimen Wörter aller Gruppen erraten']], label='Was ist das Ziel deiner Gruppe?', widget=widgets.RadioSelect)
+    understand_5 = models.StringField(choices=[['true', '12 Euro für die Teilnahme an allen Runden'],['false', '3 Euro fix plus 9 Euro Bonus für die meisten Ideen'],['false', '3 Euro fix plus 9 Euro Bonus für die meisten erratenen geheimen Wörter'],['false','3 Euro fix plus 9 Euro Bonus für die originellsten Hinweise, die zur richtigen Erratung des Wortes führen']], label='Wie viel Geld kannst du maximal in diesem Experiment verdienen?', widget=widgets.RadioSelect)
+    understand_6 = models.StringField(choices=[['false', 'Time'], ['false', 'Zeitpunkt'],['false', 'ist Geld'],['false', 'Zeeeit'],['true', 'keiner der oben genannten Hinweise']], label='Beispiel: Welcher der folgenden Hinweise wäre ein gültiger Hinweis für das geheime Wort "Zeit"?', widget=widgets.RadioSelect)
+    strategy = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='"Ich habe ständig nur daran gedacht, welche Hinweise meine Mitspieler abgeben."', widget=widgets.RadioSelectHorizontal)
+    strategy_2 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='"Erst möglichst viele Ideen aufzuschreiben, hilft mir dabei, später bessere Hinweise zu geben."', widget=widgets.RadioSelectHorizontal)
+    strategy_3 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='"Ich habe versucht, möglichst originelle und einzigartige Hinweise zu geben, damit ich keine identischen Hinweise wie meine Mitspieler abgebe."', widget=widgets.RadioSelectHorizontal)
+    strategy_4 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='"Ich habe versucht, eindeutige und naheliegende Hinweise zu geben, auch auf die Gefahr hin, dass meine Mitspieler identische Hinweise abgegen."', widget=widgets.RadioSelectHorizontal)
+    strategy_5 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='"Der Wettkampf mit den anderen Gruppen hat mich motiviert, möglichst gute Hinweise zu geben und das geheime Wort zu erraten."', widget=widgets.RadioSelectHorizontal)
     Idea1 = models.StringField(label= '', initial='', blank=True)
     Idea2 = models.StringField(label= '', initial='', blank=True)
     Idea3 = models.StringField(label= '', initial='', blank=True)
@@ -532,7 +543,7 @@ class TestQuestions(Page):
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
     form_model = 'player'
-    form_fields = ['known', 'understanding', 'role_question', 'comments', 'comments_2']
+    form_fields = ['known', 'understanding', 'role_question', 'comments', 'comments_2', 'strategy', 'strategy_2', 'strategy_3', 'strategy_4', 'strategy_5']
 
 class FredaQuestions(Page):
     template_name = 'justone_deutsch/FredaQuestions.html'
@@ -541,9 +552,30 @@ class FredaQuestions(Page):
         return player.round_number == C.NUM_ROUNDS
     form_model = 'player'
     form_fields = ['freda_1', 'freda_2', 'freda_3', 'freda_4', 'freda_5', 'freda_6', 'freda_7', 'freda_8']
-    
+
+class UnderstandPage(Page):
+    template_name = 'justone_deutsch/UnderstandPage.html'
+    timeout_seconds = 180
+    def is_displayed(player):
+        return player.round_number == 1
+    form_model = 'player'
+    form_fields = ['understand_1', 'understand_2', 'understand_3', 'understand_4', 'understand_5', 'understand_6']
+    def error_message(player, values):
+        if values['understand_1'] == 'false':
+            return 'Falsche Antwort bei Frage 1! Versuche es noch einmal.'
+        if values['understand_2'] == 'false':
+            return 'Falsche Antwort bei Frage 2! Versuche es noch einmal.'
+        if values['understand_3'] == 'false':
+            return 'Falsche Antwort bei Frage 3! Versuche es noch einmal.'
+        if values['understand_4'] == 'false':
+            return 'Falsche Antwort bei Frage 4! Versuche es noch einmal.'
+        if values['understand_5'] == 'false':
+            return 'Falsche Antwort bei Frage 5! Versuche es noch einmal.'
+        if values['understand_6'] == 'false':
+            return 'Falsche Antwort bei Frage 6! Versuche es noch einmal.'
+
 class FinalPage(Page):
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
 
-page_sequence = [GroupWaitPage, Intro, Instructions, Round, Clue_Page, GuesserWaitPage, Guess_Page, CluegiverWaitPage, ResultsWaitPage, Results, Score, TestQuestions, FredaQuestions, DAT, FinalPage]
+page_sequence = [GroupWaitPage, Intro, Instructions, UnderstandPage, Round, Clue_Page, GuesserWaitPage, Guess_Page, CluegiverWaitPage, ResultsWaitPage, Results, Score, TestQuestions, FredaQuestions, DAT, FinalPage]
