@@ -574,8 +574,108 @@ class UnderstandPage(Page):
         if values['understand_6'] == 'false':
             return 'Falsche Antwort bei Frage 6! Versuche es noch einmal.'
 
+class Generation_Page(Page):
+    timeout_seconds = 180
+    def is_displayed(player):
+        return player.role() == 'Hinweisgeber'   
+    form_model = 'player'
+    form_fields = ['Idea1', 'Idea2', 'Idea3', 'Idea4', 'Idea5', 'Idea6', 'Idea7', 'Idea8', 'Idea9', 'Idea10', 'Idea11', 'Idea12', 'Idea13', 'Idea14']
+    def vars_for_template(player):
+        mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
+        return dict(mystery_word = mystery_word)
+        
+    def before_next_page(player, timeout_happened):
+        if timeout_happened:
+            player.clues = 'Kein Hinweis gegeben'
+        else:  
+            player.clues = player.clues.lower()
+            return player.clues
+        
+def wordlength(player, value):
+    value = value.lower()
+    if len(value) > 18:
+        return True
+    
+def clues_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+
+def Idea1_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+
+def Idea2_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+
+def Idea3_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+
+def Idea4_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+
+def Idea5_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+
+def Idea6_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+
+def Idea7_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+
+def Idea8_error_message(player, value): 
+    if wordlength(player, value) == True:
+        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+
+def Idea9_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+
+def Idea10_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+    
+def Idea11_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+
+def Idea12_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+
+def Idea13_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'   
+    
+def Idea14_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+
+class CluegiverWaitPage(WaitPage):
+    title_text = "Vielen Dank für deinen Hinweis!"
+    body_text = "Bitte warte, bis alle ihre Hinweise and Vermutungen abgegeben haben."
+    def is_displayed(player):
+        return player.role() == 'Hinweisgeber'
+
+class GuesserWaitPage(WaitPage):
+    title_text = "Du kannst deinen Tipp gleich abgeben!"
+    body_text = "Bitte warte, bis die anderen Spieler ihre Hinweise für dich abgegeben haben."
+    def is_displayed(player): 
+        return player.role() == 'Ratender'
+    
+class ResultsWaitPage(WaitPage):
+    title_text = "Deine Gruppe ist fertig!"
+    body_text = "Bitte warte, bis alle Gruppen ihre Hinweise und Tipps abgegeben haben."
+    wait_for_all_groups = True
+
+
 class FinalPage(Page):
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
 
-page_sequence = [GroupWaitPage, Intro, Instructions, UnderstandPage, Round, Clue_Page, GuesserWaitPage, Guess_Page, CluegiverWaitPage, ResultsWaitPage, Results, Score, TestQuestions, FredaQuestions, DAT, FinalPage]
+page_sequence = [GroupWaitPage, Intro, Instructions, UnderstandPage, Round, Generation_Page, Clue_Page, GuesserWaitPage, Guess_Page, CluegiverWaitPage, ResultsWaitPage, Results, Score, TestQuestions, FredaQuestions, DAT, FinalPage]
