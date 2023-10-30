@@ -21,43 +21,43 @@
 </br>
 <p> Das <b>Geheimwort</b> in dieser Runde ist: </p>
 <p> <b>{{ mystery_word }}</b> </p>   
-<p> Bitte geben Sie <b>alle</b> Hinweispaare ein, die ihnen zu diesem Wort einfallen (ein Hinweis pro Textfeld): </p>
-    <b>{{ formfield 'Idea1' }} {{ formfield 'Idea2' }} </b>
+<p> Bitte geben Sie <b>alle</b> Hinweispaare ein, die ihnen zu diesem Wort einfallen <b>(ein Hinweis pro Textfeld)</b>: </p>
+    {{ formfield 'Idea1' }} <b>+</b> {{ formfield 'Idea2' }}
         <details>
-        <summary> Fügen Sie eine zweite Idee hinzu </summary>
-        {{ formfield 'Idea3' }} {{ formfield 'Idea4' }}
+        <summary> Fügen Sie ein zweites Hinweispaar hinzu </summary>
+        {{ formfield 'Idea3' }}<b>+</b> {{ formfield 'Idea4' }}
             <details>
-            <summary> Fügen Sie eine dritte Idee hinzu </summary>
-            {{ formfield 'Idea5' }} {{ formfield 'Idea6' }}
+            <summary> Fügen Sie ein drittes Hinweispaar hinzu </summary>
+            {{ formfield 'Idea5' }} <b>+</b> {{ formfield 'Idea6' }}
                 <details>
-                <summary> Fügen Sie eine vierte Idee hinzu </summary>
-                {{ formfield 'Idea7' }} {{ formfield 'Idea8' }}
+                <summary> Fügen Sie ein viertes Hinweispaar hinzu </summary>
+                {{ formfield 'Idea7' }} <b>+</b> {{ formfield 'Idea8' }}
                     <details>
-                    <summary> Fügen Sie eine fünfte Idee hinzu </summary>
-                    {{ formfield 'Idea9' }} {{ formfield 'Idea10' }}
+                    <summary> Fügen Sie ein fünftes Hinweispaar hinzu </summary>
+                    {{ formfield 'Idea9' }} <b>+</b> {{ formfield 'Idea10' }}
                         <details>
-                        <summary> Fügen Sie eine sechste Idee hinzu</summary>
-                        {{ formfield 'Idea11' }} {{ formfield 'Idea12' }}
+                        <summary> Fügen Sie ein sechstes Hinweispaar hinzu</summary>
+                        {{ formfield 'Idea11' }}<b>+</b> {{ formfield 'Idea12' }}
                             <details>
-                            <summary> Fügen Sie eine siebte Idee hinzu</summary>               
-                            {{ formfield 'Idea13' }} {{ formfield 'Idea14' }}
-                            <p>Sie haben das Maximum an Hinweispaaren erreicht, die eingereicht werden können.</p>
+                            <summary> Fügen Sie ein siebtes Hinweispaar hinzu</summary>               
+                            {{ formfield 'Idea13' }}<b>+</b> {{ formfield 'Idea14' }}
+                            <p>Sie haben das <b>Maximum</b> an Hinweispaaren erreicht, die eingereicht werden können.</p>
                             </details>
                         </details>
                     </details>
                 </details>
             </details>
-        </details>       
-</br>
+        </details>   
+    </br>    
 <button class= "otree-btn btn btn-info">Weiter</button>
 </br>
-
+</br>
 <details>
     <summary> Zusammenfassung der Regeln </summary>
     <ul>    
-        <li> <b><u>Ziel:</u></b> Einer der Spieler – <i>der Ratende</i> – muss ein Geheimwort anhand von von anderen Spielern gegebenen Hinweisen erraten.</li>
-        <li> Wenn zwei oder mehr Spieler denselben Hinweis schreiben, werden alle identischen Hinweise (auch Hinweise aus derselben Wortfamilie) entfernt, bevor <i>der Ratende</i> sie sieht</li>
-        <li> <b>Ungültige Hinweise:</b> Hinweise, die aus derselben Wortfamilie wie das Geheimwort stammen, nur eine Übersetzung des Geheimworts oder erfunden sind.</li>
+        <li> <b><u>Ziel:</u></b> Einer der Spieler – <i>der Ratende</i> – muss ein Geheimwort anhand von einem Hinweispaar erraten.</li>
+        <li> Wenn zwei oder mehr Gruppen identische Hinweispaare schreiben, werden alle identischen Hinweispaare entfernt, bevor <i>der Ratende</i> sie sieht</li>
+        <li> <b>Ungültige Hinweispaare</b> enthalten Hinweise, die aus derselben Wortfamilie wie das Geheimwort stammen, nur eine Übersetzung des Geheimworts oder erfunden sind.</li>
 </ul>  
 </details>
 

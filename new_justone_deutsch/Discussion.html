@@ -1,0 +1,44 @@
+{{ block title }}
+    Discussion
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 15) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+</br>
+<p> Dies sind die <b>Hinweispaare</b>, die Ihre Gruppenmitglieder geschrieben haben: </p> 
+<ul>
+{{ for item in Pairs }}
+    <li><b>{{ item }}</b></li>
+{{ endfor }}
+</ul>
+</br>
+<p>Bitte diskutieren sie diese:</p>
+{{ formfield 'discussion' }}
+</br>
+<button class= "otree-btn btn btn-info">Weiter</button>
+</br>
+</br>
+<details>
+    <summary> Zusammenfassung der Regeln </summary>
+    <ul>    
+        <li> <b><u>Ziel:</u></b> Einer der Spieler – <i>der Ratende</i> – muss ein Geheimwort anhand von einem Hinweispaar erraten.</li>
+        <li> Wenn zwei oder mehr Gruppen identische Hinweispaare schreiben, werden alle identischen Hinweispaare entfernt, bevor <i>der Ratende</i> sie sieht</li>
+        <li> <b>Ungültige Hinweispaare</b> enthalten Hinweise, die aus derselben Wortfamilie wie das Geheimwort stammen, nur eine Übersetzung des Geheimworts oder erfunden sind.</li>
+    </ul>  
+</details>
+
+{{ endblock }}
