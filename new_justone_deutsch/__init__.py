@@ -91,13 +91,13 @@ class Player(BasePlayer):
     guess_missing = models.BooleanField()
     quantity = models.IntegerField()
     invalid_DAT = models.BooleanField()
-    pair1 = models.StringField()
-    pair2 = models.StringField()
-    pair3 = models.StringField()
-    pair4 = models.StringField()
-    pair5 = models.StringField()
-    pair6 = models.StringField()
-    pair7 = models.StringField()
+    pair1 = models.StringField(initial='')
+    pair2 = models.StringField(initial='')
+    pair3 = models.StringField(initial='')
+    pair4 = models.StringField(initial='')
+    pair5 = models.StringField(initial='')
+    pair6 = models.StringField(initial='')
+    pair7 = models.StringField(initial='')
     discussion = models.StringField()
 
 def creating_session(subsession: Subsession):
@@ -158,7 +158,7 @@ class Clue_Page(Page):
     def is_displayed(player):
         return player.role() == 'Hinweisgeber'   
     form_model = 'player'
-    form_fields = ['clues', 'Idea1', 'Idea2', 'Idea3', 'Idea4', 'Idea5', 'Idea6', 'Idea7', 'Idea8', 'Idea9', 'Idea10', 'Idea11', 'Idea12', 'Idea13', 'Idea14', 'Idea15']
+    form_fields = ['clues', 'Idea1', 'Idea2', 'Idea3', 'Idea4', 'Idea5', 'Idea6', 'Idea7', 'Idea8', 'Idea9', 'Idea10', 'Idea11', 'Idea12', 'Idea13', 'Idea14']
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         return dict(mystery_word = mystery_word)
@@ -232,10 +232,6 @@ def Idea13_error_message(player, value):
         return 'Deine Idee darf nicht länger als 18 Zeichen sein!'   
     
 def Idea14_error_message(player, value):
-    if wordlength(player, value) == True:
-        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
-
-def Idea15_error_message(player, value):
     if wordlength(player, value) == True:
         return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
 
@@ -436,8 +432,7 @@ class Results(Page):
             player.Idea12 = player.Idea12.lower()
             player.Idea13 = player.Idea13.lower()
             player.Idea14 = player.Idea14.lower()
-            player.Idea15 = player.Idea15.lower()
-            own_ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12, player.Idea13, player.Idea14, player.Idea15] 
+            own_ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12, player.Idea13, player.Idea14] 
             while '' in own_ideas:
                 own_ideas.remove('')
             if len(own_ideas) > 0:
@@ -590,7 +585,7 @@ class Generation_Page(Page):
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         return dict(mystery_word = mystery_word)
-        
+
 def wordlength(player, value):
     value = value.lower()
     if len(value) > 18:
@@ -652,62 +647,68 @@ def Idea14_error_message(player, value):
     if wordlength(player, value) == True:
         return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
 
-def before_next_page(player, timeout_happened):
-    ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12, player.Idea13, player.Idea14]
-    import re            
-    import translators as ts            
-    def has_numbers(s):
-        return bool(re.search(r'\d',s))
-    with open('C:/Users/sarrazie/Desktop/otree/testproject/justone_deutsch/wordlist-german.txt', 'r') as file:
-        text = file.read()
-        wordlist= text.split()
-    if len(ideas) > 0:
-        for i in range(len(ideas)):  
-            if ' ' in ideas[i]:
-                more = ideas[i].split() 
-                if len(more)>1: 
+class Generation_WaitPage(WaitPage):
+    title_text = "Vielen Dank für deine Hinweispaare!"
+    body_text = "Bitte warte, bis alle ihre Hinweispaare abgegeben haben."
+    def is_displayed(player):
+        return player.role() == 'Hinweisgeber'
+    def vars_for_template(player):
+        mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
+        mystery_word = mystery_word.lower()
+        ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12, player.Idea13, player.Idea14]
+        import re            
+        import translators as ts            
+        def has_numbers(s):
+            return bool(re.search(r'\d',s))
+        with open('C:/Users/sarrazie/Desktop/otree/testproject/justone_deutsch/wordlist-german.txt', 'r') as file:
+            text = file.read()
+            wordlist= text.split()
+        if len(ideas) > 0:
+            for i in range(len(ideas)):  
+                if ' ' in ideas[i]:
+                    more = ideas[i].split() 
+                    if len(more)>1: 
+                        ideas[i] = 'false'
+                if ideas[i] in mystery_word or mystery_word in ideas[i]:
                     ideas[i] = 'false'
-            if ideas[i] in mystery_word or mystery_word in ideas[i]:
-                ideas[i] = 'false'
-            if ideas[i] not in wordlist:
-                ideas[i] = 'false' 
-            if re.search("[^a-zA-Z0-9s]", ideas[i]):
-                ideas[i] = 'false'          
-            if has_numbers(ideas[i]) == False:
-                idea_trans = ts.translate_text(query_text=ideas[i], translator='google', from_language='auto', to_language='de')
-                idea_trans = idea_trans.lower()
-                if mystery_word in clue_trans or clue_trans in mystery_word:  
-                    ideas[i] = 'false'
-            ideas[i] = ideas[i].lower()
-            
-    if ideas[1]!= '' and ideas[1] != 'false' and ideas[2] != '' and ideas[2] != 'false':
-        player.pair1 = ideas[1] + ' + ' + ideas[2]
-    else:
-        player.pair1 = 'empty'
-    if ideas[3]!= '' and ideas[3] != 'false' and ideas[4] != '' and ideas[4] != 'false':
-        player.pair2 = ideas[3] + ' + ' + ideas[4]
-    else:
-        player.pair2 = 'empty'
-    if ideas[5]!= '' and ideas[5] != 'false' and ideas[6] != '' and ideas[6] != 'false':
-        player.pair3 = ideas[5] + ' + ' + ideas[6]
-    else:
-        player.pair3 = 'empty'
-    if ideas[7]!= '' and ideas[7] != 'false' and ideas[8] != '' and ideas[8] != 'false':
-        player.pair4 = ideas[7] + ' + ' + ideas[8]
-    else:
-        player.pair4 = 'empty'
-    if ideas[9]!= '' and ideas[9] != 'false' and ideas[10] != '' and ideas[10] != 'false':
-        player.pair5 = ideas[9] + ' + ' + ideas[10]
-    else:
-        player.pair5 = 'empty'
-    if ideas[11]!= '' and ideas[11] != 'false' and ideas[12] != '' and ideas[12] != 'false':
-        player.pair6 = ideas[11] + ' + ' + ideas[12]
-    else:
-        player.pair6 = 'empty'
-    if ideas[13]!= '' and ideas[13] != 'false' and ideas[14] != '' and ideas[14] != 'false':
-        player.pair7 = ideas[13] + ' + ' + ideas[14]
-    else:
-        player.pair7 = 'empty'
+                if ideas[i] not in wordlist:
+                    ideas[i] = 'false' 
+                if re.search("[^a-zA-Z0-9s]", ideas[i]):
+                    ideas[i] = 'false'          
+                if has_numbers(ideas[i]) == False:
+                    idea_trans = ts.translate_text(query_text=ideas[i], translator='google', from_language='auto', to_language='de')
+                    idea_trans = idea_trans.lower()
+                    if mystery_word in idea_trans or idea_trans in mystery_word:  
+                        ideas[i] = 'false'
+                ideas[i] = ideas[i].lower()
+        if ((ideas[0] != '' and ideas[0] != 'false') and (ideas[1] != '' and ideas[1] != 'false')):
+            player.pair1 = ideas[0] + ' + ' + ideas[1]
+        else:
+            player.pair1 = 'empty'
+        if ((ideas[2] != '' and ideas[2] != 'false') and (ideas[3] != '' and ideas[3] != 'false')):
+            player.pair2 = ideas[2] + ' + ' + ideas[3]
+        else:
+            player.pair2 = 'empty'
+        if ((ideas[4] != '' and ideas[4] != 'false') and (ideas[5] != '' and ideas[5] != 'false')):
+            player.pair3 = ideas[4] + ' + ' + ideas[5]
+        else:
+            player.pair3 = 'empty'
+        if ((ideas[6] != '' and ideas[6] != 'false') and (ideas[7] != '' and ideas[7] != 'false')):
+            player.pair4 = ideas[6] + ' + ' + ideas[7]
+        else:
+            player.pair4 = 'empty'
+        if ((ideas[8] != '' and ideas[8] != 'false') and (ideas[9] != '' and ideas[9] != 'false')):
+            player.pair5 = ideas[8] + ' + ' + ideas[9]
+        else:
+            player.pair5 = 'empty'
+        if ((ideas[10] != '' and ideas[10] != 'false') and (ideas[11] != '' and ideas[11] != 'false')):
+            player.pair6 = ideas[10] + ' + ' + ideas[11]
+        else:
+            player.pair6 = 'empty'
+        if ((ideas[12] != '' and ideas[12] != 'false') and (ideas[13] != '' and ideas[13] != 'false')):
+            player.pair7 = ideas[12] + ' + ' + ideas[13]
+        else:
+            player.pair7 = 'empty'
 
 class Discussion(Page):
     timeout_seconds = 180
@@ -718,8 +719,8 @@ class Discussion(Page):
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         mystery_word = mystery_word.lower()
-        pairs_group = [p.pair1 for p in player.get_others_in_group()] + [p.pair2 for p in player.get_others_in_group()] + [p.pair3 for p in player.get_others_in_group()] + [p.pair4 for p in player.get_others_in_group()] + [p.pair5 for p in player.get_others_in_group()] + [p.pair6 for p in player.get_others_in_group()] + [p.pair7 for p in player.get_others_in_group()] 
-        return dict(Pairs = pairs_group, mystery_word = mystery_word)
+        pairs =  [player.pair1 for player in player.get_others_in_group()] + [player.pair2 for player in player.get_others_in_group()] + [player.pair3 for player in player.get_others_in_group()] + [player.pair4 for player in player.get_others_in_group()] + [player.pair5 for player in player.get_others_in_group()] + [player.pair6 for player in player.get_others_in_group()] + [player.pair7 for player in player.get_others_in_group()] 
+        return dict(Pairs = pairs, mystery_word = mystery_word)
 
 class CluegiverWaitPage(WaitPage):
     title_text = "Vielen Dank für deinen Hinweis!"
@@ -742,4 +743,4 @@ class FinalPage(Page):
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
 
-page_sequence = [GroupWaitPage, Intro, Instructions, UnderstandPage, Round, Generation_Page, Discussion, Clue_Page, GuesserWaitPage, Guess_Page, CluegiverWaitPage, ResultsWaitPage, Results, Score, TestQuestions, FredaQuestions, DAT, FinalPage]
+page_sequence = [GroupWaitPage, Intro, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_Page, GuesserWaitPage, Guess_Page, CluegiverWaitPage, ResultsWaitPage, Results, Score, TestQuestions, FredaQuestions, DAT, FinalPage]
