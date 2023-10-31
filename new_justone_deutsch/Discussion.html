@@ -21,7 +21,7 @@
 
 </br>
 <p>Wähle den Punkt auf der Skala, der repräsentiert, wie gut du das jeweilige Hinweispaar findest:</p>
-<p>
+<p> 
     schwach &nbsp;
     {{ for choice in form.rating_before1 }}
         {{ choice }}
@@ -36,7 +36,7 @@
     &nbsp; stark
 </p>
 </br>
-<p> Dies sind die <b>Hinweispaare</b>, die Ihre Gruppenmitglieder geschrieben haben: </p> 
+<p> Dies sind alle <b>Hinweispaare</b>, die Ihre Gruppe geschrieben hat: </p> 
 <ul>
     {% for pair in Pairs %}
         <li> {{ pair }} </li>
