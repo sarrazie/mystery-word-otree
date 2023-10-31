@@ -98,8 +98,10 @@ class Player(BasePlayer):
     pair5 = models.StringField(initial='')
     pair6 = models.StringField(initial='')
     pair7 = models.StringField(initial='')
-    discussion = models.StringField()
-
+    rating_before1 = models.IntegerField(widget=widgets.RadioSelect, choices=[1,2,3,4,5])
+    rating_before2 = models.IntegerField(widget=widgets.RadioSelect, choices=[1,2,3,4,5])
+    discussion = models.StringField(label= '', initial='', blank=True)
+    
 def creating_session(subsession: Subsession):
     session = subsession.session
     for player in subsession.get_players():
@@ -654,7 +656,8 @@ class Generation_WaitPage(WaitPage):
         return player.role() == 'Hinweisgeber'
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
-        mystery_word = mystery_word.lower()
+        mystery_word = mystery_word.lower()   
+        wait_for_all_players = True
         ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12, player.Idea13, player.Idea14]
         import re            
         import translators as ts            
@@ -709,17 +712,22 @@ class Generation_WaitPage(WaitPage):
             player.pair7 = ideas[12] + ' + ' + ideas[13]
         else:
             player.pair7 = 'empty'
+ 
 
 class Discussion(Page):
     timeout_seconds = 180
     def is_displayed(player):
         return player.role() == 'Hinweisgeber'
     form_model = 'player'
-    form_fields = ['discussion']
+    form_fields = ['rating_before1', 'rating_before2', 'discussion']
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         mystery_word = mystery_word.lower()
-        pairs =  [player.pair1 for player in player.get_others_in_group()] + [player.pair2 for player in player.get_others_in_group()] + [player.pair3 for player in player.get_others_in_group()] + [player.pair4 for player in player.get_others_in_group()] + [player.pair5 for player in player.get_others_in_group()] + [player.pair6 for player in player.get_others_in_group()] + [player.pair7 for player in player.get_others_in_group()] 
+        pairs = [player.pair1] + [player.pair1 for player in player.get_others_in_group()] + [player.pair2] + [player.pair2 for player in player.get_others_in_group()] + [player.pair3] + [player.pair3 for player in player.get_others_in_group()] + [player.pair4] + [player.pair4 for player in player.get_others_in_group()] + [player.pair5] + [player.pair5 for player in player.get_others_in_group()] + [player.pair6] + [player.pair6 for player in player.get_others_in_group()] + [player.pair7] + [player.pair7 for player in player.get_others_in_group()] 
+        while 'empty' in pairs:
+            pairs.remove('empty')
+        while '' in pairs:
+            pairs.remove('')
         return dict(Pairs = pairs, mystery_word = mystery_word)
 
 class CluegiverWaitPage(WaitPage):

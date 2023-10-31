@@ -1,5 +1,5 @@
 {{ block title }}
-    Discussion
+    Diskussion
 {{ endblock }}
 {{ block content }}
 
@@ -18,12 +18,29 @@
         });
     });
 </script>
+
+</br>
+<p>Wähle den Punkt auf der Skala, der repräsentiert, wie gut du das jeweilige Hinweispaar findest:</p>
+<p>
+    schwach &nbsp;
+    {{ for choice in form.rating_before1 }}
+        {{ choice }}
+    {{ endfor }}
+    &nbsp; stark
+</p>
+<p>
+    schwach &nbsp;
+    {{ for choice in form.rating_before2 }}
+        {{ choice }}
+    {{ endfor }}
+    &nbsp; stark
+</p>
 </br>
 <p> Dies sind die <b>Hinweispaare</b>, die Ihre Gruppenmitglieder geschrieben haben: </p> 
 <ul>
-{{ for item in Pairs }}
-    <li><b>{{ item }}</b></li>
-{{ endfor }}
+    {% for pair in Pairs %}
+        <li> {{ pair }} </li>
+    {% endfor %}
 </ul>
 </br>
 <p>Bitte diskutieren sie diese:</p>
