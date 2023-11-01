@@ -100,7 +100,32 @@ class Player(BasePlayer):
     pair7 = models.StringField(initial='')
     rating_before1 = models.IntegerField(widget=widgets.RadioSelect, choices=[1,2,3,4,5])
     rating_before2 = models.IntegerField(widget=widgets.RadioSelect, choices=[1,2,3,4,5])
-    discussion = models.StringField(label= '', initial='', blank=True)
+    rating_before3 = models.IntegerField(widget=widgets.RadioSelect, choices=[1,2,3,4,5])
+    rating_before4 = models.IntegerField(widget=widgets.RadioSelect, choices=[1,2,3,4,5])
+    rating_before5 = models.IntegerField(widget=widgets.RadioSelect, choices=[1,2,3,4,5])
+    rating_before6 = models.IntegerField(widget=widgets.RadioSelect, choices=[1,2,3,4,5])
+    rating_before7 = models.IntegerField(widget=widgets.RadioSelect, choices=[1,2,3,4,5])
+    rating_before8 = models.IntegerField(widget=widgets.RadioSelect, choices=[1,2,3,4,5])
+    rating_before9 = models.IntegerField(widget=widgets.RadioSelect, choices=[1,2,3,4,5])
+    rating_before10 = models.IntegerField(widget=widgets.RadioSelect, choices=[1,2,3,4,5])
+    rating_before11 = models.IntegerField(widget=widgets.RadioSelect, choices=[1,2,3,4,5])
+    rating_before12 = models.IntegerField(widget=widgets.RadioSelect, choices=[1,2,3,4,5])
+    rating_before13 = models.IntegerField(widget=widgets.RadioSelect, choices=[1,2,3,4,5])
+    rating_before14 = models.IntegerField(widget=widgets.RadioSelect, choices=[1,2,3,4,5])
+    discussion1 = models.StringField(label= '', initial='', blank=True)
+    discussion2 = models.StringField(label= '', initial='', blank=True)
+    discussion3 = models.StringField(label= '', initial='', blank=True)
+    discussion4 = models.StringField(label= '', initial='', blank=True)
+    discussion5 = models.StringField(label= '', initial='', blank=True)
+    discussion6 = models.StringField(label= '', initial='', blank=True)
+    discussion7 = models.StringField(label= '', initial='', blank=True)
+    discussion8 = models.StringField(label= '', initial='', blank=True)
+    discussion9 = models.StringField(label= '', initial='', blank=True)
+    discussion10 = models.StringField(label= '', initial='', blank=True)
+    discussion11 = models.StringField(label= '', initial='', blank=True)
+    discussion12 = models.StringField(label= '', initial='', blank=True)
+    discussion13 = models.StringField(label= '', initial='', blank=True)
+    discussion14 = models.StringField(label= '', initial='', blank=True)
     
 def creating_session(subsession: Subsession):
     session = subsession.session
@@ -310,31 +335,21 @@ class Guess_Page(Page):
         if num_there(clues_group[0]) == False and clues_group[0] != 'Identischer Hinweis' and clues_group[0] != 'Kein Hinweis gegeben':
             clue_trans = ts.translate_text(query_text=clues_group[0], translator='google', from_language='auto', to_language='de')
             clue_trans = clue_trans.lower()
-            special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
-            clue_trans = clue_trans.translate(special_char_map)
             if mystery_word in clue_trans or clue_trans in mystery_word:
                 clues_group[0] = 'Ungültiger Hinweis'
         if num_there(clues_group[1]) == False and clues_group[1] != 'Identischer Hinweis' and clues_group[1] != 'Kein Hinweis gegeben':
             clue_trans = ts.translate_text(query_text=clues_group[1], translator='google', from_language='auto', to_language='de')
             clue_trans = clue_trans.lower()
-            special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
-            clue_trans = clue_trans.translate(special_char_map)
             if mystery_word in clue_trans or clue_trans in mystery_word:
                 clues_group[1] = 'Ungültiger Hinweis'
         if num_there(clues_group[2]) == False and clues_group[2] != 'Identischer Hinweis' and clues_group[2] != 'Kein Hinweis gegeben':
             clue_trans = ts.translate_text(query_text=clues_group[2], translator='google', from_language='auto', to_language='de')
             clue_trans = clue_trans.lower()
-            special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
-            clue_trans = clue_trans.translate(special_char_map)
             if mystery_word in clue_trans or clue_trans in mystery_word:
                 clues_group[2] = 'Ungültiger Hinweis'
         with open('C:/Users/sarrazie/Desktop/otree/testproject/justone_deutsch/wordlist-german.txt', 'r') as file:
             text = file.read()
             wordlist= text.split()
-            back_char_map = {'ae':'ä', 'ue':'ü', 'oe':'ö', 'ss':'ß'}
-            clues_group[0] = clues_group[0].translate(back_char_map)
-            clues_group[1] = clues_group[1].translate(back_char_map)
-            clues_group[2] = clues_group[2].translate(back_char_map)
         if clues_group[0] != 'Identischer Hinweis' and clues_group[0] != 'Kein Hinweis gegeben':
             if clues_group[0] not in wordlist:
                 clues_group[0] = 'Ungültiger Hinweis'
@@ -406,16 +421,12 @@ class Results(Page):
                 if num_there(own_clue) == False and player.invalid == False:
                     clue_trans = ts.translate_text(query_text=own_clue, translator='google', from_language='auto', to_language='de')
                     clue_trans = clue_trans.lower()
-                    special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
-                    clue_trans = clue_trans.translate(special_char_map)
                     if mystery_word in clue_trans or clue_trans in mystery_word:
                         player.invalid = True
                         invalid = 'Achtung! Dein Hinweis war ungültig (Übersetzung des geheimen Wortes).'
                 with open('C:/Users/sarrazie/Desktop/otree/testproject/justone_deutsch/wordlist-german.txt', 'r') as file:
                     text = file.read()
                     wordlist= text.split()
-                    back_char_map = {'ae':'ä', 'ue':'ü', 'oe':'ö', 'ss':'ß'}
-                    own_clue = own_clue.translate(back_char_map)
                     if own_clue not in wordlist and player.invalid == False:
                         player.invalid = True
                         invalid = 'Achtung! Dein Hinweis war ungültig (Rechtschreibfehler oder kein echtes Wort).'
@@ -456,8 +467,6 @@ class Results(Page):
                 wordlist= text.split()
                 if len(own_ideas) > 0:
                     for i in range(len(own_ideas)):
-                        back_char_map = {'ae':'ä', 'ue':'ü', 'oe':'ö', 'ss':'ß'}
-                        own_ideas[i] = own_ideas[i].translate(back_char_map)
                         if own_ideas[i] not in wordlist:
                             own_ideas[i] = 'false'
             import re
@@ -587,11 +596,87 @@ class Generation_Page(Page):
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         return dict(mystery_word = mystery_word)
-
+    def before_next_page(player, timeout_happened):
+        if timeout_happened:
+            player.Idea1 = 'false'
+            player.Idea2 = 'false'  
+            player.Idea3 = 'false'
+            player.Idea4 = 'false'
+            player.Idea5 = 'false'
+            player.Idea6 = 'false'
+            player.Idea7 = 'false'
+            player.Idea8 = 'false'
+            player.Idea9 = 'false'
+            player.Idea10 = 'false'
+            player.Idea11 = 'false'
+            player.Idea12 = 'false'
+            player.Idea13 = 'false'
+            player.Idea14 = 'false'
+        else:
+            mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
+            mystery_word = mystery_word.lower()   
+            ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12, player.Idea13, player.Idea14]
+            import re            
+            import translators as ts            
+            def has_numbers(s):
+                return bool(re.search(r'\d',s))
+            with open('C:/Users/sarrazie/Desktop/otree/testproject/justone_deutsch/wordlist-german.txt', 'r') as file:
+                text = file.read()
+                wordlist= text.split()
+            if len(ideas) > 0:
+                for i in range(len(ideas)): 
+                    special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
+                    ideas[i] = ideas[i].translate(special_char_map) 
+                    ideas[i] = ideas[i].lower()
+                    if ' ' in ideas[i]:
+                        more = ideas[i].split() 
+                        if len(more)>1: 
+                            ideas[i] = 'false'
+                    if ideas[i] in mystery_word or mystery_word in ideas[i]:
+                        ideas[i] = 'false'
+                    if ideas[i] not in wordlist:
+                        ideas[i] = 'false' 
+                    if re.search("[^a-zA-Z0-9s]", ideas[i]):
+                        ideas[i] = 'false'          
+                    if has_numbers(ideas[i]) == False:
+                        idea_trans = ts.translate_text(query_text=ideas[i], translator='google', from_language='auto', to_language='de')
+                        idea_trans = idea_trans.lower()
+                        if mystery_word in idea_trans or idea_trans in mystery_word:  
+                            ideas[i] = 'false'
+                
+            if ((ideas[0] != '' and ideas[0] != 'false') and (ideas[1] != '' and ideas[1] != 'false')):
+                player.pair1 = ideas[0] + ' + ' + ideas[1]
+            else:
+                player.pair1 = 'empty'
+            if ((ideas[2] != '' and ideas[2] != 'false') and (ideas[3] != '' and ideas[3] != 'false')):
+                player.pair2 = ideas[2] + ' + ' + ideas[3]
+            else:
+                player.pair2 = 'empty'
+            if ((ideas[4] != '' and ideas[4] != 'false') and (ideas[5] != '' and ideas[5] != 'false')):
+                player.pair3 = ideas[4] + ' + ' + ideas[5]
+            else:
+                player.pair3 = 'empty'
+            if ((ideas[6] != '' and ideas[6] != 'false') and (ideas[7] != '' and ideas[7] != 'false')):
+                player.pair4 = ideas[6] + ' + ' + ideas[7]
+            else:
+                player.pair4 = 'empty'
+            if ((ideas[8] != '' and ideas[8] != 'false') and (ideas[9] != '' and ideas[9] != 'false')):
+                player.pair5 = ideas[8] + ' + ' + ideas[9]
+            else:
+                player.pair5 = 'empty'
+            if ((ideas[10] != '' and ideas[10] != 'false') and (ideas[11] != '' and ideas[11] != 'false')):
+                player.pair6 = ideas[10] + ' + ' + ideas[11]
+            else:
+                player.pair6 = 'empty'
+            if ((ideas[12] != '' and ideas[12] != 'false') and (ideas[13] != '' and ideas[13] != 'false')):
+                player.pair7 = ideas[12] + ' + ' + ideas[13]
+            else:
+                player.pair7 = 'empty'
+            
 def wordlength(player, value):
-    value = value.lower()
-    if len(value) > 18:
-        return True
+        value = value.lower()
+        if len(value) > 18:
+            return True
 
 def Idea1_error_message(player, value):
     if wordlength(player, value) == True:
@@ -649,81 +734,24 @@ def Idea14_error_message(player, value):
     if wordlength(player, value) == True:
         return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
 
+
 class Generation_WaitPage(WaitPage):
     title_text = "Vielen Dank für deine Hinweispaare!"
     body_text = "Bitte warte, bis alle ihre Hinweispaare abgegeben haben."
+    wait_for_all_players = True
     def is_displayed(player):
         return player.role() == 'Hinweisgeber'
-    def vars_for_template(player):
-        mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
-        mystery_word = mystery_word.lower()   
-        wait_for_all_players = True
-        ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12, player.Idea13, player.Idea14]
-        import re            
-        import translators as ts            
-        def has_numbers(s):
-            return bool(re.search(r'\d',s))
-        with open('C:/Users/sarrazie/Desktop/otree/testproject/justone_deutsch/wordlist-german.txt', 'r') as file:
-            text = file.read()
-            wordlist= text.split()
-        if len(ideas) > 0:
-            for i in range(len(ideas)):  
-                if ' ' in ideas[i]:
-                    more = ideas[i].split() 
-                    if len(more)>1: 
-                        ideas[i] = 'false'
-                if ideas[i] in mystery_word or mystery_word in ideas[i]:
-                    ideas[i] = 'false'
-                if ideas[i] not in wordlist:
-                    ideas[i] = 'false' 
-                if re.search("[^a-zA-Z0-9s]", ideas[i]):
-                    ideas[i] = 'false'          
-                if has_numbers(ideas[i]) == False:
-                    idea_trans = ts.translate_text(query_text=ideas[i], translator='google', from_language='auto', to_language='de')
-                    idea_trans = idea_trans.lower()
-                    if mystery_word in idea_trans or idea_trans in mystery_word:  
-                        ideas[i] = 'false'
-                ideas[i] = ideas[i].lower()
-        if ((ideas[0] != '' and ideas[0] != 'false') and (ideas[1] != '' and ideas[1] != 'false')):
-            player.pair1 = ideas[0] + ' + ' + ideas[1]
-        else:
-            player.pair1 = 'empty'
-        if ((ideas[2] != '' and ideas[2] != 'false') and (ideas[3] != '' and ideas[3] != 'false')):
-            player.pair2 = ideas[2] + ' + ' + ideas[3]
-        else:
-            player.pair2 = 'empty'
-        if ((ideas[4] != '' and ideas[4] != 'false') and (ideas[5] != '' and ideas[5] != 'false')):
-            player.pair3 = ideas[4] + ' + ' + ideas[5]
-        else:
-            player.pair3 = 'empty'
-        if ((ideas[6] != '' and ideas[6] != 'false') and (ideas[7] != '' and ideas[7] != 'false')):
-            player.pair4 = ideas[6] + ' + ' + ideas[7]
-        else:
-            player.pair4 = 'empty'
-        if ((ideas[8] != '' and ideas[8] != 'false') and (ideas[9] != '' and ideas[9] != 'false')):
-            player.pair5 = ideas[8] + ' + ' + ideas[9]
-        else:
-            player.pair5 = 'empty'
-        if ((ideas[10] != '' and ideas[10] != 'false') and (ideas[11] != '' and ideas[11] != 'false')):
-            player.pair6 = ideas[10] + ' + ' + ideas[11]
-        else:
-            player.pair6 = 'empty'
-        if ((ideas[12] != '' and ideas[12] != 'false') and (ideas[13] != '' and ideas[13] != 'false')):
-            player.pair7 = ideas[12] + ' + ' + ideas[13]
-        else:
-            player.pair7 = 'empty'
- 
 
 class Discussion(Page):
-    timeout_seconds = 180
+    timeout_seconds = 240
     def is_displayed(player):
         return player.role() == 'Hinweisgeber'
     form_model = 'player'
-    form_fields = ['rating_before1', 'rating_before2', 'discussion']
+    form_fields = ['rating_before1', 'rating_before2', 'rating_before3', 'rating_before4', 'rating_before5', 'rating_before6', 'rating_before7', 'rating_before8', 'rating_before9', 'rating_before10', 'rating_before11', 'rating_before12', 'rating_before13', 'rating_before14', 'discussion1', 'discussion2', 'discussion3', 'discussion4', 'discussion5', 'discussion6', 'discussion7', 'discussion8', 'discussion9', 'discussion10', 'discussion11', 'discussion12', 'discussion13', 'discussion14']
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         mystery_word = mystery_word.lower()
-        pairs = [player.pair1] + [player.pair1 for player in player.get_others_in_group()] + [player.pair2] + [player.pair2 for player in player.get_others_in_group()] + [player.pair3] + [player.pair3 for player in player.get_others_in_group()] + [player.pair4] + [player.pair4 for player in player.get_others_in_group()] + [player.pair5] + [player.pair5 for player in player.get_others_in_group()] + [player.pair6] + [player.pair6 for player in player.get_others_in_group()] + [player.pair7] + [player.pair7 for player in player.get_others_in_group()] 
+        pairs = [player.pair1 for player in player.get_others_in_group()] + [player.pair2 for player in player.get_others_in_group()] + [player.pair3 for player in player.get_others_in_group()] + [player.pair4 for player in player.get_others_in_group()] + [player.pair5 for player in player.get_others_in_group()] + [player.pair6 for player in player.get_others_in_group()] + [player.pair7 for player in player.get_others_in_group()] 
         while 'empty' in pairs:
             pairs.remove('empty')
         while '' in pairs:

@@ -305,31 +305,21 @@ class Guess_Page(Page):
         if num_there(clues_group[0]) == False and clues_group[0] != 'Identischer Hinweis' and clues_group[0] != 'Kein Hinweis gegeben':
             clue_trans = ts.translate_text(query_text=clues_group[0], translator='google', from_language='auto', to_language='de')
             clue_trans = clue_trans.lower()
-            special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
-            clue_trans = clue_trans.translate(special_char_map)
             if mystery_word in clue_trans or clue_trans in mystery_word:
                 clues_group[0] = 'Ungültiger Hinweis'
         if num_there(clues_group[1]) == False and clues_group[1] != 'Identischer Hinweis' and clues_group[1] != 'Kein Hinweis gegeben':
             clue_trans = ts.translate_text(query_text=clues_group[1], translator='google', from_language='auto', to_language='de')
             clue_trans = clue_trans.lower()
-            special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
-            clue_trans = clue_trans.translate(special_char_map)
             if mystery_word in clue_trans or clue_trans in mystery_word:
                 clues_group[1] = 'Ungültiger Hinweis'
         if num_there(clues_group[2]) == False and clues_group[2] != 'Identischer Hinweis' and clues_group[2] != 'Kein Hinweis gegeben':
             clue_trans = ts.translate_text(query_text=clues_group[2], translator='google', from_language='auto', to_language='de')
             clue_trans = clue_trans.lower()
-            special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
-            clue_trans = clue_trans.translate(special_char_map)
             if mystery_word in clue_trans or clue_trans in mystery_word:
                 clues_group[2] = 'Ungültiger Hinweis'
         with open('C:/Users/sarrazie/Desktop/otree/testproject/justone_deutsch/wordlist-german.txt', 'r') as file:
             text = file.read()
             wordlist= text.split()
-            back_char_map = {'ae':'ä', 'ue':'ü', 'oe':'ö', 'ss':'ß'}
-            clues_group[0] = clues_group[0].translate(back_char_map)
-            clues_group[1] = clues_group[1].translate(back_char_map)
-            clues_group[2] = clues_group[2].translate(back_char_map)
         if clues_group[0] != 'Identischer Hinweis' and clues_group[0] != 'Kein Hinweis gegeben':
             if clues_group[0] not in wordlist:
                 clues_group[0] = 'Ungültiger Hinweis'
@@ -347,6 +337,8 @@ class Guess_Page(Page):
             player.guess = 'Kein Tipp gegeben'
         else:
             player.guess = player.guess.lower()
+            special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
+            player.guess = player.guess.translate(special_char_map)
             return player.guess
         
 class Results(Page):
@@ -363,11 +355,6 @@ class Results(Page):
             while '' in guess:
                 guess.remove('')
             guess = guess[0]
-            special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
-            clues[0] = clues[0].translate(special_char_map)
-            clues[1] = clues[1].translate(special_char_map)
-            guess = guess.translate(special_char_map)
-            own_clue = own_clue.translate(special_char_map)
             player.missing = False
             player.guess_missing = False
             player.identical = False
@@ -401,16 +388,12 @@ class Results(Page):
                 if num_there(own_clue) == False and player.invalid == False:
                     clue_trans = ts.translate_text(query_text=own_clue, translator='google', from_language='auto', to_language='de')
                     clue_trans = clue_trans.lower()
-                    special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
-                    clue_trans = clue_trans.translate(special_char_map)
                     if mystery_word in clue_trans or clue_trans in mystery_word:
                         player.invalid = True
                         invalid = 'Achtung! Dein Hinweis war ungültig (Übersetzung des geheimen Wortes).'
                 with open('C:/Users/sarrazie/Desktop/otree/testproject/justone_deutsch/wordlist-german.txt', 'r') as file:
                     text = file.read()
                     wordlist= text.split()
-                    back_char_map = {'ae':'ä', 'ue':'ü', 'oe':'ö', 'ss':'ß'}
-                    own_clue = own_clue.translate(back_char_map)
                     if own_clue not in wordlist and player.invalid == False:
                         player.invalid = True
                         invalid = 'Achtung! Dein Hinweis war ungültig (Rechtschreibfehler oder kein echtes Wort).'
@@ -434,11 +417,9 @@ class Results(Page):
             while '' in own_ideas:
                 own_ideas.remove('')
             if len(own_ideas) > 0:
-                for i in range(len(own_ideas)):
+                for i in range(len(own_ideas)):  
                     special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
                     own_ideas[i] = own_ideas[i].translate(special_char_map)
-            if len(own_ideas) > 0:
-                for i in range(len(own_ideas)):  
                     if ' ' in own_ideas[i]:
                         more = own_ideas[i].split() 
                         if len(more)>1: 
@@ -452,8 +433,6 @@ class Results(Page):
                 wordlist= text.split()
                 if len(own_ideas) > 0:
                     for i in range(len(own_ideas)):
-                        back_char_map = {'ae':'ä', 'ue':'ü', 'oe':'ö', 'ss':'ß'}
-                        own_ideas[i] = own_ideas[i].translate(back_char_map)
                         if own_ideas[i] not in wordlist:
                             own_ideas[i] = 'false'
             import re
