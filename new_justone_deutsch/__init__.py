@@ -71,8 +71,6 @@ class Player(BasePlayer):
     Idea10 = models.StringField(label= '', initial='', blank=True)
     Idea11 = models.StringField(label= '', initial='', blank=True)
     Idea12 = models.StringField(label= '', initial='', blank=True)
-    Idea13 = models.StringField(label= '', initial='', blank=True)
-    Idea14 = models.StringField(label= '', initial='', blank=True)
     word1 = models.StringField(label= '', initial='', blank=True)
     word2 = models.StringField(label= '', initial='', blank=True)
     word3 = models.StringField(label= '', initial='', blank=True)
@@ -98,20 +96,18 @@ class Player(BasePlayer):
     pair5 = models.StringField(initial='')
     pair6 = models.StringField(initial='')
     pair7 = models.StringField(initial='')
-    rating_before1 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[1,2,3,4,5], label='', blank=True)
-    rating_before2 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[1,2,3,4,5], label='', blank=True)
-    rating_before3 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[1,2,3,4,5], label='', blank=True)
-    rating_before4 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[1,2,3,4,5], label='', blank=True)
-    rating_before5 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[1,2,3,4,5], label='', blank=True)
-    rating_before6 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[1,2,3,4,5], label='', blank=True)
-    rating_before7 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[1,2,3,4,5], label='', blank=True)
-    rating_before8 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[1,2,3,4,5], label='', blank=True)
-    rating_before9 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[1,2,3,4,5], label='', blank=True)
-    rating_before10 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[1,2,3,4,5], label='', blank=True)
-    rating_before11 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[1,2,3,4,5], label='', blank=True)
-    rating_before12 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[1,2,3,4,5], label='', blank=True)
-    rating_before13 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[1,2,3,4,5], label='', blank=True)
-    rating_before14 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[1,2,3,4,5], label='', blank=True)
+    rating_before1 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True)
+    rating_before2 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True)
+    rating_before3 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True)
+    rating_before4 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True)
+    rating_before5 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True)
+    rating_before6 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True)
+    rating_before7 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True)
+    rating_before8 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True)
+    rating_before9 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True)
+    rating_before10 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True)
+    rating_before11 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True)
+    rating_before12 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3, 'mittelmäßig'],[4, 'eher gut'],[5, 'gut'],], label='', blank=True)
     discussion1 = models.StringField(label= '', initial='', blank=True)
     discussion2 = models.StringField(label= '', initial='', blank=True)
     discussion3 = models.StringField(label= '', initial='', blank=True)
@@ -124,8 +120,6 @@ class Player(BasePlayer):
     discussion10 = models.StringField(label= '', initial='', blank=True)
     discussion11 = models.StringField(label= '', initial='', blank=True)
     discussion12 = models.StringField(label= '', initial='', blank=True)
-    discussion13 = models.StringField(label= '', initial='', blank=True)
-    discussion14 = models.StringField(label= '', initial='', blank=True)
     other_pairs = models.StringField(label= '', initial='', blank=True)
     replace_word1 = models.IntegerField(widget = widgets.RadioSelectHorizontal, choices=[[1, 'erste Wort durch:'],[2, 'zweite Wort durch:'],], label='Ersetze das', blank=True)
     replace_word2 = models.IntegerField(widget = widgets.RadioSelectHorizontal, choices=[[1, 'erste Wort durch:'],[2, 'zweite Wort durch:'],], label='Ersetze das', blank=True)
@@ -139,9 +133,7 @@ class Player(BasePlayer):
     replace_word10 = models.IntegerField(widget = widgets.RadioSelectHorizontal, choices=[[1, 'erste Wort durch:'],[2, 'zweite Wort durch:'],], label='Ersetze das', blank=True)
     replace_word11 = models.IntegerField(widget = widgets.RadioSelectHorizontal, choices=[[1, 'erste Wort durch:'],[2, 'zweite Wort durch:'],], label='Ersetze das', blank=True)
     replace_word12 = models.IntegerField(widget = widgets.RadioSelectHorizontal, choices=[[1, 'erste Wort durch:'],[2, 'zweite Wort durch:'],], label='Ersetze das', blank=True)
-    replace_word13 = models.IntegerField(widget = widgets.RadioSelectHorizontal, choices=[[1, 'erste Wort durch:'],[2, 'zweite Wort durch:'],], label='Ersetze das', blank=True)
-    replace_word14 = models.IntegerField(widget = widgets.RadioSelectHorizontal, choices=[[1, 'erste Wort durch:'],[2, 'zweite Wort durch:'],], label='Ersetze das', blank=True)
-
+    
 def creating_session(subsession: Subsession):
     session = subsession.session
     for player in subsession.get_players():
@@ -200,7 +192,7 @@ class Clue_Page(Page):
     def is_displayed(player):
         return player.role() == 'Hinweisgeber'   
     form_model = 'player'
-    form_fields = ['clues', 'Idea1', 'Idea2', 'Idea3', 'Idea4', 'Idea5', 'Idea6', 'Idea7', 'Idea8', 'Idea9', 'Idea10', 'Idea11', 'Idea12', 'Idea13', 'Idea14']
+    form_fields = ['clues', 'Idea1', 'Idea2', 'Idea3', 'Idea4', 'Idea5', 'Idea6', 'Idea7', 'Idea8', 'Idea9', 'Idea10', 'Idea11', 'Idea12']
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         return dict(mystery_word = mystery_word)
@@ -266,14 +258,6 @@ def Idea11_error_message(player, value):
         return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
 
 def Idea12_error_message(player, value):
-    if wordlength(player, value) == True:
-        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
-
-def Idea13_error_message(player, value):
-    if wordlength(player, value) == True:
-        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'   
-    
-def Idea14_error_message(player, value):
     if wordlength(player, value) == True:
         return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
 
@@ -458,9 +442,7 @@ class Results(Page):
             player.Idea10 = player.Idea10.lower()
             player.Idea11 = player.Idea11.lower()
             player.Idea12 = player.Idea12.lower()
-            player.Idea13 = player.Idea13.lower()
-            player.Idea14 = player.Idea14.lower()
-            own_ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12, player.Idea13, player.Idea14] 
+            own_ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12] 
             while '' in own_ideas:
                 own_ideas.remove('')
             if len(own_ideas) > 0:
@@ -607,7 +589,7 @@ class Generation_Page(Page):
     def is_displayed(player):
         return player.role() == 'Hinweisgeber'   
     form_model = 'player'
-    form_fields = ['Idea1', 'Idea2', 'Idea3', 'Idea4', 'Idea5', 'Idea6', 'Idea7', 'Idea8', 'Idea9', 'Idea10', 'Idea11', 'Idea12', 'Idea13', 'Idea14']
+    form_fields = ['Idea1', 'Idea2', 'Idea3', 'Idea4', 'Idea5', 'Idea6', 'Idea7', 'Idea8', 'Idea9', 'Idea10', 'Idea11', 'Idea12']
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         return dict(mystery_word = mystery_word)
@@ -625,12 +607,10 @@ class Generation_Page(Page):
             player.Idea10 = 'false'
             player.Idea11 = 'false'
             player.Idea12 = 'false'
-            player.Idea13 = 'false'
-            player.Idea14 = 'false'
         else:
             mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
             mystery_word = mystery_word.lower()   
-            ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12, player.Idea13, player.Idea14]
+            ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12]
             import re            
             import translators as ts            
             def has_numbers(s):
@@ -683,10 +663,6 @@ class Generation_Page(Page):
                 player.pair6 = ideas[10] + ' + ' + ideas[11]
             else:
                 player.pair6 = 'empty'
-            if ((ideas[12] != '' and ideas[12] != 'false') and (ideas[13] != '' and ideas[13] != 'false')):
-                player.pair7 = ideas[12] + ' + ' + ideas[13]
-            else:
-                player.pair7 = 'empty'
             
 def wordlength(player, value):
         value = value.lower()
@@ -741,14 +717,6 @@ def Idea12_error_message(player, value):
     if wordlength(player, value) == True:
         return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
 
-def Idea13_error_message(player, value):
-    if wordlength(player, value) == True:
-        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'   
-    
-def Idea14_error_message(player, value):
-    if wordlength(player, value) == True:
-        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
-
 
 class Generation_WaitPage(WaitPage):
     title_text = "Vielen Dank für deine Hinweispaare!"
@@ -762,7 +730,7 @@ class Discussion(Page):
     def is_displayed(player):
         return player.role() == 'Hinweisgeber'
     form_model = 'player'   
-
+    form_fields = ['rating_before1', 'rating_before2', 'rating_before3', 'rating_before4', 'rating_before5', 'rating_before6', 'rating_before7', 'rating_before8', 'rating_before9', 'rating_before10', 'rating_before11', 'rating_before12', 'replace_word1', 'replace_word2', 'replace_word3', 'replace_word4', 'replace_word5', 'replace_word6', 'replace_word7', 'replace_word8', 'replace_word9', 'replace_word10', 'replace_word11', 'replace_word12', 'discussion1','discussion2', 'discussion3', 'discussion4', 'discussion5', 'discussion6', 'discussion7', 'discussion8', 'discussion9', 'discussion10', 'discussion11', 'discussion12']
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         mystery_word = mystery_word.lower()
@@ -773,44 +741,45 @@ class Discussion(Page):
             pairs.remove('')
         delimiter = ', '
         player.other_pairs = delimiter.join(pairs)
-        return dict(Pairs = pairs, mystery_word = mystery_word)
-
-    @staticmethod
-    def get_form_fields(player):
-        pairs = [player.pair1 for player in player.get_others_in_group()] + [player.pair2 for player in player.get_others_in_group()] + [player.pair3 for player in player.get_others_in_group()] + [player.pair4 for player in player.get_others_in_group()] + [player.pair5 for player in player.get_others_in_group()] + [player.pair6 for player in player.get_others_in_group()] + [player.pair7 for player in player.get_others_in_group()]
-        while 'empty' in pairs:
-            pairs.remove('empty')
-        while '' in pairs:
-            pairs.remove('')
-        if len(pairs) == 1:
-            return ['rating_before1', 'replace_word1','discussion1']
-        if len(pairs) == 2:
-            return ['rating_before1', 'replace_word1', 'discussion1',  'rating_before2','replace_word2', 'discussion2']
-        if len(pairs) == 3:
-            return ['rating_before1',  'replace_word1', 'discussion1', 'rating_before2', 'replace_word2', 'discussion2',  'rating_before3', 'replace_word3', 'discussion3']
-        if len(pairs) == 4:
-            return ['rating_before1', 'replace_word1', 'discussion1', 'rating_before2', 'replace_word2', 'discussion2', 'rating_before3', 'replace_word3', 'discussion3', 'rating_before4', 'replace_word4', 'discussion4' ]
-        if len(pairs) == 5:
-            return ['rating_before1', 'replace_word1', 'discussion1', 'rating_before2', 'replace_word2', 'discussion2', 'rating_before3', 'replace_word3', 'discussion3', 'rating_before4', 'replace_word4', 'discussion4', 'rating_before5', 'replace_word5', 'discussion5']
-        if len(pairs) == 6:
-            return ['rating_before1', 'replace_word1', 'discussion1', 'rating_before2', 'replace_word2', 'discussion2', 'rating_before3', 'replace_word3', 'discussion3', 'rating_before4', 'replace_word4', 'discussion4', 'rating_before5', 'replace_word5', 'discussion5', 'rating_before6', 'replace_word6', 'discussion6']
-        if len(pairs) == 7:
-            return ['rating_before1', 'replace_word1', 'discussion1', 'rating_before2', 'replace_word2', 'discussion2', 'rating_before3', 'replace_word3', 'discussion3', 'rating_before4', 'replace_word4', 'discussion4', 'rating_before5', 'replace_word5', 'discussion5', 'rating_before6', 'replace_word6', 'discussion6', 'rating_before7', 'replace_word7', 'discussion7']
-        if len(pairs) == 8:
-            return ['rating_before1', 'replace_word1', 'discussion1', 'rating_before2', 'replace_word2', 'discussion2', 'rating_before3', 'replace_word3', 'discussion3', 'rating_before4', 'replace_word4', 'discussion4', 'rating_before5', 'replace_word5', 'discussion5', 'rating_before6', 'replace_word6', 'discussion6', 'rating_before7', 'replace_word7', 'discussion7', 'rating_before8', 'replace_word8', 'discussion8']
-        if len(pairs) == 9:
-            return ['rating_before1', 'replace_word1', 'discussion1', 'rating_before2', 'replace_word2', 'discussion2', 'rating_before3', 'replace_word3', 'discussion3', 'rating_before4', 'replace_word4', 'discussion4', 'rating_before5', 'replace_word5', 'discussion5', 'rating_before6', 'replace_word6', 'discussion6', 'rating_before7', 'replace_word7', 'discussion7', 'rating_before8', 'replace_word8', 'discussion8', 'rating_before9', 'replace_word9', 'discussion9']
-        if len(pairs) == 10:
-            return ['rating_before1', 'replace_word1', 'discussion1', 'rating_before2', 'replace_word2', 'discussion2', 'rating_before3', 'replace_word3', 'discussion3', 'rating_before4', 'replace_word4', 'discussion4', 'rating_before5', 'replace_word5', 'discussion5', 'rating_before6', 'replace_word6', 'discussion6', 'rating_before7', 'replace_word7', 'discussion7', 'rating_before8', 'replace_word8', 'discussion8', 'rating_before9', 'replace_word9', 'discussion9', 'rating_before10', 'replace_word10', 'discussion10']
-        if len(pairs) == 11:
-            return ['rating_before1', 'replace_word1', 'discussion1', 'rating_before2', 'replace_word2', 'discussion2', 'rating_before3', 'replace_word3', 'discussion3', 'rating_before4', 'replace_word4', 'discussion4', 'rating_before5', 'replace_word5', 'discussion5', 'rating_before6', 'replace_word6', 'discussion6', 'rating_before7', 'replace_word7', 'discussion7', 'rating_before8', 'replace_word8', 'discussion8', 'rating_before9', 'replace_word9', 'discussion9', 'rating_before10', 'replace_word10', 'discussion10', 'rating_before11', 'replace_word11', 'discussion11']
-        if len(pairs) == 12:
-            return ['rating_before1', 'replace_word1', 'discussion1', 'rating_before2', 'replace_word2', 'discussion2', 'rating_before3', 'replace_word3', 'discussion3', 'rating_before4', 'replace_word4', 'discussion4', 'rating_before5', 'replace_word5', 'discussion5', 'rating_before6', 'replace_word6', 'discussion6', 'rating_before7', 'replace_word7', 'discussion7', 'rating_before8', 'replace_word8', 'discussion8', 'rating_before9', 'replace_word9', 'discussion9', 'rating_before10', 'replace_word10', 'discussion10', 'rating_before11', 'replace_word11', 'discussion11', 'rating_before12', 'replace_word12', 'discussion12']
-        if len(pairs) == 13:
-            return ['rating_before1', 'replace_word1','discussion1', 'rating_before2', 'replace_word2','discussion2', 'rating_before3', 'replace_word3','discussion3', 'rating_before4', 'replace_word4','discussion4', 'rating_before5', 'replace_word5','discussion5', 'rating_before6', 'replace_word6','discussion6', 'rating_before7', 'replace_word7','discussion7', 'rating_before8', 'replace_word8','discussion8', 'rating_before9', 'replace_word9','discussion9', 'rating_before10', 'replace_word10','discussion10', 'rating_before11', 'replace_word11','discussion11', 'rating_before12', 'replace_word12','discussion12', 'rating_before13', 'replace_word13','discussion13']
-        if len(pairs) == 14:
-            return ['rating_before1', 'replace_word1','discussion1', 'rating_before2', 'replace_word2','discussion2', 'rating_before3', 'replace_word3','discussion3', 'rating_before4', 'replace_word4','discussion4', 'rating_before5', 'replace_word5','discussion5', 'rating_before6', 'replace_word6','discussion6', 'rating_before7', 'replace_word7','discussion7', 'rating_before8', 'replace_word8','discussion8', 'rating_before9', 'replace_word9','discussion9', 'rating_before10', 'replace_word10','discussion10', 'rating_before11', 'replace_word11','discussion11', 'rating_before12', 'replace_word12','discussion12', 'rating_before13', 'replace_word13','discussion13', 'rating_before14', 'replace_word14','discussion14']
-
+        number_pairs = len(pairs)
+        Pair1 = ''
+        Pair2 = ''
+        Pair3 = ''
+        Pair4 = ''
+        Pair5 = ''
+        Pair6 = ''
+        Pair7 = ''
+        Pair8 = ''
+        Pair9 = ''
+        Pair10 = ''
+        Pair11 = ''
+        Pair12 = ''
+        if number_pairs > 0:
+            Pair1 = pairs[0]
+        if number_pairs > 1:
+            Pair2 = pairs[1]
+        if number_pairs > 2:
+            Pair3 = pairs[2]
+        if number_pairs > 3:
+            Pair4 = pairs[3]
+        if number_pairs > 4:
+            Pair5 = pairs[4]
+        if number_pairs > 5:
+            Pair6 = pairs[5]
+        if number_pairs > 6:
+            Pair7 = pairs[6]
+        if number_pairs > 7:
+            Pair8 = pairs[7]
+        if number_pairs > 8:
+            Pair9 = pairs[8]
+        if number_pairs > 9:
+            Pair10 = pairs[9]
+        if number_pairs > 10:
+            Pair11 = pairs[10]
+        if number_pairs > 11:
+            Pair12 = pairs[11]
+        return dict(mystery_word = mystery_word, number_pairs = number_pairs, Pair1 = Pair1, Pair2 = Pair2, Pair3 = Pair3, Pair4 = Pair4, Pair5 = Pair5, Pair6 = Pair6, Pair7 = Pair7, Pair8 = Pair8, Pair9 = Pair9, Pair10 = Pair10, Pair11 = Pair11, Pair12 = Pair12)   
+    
 
 class CluegiverWaitPage(WaitPage):
     def vars_for_template(player):
