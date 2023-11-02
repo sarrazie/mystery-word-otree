@@ -18,131 +18,13 @@
         });
     });
 </script>
-
 </br>
 <p>Wähle den Punkt auf der Skala, der repräsentiert, wie gut du das jeweilige Hinweispaar findest:</p>
-<p> 
-    schwach &nbsp;
-    {{ for choice in form.rating_before1 }}
-        {{ choice }}
-    {{ endfor }}
-    &nbsp; stark
-    {{ formfield 'discussion1'}}
-</p>
-<p>
-    schwach &nbsp;
-    {{ for choice in form.rating_before2 }}
-        {{ choice }}
-    {{ endfor }}
-    &nbsp; stark
-    {{ formfield 'discussion2' }}
-</p>
-<p>
-    schwach &nbsp;
-    {{ for choice in form.rating_before3 }}
-        {{ choice }}
-    {{ endfor }}
-    &nbsp; stark
-    {{ formfield 'discussion3' }}
-</p>
-<p>
-    schwach &nbsp;
-    {{ for choice in form.rating_before4 }}
-        {{ choice }}
-    {{ endfor }}
-    &nbsp; stark
-    {{ formfield 'discussion4' }}
-</p>
-<p>
-    schwach &nbsp;
-    {{ for choice in form.rating_before5 }}
-        {{ choice }}
-    {{ endfor }}
-    &nbsp; stark
-    {{ formfield 'discussion5' }}
-</p>
-<p>
-    schwach &nbsp;
-    {{ for choice in form.rating_before6 }}
-        {{ choice }}
-    {{ endfor }}
-    &nbsp; stark
-    {{ formfield 'discussion6' }}
-</p>
-<p>
-    schwach &nbsp;
-    {{ for choice in form.rating_before7 }}
-        {{ choice }}
-    {{ endfor }}
-    &nbsp; stark
-    {{ formfield 'discussion7' }}
-</p>
-<p>
-    schwach &nbsp;
-    {{ for choice in form.rating_before8 }}
-        {{ choice }}
-    {{ endfor }}
-    &nbsp; stark
-    {{ formfield 'discussion8' }}
-</p>
-<p>
-    schwach &nbsp;
-    {{ for choice in form.rating_before9 }}
-        {{ choice }}
-    {{ endfor }}
-    &nbsp; stark
-    {{ formfield 'discussion9' }}
-</p>
-<p>
-    schwach &nbsp;
-    {{ for choice in form.rating_before10 }}
-        {{ choice }}
-    {{ endfor }}
-    &nbsp; stark
-    {{ formfield 'discussion10' }}
-</p>
-<p>
-    schwach &nbsp;
-    {{ for choice in form.rating_before11 }}
-        {{ choice }}
-    {{ endfor }}
-    &nbsp; stark
-    {{ formfield 'discussion11' }}
-</p>
-<p>
-    schwach &nbsp;
-    {{ for choice in form.rating_before12 }}
-        {{ choice }}
-    {{ endfor }}
-    &nbsp; stark
-    {{ formfield 'discussion12' }}
-</p>
-<p>
-    schwach &nbsp;
-    {{ for choice in form.rating_before13 }}
-        {{ choice }}
-    {{ endfor }}
-    &nbsp; stark
-    {{ formfield 'discussion13' }}
-</p>
-<p>
-    schwach &nbsp;
-    {{ for choice in form.rating_before14 }}
-        {{ choice }}
-    {{ endfor }}
-    &nbsp; stark
-    {{ formfield 'discussion14' }}
-</p>
 </br>
-<p> Dies sind alle gültigen <b>Hinweispaare</b>, die Ihre Gruppenmitglieder geschrieben haben: </p> 
 {% for pair in Pairs %}
-    <form method="post">
-    <p>Paar: {{ pair }}</p>
-    <input type="text" name="pair_{{ forloop.counter }}" required>
-        <br><br>
-    </form>
+    <p><b>Pair:</b> {{ pair }}</p>
 {% endfor %}
-</br>
+{{ formfields}}
 <button class= "otree-btn btn btn-info">Weiter</button>
 </br>
 </br>
