@@ -26,50 +26,92 @@
 {{ formfield 'Idea1' }}
 +
 {{ formfield 'Idea2' }}
-{{ Feedback1 }}
-{{ Feedback2 }}
 {{ else }}
 {{ endif }}
+{{ if Rating_1 != [] and Replace_1 != [] }}
+<p>Dieses Hinweispaar wurde von einem Mitspieler als <b> {{ Rating_1 }} </b> bewertet. </p>
+<p>Er/Sie schlägt vor, das <b>{{ Replace_1 }}.</b> Wort mit dem Wort <b> {{ R_word_1 }} </b> zu ersetzen.</p>
+{{ else }} <p><b>Kein Feedback für dieses Hinweispaar</b></p>
+{{ endif }}
+{{ Feedback1 }}
+</br>
+{{ Feedback2 }}
+</br>
 {{ if player.Idea3 != '' and player.Idea4 != '' }}    
 {{ formfield 'Idea3' }}
 +
 {{ formfield 'Idea4' }}
-{{ Feedback3 }}
-{{ Feedback4 }}
 {{ else }}
 {{ endif }}
+{{ if Rating_2 != [] and Replace_2 != [] }}
+<p>Dieses Hinweispaar wurde von einem Mitspieler als <b> {{ Rating_2 }} </b> bewertet. </p>
+<p>Er/Sie schlägt vor, das <b>{{ Replace_2 }}.</b> Wort mit dem Wort <b> {{ R_word_2 }} </b> zu ersetzen.</p>
+{{ else }} <p><b>Kein Feedback für dieses Hinweispaar</b></p>
+{{ endif }}
+{{ Feedback3 }}
+</br>
+{{ Feedback4 }}
+</br>
 {{ if player.Idea5 != '' and player.Idea6 != '' }}    
 {{ formfield 'Idea5' }}
 +
 {{ formfield 'Idea6' }}
-{{ Feedback5 }}
-{{ Feedback6 }}
 {{ else }}
 {{ endif }}
+{{ if Rating_3 != [] and Replace_3 != [] }}
+<p>Dieses Hinweispaar wurde von einem Mitspieler als <b> {{ Rating_3 }} </b> bewertet. </p>
+<p>Er/Sie schlägt vor, das <b>{{ Replace_3 }}.</b> Wort mit dem Wort <b> {{ R_word_3 }} </b> zu ersetzen.</p>
+{{ else }} <p><b>Kein Feedback für dieses Hinweispaar</b></p>
+{{ endif }}
+{{ Feedback5 }}
+</br>
+{{ Feedback6 }}
+</br>
 {{ if player.Idea7 != '' and player.Idea8 != '' }}    
 {{ formfield 'Idea7' }}
 +
 {{ formfield 'Idea8' }}
-{{ Feedback7 }}
-{{ Feedback8 }}
 {{ else }}
 {{ endif }}
+{{ if Rating_4 != [] and Replace_4 != [] }}
+<p>Dieses Hinweispaar wurde von einem Mitspieler als <b> {{ Rating_4 }} </b> bewertet. </p>
+<p>Er/Sie schlägt vor, das <b>{{ Replace_4 }}.</b> Wort mit dem Wort <b> {{ R_word_4 }} </b> zu ersetzen.</p>
+{{ else }} <p><b>Kein Feedback für dieses Hinweispaar</b></p>
+{{ endif }}
+{{ Feedback7 }}
+</br>
+{{ Feedback8 }}
+</br>
 {{ if player.Idea9 != '' and player.Idea10 != '' }}    
 {{ formfield 'Idea9' }}
 +
 {{ formfield 'Idea10' }}
-{{ Feedback9 }}
-{{ Feedback10 }}
 {{ else }}
 {{ endif }}
+{{ if Rating_5 != [] and Replace_5 != [] }}
+<p>Dieses Hinweispaar wurde von einem Mitspieler als <b> {{ Rating_5 }} </b> bewertet. </p>
+<p>Er/Sie schlägt vor, das <b>{{ Replace_5 }}.</b> Wort mit dem Wort <b> {{ R_word_5 }} </b> zu ersetzen.</p>
+{{ else }} <p><b>Kein Feedback für dieses Hinweispaar</b></p>
+{{ endif }}
+{{ Feedback9 }}
+</br>
+{{ Feedback10 }}
+</br>
 {{ if player.Idea11 != '' and player.Idea12 != '' }}    
 {{ formfield 'Idea11' }}
 +
 {{ formfield 'Idea12' }}
-{{ Feedback11 }}
-{{ Feedback12 }}
 {{ else }}
 {{ endif }}
+{{ if Rating_6 != [] and Replace_6 != [] }}
+<p>Dieses Hinweispaar wurde von einem Mitspieler als <b> {{ Rating_6 }} </b> bewertet. </p>
+<p>Er/Sie schlägt vor, das <b>{{ Replace_6 }}.</b> Wort mit dem Wort <b> {{ R_word_6 }} </b> zu ersetzen.</p>
+{{ else }} <p><b>Kein Feedback für dieses Hinweispaar</b></p>
+{{ endif }}
+{{ Feedback11 }}
+</br>
+{{ Feedback12 }}
+
 <button class= "otree-btn btn btn-info">Weiter</button>
 </br>
 </br>

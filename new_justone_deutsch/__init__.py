@@ -231,8 +231,67 @@ class Clue_Page(Page):
         feedback11_group.remove('')
         feedback12_group = [p.pair_feedback12 for p in player.get_others_in_group()]
         feedback12_group.remove('')
-        return dict(mystery_word = mystery_word, Feedback1 = feedback1_group, Feedback2 = feedback2_group, Feedback3 = feedback3_group, Feedback4 = feedback4_group, Feedback5 = feedback5_group, Feedback6 = feedback6_group, Feedback7 = feedback7_group, Feedback8 = feedback8_group, Feedback9 = feedback9_group, Feedback10 = feedback10_group, Feedback11 = feedback11_group, Feedback12 = feedback12_group)
-        
+        rating_1 = []
+        replace_1 = []
+        r_word_1 = []
+        rating_2 = []
+        replace_2 = []
+        r_word_2 = []
+        rating_3 = []
+        replace_3 = []
+        r_word_3 = []
+        rating_4 = []
+        replace_4 = []
+        r_word_4 = []
+        rating_5 = []
+        replace_5 = []
+        r_word_5 = []
+        rating_6 = []
+        replace_6 = []
+        r_word_6 = []
+        print(feedback1_group)
+        print(feedback2_group)
+        print(feedback3_group)
+        print(feedback4_group)
+        print(feedback5_group)
+        print(feedback6_group)
+        print(feedback7_group)
+        print(feedback8_group)
+        print(feedback9_group)
+        print(feedback10_group)
+        print(feedback11_group)
+        print(feedback12_group)
+        import ast
+        all_feedback_groups = feedback1_group + feedback2_group
+        for element in all_feedback_groups:
+            element_list = ast.literal_eval(element)
+            print(element_list)
+            if element_list[0] == player.pair1:
+                rating_1.append(element_list[1])
+                replace_1.append(element_list[2])
+                r_word_1.append(element_list[3])
+            if element_list[0] == player.pair2:	
+                rating_2.append(element_list[1])
+                replace_2.append(element_list[2])
+                r_word_2.append(element_list[3])
+            if element_list[0] == player.pair3:
+                rating_3.append(element_list[1])
+                replace_3.append(element_list[2])
+                r_word_3.append(element_list[3])
+            if element_list[0] == player.pair4:
+                rating_4.append(element_list[1])
+                replace_4.append(element_list[2])
+                r_word_4.append(element_list[3])
+            if element_list[0] == player.pair5:
+                rating_5.append(element_list[1])
+                replace_5.append(element_list[2])
+                r_word_5.append(element_list[3])
+            if element_list[0] == player.pair6:
+                rating_6.append(element_list[1])
+                replace_6.append(element_list[2])
+                r_word_6.append(element_list[3])
+        return dict(mystery_word = mystery_word, Rating_1 = rating_1, Replace_1 = replace_1, R_Word_1 = r_word_1, Rating_2 = rating_2, Replace_2 = replace_2, R_Word_2 = r_word_2, Rating_3 = rating_3, Replace_3 = replace_3, R_Word_3 = r_word_3, Rating_4 = rating_4, Replace_4 = replace_4, R_Word_4 = r_word_4, Rating_5 = rating_5, Replace_5 = replace_5, R_Word_5 = r_word_5, Rating_6 = rating_6, Replace_6 = replace_6, R_Word_6 = r_word_6, Feedback1 = feedback1_group, Feedback2 = feedback2_group, Feedback3 = feedback3_group, Feedback4 = feedback4_group, Feedback5 = feedback5_group, Feedback6 = feedback6_group, Feedback7 = feedback7_group, Feedback8 = feedback8_group, Feedback9 = feedback9_group, Feedback10 = feedback10_group, Feedback11 = feedback11_group, Feedback12 = feedback12_group)
+     
 def wordlength(player, value):
     value = value.lower()
     if len(value) > 18:
@@ -829,47 +888,47 @@ class Discussion(Page):
                 feedback_1 = str(feedback_1)
                 player.pair_feedback1 = feedback_1
             if len(pairs) > 1:
-                feedback_2 = [player.other_pairs.split(',')[1]] + [player.rating_before2] + [player.replace_word2] + [player.discussion2]
+                feedback_2 = [player.other_pairs.split(', ')[1]] + [player.rating_before2] + [player.replace_word2] + [player.discussion2]
                 feedback_2 = str(feedback_2)
                 player.pair_feedback2 = feedback_2
             if len(pairs) > 2:
-                feedback_3 = [player.other_pairs.split(',')[2]] + [player.rating_before3] + [player.replace_word3] + [player.discussion3]
+                feedback_3 = [player.other_pairs.split(', ')[2]] + [player.rating_before3] + [player.replace_word3] + [player.discussion3]
                 feedback_3 = str(feedback_3)
                 player.pair_feedback3 = feedback_3
             if len(pairs) > 3:
-                feedback_4 = [player.other_pairs.split(',')[3]] + [player.rating_before4] + [player.replace_word4] + [player.discussion4]
+                feedback_4 = [player.other_pairs.split(', ')[3]] + [player.rating_before4] + [player.replace_word4] + [player.discussion4]
                 feedback_4 = str(feedback_4)
                 player.pair_feedback4 = feedback_4
             if len(pairs) > 4:
-                feedback_5 = [player.other_pairs.split(',')[4]] + [player.rating_before5] + [player.replace_word5] + [player.discussion5]
+                feedback_5 = [player.other_pairs.split(', ')[4]] + [player.rating_before5] + [player.replace_word5] + [player.discussion5]
                 feedback_5 = str(feedback_5)
                 player.pair_feedback5 = feedback_5
             if len(pairs) > 5:
-                feedback_6 = [player.other_pairs.split(',')[5]] + [player.rating_before6] + [player.replace_word6] + [player.discussion6]
+                feedback_6 = [player.other_pairs.split(', ')[5]] + [player.rating_before6] + [player.replace_word6] + [player.discussion6]
                 feedback_6 = str(feedback_6)
                 player.pair_feedback6 = feedback_6
             if len(pairs) > 6:
-                feedback_7 = [player.other_pairs.split(',')[6]] + [player.rating_before7] + [player.replace_word7] + [player.discussion7]
+                feedback_7 = [player.other_pairs.split(', ')[6]] + [player.rating_before7] + [player.replace_word7] + [player.discussion7]
                 feedback_7 = str(feedback_7)
                 player.pair_feedback7 = feedback_7
             if len(pairs) > 7:
-                feedback_8 = [player.other_pairs.split(',')[7]] + [player.rating_before8] + [player.replace_word8] + [player.discussion8]
+                feedback_8 = [player.other_pairs.split(', ')[7]] + [player.rating_before8] + [player.replace_word8] + [player.discussion8]
                 feedback_8 = str(feedback_8)
                 player.pair_feedback8 = feedback_8
             if len(pairs) > 8:
-                feedback_9 = [player.other_pairs.split(',')[8]] + [player.rating_before9] + [player.replace_word9] + [player.discussion9]
+                feedback_9 = [player.other_pairs.split(', ')[8]] + [player.rating_before9] + [player.replace_word9] + [player.discussion9]
                 feedback_9 = str(feedback_9)
                 player.pair_feedback9 = feedback_9
             if len(pairs) > 9:
-                feedback_10 = [player.other_pairs.split(',')[9]] + [player.rating_before10] + [player.replace_word10] + [player.discussion10]
+                feedback_10 = [player.other_pairs.split(', ')[9]] + [player.rating_before10] + [player.replace_word10] + [player.discussion10]
                 feedback_10 = str(feedback_10)
                 player.pair_feedback10 = feedback_10
             if len(pairs) > 10:
-                feedback_11 = [player.other_pairs.split(',')[10]] + [player.rating_before11] + [player.replace_word11] + [player.discussion11]
+                feedback_11 = [player.other_pairs.split(', ')[10]] + [player.rating_before11] + [player.replace_word11] + [player.discussion11]
                 feedback_11 = str(feedback_11)
                 player.pair_feedback11 = feedback_11
             if len(pairs) > 11:
-                feedback_12 = [player.other_pairs.split(',')[11]] + [player.rating_before12] + [player.replace_word12] + [player.discussion12]
+                feedback_12 = [player.other_pairs.split(', ')[11]] + [player.rating_before12] + [player.replace_word12] + [player.discussion12]
                 feedback_12 = str(feedback_12)
                 player.pair_feedback12 = feedback_12
 

@@ -22,10 +22,13 @@
 <p>Folgende <b>Hinweispaare</b> wurden von deinen Mitspielern geschrieben.</p>
 <p>Bewerte, wie gut du das jeweilige Hinweispaar findest und mache Vorschläge, welche Hinweise du ersetzen würdest.</p>
 </br>
+
+{{ if number_pairs > 0 }}
 <b>{{ Pair1 }} </b>
 {{ formfield 'rating_before1' }}
 {{ formfield 'replace_word1' }}
 {{ formfield 'discussion1' }}
+{{ else }} <b>Deine Mitspieler haben keine gültigen Hinweispaare geschrieben.</b> {{ endif }}
 
 {{ if number_pairs > 1 }}
 <b>{{ Pair2 }}</b>
@@ -103,7 +106,8 @@
 {{ formfield 'replace_word12' }}
 {{ formfield 'discussion12' }}
 {{ else }} {{ endif }}
-
+</br>
+</br>
 <button class= "otree-btn btn btn-info">Weiter</button>
 </br>
 </br>
