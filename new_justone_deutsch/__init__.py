@@ -249,28 +249,39 @@ class Clue_Page(Page):
         rating_6 = []
         replace_6 = []
         r_word_6 = []
-        print(feedback1_group)
-        print(feedback2_group)
-        print(feedback3_group)
-        print(feedback4_group)
-        print(feedback5_group)
-        print(feedback6_group)
-        print(feedback7_group)
-        print(feedback8_group)
-        print(feedback9_group)
-        print(feedback10_group)
-        print(feedback11_group)
-        print(feedback12_group)
+        all_feedback_groups = []
+        if feedback1_group != ['', '']:
+            all_feedback_groups = feedback1_group
+        if feedback1_group != ['', ''] and feedback2_group != ['', '']:
+            all_feedback_groups = feedback1_group + feedback2_group
+        if feedback1_group != ['', ''] and feedback2_group != ['', ''] and feedback3_group != ['', '']:
+            all_feedback_groups = feedback1_group + feedback2_group + feedback3_group
+        if feedback1_group != ['', ''] and feedback2_group != ['', ''] and feedback3_group != ['', ''] and feedback4_group != ['', '']: 
+            all_feedback_groups = feedback1_group + feedback2_group + feedback3_group + feedback4_group
+        if feedback1_group != ['', ''] and feedback2_group != ['', ''] and feedback3_group != ['', ''] and feedback4_group != ['', ''] and feedback5_group != ['', '']:
+            all_feedback_groups = feedback1_group + feedback2_group + feedback3_group + feedback4_group + feedback5_group
+        if feedback1_group != ['', ''] and feedback2_group != ['', ''] and feedback3_group != ['', ''] and feedback4_group != ['', ''] and feedback5_group != ['', ''] and feedback6_group != ['', '']:
+            all_feedback_groups = feedback1_group + feedback2_group + feedback3_group + feedback4_group + feedback5_group + feedback6_group
+        if feedback1_group != ['', ''] and feedback2_group != ['', ''] and feedback3_group != ['', ''] and feedback4_group != ['', ''] and feedback5_group != ['', ''] and feedback6_group != ['', ''] and feedback7_group != ['', '']:
+            all_feedback_groups = feedback1_group + feedback2_group + feedback3_group + feedback4_group + feedback5_group + feedback6_group + feedback7_group
+        if feedback1_group != ['', ''] and feedback2_group != ['', ''] and feedback3_group != ['', ''] and feedback4_group != ['', ''] and feedback5_group != ['', ''] and feedback6_group != ['', ''] and feedback7_group != ['', ''] and feedback8_group != ['', '']:
+            all_feedback_groups = feedback1_group + feedback2_group + feedback3_group + feedback4_group + feedback5_group + feedback6_group + feedback7_group + feedback8_group
+        if feedback1_group != ['', ''] and feedback2_group != ['', ''] and feedback3_group != ['', ''] and feedback4_group != ['', ''] and feedback5_group != ['', ''] and feedback6_group != ['', ''] and feedback7_group != ['', ''] and feedback8_group != ['', ''] and feedback9_group != ['', '']:
+            all_feedback_groups = feedback1_group + feedback2_group + feedback3_group + feedback4_group + feedback5_group + feedback6_group + feedback7_group + feedback8_group + feedback9_group
+        if feedback1_group != ['', ''] and feedback2_group != ['', ''] and feedback3_group != ['', ''] and feedback4_group != ['', ''] and feedback5_group != ['', ''] and feedback6_group != ['', ''] and feedback7_group != ['', ''] and feedback8_group != ['', ''] and feedback9_group != ['', ''] and feedback10_group != ['', '']:
+            all_feedback_groups = feedback1_group + feedback2_group + feedback3_group + feedback4_group + feedback5_group + feedback6_group + feedback7_group + feedback8_group + feedback9_group + feedback10_group
+        if feedback1_group != ['', ''] and feedback2_group != ['', ''] and feedback3_group != ['', ''] and feedback4_group != ['', ''] and feedback5_group != ['', ''] and feedback6_group != ['', ''] and feedback7_group != ['', ''] and feedback8_group != ['', ''] and feedback9_group != ['', ''] and feedback10_group != ['', ''] and feedback11_group != ['', '']:
+            all_feedback_groups = feedback1_group + feedback2_group + feedback3_group + feedback4_group + feedback5_group + feedback6_group + feedback7_group + feedback8_group + feedback9_group + feedback10_group + feedback11_group
+        if feedback1_group != ['', ''] and feedback2_group != ['', ''] and feedback3_group != ['', ''] and feedback4_group != ['', ''] and feedback5_group != ['', ''] and feedback6_group != ['', ''] and feedback7_group != ['', ''] and feedback8_group != ['', ''] and feedback9_group != ['', ''] and feedback10_group != ['', ''] and feedback11_group != ['', ''] and feedback12_group != ['', '']:
+            all_feedback_groups = feedback1_group + feedback2_group + feedback3_group + feedback4_group + feedback5_group + feedback6_group + feedback7_group + feedback8_group + feedback9_group + feedback10_group + feedback11_group + feedback12_group
         import ast
-        all_feedback_groups = feedback1_group + feedback2_group
         for element in all_feedback_groups:
             element_list = ast.literal_eval(element)
-            print(element_list)
             if element_list[0] == player.pair1:
                 rating_1.append(element_list[1])
                 replace_1.append(element_list[2])
                 r_word_1.append(element_list[3])
-            if element_list[0] == player.pair2:	
+            if element_list[0] == player.pair2:
                 rating_2.append(element_list[1])
                 replace_2.append(element_list[2])
                 r_word_2.append(element_list[3])
@@ -290,7 +301,7 @@ class Clue_Page(Page):
                 rating_6.append(element_list[1])
                 replace_6.append(element_list[2])
                 r_word_6.append(element_list[3])
-        return dict(mystery_word = mystery_word, Rating_1 = rating_1, Replace_1 = replace_1, R_Word_1 = r_word_1, Rating_2 = rating_2, Replace_2 = replace_2, R_Word_2 = r_word_2, Rating_3 = rating_3, Replace_3 = replace_3, R_Word_3 = r_word_3, Rating_4 = rating_4, Replace_4 = replace_4, R_Word_4 = r_word_4, Rating_5 = rating_5, Replace_5 = replace_5, R_Word_5 = r_word_5, Rating_6 = rating_6, Replace_6 = replace_6, R_Word_6 = r_word_6, Feedback1 = feedback1_group, Feedback2 = feedback2_group, Feedback3 = feedback3_group, Feedback4 = feedback4_group, Feedback5 = feedback5_group, Feedback6 = feedback6_group, Feedback7 = feedback7_group, Feedback8 = feedback8_group, Feedback9 = feedback9_group, Feedback10 = feedback10_group, Feedback11 = feedback11_group, Feedback12 = feedback12_group)
+        return dict(mystery_word = mystery_word, Rating_1 = rating_1, Replace_1 = replace_1, R_word_1 = r_word_1, Rating_2 = rating_2, Replace_2 = replace_2, R_word_2 = r_word_2, Rating_3 = rating_3, Replace_3 = replace_3, R_word_3 = r_word_3, Rating_4 = rating_4, Replace_4 = replace_4, R_word_4 = r_word_4, Rating_5 = rating_5, Replace_5 = replace_5, R_word_5 = r_word_5, Rating_6 = rating_6, Replace_6 = replace_6, R_word_6 = r_word_6, Feedback1 = feedback1_group, Feedback2 = feedback2_group, Feedback3 = feedback3_group, Feedback4 = feedback4_group, Feedback5 = feedback5_group, Feedback6 = feedback6_group, Feedback7 = feedback7_group, Feedback8 = feedback8_group, Feedback9 = feedback9_group, Feedback10 = feedback10_group, Feedback11 = feedback11_group, Feedback12 = feedback12_group)
      
 def wordlength(player, value):
     value = value.lower()
