@@ -96,18 +96,18 @@ class Player(BasePlayer):
     pair5 = models.StringField(initial='')
     pair6 = models.StringField(initial='')
     pair7 = models.StringField(initial='')
-    rating_before1 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True)
-    rating_before2 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True)
-    rating_before3 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True)
-    rating_before4 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True)
-    rating_before5 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True)
-    rating_before6 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True)
-    rating_before7 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True)
-    rating_before8 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True)
-    rating_before9 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True)
-    rating_before10 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True)
-    rating_before11 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True)
-    rating_before12 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3, 'mittelmäßig'],[4, 'eher gut'],[5, 'gut'],], label='', blank=True)
+    rating_before1 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True, initial='')
+    rating_before2 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True, initial='')
+    rating_before3 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True, initial='')
+    rating_before4 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True, initial='')
+    rating_before5 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True, initial='')
+    rating_before6 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True, initial='')
+    rating_before7 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True, initial='')
+    rating_before8 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True, initial='')
+    rating_before9 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True, initial='')
+    rating_before10 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True, initial=''    )
+    rating_before11 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3,'mittelmäßig'],[4,'eher gut'],[5, 'gut'],], label='', blank=True, initial='')
+    rating_before12 = models.IntegerField(widget=widgets.RadioSelectHorizontal, choices=[[1, 'schwach'],[2, 'eher schwach'],[3, 'mittelmäßig'],[4, 'eher gut'],[5, 'gut'],], label='', blank=True, initial='')
     discussion1 = models.StringField(label= '', initial='', blank=True)
     discussion2 = models.StringField(label= '', initial='', blank=True)
     discussion3 = models.StringField(label= '', initial='', blank=True)
@@ -121,18 +121,30 @@ class Player(BasePlayer):
     discussion11 = models.StringField(label= '', initial='', blank=True)
     discussion12 = models.StringField(label= '', initial='', blank=True)
     other_pairs = models.StringField(label= '', initial='', blank=True)
-    replace_word1 = models.IntegerField(widget = widgets.RadioSelectHorizontal, choices=[[1, 'erste Wort durch:'],[2, 'zweite Wort durch:'],], label='Ersetze das', blank=True)
-    replace_word2 = models.IntegerField(widget = widgets.RadioSelectHorizontal, choices=[[1, 'erste Wort durch:'],[2, 'zweite Wort durch:'],], label='Ersetze das', blank=True)
-    replace_word3 = models.IntegerField(widget = widgets.RadioSelectHorizontal, choices=[[1, 'erste Wort durch:'],[2, 'zweite Wort durch:'],], label='Ersetze das', blank=True)
-    replace_word4 = models.IntegerField(widget = widgets.RadioSelectHorizontal, choices=[[1, 'erste Wort durch:'],[2, 'zweite Wort durch:'],], label='Ersetze das', blank=True)
-    replace_word5 = models.IntegerField(widget = widgets.RadioSelectHorizontal, choices=[[1, 'erste Wort durch:'],[2, 'zweite Wort durch:'],], label='Ersetze das', blank=True)
-    replace_word6 = models.IntegerField(widget = widgets.RadioSelectHorizontal, choices=[[1, 'erste Wort durch:'],[2, 'zweite Wort durch:'],], label='Ersetze das', blank=True)
-    replace_word7 = models.IntegerField(widget = widgets.RadioSelectHorizontal, choices=[[1, 'erste Wort durch:'],[2, 'zweite Wort durch:'],], label='Ersetze das', blank=True)
-    replace_word8 = models.IntegerField(widget = widgets.RadioSelectHorizontal, choices=[[1, 'erste Wort durch:'],[2, 'zweite Wort durch:'],], label='Ersetze das', blank=True)
-    replace_word9 = models.IntegerField(widget = widgets.RadioSelectHorizontal, choices=[[1, 'erste Wort durch:'],[2, 'zweite Wort durch:'],], label='Ersetze das', blank=True)
-    replace_word10 = models.IntegerField(widget = widgets.RadioSelectHorizontal, choices=[[1, 'erste Wort durch:'],[2, 'zweite Wort durch:'],], label='Ersetze das', blank=True)
-    replace_word11 = models.IntegerField(widget = widgets.RadioSelectHorizontal, choices=[[1, 'erste Wort durch:'],[2, 'zweite Wort durch:'],], label='Ersetze das', blank=True)
-    replace_word12 = models.IntegerField(widget = widgets.RadioSelectHorizontal, choices=[[1, 'erste Wort durch:'],[2, 'zweite Wort durch:'],], label='Ersetze das', blank=True)
+    replace_word1 = models.IntegerField(widget = widgets.RadioSelectHorizontal, choices=[[1, 'erste Wort durch:'],[2, 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
+    replace_word2 = models.IntegerField(widget = widgets.RadioSelectHorizontal, choices=[[1, 'erste Wort durch:'],[2, 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
+    replace_word3 = models.IntegerField(widget = widgets.RadioSelectHorizontal, choices=[[1, 'erste Wort durch:'],[2, 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
+    replace_word4 = models.IntegerField(widget = widgets.RadioSelectHorizontal, choices=[[1, 'erste Wort durch:'],[2, 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
+    replace_word5 = models.IntegerField(widget = widgets.RadioSelectHorizontal, choices=[[1, 'erste Wort durch:'],[2, 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
+    replace_word6 = models.IntegerField(widget = widgets.RadioSelectHorizontal, choices=[[1, 'erste Wort durch:'],[2, 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
+    replace_word7 = models.IntegerField(widget = widgets.RadioSelectHorizontal, choices=[[1, 'erste Wort durch:'],[2, 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
+    replace_word8 = models.IntegerField(widget = widgets.RadioSelectHorizontal, choices=[[1, 'erste Wort durch:'],[2, 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
+    replace_word9 = models.IntegerField(widget = widgets.RadioSelectHorizontal, choices=[[1, 'erste Wort durch:'],[2, 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
+    replace_word10 = models.IntegerField(widget = widgets.RadioSelectHorizontal, choices=[[1, 'erste Wort durch:'],[2, 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
+    replace_word11 = models.IntegerField(widget = widgets.RadioSelectHorizontal, choices=[[1, 'erste Wort durch:'],[2, 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
+    replace_word12 = models.IntegerField(widget = widgets.RadioSelectHorizontal, choices=[[1, 'erste Wort durch:'],[2, 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
+    pair_feedback1 = models.StringField(label= '', initial='', blank=True)
+    pair_feedback2 = models.StringField(label= '', initial='', blank=True)
+    pair_feedback3 = models.StringField(label= '', initial='', blank=True)
+    pair_feedback4 = models.StringField(label= '', initial='', blank=True)
+    pair_feedback5 = models.StringField(label= '', initial='', blank=True)
+    pair_feedback6 = models.StringField(label= '', initial='', blank=True)
+    pair_feedback7 = models.StringField(label= '', initial='', blank=True)
+    pair_feedback8 = models.StringField(label= '', initial='', blank=True)
+    pair_feedback9 = models.StringField(label= '', initial='', blank=True)
+    pair_feedback10 = models.StringField(label= '', initial='', blank=True)
+    pair_feedback11 = models.StringField(label= '', initial='', blank=True)
+    pair_feedback12 = models.StringField(label= '', initial='', blank=True)
     
 def creating_session(subsession: Subsession):
     session = subsession.session
@@ -188,30 +200,43 @@ class Round(Page):
         return dict(round_number = round_number, remaining_rounds = remaining_rounds)
 
 class Clue_Page(Page):
-    timeout_seconds = 180
+    timeout_seconds = 10000
     def is_displayed(player):
         return player.role() == 'Hinweisgeber'   
     form_model = 'player'
-    form_fields = ['clues', 'Idea1', 'Idea2', 'Idea3', 'Idea4', 'Idea5', 'Idea6', 'Idea7', 'Idea8', 'Idea9', 'Idea10', 'Idea11', 'Idea12']
+    form_fields = ['Idea1', 'Idea2', 'Idea3', 'Idea4', 'Idea5', 'Idea6', 'Idea7', 'Idea8', 'Idea9', 'Idea10', 'Idea11', 'Idea12']
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
-        return dict(mystery_word = mystery_word)
-        
-    def before_next_page(player, timeout_happened):
-        if timeout_happened:
-            player.clues = 'Kein Hinweis gegeben'
-        else:  
-            player.clues = player.clues.lower()
-            return player.clues
+        feedback1_group = [p.pair_feedback1 for p in player.get_others_in_group()]
+        feedback1_group.remove('')
+        feedback2_group = [p.pair_feedback2 for p in player.get_others_in_group()]
+        feedback2_group.remove('')
+        feedback3_group = [p.pair_feedback3 for p in player.get_others_in_group()]
+        feedback3_group.remove('')
+        feedback4_group = [p.pair_feedback4 for p in player.get_others_in_group()]
+        feedback4_group.remove('')
+        feedback5_group = [p.pair_feedback5 for p in player.get_others_in_group()]
+        feedback5_group.remove('')
+        feedback6_group = [p.pair_feedback6 for p in player.get_others_in_group()]
+        feedback6_group.remove('')
+        feedback7_group = [p.pair_feedback7 for p in player.get_others_in_group()]
+        feedback7_group.remove('')
+        feedback8_group = [p.pair_feedback8 for p in player.get_others_in_group()]
+        feedback8_group.remove('')
+        feedback9_group = [p.pair_feedback9 for p in player.get_others_in_group()]
+        feedback9_group.remove('')
+        feedback10_group = [p.pair_feedback10 for p in player.get_others_in_group()]
+        feedback10_group.remove('')
+        feedback11_group = [p.pair_feedback11 for p in player.get_others_in_group()]
+        feedback11_group.remove('')
+        feedback12_group = [p.pair_feedback12 for p in player.get_others_in_group()]
+        feedback12_group.remove('')
+        return dict(mystery_word = mystery_word, Feedback1 = feedback1_group, Feedback2 = feedback2_group, Feedback3 = feedback3_group, Feedback4 = feedback4_group, Feedback5 = feedback5_group, Feedback6 = feedback6_group, Feedback7 = feedback7_group, Feedback8 = feedback8_group, Feedback9 = feedback9_group, Feedback10 = feedback10_group, Feedback11 = feedback11_group, Feedback12 = feedback12_group)
         
 def wordlength(player, value):
     value = value.lower()
     if len(value) > 18:
         return True
-    
-def clues_error_message(player, value):
-    if wordlength(player, value) == True:
-        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def Idea1_error_message(player, value):
     if wordlength(player, value) == True:
@@ -717,7 +742,6 @@ def Idea12_error_message(player, value):
     if wordlength(player, value) == True:
         return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
 
-
 class Generation_WaitPage(WaitPage):
     title_text = "Vielen Dank für deine Hinweispaare!"
     body_text = "Bitte warte, bis alle ihre Hinweispaare abgegeben haben."
@@ -779,7 +803,128 @@ class Discussion(Page):
         if number_pairs > 11:
             Pair12 = pairs[11]
         return dict(mystery_word = mystery_word, number_pairs = number_pairs, Pair1 = Pair1, Pair2 = Pair2, Pair3 = Pair3, Pair4 = Pair4, Pair5 = Pair5, Pair6 = Pair6, Pair7 = Pair7, Pair8 = Pair8, Pair9 = Pair9, Pair10 = Pair10, Pair11 = Pair11, Pair12 = Pair12)   
+
+    def before_next_page(player, timeout_happened):
+        if timeout_happened:
+            player.discussion1 = 'empty'
+            player.discussion2 = 'empty'
+            player.discussion3 = 'empty'
+            player.discussion4 = 'empty'
+            player.discussion5 = 'empty'
+            player.discussion6 = 'empty'
+            player.discussion7 = 'empty'
+            player.discussion8 = 'empty'
+            player.discussion9 = 'empty'
+            player.discussion10 = 'empty'
+            player.discussion11 = 'empty'
+            player.discussion12 = 'empty'
+        else:
+            pairs = [player.pair1 for player in player.get_others_in_group()] + [player.pair2 for player in player.get_others_in_group()] + [player.pair3 for player in player.get_others_in_group()] + [player.pair4 for player in player.get_others_in_group()] + [player.pair5 for player in player.get_others_in_group()] + [player.pair6 for player in player.get_others_in_group()] + [player.pair7 for player in player.get_others_in_group()]
+            while 'empty' in pairs:
+                pairs.remove('empty')
+            while '' in pairs:
+                pairs.remove('')
+            if len(pairs) > 0:
+                feedback_1 = [player.other_pairs.split(',')[0]] + [player.rating_before1] + [player.replace_word1] + [player.discussion1]
+                feedback_1 = str(feedback_1)
+                player.pair_feedback1 = feedback_1
+            if len(pairs) > 1:
+                feedback_2 = [player.other_pairs.split(',')[1]] + [player.rating_before2] + [player.replace_word2] + [player.discussion2]
+                feedback_2 = str(feedback_2)
+                player.pair_feedback2 = feedback_2
+            if len(pairs) > 2:
+                feedback_3 = [player.other_pairs.split(',')[2]] + [player.rating_before3] + [player.replace_word3] + [player.discussion3]
+                feedback_3 = str(feedback_3)
+                player.pair_feedback3 = feedback_3
+            if len(pairs) > 3:
+                feedback_4 = [player.other_pairs.split(',')[3]] + [player.rating_before4] + [player.replace_word4] + [player.discussion4]
+                feedback_4 = str(feedback_4)
+                player.pair_feedback4 = feedback_4
+            if len(pairs) > 4:
+                feedback_5 = [player.other_pairs.split(',')[4]] + [player.rating_before5] + [player.replace_word5] + [player.discussion5]
+                feedback_5 = str(feedback_5)
+                player.pair_feedback5 = feedback_5
+            if len(pairs) > 5:
+                feedback_6 = [player.other_pairs.split(',')[5]] + [player.rating_before6] + [player.replace_word6] + [player.discussion6]
+                feedback_6 = str(feedback_6)
+                player.pair_feedback6 = feedback_6
+            if len(pairs) > 6:
+                feedback_7 = [player.other_pairs.split(',')[6]] + [player.rating_before7] + [player.replace_word7] + [player.discussion7]
+                feedback_7 = str(feedback_7)
+                player.pair_feedback7 = feedback_7
+            if len(pairs) > 7:
+                feedback_8 = [player.other_pairs.split(',')[7]] + [player.rating_before8] + [player.replace_word8] + [player.discussion8]
+                feedback_8 = str(feedback_8)
+                player.pair_feedback8 = feedback_8
+            if len(pairs) > 8:
+                feedback_9 = [player.other_pairs.split(',')[8]] + [player.rating_before9] + [player.replace_word9] + [player.discussion9]
+                feedback_9 = str(feedback_9)
+                player.pair_feedback9 = feedback_9
+            if len(pairs) > 9:
+                feedback_10 = [player.other_pairs.split(',')[9]] + [player.rating_before10] + [player.replace_word10] + [player.discussion10]
+                feedback_10 = str(feedback_10)
+                player.pair_feedback10 = feedback_10
+            if len(pairs) > 10:
+                feedback_11 = [player.other_pairs.split(',')[10]] + [player.rating_before11] + [player.replace_word11] + [player.discussion11]
+                feedback_11 = str(feedback_11)
+                player.pair_feedback11 = feedback_11
+            if len(pairs) > 11:
+                feedback_12 = [player.other_pairs.split(',')[11]] + [player.rating_before12] + [player.replace_word12] + [player.discussion12]
+                feedback_12 = str(feedback_12)
+                player.pair_feedback12 = feedback_12
+
+def wordlength(player, value):
+        value = value.lower()
+        if len(value) > 18:
+            return True
+
+def discussion1_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+
+def discussion2_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+
+def discussion3_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
     
+def discussion4_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+
+def discussion5_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+
+def discussion6_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+
+def discussion7_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+
+def discussion8_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+
+def discussion9_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+
+def discussion10_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+
+def discussion11_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+
+def discussion12_error_message(player, value):
+    if wordlength(player, value) == True:
+        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
 
 class CluegiverWaitPage(WaitPage):
     def vars_for_template(player):
@@ -794,6 +939,13 @@ class CluegiverWaitPage(WaitPage):
     
     title_text = "Vielen Dank für deinen Hinweis!"
     body_text = "Bitte warte, bis alle ihre Hinweise and Vermutungen abgegeben haben."
+    def is_displayed(player):
+        return player.role() == 'Hinweisgeber'
+
+class Clue_WaitPage(WaitPage):
+    title_text = "Vielen Dank für dein Feedback!"
+    body_text = "Bitte warte, bis all deine Gruppenmitglieder ihr Feedback abgegeben haben."
+    wait_for_all_players = True
     def is_displayed(player):
         return player.role() == 'Hinweisgeber'
 
@@ -812,4 +964,4 @@ class FinalPage(Page):
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
 
-page_sequence = [GroupWaitPage, Intro, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_Page, GuesserWaitPage, Guess_Page, CluegiverWaitPage, ResultsWaitPage, Results, Score, TestQuestions, FredaQuestions, DAT, FinalPage]
+page_sequence = [GroupWaitPage, Intro, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, GuesserWaitPage, Guess_Page, CluegiverWaitPage, ResultsWaitPage, Results, Score, TestQuestions, FredaQuestions, DAT, FinalPage]

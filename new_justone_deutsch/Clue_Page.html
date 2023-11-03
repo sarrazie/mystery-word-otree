@@ -1,5 +1,5 @@
 {{ block title }}
-    Hinweis
+    Hinweispaar
 {{ endblock }}
 {{ block content }}
 
@@ -21,66 +21,58 @@
 </br>
 <p> Das <b>Geheimwort</b> in dieser Runde ist: </p>
 <p> <b>{{ mystery_word }}</b> </p>   
-<p> Bitte geben Sie <b>alle</b> Ihre Ideen zu diesem Wort ein (eine Idee pro Textfeld): </p>
-    <b>{{ formfield 'Idea1' }}</b>
-        <details>
-        <summary> Fügen Sie eine zweite Idee hinzu </summary>
-        {{ formfield 'Idea2' }}
-            <details>
-            <summary> Fügen Sie eine dritte Idee hinzu </summary>
-            {{ formfield 'Idea3' }}
-                <details>
-                <summary> Fügen Sie eine vierte Idee hinzu </summary>
-                {{ formfield 'Idea4' }}
-                    <details>
-                    <summary> Fügen Sie eine fünfte Idee hinzu </summary>
-                    {{ formfield 'Idea5' }}
-                        <details>
-                        <summary> Fügen Sie eine sechste Idee hinzu</summary>
-                        {{ formfield 'Idea6' }}
-                            <details>
-                            <summary> Fügen Sie eine siebte Idee hinzu</summary> 
-                            {{ formfield 'Idea7' }}
-                                <details>
-                                <summary> Fügen Sie eine achte Idee hinzu</summary> 
-                                {{ formfield 'Idea8' }}
-                                    <details>
-                                    <summary> Fügen Sie eine neunte Idee hinzu</summary> 
-                                    {{ formfield 'Idea9' }}
-                                        <details>
-                                        <summary> Fügen Sie eine zehnte Idee hinzu</summary> 
-                                        {{ formfield 'Idea10' }}
-                                            <details>
-                                            <summary> Fügen Sie eine elfte Idee hinzu</summary>
-                                            {{ formfield 'Idea11' }}
-                                                <details>
-                                                <summary> Fügen Sie eine zwölfte Idee hinzu </summary>
-                                                {{ formfield 'Idea12' }}
-                                                    <details>
-                                                    <summary> Fügen Sie eine dreizehnte Idee hinzu </summary>
-                                                    {{ formfield 'Idea13' }}
-                                                        <details>
-                                                        <summary> Fügen Sie eine vierzehnte Idee hinzu </summary>
-                                                        {{ formfield 'Idea14' }}
-                                                        <p>Sie haben das Maximum an Ideen erreicht, die eingereicht werden können.</p>        
-                                                    </details>
-                                                </details>
-                                            </details>
-                                        </details>
-                                    </details>
-                                </details>
-                            </details>
-                        </details>
-                    </details>
-                </details>
-            </details>
-        </details>       
-</br>
-<p> Bitte entscheiden Sie sich jetzt für Ihren finalen Hinweis und geben Sie ihn hier ein: <b>{{ formfield 'clues' }}</b> </p>
-</br>
+<p> Hier sind ihre bisher gegebenen Hinweispaare mit dem Feedback ihrer Gruppenmitglieder:</p>
+{{ if player.Idea1 != '' and player.Idea2 != '' }}    
+{{ formfield 'Idea1' }}
++
+{{ formfield 'Idea2' }}
+{{ Feedback1 }}
+{{ Feedback2 }}
+{{ else }}
+{{ endif }}
+{{ if player.Idea3 != '' and player.Idea4 != '' }}    
+{{ formfield 'Idea3' }}
++
+{{ formfield 'Idea4' }}
+{{ Feedback3 }}
+{{ Feedback4 }}
+{{ else }}
+{{ endif }}
+{{ if player.Idea5 != '' and player.Idea6 != '' }}    
+{{ formfield 'Idea5' }}
++
+{{ formfield 'Idea6' }}
+{{ Feedback5 }}
+{{ Feedback6 }}
+{{ else }}
+{{ endif }}
+{{ if player.Idea7 != '' and player.Idea8 != '' }}    
+{{ formfield 'Idea7' }}
++
+{{ formfield 'Idea8' }}
+{{ Feedback7 }}
+{{ Feedback8 }}
+{{ else }}
+{{ endif }}
+{{ if player.Idea9 != '' and player.Idea10 != '' }}    
+{{ formfield 'Idea9' }}
++
+{{ formfield 'Idea10' }}
+{{ Feedback9 }}
+{{ Feedback10 }}
+{{ else }}
+{{ endif }}
+{{ if player.Idea11 != '' and player.Idea12 != '' }}    
+{{ formfield 'Idea11' }}
++
+{{ formfield 'Idea12' }}
+{{ Feedback11 }}
+{{ Feedback12 }}
+{{ else }}
+{{ endif }}
 <button class= "otree-btn btn btn-info">Weiter</button>
 </br>
-
+</br>
 <details>
     <summary> Zusammenfassung der Regeln </summary>
     <ul>    
