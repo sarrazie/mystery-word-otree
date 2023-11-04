@@ -22,65 +22,65 @@
 <p> Das <b>Geheimwort</b> in dieser Runde ist: </p>
 <p> <b>{{ mystery_word }}</b> </p>   
 <p> Hier sind ihre bisher gegebenen Hinweispaare mit dem Feedback ihrer Gruppenmitglieder:</p>
-{{ if player.Idea1 != '' and player.Idea2 != '' }}    
+{{ if player.pair1 != 'empty' }}    
 {{ formfield 'Idea1' }}
 +
 {{ formfield 'Idea2' }}
-<p>Dieses Hinweispaar wurde von einem Mitspieler als <b> {{ Rating_1.0 }} </b> bewertet. </p>
-<p>Er/Sie schlägt vor, das <b>{{ Replace_1.0 }}</b> Wort mit dem Wort <b> {{ R_word_1.0 }} </b> zu ersetzen.</p>
-<p>Dieses Hinweispaar wurde von einem Mitspieler als <b> {{ Rating_1.1 }} </b> bewertet. </p>
-<p>Er/Sie schlägt vor, das <b>{{ Replace_1.1 }}</b> Wort mit dem Wort <b> {{ R_word_1.1 }} </b> zu ersetzen.</p>
+{{ if Rating_1.0 != 'empty' }} <p>Bewertung eines Mitspielers: <b> {{ Rating_1.0 }} </b> </p> {{ else }} {{ endif}}
+{{ if Replace_1.0 != '' and R_word_1.0 != '' }} <p>Ersatzvorschlag für das <b>{{ Replace_1.0 }}</b> Wort: <b> {{ R_word_1.0 }} </b></p> {{ else }} {{ endif}}
+{{ if Rating_1.1 != 'empty' }} Bewertung eines Mitspielers: <b> {{ Rating_1.1 }} </b> </p> {{ else }} {{ endif}}
+{{ if Replace_1.1 != '' and R_word_1.1 != '' }} <p>Ersatzvorschlag für das <b>{{ Replace_1.1 }}</b> Wort: <b> {{ R_word_1.1 }} </b></p> {{ else }} {{ endif}}
 {{ else }}
 {{ endif }}
 
-{{ if player.Idea3 != '' and player.Idea4 != '' }}    
+{{ if player.pair2 != 'empty' }}    
 {{ formfield 'Idea3' }}
 +
 {{ formfield 'Idea4' }}
-<p>Dieses Hinweispaar wurde von einem Mitspieler als <b> {{ Rating_2.0 }} </b> bewertet. </p>
-<p>Er/Sie schlägt vor, das <b>{{ Replace_2.0 }}</b> Wort mit dem Wort <b> {{ R_word_2.0 }} </b> zu ersetzen.</p>
-<p>Dieses Hinweispaar wurde von einem Mitspieler als <b> {{ Rating_2.1 }} </b> bewertet. </p>
-<p>Er/Sie schlägt vor, das <b>{{ Replace_2.1 }}</b> Wort mit dem Wort <b> {{ R_word_2.1 }} </b> zu ersetzen.</p>
+{{ if Rating_2.0 != 'empty' }} <p> Bewertung eines Mitspielers: <b> {{ Rating_2.0 }} </b> </p> {{ else }} {{ endif}}
+{{ if Replace_2.0 != '' and R_word_2.0 != '' }} <p> Ersatzvorschlag für das <b>{{ Replace_2.0 }}</b> Wort: <b> {{ R_word_2.0 }} </b></p> {{ else }} {{ endif}}
+{{ if Rating_2.1 != 'empty' }} Bewertung eines Mitspielers: <b> {{ Rating_2.1 }} </b> </p> {{ else }} {{ endif}}
+{{ if Replace_2.1 != '' and R_word_2.1 != '' }} <p> Ersatzvorschlag für das <b>{{ Replace_2.1 }}</b> Wort: <b> {{ R_word_2.1 }} </b></p> {{ else }} {{ endif}}
 {{ else }}
 {{ endif }}
-{{ if player.Idea5 != '' and player.Idea6 != '' }}    
+{{ if player.pair3 != 'empty' }}    
 {{ formfield 'Idea5' }}
 +
 {{ formfield 'Idea6' }}
-<p>Dieses Hinweispaar wurde von einem Mitspieler als <b> {{ Rating_3.0 }} </b> bewertet. </p>
-<p>Er/Sie schlägt vor, das <b>{{ Replace_3.0 }}</b> Wort mit dem Wort <b> {{ R_word_3.0 }}  </b> zu ersetzen.</p>7
-<p>Dieses Hinweispaar wurde von einem Mitspieler als <b> {{ Rating_3.1 }} </b> bewertet. </p>
-<p>Er/Sie schlägt vor, das <b>{{ Replace_3.1 }}</b> Wort mit dem Wort <b> {{ R_word_3.1 }}  </b> zu ersetzen.</p>
+{{ if Rating_3.0 != 'empty' }} <p> Bewertung eines Mitspielers: <b> {{ Rating_3.0 }} </b> </p> {{ else }} {{ endif}}
+<p> Ersatzvorschlag für das <b>{{ Replace_3.0 }}</b> Wort: <b> {{ R_word_3.0 }} </b></p>
+{{ if Rating_3.1 != 'empty' }} Bewertung eines Mitspielers: <b> {{ Rating_3.1 }} </b> </p> {{ else }} {{ endif}}
+<p> Ersatzvorschlag für das <b>{{ Replace_3.1 }}</b> Wort: <b> {{ R_word_3.1 }} </b></p>
 {{ else }}
 {{ endif }}
-{{ if player.Idea7 != '' and player.Idea8 != '' }}    
+{{ if player.pair4 != 'empty' }}   
 {{ formfield 'Idea7' }}
 +
 {{ formfield 'Idea8' }}
-<p>Dieses Hinweispaar wurde von einem Mitspieler als <b> {{ Rating_4.0 }} </b> bewertet. </p>
-<p>Er/Sie schlägt vor, das <b>{{ Replace_4.0 }}</b> Wort mit dem Wort <b> {{ R_word_4.0 }}  </b> zu ersetzen.</p>
-<p>Dieses Hinweispaar wurde von einem Mitspieler als <b> {{ Rating_4.1 }} </b> bewertet. </p>
-<p>Er/Sie schlägt vor, das <b>{{ Replace_4.1 }}</b> Wort mit dem Wort <b> {{ R_word_4.1 }}  </b> zu ersetzen.</p>
+{{ if Rating_4.0 != 'empty' }} <p> Bewertung eines Mitspielers: <b> {{ Rating_4.0 }} </b> </p> {{ else }} {{ endif}}
+{{ if Replace_4.0 != '' and R_word_4.0 != '' }} <p> Ersatzvorschlag für das <b>{{ Replace_4.0 }}</b> Wort: <b> {{ R_word_4.0 }} </b></p> {{ else }} {{ endif}}
+{{ if Rating_4.1 != 'empty' }} Bewertung eines Mitspielers: <b> {{ Rating_4.1 }} </b> </p> {{ else }} {{ endif}}
+{{ if Replace_4.1 != '' and R_word_4.1 != '' }} <p> Ersatzvorschlag für das <b>{{ Replace_4.1 }}</b> Wort: <b> {{ R_word_4.1 }} </b></p> {{ else }} {{ endif}}
 {{ else }}
 {{ endif }}
-{{ if player.Idea9 != '' and player.Idea10 != '' }}    
+{{ if player.pair5 != 'empty' }}   
 {{ formfield 'Idea9' }}
 +
 {{ formfield 'Idea10' }}
-<p>Dieses Hinweispaar wurde von einem Mitspieler als <b> {{ Rating_5.0 }} </b> bewertet. </p>
-<p>Er/Sie schlägt vor, das <b>{{ Replace_5.0 }}</b> Wort mit dem Wort <b> {{ R_word_5.0 }}  </b> zu ersetzen.</p>
-<p>Dieses Hinweispaar wurde von einem Mitspieler als <b> {{ Rating_5.1 }} </b> bewertet. </p>
-<p>Er/Sie schlägt vor, das <b>{{ Replace_5.1 }}</b> Wort mit dem Wort <b> {{ R_word_5.1 }}  </b> zu ersetzen.</p>
+{{ if Rating_5.0 != 'empty' }} <p> Bewertung eines Mitspielers: <b> {{ Rating_5.0 }} </b> </p> {{ else }} {{ endif}}
+{{ if Replace_5.0 != '' and R_word_5.0 != '' }} <p> Ersatzvorschlag für das <b>{{ Replace_5.0 }}</b> Wort: <b> {{ R_word_5.0 }} </b></p> {{ else }} {{ endif}}
+{{ if Rating_5.1 != 'empty' }} Bewertung eines Mitspielers: <b> {{ Rating_5.1 }} </b> </p> {{ else }} {{ endif}}
+{{ if Replace_5.1 != '' and R_word_5.1 != '' }} <p> Ersatzvorschlag für das <b>{{ Replace_5.1 }}</b> Wort: <b> {{ R_word_5.1 }} </b></p> {{ else }} {{ endif}}
 {{ else }}
 {{ endif }}
-{{ if player.Idea11 != '' and player.Idea12 != '' }}    
+{{ if player.pair6 != 'empty' }}
 {{ formfield 'Idea11' }}
 +
 {{ formfield 'Idea12' }}
-<p>Dieses Hinweispaar wurde von einem Mitspieler als <b> {{ Rating_6.0 }} </b> bewertet. </p>
-<p>Er/Sie schlägt vor, das <b>{{ Replace_6.0 }}</b> Wort mit dem Wort <b> {{ R_word_6.0 }}  </b> zu ersetzen.</p>
-<p>Dieses Hinweispaar wurde von einem Mitspieler als <b> {{ Rating_6.1 }} </b> bewertet. </p>
-<p>Er/Sie schlägt vor, das <b>{{ Replace_6.1 }}</b> Wort mit dem Wort <b> {{ R_word_6.1 }}  </b> zu ersetzen.</p>
+{{ if Rating_6.0 != 'empty' }} <p> Bewertung eines Mitspielers: <b> {{ Rating_6.0 }} </b> </p> {{ else }} {{ endif}}
+{{ if Replace_6.0 != '' and R_word_6.0 != '' }} <p> Ersatzvorschlag für das <b>{{ Replace_6.0 }}</b> Wort: <b> {{ R_word_6.0 }} </b></p> {{ else }} {{ endif}}
+{{ if Rating_6.1 != 'empty' }} Bewertung eines Mitspielers: <b> {{ Rating_6.1 }} </b> </p> {{ else }} {{ endif}}
+{{ if Replace_6.1 != '' and R_word_6.1 != '' }} <p> Ersatzvorschlag für das <b>{{ Replace_6.1 }}</b> Wort: <b> {{ R_word_6.1 }} </b></p> {{ else }} {{ endif}}
 {{ else }}
 {{ endif }}
 </br>

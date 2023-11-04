@@ -95,7 +95,6 @@ class Player(BasePlayer):
     pair4 = models.StringField(initial='')
     pair5 = models.StringField(initial='')
     pair6 = models.StringField(initial='')
-    pair7 = models.StringField(initial='')
     rating_before1 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=[['schwach', 'schwach'],['eher schwach', 'eher schwach'],['mittelmäßig','mittelmäßig'],['eher gut','eher gut'],['gut', 'gut'],], label='', blank=True, initial='empty')
     rating_before2 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=[['schwach', 'schwach'],['eher schwach', 'eher schwach'],['mittelmäßig','mittelmäßig'],['eher gut','eher gut'],['gut', 'gut'],], label='', blank=True, initial='empty')
     rating_before3 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=[['schwach', 'schwach'],['eher schwach', 'eher schwach'],['mittelmäßig','mittelmäßig'],['eher gut','eher gut'],['gut', 'gut'],], label='', blank=True, initial='empty')
@@ -208,29 +207,29 @@ class Clue_Page(Page):
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         feedback1_group = [p.pair_feedback1 for p in player.get_others_in_group()]
-        feedback1_group.remove('')
+        feedback1_group = list(filter(bool, feedback1_group))
         feedback2_group = [p.pair_feedback2 for p in player.get_others_in_group()]
-        feedback2_group.remove('')
+        feedback2_group = list(filter(bool, feedback2_group))
         feedback3_group = [p.pair_feedback3 for p in player.get_others_in_group()]
-        feedback3_group.remove('')
+        feedback3_group = list(filter(bool, feedback3_group))
         feedback4_group = [p.pair_feedback4 for p in player.get_others_in_group()]
-        feedback4_group.remove('')
+        feedback4_group = list(filter(bool, feedback4_group))
         feedback5_group = [p.pair_feedback5 for p in player.get_others_in_group()]
-        feedback5_group.remove('')
+        feedback5_group = list(filter(bool, feedback5_group))
         feedback6_group = [p.pair_feedback6 for p in player.get_others_in_group()]
-        feedback6_group.remove('')
+        feedback6_group = list(filter(bool, feedback6_group))
         feedback7_group = [p.pair_feedback7 for p in player.get_others_in_group()]
-        feedback7_group.remove('')
+        feedback7_group = list(filter(bool, feedback7_group))
         feedback8_group = [p.pair_feedback8 for p in player.get_others_in_group()]
-        feedback8_group.remove('')
+        feedback8_group = list(filter(bool, feedback8_group))
         feedback9_group = [p.pair_feedback9 for p in player.get_others_in_group()]
-        feedback9_group.remove('')
+        feedback9_group = list(filter(bool, feedback9_group))
         feedback10_group = [p.pair_feedback10 for p in player.get_others_in_group()]
-        feedback10_group.remove('')
+        feedback10_group = list(filter(bool, feedback10_group))
         feedback11_group = [p.pair_feedback11 for p in player.get_others_in_group()]
-        feedback11_group.remove('')
+        feedback11_group = list(filter(bool, feedback11_group))
         feedback12_group = [p.pair_feedback12 for p in player.get_others_in_group()]
-        feedback12_group.remove('')
+        feedback12_group = list(filter(bool, feedback12_group))
         rating_1 = []
         replace_1 = []
         r_word_1 = []
