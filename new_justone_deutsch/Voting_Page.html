@@ -1,0 +1,111 @@
+{{ block title }}
+    Abstimmung
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 15) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+</br>
+<p>Folgende <b>Hinweispaare</b> wurden von dir und deinen Mitspielern geschrieben.</p>
+<p>Ihr müsst euch nun für ein Hinweispaar entscheiden.</p>
+</br>
+
+{{ if number_pairs > 0 }}
+<p><b>{{ Pair1 }} </b></p>
+{{ else }} <b>Deine Mitspieler haben keine gültigen Hinweispaare geschrieben.</b> {{ endif }}
+
+{{ if number_pairs > 1 }}
+<p><b>{{ Pair2 }}</b></p>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 2 }}
+<p><b>{{ Pair3 }}</b></p>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 3 }}
+<p><b>{{ Pair4 }}</b></p>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 4 }}
+<p><b>{{ Pair5 }}</b></p>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 5 }}
+<p><b>{{ Pair6 }}</b></p>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 6 }}
+<p><b>{{ Pair7 }}</b></p>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 7 }}
+<p><b>{{ Pair8 }}</b></p>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 8 }}
+<p><b>{{ Pair9 }}</b></p>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 9 }}
+<p><b>{{ Pair10 }}</b></p>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 10 }}
+<p><b>{{ Pair11 }}</b></p>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 11 }}
+<p><b>{{ Pair12 }}</b></p>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 12 }}
+<p><b>{{ Pair13 }}</b></p>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 13 }}
+<p><b>{{ Pair14 }}</b></p>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 14 }}
+<p><b>{{ Pair15 }}</b></p>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 15 }}
+<p><b>{{ Pair16 }}</b></p>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 16 }}
+<p><b>{{ Pair17 }}</b></p>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 17 }}
+<p><b>{{ Pair18 }}</b></p>
+{{ else }} {{ endif }}
+
+</br>
+<button class= "otree-btn btn btn-info">Weiter</button>
+</br>
+</br>
+<details>
+    <summary> Zusammenfassung der Regeln </summary>
+    <ul>    
+        <li> <b><u>Ziel:</u></b> Einer der Spieler – <i>der Ratende</i> – muss ein Geheimwort anhand von einem Hinweispaar erraten.</li>
+        <li> Wenn zwei oder mehr Gruppen identische Hinweispaare schreiben, werden alle identischen Hinweispaare entfernt, bevor <i>der Ratende</i> sie sieht</li>
+        <li> <b>Ungültige Hinweispaare</b> enthalten Hinweise, die aus derselben Wortfamilie wie das Geheimwort stammen, nur eine Übersetzung des Geheimworts oder erfunden sind.</li>
+    </ul>  
+</details>
+
+{{ endblock }}
