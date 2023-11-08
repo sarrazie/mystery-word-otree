@@ -1063,7 +1063,7 @@ def discussion12_error_message(player, value):
         return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
 
 class Voting_Page(Page):
-    timeout_seconds = 90
+    timeout_seconds = 120
     def is_displayed(player):
         return player.role() == 'Hinweisgeber'
     form_model = 'player'
