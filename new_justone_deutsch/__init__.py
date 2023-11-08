@@ -18,7 +18,6 @@ class Subsession(BaseSubsession):
 
 class Group(BaseGroup):
     payoff = models.IntegerField(initial=1000)
-    vote = models.IntegerField()
     
 class Player(BasePlayer): 
     def role(player):
@@ -151,7 +150,7 @@ class Player(BasePlayer):
     pair_feedback10 = models.StringField(label= '', initial='', blank=True)
     pair_feedback11 = models.StringField(label= '', initial='', blank=True)
     pair_feedback12 = models.StringField(label= '', initial='', blank=True)
-    vote = models.IntegerField()
+    vote = models.StringField()
     pairsafter = models.StringField(label= '', initial='', blank=True)
 
 def creating_session(subsession: Subsession):
@@ -1062,60 +1061,13 @@ def discussion11_error_message(player, value):
 def discussion12_error_message(player, value):
     if wordlength(player, value) == True:
         return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
-    
-def generate_numbers(start,end,step):
-    return list(range(start,end+1,step))
 
 class Voting_Page(Page):
-    timeout_seconds = 10000
+    timeout_seconds = 90
     def is_displayed(player):
-        group = player.group
-        vote = group.field_maybe_none('vote')
-        return vote is None and player.role() == 'Hinweisgeber'
-    @staticmethod
-    def js_vars(player):
-        return dict(my_id=player.id_in_group)
-    @staticmethod
-    def live_method(player, data):        
-        group = player.group        
-        if player.role() == 'Hinweisgeber':
-            players = group.get_players()
-        pairs = [player.pair1after] + [player.pair1after for player in player.get_others_in_group()] + [player.pair2after] + [player.pair2after for player in player.get_others_in_group()] + [player.pair3after] + [player.pair3after for player in player.get_others_in_group()] + [player.pair4after] + [player.pair4after for player in player.get_others_in_group()] + [player.pair5after] + [player.pair5after for player in player.get_others_in_group()] + [player.pair6after] + [player.pair6after for player in player.get_others_in_group()]
-        while 'empty' in pairs:
-            pairs.remove('empty')
-        while '' in pairs:
-            pairs.remove('')
-        start_value = 1
-        end_value = len(pairs)
-        step_size = 1
-        numbers = generate_numbers(start_value,end_value,step_size)
-        if 'vote' in data:
-            try:
-                vote = int(data['vote'])
-            except Exception:
-                print('Invalid message received', data)
-                return
-            if not vote in numbers:
-                print('Invalid message received', data)
-                return
-            player.vote = vote
-        tallies = {vote: 0 for vote in numbers}
-        votes = []
-        for p in players:
-            vote=p.field_maybe_none('vote')
-            if vote is not None:
-                tallies[vote] += 1
-                if tallies[vote] >= 2:
-                    group.vote = vote
-                    return {0: dict(finished=True)}
-            votes.append([p.id_in_group, vote])
-        return {0: dict(votes=votes, tallies=tallies)}
-  
-    def error_message(player, values):
-        group = player.group
-        if group.field_maybe_none('vote') is None:
-            return 'Ihr müsst eine Auswahl treffen!'
-        
+        return player.role() == 'Hinweisgeber'
+    form_model = 'player'
+    form_fields = ['vote']
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         mystery_word = mystery_word.lower()
@@ -1127,10 +1079,6 @@ class Voting_Page(Page):
         delimiter = ', '
         player.pairsafter = delimiter.join(pairs)
         number_pairs = len(pairs)
-        start_value = 1
-        end_value = number_pairs
-        step_size = 1
-        choices = generate_numbers(start_value,end_value,step_size)
         Pair1 = ''
         Pair2 = ''
         Pair3 = ''
@@ -1185,8 +1133,8 @@ class Voting_Page(Page):
             Pair17 = pairs[16]
         if number_pairs > 17:
             Pair18 = pairs[17]
-        return dict(mystery_word = mystery_word, number_pairs = number_pairs, Pair1 = Pair1, Pair2 = Pair2, Pair3 = Pair3, Pair4 = Pair4, Pair5 = Pair5, Pair6 = Pair6, Pair7 = Pair7, Pair8 = Pair8, Pair9 = Pair9, Pair10 = Pair10, Pair11 = Pair11, Pair12 = Pair12, Pair13 = Pair13, Pair14 = Pair14, Pair15 = Pair15, Pair16 = Pair16, Pair17 = Pair17, Pair18 = Pair18, pairs = pairs, choices = choices)
-    
+        return dict(mystery_word = mystery_word, number_pairs = number_pairs, Pair1 = Pair1, Pair2 = Pair2, Pair3 = Pair3, Pair4 = Pair4, Pair5 = Pair5, Pair6 = Pair6, Pair7 = Pair7, Pair8 = Pair8, Pair9 = Pair9, Pair10 = Pair10, Pair11 = Pair11, Pair12 = Pair12, Pair13 = Pair13, Pair14 = Pair14, Pair15 = Pair15, Pair16 = Pair16, Pair17 = Pair17, Pair18 = Pair18, pairs = pairs)
+
 class CluegiverWaitPage(WaitPage):
     title_text = "Vielen Dank für euer Hinweipaar!"
     body_text = "Euer Hinweispaar wird nun dem Ratenden gezeigt."
@@ -1223,5 +1171,3 @@ class FinalPage(Page):
         return player.round_number == C.NUM_ROUNDS
 
 page_sequence = [GroupWaitPage, Intro, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, GuesserWaitPage, Guess_Page, CluegiverWaitPage, ResultsWaitPage, Results, Score, TestQuestions, FredaQuestions, DAT, FinalPage]
-
-# %%

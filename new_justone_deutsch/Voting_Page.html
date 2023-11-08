@@ -5,75 +5,31 @@
 
 <style>
     .otree-timer {
-        display: none;
+        display: yes;
     }
 </style>
 <p>Folgende <b>Hinweispaare</b> wurden von dir und deinen Mitspielern geschrieben.</p>
-<p>Ihr müsst euch nun für ein Hinweispaar entscheiden. Wenn eine Mehrheit (2 gegen 1) für ein Hinweispaar entsteht, wird dieses sofort an den Ratenden übergeben.</p>
-{{ for pair in pairs }}
-    <p><b> {{ pair }} </b></p>
-{{ endfor }}
+<p>Ihr habt nun maximal eine Minute Zeit, um euch für ein Hinweispaar zu entscheiden. Wenn eine Mehrheit (mindestens 2 gegen 1) für ein Hinweispaar entsteht, wird dieses an den Ratenden übergeben.</p>
+<p>Über den Chat könnt ihr eure Wahl koordinieren.</p>
 <table class="table table-striped">
     <tr>
         <th>Auswahl</th>
         <th>Meine Stimme</th>
-        <th>Stimmabgaben</th>
     </tr>
-    {{ for choice in choices }}    
+    {{ for pair in pairs }}    
     <tr>
-        <th> {{ choice }} </th>       
+        <th> {{ pair }} </th>       
         <td>
-            <input type="radio" name="my-vote" value="{{ choice }}" id="radio-{{ choice }}" onclick="vote(this)">
-        </td>
-        <td>
-            <ul id="votes-for-{{ choice }}" class="clear-on-redraw"></ul>
+            <input type="radio" name="vote" value="{{ pair }}" id="radio-{{ pair }}" />
         </td>
     </tr>
     {{ endfor }}
 </table>
-<h4>Noch unentschiedene Spieler</h4>
-<ul id="undecided" class="clear-on-redraw"></ul>
 
 <h4>Chat</h4>
 {{ chat }}
 
 <script>
-    let redrawableNodes = document.getElementsByClassName('clear-on-redraw');
-
-    function vote(btn) {
-        liveSend({vote: parseInt(btn.value)});
-    }
-
-    function liveRecv(data) {
-        if ('finished' in data) {
-            document.getElementById('form').submit();
-        }
-
-        if ('votes' in data) {
-            for (let ele of redrawableNodes) {
-                ele.innerHTML = '';
-            }
-            for (let [id_in_group, vote] of data.votes) {
-                let playerName = `Participant ${id_in_group}`;
-                let isMe = id_in_group === js_vars.my_id;
-                let isNull = vote === null;
-                if (isMe) {
-                    playerName += ' (me)';
-                    if (!isNull) {
-                        document.getElementById(`radio-${vote}`).checked = true;
-                    }
-                }
-                let bulletListId = isNull ? 'undecided' : `votes-for-${vote}`;
-                let bulletList = document.getElementById(bulletListId);
-                bulletList.innerHTML += `<li>${playerName}</li>`;
-            }
-        }
-    }
-
-    document.addEventListener("DOMContentLoaded", function (event) {
-        liveSend({});
-    });
-
     document.addEventListener("DOMContentLoaded", function (event) {
         $('.otree-timer__time-left').on('update.countdown', function (event) {
             if (event.offset.totalSeconds === 15) {
@@ -82,6 +38,9 @@
         });
     });
 </script>
+</br>
+<button class= "otree-btn btn btn-info">Weiter</button>
+</br>
 </br>
 <details>
     <summary> Zusammenfassung der Regeln </summary>
