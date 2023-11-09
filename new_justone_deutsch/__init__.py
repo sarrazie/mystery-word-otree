@@ -151,6 +151,8 @@ class Player(BasePlayer):
     pair_feedback11 = models.StringField(label= '', initial='', blank=True)
     pair_feedback12 = models.StringField(label= '', initial='', blank=True)
     vote = models.StringField()
+    vote_group = models.StringField()
+    corrected_votes = models.StringField()
     pairsafter = models.StringField(label= '', initial='', blank=True)
 
 def creating_session(subsession: Subsession):
@@ -452,80 +454,69 @@ class Guess_Page(Page):
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         mystery_word = mystery_word.lower()
-        clues_group = [p.clues for p in player.get_others_in_group()]
-        special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
-        clues_group[0] = clues_group[0].translate(special_char_map)
-        clues_group[1] = clues_group[1].translate(special_char_map)
-        clues_group[2] = clues_group[2].translate(special_char_map)
-        if (clues_group[0] in clues_group[1] or clues_group[1] in clues_group[0]) and (clues_group[0] in clues_group[2] or clues_group[2] in clues_group[0]) and (clues_group[1] in clues_group[2] or clues_group[2] in clues_group[1]):
-            clues_group[0] = 'Identischer Hinweis'
-            clues_group[1] = 'Identischer Hinweis'
-            clues_group[2] = 'Identischer Hinweis'
-        if clues_group[0] in clues_group[1] or clues_group[1] in clues_group[0]:
-            clues_group[0] = 'Identischer Hinweis'
-            clues_group[1] = 'Identischer Hinweis'
-        if clues_group[0] in clues_group[2] or  clues_group[2] in clues_group[0]:
-            clues_group[0] = 'Identischer Hinweis'
-            clues_group[2] = 'Identischer Hinweis'
-        if clues_group[1] in clues_group[2] or clues_group[2] in clues_group[1]:
-            clues_group[1] = 'Identischer Hinweis'
-            clues_group[2] = 'Identischer Hinweis'
-        if ' ' in clues_group[0] and clues_group[0] != 'Identischer Hinweis' and clues_group[0] != 'Kein Hinweis gegeben':
-            more = clues_group[0].split() 
-            if len(more)>1:
-                clues_group[0] = 'Ungültiger Hinweis'
-        if ' ' in clues_group[1] and clues_group[1] != 'Identischer Hinweis' and clues_group[1] != 'Kein Hinweis gegeben':
-            more = clues_group[1].split() 
-            if len(more)>1:
-                clues_group[1] = 'Ungültiger Hinweis'
-        if ' ' in clues_group[2] and clues_group[2] != 'Identischer Hinweis' and clues_group[2] != 'Kein Hinweis gegeben':
-            more = clues_group[2].split() 
-            if len(more)>1:
-                clues_group[2] = 'Ungültiger Hinweis'
-        import re
-        if re.search("[^a-zA-Z0-9s]", clues_group[0]) and clues_group[0] != 'Identischer Hinweis' and clues_group[0] != 'Kein Hinweis gegeben':
-            clues_group[0] = 'Ungültiger Hinweis'
-        if re.search("[^a-zA-Z0-9s]", clues_group[1]) and clues_group[1] != 'Identischer Hinweis' and clues_group[1] != 'Kein Hinweis gegeben':
-            clues_group[1] = 'Ungültiger Hinweis'
-        if re.search("[^a-zA-Z0-9s]", clues_group[2]) and clues_group[2] != 'Identischer Hinweis' and clues_group[2] != 'Kein Hinweis gegeben':
-            clues_group[2] = 'Ungültiger Hinweis'
-        if mystery_word in clues_group[0] or clues_group[0] in mystery_word:
-            clues_group[0] = 'Ungültiger Hinweis' 
-        if mystery_word in clues_group[1] or clues_group[1] in mystery_word:
-            clues_group[1] = 'Ungültiger Hinweis' 
-        if mystery_word in clues_group[2] or clues_group[2] in mystery_word:
-            clues_group[2] = 'Ungültiger Hinweis'
-        def num_there(s):
-            return any(i.isdigit() for i in s)
-        import translators as ts
-        if num_there(clues_group[0]) == False and clues_group[0] != 'Identischer Hinweis' and clues_group[0] != 'Kein Hinweis gegeben':
-            clue_trans = ts.translate_text(query_text=clues_group[0], translator='google', from_language='auto', to_language='de')
-            clue_trans = clue_trans.lower()
-            if mystery_word in clue_trans or clue_trans in mystery_word:
-                clues_group[0] = 'Ungültiger Hinweis'
-        if num_there(clues_group[1]) == False and clues_group[1] != 'Identischer Hinweis' and clues_group[1] != 'Kein Hinweis gegeben':
-            clue_trans = ts.translate_text(query_text=clues_group[1], translator='google', from_language='auto', to_language='de')
-            clue_trans = clue_trans.lower()
-            if mystery_word in clue_trans or clue_trans in mystery_word:
-                clues_group[1] = 'Ungültiger Hinweis'
-        if num_there(clues_group[2]) == False and clues_group[2] != 'Identischer Hinweis' and clues_group[2] != 'Kein Hinweis gegeben':
-            clue_trans = ts.translate_text(query_text=clues_group[2], translator='google', from_language='auto', to_language='de')
-            clue_trans = clue_trans.lower()
-            if mystery_word in clue_trans or clue_trans in mystery_word:
-                clues_group[2] = 'Ungültiger Hinweis'
+        votes = [p.vote for p in player.get_others_in_group()]
+        while '' in votes:
+            votes.remove('')
+        votes = [vote.replace(' + ', ' ') for vote in votes]   
+        if len(votes) > 0:
+            for i in range(len(votes)):
+                words = votes[i].split()
+                if len(words) >= 3:  
+                    votes[i] = 'false false'
+        words = [word for vote in votes for word in vote.split()]
+        import translators as ts 
+        import re            
+        def has_numbers(s):
+            return bool(re.search(r'\d',s))
         with open('C:/Users/sarrazie/Desktop/otree/testproject/justone_deutsch/wordlist-german.txt', 'r') as file:
             text = file.read()
             wordlist= text.split()
-        if clues_group[0] != 'Identischer Hinweis' and clues_group[0] != 'Kein Hinweis gegeben':
-            if clues_group[0] not in wordlist:
-                clues_group[0] = 'Ungültiger Hinweis'
-        if clues_group[1] != 'Identischer Hinweis' and clues_group[1] != 'Kein Hinweis gegeben':
-            if clues_group[1] not in wordlist:
-                clues_group[1] = 'Ungültiger Hinweis'
-        if clues_group[2] != 'Identischer Hinweis' and clues_group[2] != 'Kein Hinweis gegeben':
-            if clues_group[2] not in wordlist:
-                clues_group[2] = 'Ungültiger Hinweis'
-        return dict(clues = clues_group)
+        if len(words) > 0:
+            for i in range(len(words)): 
+                special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
+                words[i] = words[i].translate(special_char_map) 
+                words[i] = words[i].lower()
+                if re.search("[^a-zA-Z0-9s]", words[i]):
+                    words[i] = 'false' 
+                if has_numbers(words[i]) == False:
+                    word_trans = ts.translate_text(query_text=words[i], translator='google', from_language='auto', to_language='de')
+                    word_trans = word_trans.lower()
+                    if mystery_word in word_trans or word_trans in mystery_word:  
+                        words[i] = 'false'
+                if words[i] in mystery_word or mystery_word in words[i]:
+                    words[i] = 'false'
+                if words[i] not in wordlist:
+                    words[i] = 'false'
+        corrected_votes = []
+        for i in range(0, len(words), 2):
+            corrected_votes.append(' + '.join(words[i:i+2]))
+        player.corrected_votes = str(corrected_votes)
+        import random
+        valid_votes = [v for v in corrected_votes if 'false' not in v]
+        duplicates = [v for v in set(valid_votes) if valid_votes.count(v) >= 2]
+        if len(duplicates) > 0:
+            vote_group = random.choice(duplicates)
+        else:
+            if len(valid_votes) > 0:
+                vote_group = random.choice(valid_votes)
+            else:
+                vote_group = 'Kein gültiges Hinweispaar'
+        player.vote_group = vote_group
+        return dict(mystery_word = mystery_word, votes = corrected_votes, group_vote = vote_group)
+
+        #if (clues_group[0] in clues_group[1] or clues_group[1] in clues_group[0]) and (clues_group[0] in clues_group[2] or clues_group[2] in clues_group[0]) and (clues_group[1] in clues_group[2] or clues_group[2] in clues_group[1]):
+            #clues_group[0] = 'Identischer Hinweis'
+            #clues_group[1] = 'Identischer Hinweis'
+            #clues_group[2] = 'Identischer Hinweis'
+        #if clues_group[0] in clues_group[1] or clues_group[1] in clues_group[0]:
+            #clues_group[0] = 'Identischer Hinweis'
+            #clues_group[1] = 'Identischer Hinweis'
+        #if clues_group[0] in clues_group[2] or  clues_group[2] in clues_group[0]:
+            #clues_group[0] = 'Identischer Hinweis'
+            #clues_group[2] = 'Identischer Hinweis'
+       # if clues_group[1] in clues_group[2] or clues_group[2] in clues_group[1]:
+            #clues_group[1] = 'Identischer Hinweis'
+           # clues_group[2] = 'Identischer Hinweis'
     form_model = 'player'
     form_fields = ['guess'] 
     def before_next_page(player, timeout_happened):
@@ -1140,6 +1131,7 @@ class CluegiverWaitPage(WaitPage):
     body_text = "Euer Hinweispaar wird nun dem Ratenden gezeigt."
     def is_displayed(player):
         return player.role() == 'Hinweisgeber'
+    wait_for_all_groups = True
 
 class Clue_WaitPage(WaitPage):
     title_text = "Vielen Dank für dein Feedback!"
@@ -1170,4 +1162,4 @@ class FinalPage(Page):
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
 
-page_sequence = [GroupWaitPage, Intro, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, GuesserWaitPage, Guess_Page, CluegiverWaitPage, ResultsWaitPage, Results, Score, TestQuestions, FredaQuestions, DAT, FinalPage]
+page_sequence = [GroupWaitPage, Intro, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, GuesserWaitPage,  CluegiverWaitPage, Guess_Page, ResultsWaitPage, Results, Score, TestQuestions, FredaQuestions, DAT, FinalPage]
