@@ -150,8 +150,8 @@ class Player(BasePlayer):
     pair_feedback10 = models.StringField(label= '', initial='', blank=True)
     pair_feedback11 = models.StringField(label= '', initial='', blank=True)
     pair_feedback12 = models.StringField(label= '', initial='', blank=True)
-    vote = models.StringField()
-    vote_group = models.StringField()
+    vote = models.StringField(initial='')
+    vote_group = models.StringField(initial='')
     corrected_votes = models.StringField()
     pairsafter = models.StringField(label= '', initial='', blank=True)
 
@@ -502,21 +502,13 @@ class Guess_Page(Page):
             else:
                 vote_group = 'Kein gültiges Hinweispaar'
         player.vote_group = vote_group
-        return dict(mystery_word = mystery_word, votes = corrected_votes, group_vote = vote_group)
-
-        #if (clues_group[0] in clues_group[1] or clues_group[1] in clues_group[0]) and (clues_group[0] in clues_group[2] or clues_group[2] in clues_group[0]) and (clues_group[1] in clues_group[2] or clues_group[2] in clues_group[1]):
-            #clues_group[0] = 'Identischer Hinweis'
-            #clues_group[1] = 'Identischer Hinweis'
-            #clues_group[2] = 'Identischer Hinweis'
-        #if clues_group[0] in clues_group[1] or clues_group[1] in clues_group[0]:
-            #clues_group[0] = 'Identischer Hinweis'
-            #clues_group[1] = 'Identischer Hinweis'
-        #if clues_group[0] in clues_group[2] or  clues_group[2] in clues_group[0]:
-            #clues_group[0] = 'Identischer Hinweis'
-            #clues_group[2] = 'Identischer Hinweis'
-       # if clues_group[1] in clues_group[2] or clues_group[2] in clues_group[1]:
-            #clues_group[1] = 'Identischer Hinweis'
-           # clues_group[2] = 'Identischer Hinweis'
+        vote_other_groups = [player.vote_group for player in player.get_others_in_subsession()]
+        while '' in vote_other_groups:
+            vote_other_groups.remove('')
+        if vote_group != 'Kein gültiges Hinweispaar':
+            if vote_group in vote_other_groups or vote_group in vote_other_groups:
+                vote_group = 'Identisches Hinweispaar'
+        return dict(mystery_word = mystery_word, votes = corrected_votes, vote_group = vote_group, vote_other_groups = vote_other_groups)   
     form_model = 'player'
     form_fields = ['guess'] 
     def before_next_page(player, timeout_happened):
@@ -532,129 +524,50 @@ class Results(Page):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         mystery_word = mystery_word.lower()
         if player.role() == 'Hinweisgeber':
-            own_clue = player.clues
-            clues = [p.clues for p in player.get_others_in_group()]
+            vote_group = [p.vote_group for p in player.get_others_in_group()]
+            while '' in vote_group:
+                vote_group.remove('')
+            vote_group = vote_group[0]
             guess = [p.guess for p in player.get_others_in_group()]
-            while '' in clues:
-                clues.remove('')
             while '' in guess:
                 guess.remove('')
             guess = guess[0]
-            special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
-            clues[0] = clues[0].translate(special_char_map)
-            clues[1] = clues[1].translate(special_char_map)
-            guess = guess.translate(special_char_map)
-            own_clue = own_clue.translate(special_char_map)
-            player.missing = False
             player.guess_missing = False
             player.identical = False
             player.invalid = False
+            player.missing = False
             identical = ''
             invalid = ''
-            missing = ''
             guess_missing = ''
-            if own_clue == 'Kein Hinweis gegeben':
+            missing = ''
+            if vote_group == 'Kein gültiges Hinweispaar':
+                player.invalid = True
+                invalid = 'Achtung! Euer Hinweispaar war ungültig.'
+            if vote_group == 'Identisches Hinweispaar':
+                player.identical = True
+                identical = 'Achtung! Euer Hinweispaar war identisch mit dem Hinweispaar einer anderen Gruppe.'
+            pairs = [player.pair1after] + [player.pair2after] + [player.pair3after] + [player.pair4after] + [player.pair5after] + [player.pair6after]
+            for i in range(len(pairs)):
+                if pairs[i] == 'empty':
+                    pairs[i] = ''
+            while '' in pairs:
+                pairs.remove('')
+            player.quantity = len(pairs)
+            if player.quantity == 0:
                 player.missing = True
-                missing = 'Achtung! Du hast keinen Hinweis gegeben.'
-            else:
-                if own_clue in clues[0] or clues[0] in own_clue or own_clue in clues[1] or clues[1] in own_clue:
-                    player.identical = True
-                    identical = 'Achtung! Du hast einen identischen Hinweis gegeben.'
-                if own_clue in mystery_word or mystery_word in own_clue:
-                    player.invalid = True
-                    invalid = 'Achtung! Dein Hinweis war ungültig (gleiche Wortfamilie wie das geheimnisvolle Wort).'
-                if ' ' in own_clue and player.invalid == False:
-                    more = own_clue.split() 
-                    if len(more)>1:
-                        player.invalid = True
-                        invalid = 'Achtung! Dein Hinweis war ungültig (mehr als ein Wort).'
-                import re
-                if re.search("[^a-zA-Z0-9s]", own_clue) and player.invalid == False:
-                    player.invalid = True
-                    invalid = 'Achtung! Dein Hinweis war ungültig (Verwendung von Sonderzeichen).'
-                def num_there(s):
-                    return any(i.isdigit() for i in s)
-                import translators as ts
-                if num_there(own_clue) == False and player.invalid == False:
-                    clue_trans = ts.translate_text(query_text=own_clue, translator='google', from_language='auto', to_language='de')
-                    clue_trans = clue_trans.lower()
-                    if mystery_word in clue_trans or clue_trans in mystery_word:
-                        player.invalid = True
-                        invalid = 'Achtung! Dein Hinweis war ungültig (Übersetzung des geheimen Wortes).'
-                with open('C:/Users/sarrazie/Desktop/otree/testproject/justone_deutsch/wordlist-german.txt', 'r') as file:
-                    text = file.read()
-                    wordlist= text.split()
-                    if own_clue not in wordlist and player.invalid == False:
-                        player.invalid = True
-                        invalid = 'Achtung! Dein Hinweis war ungültig (Rechtschreibfehler oder kein echtes Wort).'
-            clues.append(own_clue)
-            player.Idea1 = player.Idea1.lower()
-            player.Idea2 = player.Idea2.lower()
-            player.Idea3 = player.Idea3.lower()
-            player.Idea4 = player.Idea4.lower()
-            player.Idea5 = player.Idea5.lower()
-            player.Idea6 = player.Idea6.lower()
-            player.Idea7 = player.Idea7.lower()
-            player.Idea8 = player.Idea8.lower()
-            player.Idea9 = player.Idea9.lower()
-            player.Idea10 = player.Idea10.lower()
-            player.Idea11 = player.Idea11.lower()
-            player.Idea12 = player.Idea12.lower()
-            own_ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12] 
-            while '' in own_ideas:
-                own_ideas.remove('')
-            if len(own_ideas) > 0:
-                for i in range(len(own_ideas)):
-                    special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
-                    own_ideas[i] = own_ideas[i].translate(special_char_map)
-            if len(own_ideas) > 0:
-                for i in range(len(own_ideas)):  
-                    if ' ' in own_ideas[i]:
-                        more = own_ideas[i].split() 
-                        if len(more)>1: 
-                            own_ideas[i] = 'false'
-            if len(own_ideas) > 0:
-                for i in range(len(own_ideas)):
-                    if own_ideas[i] in mystery_word or mystery_word in own_ideas[i]:
-                        own_ideas[i] = 'false'
-            with open('C:/Users/sarrazie/Desktop/otree/testproject/justone_deutsch/wordlist-german.txt', 'r') as file:
-                text = file.read()
-                wordlist= text.split()
-                if len(own_ideas) > 0:
-                    for i in range(len(own_ideas)):
-                        if own_ideas[i] not in wordlist:
-                            own_ideas[i] = 'false'
-            import re
-            if len(own_ideas) > 0:
-                for i in range(len(own_ideas)):
-                    if re.search("[^a-zA-Z0-9s]", own_ideas[i]):
-                        own_ideas[i] = 'false'          
-            def has_numbers(s):
-                return bool(re.search(r'\d',s))
-            import translators as ts
-            if len(own_ideas) > 0:
-                for i in range(len(own_ideas)):
-                    if has_numbers(own_ideas[i]) == False:
-                        clue_trans = ts.translate_text(query_text=own_ideas[i], translator='google', from_language='auto', to_language='de')
-                        clue_trans = clue_trans.lower()
-                        if mystery_word in clue_trans or clue_trans in mystery_word:  
-                            own_ideas[i] = 'false'
-            while 'false' in own_ideas:
-                own_ideas.remove('false')
-            own_ideas = list(dict.fromkeys(own_ideas))
-            player.quantity = len(own_ideas)
+                missing = 'Achtung! Du hast kein Hinweispaar abgegeben.'
         if player.role() == 'Ratender':
-            player.missing = False
+            vote_group = player.vote_group
             player.identical = False
             player.invalid = False
             player.quantity = 0
             player.guess_missing = False
+            player.missing = False
             identical = ''
             invalid = ''
             missing = ''
             guess_missing = ''
             guess = player.guess
-            clues = [p.clues for p in player.get_others_in_group()]
             if guess == 'Kein Tipp gegeben':
                 player.guess_missing = True
                 guess_missing = 'Achtung! Du hast keinen Tipp abgegeben.'
@@ -668,7 +581,7 @@ class Results(Page):
         player.group.payoff =  player.score 
         if player.participant.treatment == 1:
             player.group.payoff = 1000
-        return dict(mystery_word = mystery_word, clues = clues, guess = guess, result = player.result, identical = identical, invalid = invalid, missing = missing, guess_missing = guess_missing, number_ideas = player.quantity)
+        return dict(mystery_word = mystery_word, vote_group = vote_group, guess = guess, result = player.result, identical = identical, invalid = invalid, missing = missing, guess_missing = guess_missing, number_ideas = player.quantity)
 
 def score(group: Group):
     subsession = group.subsession
@@ -1152,10 +1065,11 @@ class GuesserWaitPage(WaitPage):
     body_text = "Bitte warte, bis die anderen Spieler ihre Hinweise für dich abgegeben haben."
     def is_displayed(player): 
         return player.role() == 'Ratender'
+    wait_for_all_groups = True
     
 class ResultsWaitPage(WaitPage):
     title_text = "Deine Gruppe ist fertig!"
-    body_text = "Bitte warte, bis alle Gruppen ihre Hinweise und Tipps abgegeben haben."
+    body_text = "Bitte warte, bis alle Gruppen ihre Hinweispaare und Tipps abgegeben haben."
     wait_for_all_groups = True
 
 class FinalPage(Page):
