@@ -447,10 +447,10 @@ class ResultsWaitPage(WaitPage):
     body_text = "Bitte warte, bis alle Gruppen ihre Hinweise und Tipps abgegeben haben."
     wait_for_all_groups = True
 
-class Guess_Page(Page):
-    timeout_seconds = 120
+class VotingResultPage(Page):
+    timeout_seconds = 30
     def is_displayed(player):
-        return player.role() == 'Ratender'
+        return player.role() == 'Hinweisgeber'
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         mystery_word = mystery_word.lower()
@@ -494,21 +494,32 @@ class Guess_Page(Page):
         import random
         valid_votes = [v for v in corrected_votes if 'false' not in v]
         duplicates = [v for v in set(valid_votes) if valid_votes.count(v) >= 2]
-        if len(duplicates) > 0:
+        number_duplicates = len(duplicates)
+        number_valid_votes = len(valid_votes)
+        if number_duplicates > 0:
             vote_group = random.choice(duplicates)
         else:
-            if len(valid_votes) > 0:
+            if number_valid_votes> 0:
                 vote_group = random.choice(valid_votes)
             else:
                 vote_group = 'Kein gültiges Hinweispaar'
         player.vote_group = vote_group
+        return dict(mystery_word = mystery_word, vote_group = vote_group, duplicates = number_duplicates, valid_votes = number_valid_votes)
+
+class Guess_Page(Page):
+    timeout_seconds = 120
+    def is_displayed(player):
+        return player.role() == 'Ratender'
+    def vars_for_template(player):  
+        vote_group = player.vote_group
         vote_other_groups = [player.vote_group for player in player.get_others_in_subsession()]
         while '' in vote_other_groups:
             vote_other_groups.remove('')
+        vote_other_groups = str(vote_other_groups)
         if vote_group != 'Kein gültiges Hinweispaar':
-            if vote_group in vote_other_groups or vote_group in vote_other_groups:
+            if vote_group in vote_other_groups or vote_other_groups in vote_group:
                 vote_group = 'Identisches Hinweispaar'
-        return dict(mystery_word = mystery_word, votes = corrected_votes, vote_group = vote_group, vote_other_groups = vote_other_groups)   
+        return dict(vote_group = vote_group, vote_other_groups = vote_other_groups)   
     form_model = 'player'
     form_fields = ['guess'] 
     def before_next_page(player, timeout_happened):
@@ -790,7 +801,7 @@ class Generation_WaitPage(WaitPage):
         return player.role() == 'Hinweisgeber'
 
 class Discussion(Page):
-    timeout_seconds = 10000
+    timeout_seconds = 240
     def is_displayed(player):
         return player.role() == 'Hinweisgeber'
     form_model = 'player'   
@@ -1039,6 +1050,13 @@ class Voting_Page(Page):
             Pair18 = pairs[17]
         return dict(mystery_word = mystery_word, number_pairs = number_pairs, Pair1 = Pair1, Pair2 = Pair2, Pair3 = Pair3, Pair4 = Pair4, Pair5 = Pair5, Pair6 = Pair6, Pair7 = Pair7, Pair8 = Pair8, Pair9 = Pair9, Pair10 = Pair10, Pair11 = Pair11, Pair12 = Pair12, Pair13 = Pair13, Pair14 = Pair14, Pair15 = Pair15, Pair16 = Pair16, Pair17 = Pair17, Pair18 = Pair18, pairs = pairs)
 
+class VotingResultWaitPage(WaitPage):
+    title_text = "Vielen Dank für deine Abstimmung!"
+    body_text = "Bitte warte, bis alle ihre Stimmen abgegeben haben."
+    wait_for_all_players = True
+    def is_displayed(player):
+        return player.role() == 'Hinweisgeber'
+    
 class CluegiverWaitPage(WaitPage):
     title_text = "Vielen Dank für euer Hinweipaar!"
     body_text = "Euer Hinweispaar wird nun dem Ratenden gezeigt."
@@ -1076,4 +1094,4 @@ class FinalPage(Page):
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
 
-page_sequence = [GroupWaitPage, Intro, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, GuesserWaitPage,  CluegiverWaitPage, Guess_Page, ResultsWaitPage, Results, Score, TestQuestions, FredaQuestions, DAT, FinalPage]
+page_sequence = [GroupWaitPage, Intro, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, CluegiverWaitPage, Guess_Page, ResultsWaitPage, Results, Score, TestQuestions, FredaQuestions, DAT, FinalPage]
