@@ -19,10 +19,8 @@
     });
 </script>
 </br>
-<p> {{ if duplicates > 0 }} Eine Mehrheit der Gruppe konnte sich auf ein gemeinsames Hinweispaar einigen. {{ else }} Leider hat sich keine Mehrheit für ein Hinweispaar gefunden. So wurde das Hinweispaar nun per Zufall bestimmt. {{ endif }} </p>
-<p> {{ if valid_votes > 0 }} Das bestimmte Hinweispaar ist gültig. {{ else }} Das bestimmte Hinweispaar ist ungültig und wird dem Ratenden nicht angezeigt. {{ endif }} </p>
-<p> Das <b>Hinweispaar</b> Ihrer Gruppe ist: </p> 
-<p><b> {{ vote_group }} </b></p>
+<p> {{ if duplicates > 0 }} Ihre Gruppe hat <b>mehrheitlich</b> für das Hinweispaar <b> {{ vote_group }} </b> gestimmt. {{ else }} Leider hat sich <b>keine Mehrheit</b> für ein Hinweispaar gefunden. Per Zufall wurde folgendes Hinweispaar ausgewählt: <b> {{ vote_group }} </b> {{ endif }} </p>
+<p> {{ if valid_votes > 0 }} Dieses Hinweispaar ist <b>gültig</b> und wird dem Ratenden angezeigt, sofern es nicht identisch zu einem Hinweispaar einer anderen Gruppe ist. {{ else }} Dieses Hinweispaar ist <b>ungültig</b> und wird dem Ratenden nicht angezeigt. {{ endif }} </p>
 </br>
 <button class= "otree-btn btn btn-info">Weiter</button>
 </br>

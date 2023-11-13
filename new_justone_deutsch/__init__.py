@@ -448,13 +448,13 @@ class ResultsWaitPage(WaitPage):
     wait_for_all_groups = True
 
 class VotingResultPage(Page):
-    timeout_seconds = 30
+    timeout_seconds = 300
     def is_displayed(player):
         return player.role() == 'Hinweisgeber'
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         mystery_word = mystery_word.lower()
-        votes = [p.vote for p in player.get_others_in_group()]
+        votes = [player.vote] + [p.vote for p in player.get_others_in_group()]
         while '' in votes:
             votes.remove('')
         votes = [vote.replace(' + ', ' ') for vote in votes]   
@@ -496,30 +496,68 @@ class VotingResultPage(Page):
         duplicates = [v for v in set(valid_votes) if valid_votes.count(v) >= 2]
         number_duplicates = len(duplicates)
         number_valid_votes = len(valid_votes)
-        if number_duplicates > 0:
+        if len(duplicates) > 0:
             vote_group = random.choice(duplicates)
         else:
-            if number_valid_votes> 0:
-                vote_group = random.choice(valid_votes)
+            if len(valid_votes) > 0:
+                vote_group = random.choice(valid_votes) 
             else:
                 vote_group = 'Kein gültiges Hinweispaar'
         player.vote_group = vote_group
         return dict(mystery_word = mystery_word, vote_group = vote_group, duplicates = number_duplicates, valid_votes = number_valid_votes)
 
 class Guess_Page(Page):
-    timeout_seconds = 120
+    timeout_seconds = 3000
     def is_displayed(player):
         return player.role() == 'Ratender'
     def vars_for_template(player):  
-        vote_group = player.vote_group
-        vote_other_groups = [player.vote_group for player in player.get_others_in_subsession()]
+        vote_group = [p.vote_group for p in player.get_others_in_group()]
+        vote_group = vote_group[0]
+        player.vote_group = vote_group
+        vote_other_groups = []
+        for other_group in player.subsession.get_groups():
+            if other_group != player.group:
+                for other_player in other_group.get_players():
+                    vote_other_groups.append(other_player.vote_group)
+        for vote in vote_other_groups:  
+            while (vote_other_groups.count(vote) > 1):
+                vote_other_groups.remove(vote)
         while '' in vote_other_groups:
             vote_other_groups.remove('')
-        vote_other_groups = str(vote_other_groups)
-        if vote_group != 'Kein gültiges Hinweispaar':
-            if vote_group in vote_other_groups or vote_other_groups in vote_group:
+        def find_identical_words(str1, str2):
+            str1 = str1.replace('+', '')
+            str2 = str2.replace('+','')
+            words1 = set(str1.split())
+            words2 = set(str2.split())
+            identical_words = words1.intersection(words2)
+            return identical_words
+        if len(vote_other_groups) > 0:
+            vote_other_groups1 = vote_other_groups[0] 
+            identical_words = find_identical_words(vote_group, vote_other_groups1)
+            if identical_words:
+                vote_group = 'Identisches Hinweispaar'            
+        if len(vote_other_groups) > 1:
+            vote_other_groups2 = vote_other_groups[1]
+            identical_words = find_identical_words(vote_group, vote_other_groups2)
+            if identical_words:
                 vote_group = 'Identisches Hinweispaar'
-        return dict(vote_group = vote_group, vote_other_groups = vote_other_groups)   
+        if len(vote_other_groups) > 2:
+            vote_other_groups3 = vote_other_groups[2]
+            identical_words = find_identical_words(vote_group, vote_other_groups3)
+            if identical_words:
+                vote_group = 'Identisches Hinweispaar'
+        if len(vote_other_groups) > 3:
+            vote_other_groups4 = vote_other_groups[3]
+            identical_words = find_identical_words(vote_group, vote_other_groups4)
+            if identical_words:
+                vote_group = 'Identisches Hinweispaar'
+        if len(vote_other_groups) > 4:
+            vote_other_groups5 = vote_other_groups[4]
+            identical_words = find_identical_words(vote_group, vote_other_groups5)
+            if identical_words:
+                vote_group = 'Identisches Hinweispaar'
+        player.vote_group = vote_group
+        return dict(vote_group = vote_group, vote_other_groups = vote_other_groups)  
     form_model = 'player'
     form_fields = ['guess'] 
     def before_next_page(player, timeout_happened):
@@ -530,7 +568,7 @@ class Guess_Page(Page):
             return player.guess
         
 class Results(Page):
-    timeout_seconds = 45
+    timeout_seconds = 1000
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         mystery_word = mystery_word.lower()
@@ -538,25 +576,27 @@ class Results(Page):
             vote_group = [p.vote_group for p in player.get_others_in_group()]
             while '' in vote_group:
                 vote_group.remove('')
-            vote_group = vote_group[0]
+            invalid = '' 
+            identical = ''               
+            player.identical = False
+            player.invalid = False
+            if 'Identisches Hinweispaar' in vote_group:
+                player.identical = True
+                identical = 'Achtung! Euer Hinweispaar war identisch mit dem Hinweispaar einer anderen Gruppe.'
+                vote_group = 'Identisches Hinweispaar'
+            else:    
+                vote_group = vote_group[0]
+                if vote_group == 'Kein gültiges Hinweispaar':
+                    player.invalid = True
+                    invalid = 'Achtung! Euer Hinweispaar war ungültig.'
             guess = [p.guess for p in player.get_others_in_group()]
             while '' in guess:
                 guess.remove('')
             guess = guess[0]
             player.guess_missing = False
-            player.identical = False
-            player.invalid = False
             player.missing = False
-            identical = ''
-            invalid = ''
             guess_missing = ''
             missing = ''
-            if vote_group == 'Kein gültiges Hinweispaar':
-                player.invalid = True
-                invalid = 'Achtung! Euer Hinweispaar war ungültig.'
-            if vote_group == 'Identisches Hinweispaar':
-                player.identical = True
-                identical = 'Achtung! Euer Hinweispaar war identisch mit dem Hinweispaar einer anderen Gruppe.'
             pairs = [player.pair1after] + [player.pair2after] + [player.pair3after] + [player.pair4after] + [player.pair5after] + [player.pair6after]
             for i in range(len(pairs)):
                 if pairs[i] == 'empty':
@@ -1058,7 +1098,7 @@ class VotingResultWaitPage(WaitPage):
         return player.role() == 'Hinweisgeber'
     
 class CluegiverWaitPage(WaitPage):
-    title_text = "Vielen Dank für euer Hinweipaar!"
+    title_text = "Vielen Dank für euer Hinweispaar!"
     body_text = "Euer Hinweispaar wird nun dem Ratenden gezeigt."
     def is_displayed(player):
         return player.role() == 'Hinweisgeber'
@@ -1095,3 +1135,4 @@ class FinalPage(Page):
         return player.round_number == C.NUM_ROUNDS
 
 page_sequence = [GroupWaitPage, Intro, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, CluegiverWaitPage, Guess_Page, ResultsWaitPage, Results, Score, TestQuestions, FredaQuestions, DAT, FinalPage]
+# %%
