@@ -71,17 +71,17 @@ class Player(BasePlayer):
     Idea10 = models.StringField(label= '', initial='', blank=True)
     Idea11 = models.StringField(label= '', initial='', blank=True)
     Idea12 = models.StringField(label= '', initial='', blank=True)
-    word1 = models.StringField(label= '', initial='', blank=True)
-    word2 = models.StringField(label= '', initial='', blank=True)
-    word3 = models.StringField(label= '', initial='', blank=True)
-    word4 = models.StringField(label= '', initial='', blank=True)
-    word5 = models.StringField(label= '', initial='', blank=True)
-    word6 = models.StringField(label= '', initial='', blank=True)
-    word7 = models.StringField(label= '', initial='', blank=True)
-    word8 = models.StringField(label= '', initial='', blank=True)
-    word9 = models.StringField(label= '', initial='', blank=True)
-    word10 = models.StringField(label= '', initial='', blank=True)
-    gender = models.IntegerField(choices=[[1, 'Männlich'],[2, 'Weiblich'],[3, 'Diverse'],], label='Geschlecht:')
+    word1 = models.StringField(label= '', initial='', blank=False)
+    word2 = models.StringField(label= '', initial='', blank=False)
+    word3 = models.StringField(label= '', initial='', blank=False)
+    word4 = models.StringField(label= '', initial='', blank=False)
+    word5 = models.StringField(label= '', initial='', blank=False)
+    word6 = models.StringField(label= '', initial='', blank=False)
+    word7 = models.StringField(label= '', initial='', blank=False)
+    word8 = models.StringField(label= '', initial='', blank=False)
+    word9 = models.StringField(label= '', initial='', blank=False)
+    word10 = models.StringField(label= '', initial='', blank=False)
+    gender = models.IntegerField(choices=[[1, 'Männlich'],[2, 'Weiblich'],[3, 'Divers'],], label='Geschlecht:')
     age = models.IntegerField(min=18, max=100, label='Alter:')
     identical = models.BooleanField()
     invalid = models.BooleanField()
@@ -154,6 +154,7 @@ class Player(BasePlayer):
     vote_group = models.StringField(initial='')
     corrected_votes = models.StringField()
     pairsafter = models.StringField(label= '', initial='', blank=True)
+    number_pairs = models.IntegerField()
 
 def creating_session(subsession: Subsession):
     session = subsession.session
@@ -177,6 +178,11 @@ class Intro(Page):
     timeout_seconds = 150
     def is_displayed(player):
         return player.round_number == 1
+
+class Intro2(Page):
+    timeout_seconds = 150
+    def is_displayed(player):
+        return player.round_number == 1
     
 class DAT(Page):
     timeout_seconds = 360
@@ -193,6 +199,11 @@ class DAT(Page):
             return player.invalid_DAT
    
 class Instructions(Page):
+    timeout_seconds = 120
+    def is_displayed(player):
+        return player.round_number == 1
+
+class Instructions_2(Page):
     timeout_seconds = 120
     def is_displayed(player):
         return player.round_number == 1
@@ -384,51 +395,51 @@ def wordlength(player, value):
 
 def Idea1_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def Idea2_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def Idea3_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def Idea4_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def Idea5_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def Idea6_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def Idea7_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
-def Idea8_error_message(player, value): 
+def Idea8_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def Idea9_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def Idea10_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
-    
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
+
 def Idea11_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
-
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
+    
 def Idea12_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 class CluegiverWaitPage(WaitPage):
     title_text = "Vielen Dank für deinen Hinweis!"
@@ -694,17 +705,17 @@ class UnderstandPage(Page):
     form_fields = ['understand_1', 'understand_2', 'understand_3', 'understand_4', 'understand_5', 'understand_6']
     def error_message(player, values):
         if values['understand_1'] == 'false':
-            return 'Falsche Antwort bei Frage 1! Versuche es noch einmal.'
+            return 'Falsche Antwort bei Frage 1! Versuchen Sie es noch einmal.'
         if values['understand_2'] == 'false':
-            return 'Falsche Antwort bei Frage 2! Versuche es noch einmal.'
+            return 'Falsche Antwort bei Frage 2! Versuchen Sie es noch einmal.'
         if values['understand_3'] == 'false':
-            return 'Falsche Antwort bei Frage 3! Versuche es noch einmal.'
+            return 'Falsche Antwort bei Frage 3! Versuchen Sie es noch einmal.'
         if values['understand_4'] == 'false':
-            return 'Falsche Antwort bei Frage 4! Versuche es noch einmal.'
+            return 'Falsche Antwort bei Frage 4! Versuchen Sie es noch einmal.'
         if values['understand_5'] == 'false':
-            return 'Falsche Antwort bei Frage 5! Versuche es noch einmal.'
+            return 'Falsche Antwort bei Frage 5! Versuchen Sie es noch einmal.'
         if values['understand_6'] == 'false':
-            return 'Falsche Antwort bei Frage 6! Versuche es noch einmal.'
+            return 'Falsche Antwort bei Frage 6! Versuchen Sie es noch einmal.'
 
 class Generation_Page(Page):
     timeout_seconds = 180
@@ -787,61 +798,61 @@ def wordlength(player, value):
 
 def Idea1_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def Idea2_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def Idea3_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def Idea4_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def Idea5_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def Idea6_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def Idea7_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def Idea8_error_message(player, value): 
     if wordlength(player, value) == True:
-        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def Idea9_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def Idea10_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
     
 def Idea11_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def Idea12_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 class Generation_WaitPage(WaitPage):
-    title_text = "Vielen Dank für deine Hinweispaare!"
-    body_text = "Bitte warte, bis alle ihre Hinweispaare abgegeben haben."
+    title_text = "Vielen Dank für Ihre Hinweispaare!"
+    body_text = "Bitte warten Sie, bis alle ihre Hinweispaare abgegeben haben."
     wait_for_all_players = True
     def is_displayed(player):
         return player.role() == 'Hinweisgeber'
 
 class Discussion(Page):
-    timeout_seconds = 240
+    timeout_seconds = 60
     def is_displayed(player):
         return player.role() == 'Hinweisgeber'
     form_model = 'player'   
@@ -893,22 +904,88 @@ class Discussion(Page):
             Pair11 = pairs[10]
         if number_pairs > 11:
             Pair12 = pairs[11]
+        player.number_pairs = number_pairs 
         return dict(mystery_word = mystery_word, number_pairs = number_pairs, Pair1 = Pair1, Pair2 = Pair2, Pair3 = Pair3, Pair4 = Pair4, Pair5 = Pair5, Pair6 = Pair6, Pair7 = Pair7, Pair8 = Pair8, Pair9 = Pair9, Pair10 = Pair10, Pair11 = Pair11, Pair12 = Pair12)   
-
+    
     def before_next_page(player, timeout_happened):
         if timeout_happened:
-            player.discussion1 = 'empty'
-            player.discussion2 = 'empty'
-            player.discussion3 = 'empty'
-            player.discussion4 = 'empty'
-            player.discussion5 = 'empty'
-            player.discussion6 = 'empty'
-            player.discussion7 = 'empty'
-            player.discussion8 = 'empty'
-            player.discussion9 = 'empty'
-            player.discussion10 = 'empty'
-            player.discussion11 = 'empty'
-            player.discussion12 = 'empty'
+            player.discussion1 = ''
+            player.discussion2 = ''
+            player.discussion3 = ''
+            player.discussion4 = ''
+            player.discussion5 = ''
+            player.discussion6 = ''
+            player.discussion7 = ''
+            player.discussion8 = ''
+            player.discussion9 = ''
+            player.discussion10 = ''
+            player.discussion11 = ''
+            player.discussion12 = ''
+            player.rating_before1 = 'empty'
+            player.rating_before2 = 'empty'
+            player.rating_before3 = 'empty'
+            player.rating_before4 = 'empty'
+            player.rating_before5 = 'empty'
+            player.rating_before6 = 'empty'
+            player.rating_before7 = 'empty'
+            player.rating_before8 = 'empty'
+            player.rating_before9 = 'empty'
+            player.rating_before10 = 'empty'
+            player.rating_before11 = 'empty'
+            player.rating_before12 = 'empty'
+            pairs = [player.pair1 for player in player.get_others_in_group()] + [player.pair2 for player in player.get_others_in_group()] + [player.pair3 for player in player.get_others_in_group()] + [player.pair4 for player in player.get_others_in_group()] + [player.pair5 for player in player.get_others_in_group()] + [player.pair6 for player in player.get_others_in_group()] 
+            while 'empty' in pairs:
+                pairs.remove('empty')
+            while '' in pairs:
+                pairs.remove('')
+            if len(pairs) > 0:
+                feedback_1 = [player.other_pairs.split(',')[0]] + [player.rating_before1] + [player.replace_word1] + [player.discussion1]
+                feedback_1 = str(feedback_1)
+                player.pair_feedback1 = feedback_1
+            if len(pairs) > 1:
+                feedback_2 = [player.other_pairs.split(', ')[1]] + [player.rating_before2] + [player.replace_word2] + [player.discussion2]
+                feedback_2 = str(feedback_2)
+                player.pair_feedback2 = feedback_2
+            if len(pairs) > 2:
+                feedback_3 = [player.other_pairs.split(', ')[2]] + [player.rating_before3] + [player.replace_word3] + [player.discussion3]
+                feedback_3 = str(feedback_3)
+                player.pair_feedback3 = feedback_3
+            if len(pairs) > 3:
+                feedback_4 = [player.other_pairs.split(', ')[3]] + [player.rating_before4] + [player.replace_word4] + [player.discussion4]
+                feedback_4 = str(feedback_4)
+                player.pair_feedback4 = feedback_4
+            if len(pairs) > 4:
+                feedback_5 = [player.other_pairs.split(', ')[4]] + [player.rating_before5] + [player.replace_word5] + [player.discussion5]
+                feedback_5 = str(feedback_5)
+                player.pair_feedback5 = feedback_5
+            if len(pairs) > 5:
+                feedback_6 = [player.other_pairs.split(', ')[5]] + [player.rating_before6] + [player.replace_word6] + [player.discussion6]
+                feedback_6 = str(feedback_6)
+                player.pair_feedback6 = feedback_6
+            if len(pairs) > 6:
+                feedback_7 = [player.other_pairs.split(', ')[6]] + [player.rating_before7] + [player.replace_word7] + [player.discussion7]
+                feedback_7 = str(feedback_7)
+                player.pair_feedback7 = feedback_7
+            if len(pairs) > 7:
+                feedback_8 = [player.other_pairs.split(', ')[7]] + [player.rating_before8] + [player.replace_word8] + [player.discussion8]
+                feedback_8 = str(feedback_8)
+                player.pair_feedback8 = feedback_8
+            if len(pairs) > 8:
+                feedback_9 = [player.other_pairs.split(', ')[8]] + [player.rating_before9] + [player.replace_word9] + [player.discussion9]
+                feedback_9 = str(feedback_9)
+                player.pair_feedback9 = feedback_9
+            if len(pairs) > 9:
+                feedback_10 = [player.other_pairs.split(', ')[9]] + [player.rating_before10] + [player.replace_word10] + [player.discussion10]
+                feedback_10 = str(feedback_10)
+                player.pair_feedback10 = feedback_10
+            if len(pairs) > 10:
+                feedback_11 = [player.other_pairs.split(', ')[10]] + [player.rating_before11] + [player.replace_word11] + [player.discussion11]
+                feedback_11 = str(feedback_11)
+                player.pair_feedback11 = feedback_11
+            if len(pairs) > 11:
+                feedback_12 = [player.other_pairs.split(', ')[11]] + [player.rating_before12] + [player.replace_word12] + [player.discussion12]
+                feedback_12 = str(feedback_12)
+                player.pair_feedback12 = feedback_12
         else:
             pairs = [player.pair1 for player in player.get_others_in_group()] + [player.pair2 for player in player.get_others_in_group()] + [player.pair3 for player in player.get_others_in_group()] + [player.pair4 for player in player.get_others_in_group()] + [player.pair5 for player in player.get_others_in_group()] + [player.pair6 for player in player.get_others_in_group()] 
             while 'empty' in pairs:
@@ -964,6 +1041,54 @@ class Discussion(Page):
                 feedback_12 = str(feedback_12)
                 player.pair_feedback12 = feedback_12
 
+def rating_before1_error_message(player, value):
+    if value == 'empty' and player.number_pairs > 0:
+        return 'Bitte wählen Sie eine Antwort aus!'
+
+def rating_before2_error_message(player, value):
+    if value == 'empty' and player.number_pairs > 1:
+        return 'Bitte wählen Sie eine Antwort aus!'
+
+def rating_before3_error_message(player, value):
+    if value == 'empty' and player.number_pairs > 2:
+        return 'Bitte wählen Sie eine Antwort aus!'
+
+def rating_before4_error_message(player, value):
+    if value == 'empty' and player.number_pairs > 3:
+        return 'Bitte wählen Sie eine Antwort aus!'
+
+def rating_before5_error_message(player, value):
+    if value == 'empty' and player.number_pairs > 4:
+        return 'Bitte wählen Sie eine Antwort aus!'
+
+def rating_before6_error_message(player, value):
+    if value == 'empty' and player.number_pairs > 5:
+        return 'Bitte wählen Sie eine Antwort aus!'
+
+def rating_before7_error_message(player, value):
+    if value == 'empty' and player.number_pairs > 6:
+        return 'Bitte wählen Sie eine Antwort aus!'
+
+def rating_before8_error_message(player, value):
+    if value == 'empty' and player.number_pairs > 7:
+        return 'Bitte wählen Sie eine Antwort aus!'
+
+def rating_before9_error_message(player, value):
+    if value == 'empty' and player.number_pairs > 8:
+        return 'Bitte wählen Sie eine Antwort aus!'
+
+def rating_before10_error_message(player, value):
+    if value == 'empty' and player.number_pairs > 9:
+        return 'Bitte wählen Sie eine Antwort aus!'
+
+def rating_before11_error_message(player, value):
+    if value == 'empty' and player.number_pairs > 10:
+        return 'Bitte wählen Sie eine Antwort aus!'
+
+def rating_before12_error_message(player, value):
+    if value == 'empty' and player.number_pairs > 11:
+        return 'Bitte wählen Sie eine Antwort aus!'
+    
 def wordlength(player, value):
         value = value.lower()
         if len(value) > 18:
@@ -971,51 +1096,51 @@ def wordlength(player, value):
 
 def discussion1_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def discussion2_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def discussion3_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
     
 def discussion4_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def discussion5_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def discussion6_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def discussion7_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def discussion8_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def discussion9_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def discussion10_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def discussion11_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def discussion12_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 class Voting_Page(Page):
     timeout_seconds = 120
@@ -1031,9 +1156,15 @@ class Voting_Page(Page):
             pairs.remove('empty')
         while '' in pairs:
             pairs.remove('')
+        pairsafter = []
+        for item in pairs:
+            if pairs.count(item) > 1 and item not in pairsafter:
+                pairsafter.append(item)
+            elif pairs.count(item) == 1:
+                pairsafter.append(item)
         delimiter = ', '
-        player.pairsafter = delimiter.join(pairs)
-        number_pairs = len(pairs)
+        player.pairsafter = delimiter.join(pairsafter)
+        number_pairs = len(pairsafter)
         Pair1 = ''
         Pair2 = ''
         Pair3 = ''
@@ -1053,86 +1184,85 @@ class Voting_Page(Page):
         Pair17 = ''
         Pair18 = ''
         if number_pairs > 0:
-            Pair1 = pairs[0]
+            Pair1 = pairsafter[0]
         if number_pairs > 1:
-            Pair2 = pairs[1]
+            Pair2 = pairsafter[1]
         if number_pairs > 2:
-            Pair3 = pairs[2]
+            Pair3 = pairsafter[2]
         if number_pairs > 3:
-            Pair4 = pairs[3]
+            Pair4 = pairsafter[3]
         if number_pairs > 4:
-            Pair5 = pairs[4]
+            Pair5 = pairsafter[4]
         if number_pairs > 5:
-            Pair6 = pairs[5]
+            Pair6 = pairsafter[5]
         if number_pairs > 6:
-            Pair7 = pairs[6]
+            Pair7 = pairsafter[6]
         if number_pairs > 7:
-            Pair8 = pairs[7]
+            Pair8 = pairsafter[7]
         if number_pairs > 8:
-            Pair9 = pairs[8]
+            Pair9 = pairsafter[8]
         if number_pairs > 9:
-            Pair10 = pairs[9]
+            Pair10 = pairsafter[9]
         if number_pairs > 10:
-            Pair11 = pairs[10]
+            Pair11 = pairsafter[10]
         if number_pairs > 11:
-            Pair12 = pairs[11]
+            Pair12 = pairsafter[11]
         if number_pairs > 12:
-            Pair13 = pairs[12]
+            Pair13 = pairsafter[12]
         if number_pairs > 13:
-            Pair14 = pairs[13]
+            Pair14 = pairsafter[13]
         if number_pairs > 14:
-            Pair15 = pairs[14]
+            Pair15 = pairsafter[14]
         if number_pairs > 15:
-            Pair16 = pairs[15]
+            Pair16 = pairsafter[15]
         if number_pairs > 16:
-            Pair17 = pairs[16]
+            Pair17 = pairsafter[16]
         if number_pairs > 17:
-            Pair18 = pairs[17]
-        return dict(mystery_word = mystery_word, number_pairs = number_pairs, Pair1 = Pair1, Pair2 = Pair2, Pair3 = Pair3, Pair4 = Pair4, Pair5 = Pair5, Pair6 = Pair6, Pair7 = Pair7, Pair8 = Pair8, Pair9 = Pair9, Pair10 = Pair10, Pair11 = Pair11, Pair12 = Pair12, Pair13 = Pair13, Pair14 = Pair14, Pair15 = Pair15, Pair16 = Pair16, Pair17 = Pair17, Pair18 = Pair18, pairs = pairs)
+            Pair18 = pairsafter[17]
+        return dict(mystery_word = mystery_word, number_pairs = number_pairs, Pair1 = Pair1, Pair2 = Pair2, Pair3 = Pair3, Pair4 = Pair4, Pair5 = Pair5, Pair6 = Pair6, Pair7 = Pair7, Pair8 = Pair8, Pair9 = Pair9, Pair10 = Pair10, Pair11 = Pair11, Pair12 = Pair12, Pair13 = Pair13, Pair14 = Pair14, Pair15 = Pair15, Pair16 = Pair16, Pair17 = Pair17, Pair18 = Pair18, pairs = pairsafter)
 
 class VotingResultWaitPage(WaitPage):
-    title_text = "Vielen Dank für deine Abstimmung!"
-    body_text = "Bitte warte, bis alle ihre Stimmen abgegeben haben."
+    title_text = "Vielen Dank für Ihre Abstimmung!"
+    body_text = "Bitte warten Sie, bis alle ihre Stimmen abgegeben haben."
     wait_for_all_players = True
     def is_displayed(player):
         return player.role() == 'Hinweisgeber'
     
 class CluegiverWaitPage(WaitPage):
-    title_text = "Vielen Dank für euer Hinweispaar!"
-    body_text = "Euer Hinweispaar wird nun dem Ratenden gezeigt."
+    title_text = "Vielen Dank für Ihr Hinweispaar!"
+    body_text = "Das Hinweispaar wird nun dem Ratenden gezeigt."
     def is_displayed(player):
         return player.role() == 'Hinweisgeber'
     wait_for_all_groups = True
 
 class Clue_WaitPage(WaitPage):
-    title_text = "Vielen Dank für dein Feedback!"
-    body_text = "Bitte warte, bis all deine Gruppenmitglieder ihr Feedback abgegeben haben."
+    title_text = "Vielen Dank für Ihr Feedback!"
+    body_text = "Bitte warten Sie, bis all Ihre Gruppenmitglieder ihr Feedback abgegeben haben."
     wait_for_all_players = True
     def is_displayed(player):
         return player.role() == 'Hinweisgeber'
 
 class VotingWaitPage(WaitPage):
-    title_text = "Vielen Dank für deine Hinweispaare"
-    body_text = "Bitte warte, bis alle ihre Hinweispaare abgegeben haben."
+    title_text = "Vielen Dank für Ihre Hinweispaare"
+    body_text = "Bitte warten Sie, bis alle ihre Hinweispaare abgegeben haben."
     wait_for_all_players = True
     def is_displayed(player):
         return player.role() == 'Hinweisgeber'
 
 class GuesserWaitPage(WaitPage):
-    title_text = "Du kannst deinen Tipp gleich abgeben!"
-    body_text = "Bitte warte, bis die anderen Spieler ihre Hinweise für dich abgegeben haben."
+    title_text = "Sie können Ihren Tipp bald abgeben"
+    body_text = "Bitte warten Sie, bis die anderen Spieler ein Hinweispaar für Sie abgegeben haben. Dies kann ein paar Minuten dauern."
     def is_displayed(player): 
         return player.role() == 'Ratender'
     wait_for_all_groups = True
     
 class ResultsWaitPage(WaitPage):
-    title_text = "Deine Gruppe ist fertig!"
-    body_text = "Bitte warte, bis alle Gruppen ihre Hinweispaare und Tipps abgegeben haben."
+    title_text = "Ihre Gruppe ist fertig!"
+    body_text = "Bitte warten Sie, bis alle Gruppen ihre Hinweispaare und Tipps abgegeben haben."
     wait_for_all_groups = True
 
 class FinalPage(Page):
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
 
-page_sequence = [GroupWaitPage, Intro, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, CluegiverWaitPage, Guess_Page, ResultsWaitPage, Results, Score, TestQuestions, FredaQuestions, DAT, FinalPage]
-# %%
+page_sequence = [GroupWaitPage, Intro, Intro2, Instructions, Instructions_2, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, CluegiverWaitPage, Guess_Page, ResultsWaitPage, Results, Score, TestQuestions, FredaQuestions, DAT, FinalPage]
