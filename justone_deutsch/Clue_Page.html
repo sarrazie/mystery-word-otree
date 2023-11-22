@@ -21,7 +21,7 @@
 </br>
 <p> Das <b>Geheimwort</b> in dieser Runde ist: </p>
 <p> <b>{{ mystery_word }}</b> </p>   
-<p> Bitte geben Sie <b>alle</b> Ihre Ideen zu diesem Wort ein (eine Idee pro Textfeld): </p>
+<p> Bitte geben Sie <b>alle</b> Ideen ein, die Ihnen zu diesem Wort einfallen <b>(eine Idee pro Textfeld)</b>: </p>
     <b>{{ formfield 'Idea1' }}</b>
         <details>
         <summary> Fügen Sie eine zweite Idee hinzu </summary>
@@ -56,19 +56,7 @@
                                                 <details>
                                                 <summary> Fügen Sie eine zwölfte Idee hinzu </summary>
                                                 {{ formfield 'Idea12' }}
-                                                    <details>
-                                                    <summary> Fügen Sie eine dreizehnte Idee hinzu </summary>
-                                                    {{ formfield 'Idea13' }}
-                                                        <details>
-                                                        <summary> Fügen Sie eine vierzehnte Idee hinzu </summary>
-                                                        {{ formfield 'Idea14' }}
-                                                            <details>
-                                                            <summary> Fügen Sie eine fünfzehnte Idee hinzu </summary>
-                                                            {{ formfield 'Idea15' }}
-                                                            <p>Sie haben das Maximum an Ideen erreicht, die eingereicht werden können.</p>        
-                                                            </details>
-                                                        </details>
-                                                    </details>
+                                                <p>Sie haben das <b>Maximum</b> an Ideen erreicht, die eingereicht werden können.</p>        
                                                 </details>
                                             </details>
                                         </details>
@@ -81,17 +69,18 @@
             </details>
         </details>       
 </br>
-<p> Bitte entscheiden Sie sich jetzt für Ihren finalen Hinweis und geben Sie ihn hier ein: <b>{{ formfield 'clues' }}</b> </p>
+<p> Bitte entscheiden Sie sich jetzt für Ihren finalen Hinweis und geben Sie ihn hier ein. <b>{{ formfield 'clues' }}</b> </p>
 </br>
 <button class= "otree-btn btn btn-info">Weiter</button>
 </br>
-
+</br>
 <details>
     <summary> Zusammenfassung der Regeln </summary>
+</br>
     <ul>    
-        <li> <b><u>Ziel:</u></b> Einer der Spieler – <i>der Ratende</i> – muss ein Geheimwort anhand von von anderen Spielern gegebenen Hinweisen erraten.</li>
-        <li> Wenn zwei oder mehr Spieler denselben Hinweis schreiben, werden alle identischen Hinweise (auch Hinweise aus derselben Wortfamilie) entfernt, bevor <i>der Ratende</i> sie sieht</li>
-        <li> <b>Ungültige Hinweise:</b> Hinweise, die aus derselben Wortfamilie wie das Geheimwort stammen, nur eine Übersetzung des Geheimworts oder erfunden sind.</li>
+        <li> <b><u>Ziel:</u></b> Einer der Spieler – <i>der Ratende</i> – muss ein Geheimwort anhand von Hinweisen erraten, die seine Mitspieler geschrieben haben.</li>
+        <li> Wenn zwei oder mehr Spieler denselben Hinweis schreiben, werden alle <b>identischen Hinweise</b> (auch Hinweise mit demselben Wortstamm) entfernt, bevor <i>der Ratende</i> sie sieht.</li>
+        <li> <b>Ungültige Hinweise:</b> Hinweise, die denselben Wortstamm wie das Geheimwort haben, eine Übersetzung des Geheimworts sind oder frei erfunden.</li>
 </ul>  
 </details>
 

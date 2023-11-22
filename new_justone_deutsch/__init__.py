@@ -48,12 +48,12 @@ class Player(BasePlayer):
     freda_6 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='"In meinem Job lerne ich häufig dazu, indem ich mich zum Beispiel auf den neuesten Stand bringe oder neue Aufgaben praktisch durchführe (“learning by doing”)."', widget=widgets.RadioSelectHorizontal)
     freda_7 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='"Meine Eltern gaben mir immer alle Freiheiten."', widget=widgets.RadioSelectHorizontal)
     freda_8 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='"Ich versuche, meinem (künftigen) Kind so viele Freiheiten zu geben, wie ich von meinen Eltern erhalten habe."', widget=widgets.RadioSelectHorizontal)
-    understand_1 = models.StringField(choices=[['false', 'Die Hinweispaare werden den Ratenden gezeigt'], ['true', 'Die Hinweispaare werden entfernt, bevor die Ratenden sie sehen.'], ['false', 'Die Hinweispaare zählen doppelt'],['false', 'Der Gewinn der Gruppen wird verdoppelt']], label='Was passiert, wenn Gruppen identische Hinweispaare abgeben?', widget=widgets.RadioSelect)
-    understand_2 = models.StringField(choices=[['false', 'Unbegrenzt viele Versuche'],['false', 'Zwei Versuche'],['false', 'Drei Versuche'],['true', 'Nur einen Versuch']], label='Wie viele Versuche hat der Ratende, um das geheime Wort zu erraten?', widget=widgets.RadioSelect)
-    understand_3 = models.StringField(choices=[['false,','Zwei'],['false', 'Drei'],['true', 'Vier'],['false', 'Fünf']], label='Wie viele Spieler bilden zusammen eine Gruppe?', widget=widgets.RadioSelect)
-    understand_4 = models.StringField(choices=[['false', 'Die meisten Hinweispaare aller Gruppen generieren'],['true', 'Die meisten geheimen Wörter erraten von allen Gruppen'],['false', 'Die meisten identischen Hinweispaare aller Gruppen geben'],['false','Die wenigsten geheimen Wörter aller Gruppen erraten']], label='Was ist das Ziel deiner Gruppe?', widget=widgets.RadioSelect)
-    understand_5 = models.StringField(choices=[['true', '12 Euro für die Teilnahme an allen Runden'],['false', '3 Euro fix plus 9 Euro Bonus für die meisten generierten Ideen'],['false', '3 Euro fix plus 9 Euro Bonus für die meisten erratenen geheimen Wörter'],['false','3 Euro fix plus 9 Euro Bonus für die originellsten Hinweispaare, die zur richtigen Erratung des Wortes führen']], label='Wie viel Geld kannst du maximal in diesem Experiment verdienen?', widget=widgets.RadioSelect)
-    understand_6 = models.StringField(choices=[['false', 'Time'], ['false', 'Zeitpunkt'],['false', 'ist Geld'],['false', 'Zeeeit'],['true', 'keiner der oben genannten Hinweise']], label='Beispiel: Welcher der folgenden Hinweise wäre ein gültiger Hinweis in einem Hinweispaar für das geheime Wort "Zeit"?', widget=widgets.RadioSelect)
+    understand_1 = models.StringField(choices=[['false', 'Die Hinweispaare werden den Ratenden gezeigt'], ['true', 'Die Hinweispaare werden entfernt, bevor die Ratenden sie sehen.'], ['false', 'Die Hinweispaare zählen doppelt'],['false', 'Der Gewinn der Gruppen wird verdoppelt']], label='<b>Frage 1:</b> Was passiert, wenn Gruppen identische Hinweispaare abgeben?', widget=widgets.RadioSelect)
+    understand_2 = models.StringField(choices=[['false', 'Unbegrenzt viele Versuche'],['false', 'Zwei Versuche'],['false', 'Drei Versuche'],['true', 'Nur einen Versuch']], label='<b>Frage 2:</b> Wie viele Versuche hat der Ratende, um das geheime Wort zu erraten?', widget=widgets.RadioSelect)
+    understand_3 = models.StringField(choices=[['false,','Zwei'],['false', 'Drei'],['true', 'Vier'],['false', 'Fünf']], label='<b>Frage 3:</b> Wie viele Spieler bilden zusammen eine Gruppe?', widget=widgets.RadioSelect)
+    understand_4 = models.StringField(choices=[['false', 'Die meisten Hinweispaare aller Gruppen generieren'],['true', 'Die meisten geheimen Wörter erraten von allen Gruppen'],['false', 'Die meisten identischen Hinweispaare aller Gruppen geben'],['false','Die wenigsten geheimen Wörter aller Gruppen erraten']], label='<b>Frage 4:</b> Was ist das Ziel Ihrer Gruppe?', widget=widgets.RadioSelect)
+    understand_5 = models.StringField(choices=[['true', '12 Euro für die Teilnahme an allen Runden'],['false', '3 Euro fix plus 9 Euro Bonus für die meisten generierten Ideen'],['false', '3 Euro fix plus 9 Euro Bonus für die meisten erratenen geheimen Wörter'],['false','3 Euro fix plus 9 Euro Bonus für die originellsten Hinweispaare, die zur richtigen Erratung des Wortes führen']], label='<b>Frage 5:</b> Wie viel Geld können Sie maximal in diesem Experiment verdienen?', widget=widgets.RadioSelect)
+    understand_6 = models.StringField(choices=[['false', 'Time'], ['false', 'Zeitpunkt'],['false', 'ist Geld'],['false', 'Zeeeit'],['true', 'keiner der oben genannten Hinweise']], label='<b>Frage 6:</b> Welcher der folgenden Hinweise wäre ein gültiger Hinweis in einem Hinweispaar für das geheime Wort "Zeit"?', widget=widgets.RadioSelect)
     strategy = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='"Ich habe ständig nur daran gedacht, welche Hinweise meine Mitspieler abgeben."', widget=widgets.RadioSelectHorizontal)
     strategy_2 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='"Erst möglichst viele Ideen aufzuschreiben, hilft mir dabei, später bessere Hinweise zu geben."', widget=widgets.RadioSelectHorizontal)
     strategy_3 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='"Ich habe versucht, möglichst originelle und einzigartige Hinweise zu geben, damit ich keine identischen Hinweise wie meine Mitspieler abgebe."', widget=widgets.RadioSelectHorizontal)
@@ -165,7 +165,7 @@ def creating_session(subsession: Subsession):
 
 # PAGES
 class GroupWaitPage(WaitPage):
-    template_name = 'justone_deutsch/GroupWaitPage.html'
+    template_name = 'new_justone_deutsch/GroupWaitPage.html'
     group_by_arrival_time = True
     def is_displayed(player):
         return player.round_number == 1
@@ -180,6 +180,11 @@ class Intro(Page):
         return player.round_number == 1
 
 class Intro2(Page):
+    timeout_seconds = 150
+    def is_displayed(player):
+        return player.round_number == 1
+    
+class Rules(Page):
     timeout_seconds = 150
     def is_displayed(player):
         return player.round_number == 1
@@ -339,7 +344,7 @@ class Clue_Page(Page):
             import translators as ts            
             def has_numbers(s):
                 return bool(re.search(r'\d',s))
-            with open('C:/Users/sarrazie/Desktop/otree/testproject/justone_deutsch/wordlist-german.txt', 'r') as file:
+            with open('C:/Users/sarrazie/Desktop/otree/testproject/new_justone_deutsch/wordlist-german.txt', 'r') as file:
                 text = file.read()
                 wordlist= text.split()
             if len(ideas) > 0:
@@ -479,7 +484,7 @@ class VotingResultPage(Page):
         import re            
         def has_numbers(s):
             return bool(re.search(r'\d',s))
-        with open('C:/Users/sarrazie/Desktop/otree/testproject/justone_deutsch/wordlist-german.txt', 'r') as file:
+        with open('C:/Users/sarrazie/Desktop/otree/testproject/new_justone_deutsch/wordlist-german.txt', 'r') as file:
             text = file.read()
             wordlist= text.split()
         if len(words) > 0:
@@ -681,7 +686,7 @@ class Score(Page):
         return dict(overall_score = overall_score, score = player.score, rank = rank, number_groups = number_groups)
 
 class TestQuestions(Page):
-    template_name = 'justone_deutsch/TestQuestions.html'
+    template_name = 'new_justone_deutsch/TestQuestions.html'
     timeout_seconds = 180
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
@@ -689,7 +694,7 @@ class TestQuestions(Page):
     form_fields = ['known', 'understanding', 'role_question', 'comments', 'comments_2', 'strategy', 'strategy_2', 'strategy_3', 'strategy_4', 'strategy_5']
 
 class FredaQuestions(Page):
-    template_name = 'justone_deutsch/FredaQuestions.html'
+    template_name = 'new_justone_deutsch/FredaQuestions.html'
     timeout_seconds = 180
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
@@ -697,7 +702,7 @@ class FredaQuestions(Page):
     form_fields = ['freda_1', 'freda_2', 'freda_3', 'freda_4', 'freda_5', 'freda_6', 'freda_7', 'freda_8']
 
 class UnderstandPage(Page):
-    template_name = 'justone_deutsch/UnderstandPage.html'
+    template_name = 'new_justone_deutsch/UnderstandPage.html'
     timeout_seconds = 180
     def is_displayed(player):
         return player.round_number == 1
@@ -742,7 +747,7 @@ class Generation_Page(Page):
             import translators as ts            
             def has_numbers(s):
                 return bool(re.search(r'\d',s))
-            with open('C:/Users/sarrazie/Desktop/otree/testproject/justone_deutsch/wordlist-german.txt', 'r') as file:
+            with open('C:/Users/sarrazie/Desktop/otree/testproject/new_justone_deutsch/wordlist-german.txt', 'r') as file:
                 text = file.read()
                 wordlist= text.split()
             if len(ideas) > 0:
@@ -1265,4 +1270,4 @@ class FinalPage(Page):
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
 
-page_sequence = [GroupWaitPage, Intro, Intro2, Instructions, Instructions_2, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, CluegiverWaitPage, Guess_Page, ResultsWaitPage, Results, Score, TestQuestions, FredaQuestions, DAT, FinalPage]
+page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, Instructions_2, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, CluegiverWaitPage, Guess_Page, ResultsWaitPage, Results, Score, TestQuestions, FredaQuestions, DAT, FinalPage]
