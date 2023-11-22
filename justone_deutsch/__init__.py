@@ -35,30 +35,30 @@ class Player(BasePlayer):
     score = models.IntegerField()
     result = models.StringField()
     incentive = models.IntegerField()
-    known = models.StringField(choices=[['Ja', 'Ja'], ['Nein', 'Nein']], label='Kennen Sie das Spiel "Just One"?', widget=widgets.RadioSelect)
-    role_question = models.StringField(choices=[['Hinweisgeber', 'Hinweisgeber'], ['Ratender', 'Ratender']], label='In welcher Rolle haben sie sich wohler gefühlt?', widget=widgets.RadioSelect)
-    understanding = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='"Ich habe die Verfahrensweise und die Regeln schnell verstanden."', widget=widgets.RadioSelectHorizontal)
-    comments = models.LongStringField(label="Welche Strategie haben sie als Hinweisgeber verfolgt?", initial='', max_length=500, blank=True)
-    comments_2 = models.LongStringField(label="Welche Strategie haben sie als Ratender verfolgt?", initial='', max_length=500, blank=True)
-    freda_1 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='"In meiner Familie werden Werte und Familienrituale über Generationen weitergegeben."', widget=widgets.RadioSelectHorizontal)
-    freda_2 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='"Die Zuneigung und Unterstützung meiner Eltern hängen davon ab, inwiefern ich ihre Erwartungen erfülle."', widget=widgets.RadioSelectHorizontal)
-    freda_3 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='"Ich weiß besser, was gut für mein (künftiges) Kind ist, als mein (künftiges) Kind selbst."', widget=widgets.RadioSelectHorizontal)
-    freda_4 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='"Ich möchte, dass mein (künftiges) Kind wie ich ist, wenn es erwachsen ist."', widget=widgets.RadioSelectHorizontal)
-    freda_5 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='"Es gibt eine gute Übereinstimmung zwischen dem, was mein Job mir bietet, und dem, was ich von einem Job erwarte."', widget=widgets.RadioSelectHorizontal)
-    freda_6 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='"In meinem Job lerne ich häufig dazu, indem ich mich zum Beispiel auf den neuesten Stand bringe oder neue Aufgaben praktisch durchführe (“learning by doing”)."', widget=widgets.RadioSelectHorizontal)
-    freda_7 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='"Meine Eltern gaben mir immer alle Freiheiten."', widget=widgets.RadioSelectHorizontal)
-    freda_8 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='"Ich versuche, meinem (künftigen) Kind so viele Freiheiten zu geben, wie ich von meinen Eltern erhalten habe."', widget=widgets.RadioSelectHorizontal)
+    known = models.StringField(choices=[['Ja', 'Ja'], ['Nein', 'Nein']], label='<b>1. </b>Kennen Sie das Spiel "Just One"?', widget=widgets.RadioSelect)
+    role_question = models.StringField(choices=[['Hinweisgeber', 'Hinweisgeber'], ['Ratender', 'Ratender']], label='<b>3. </b>In welcher Rolle haben sie sich wohler gefühlt?', widget=widgets.RadioSelect)
+    understanding = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>2. </b>"Ich habe die Verfahrensweise und die Regeln schnell verstanden."', widget=widgets.RadioSelectHorizontal)
+    comments = models.LongStringField(label="<b>4. </b>Welche Strategie haben sie als Hinweisgeber verfolgt?", initial='', max_length=500, blank=True)
+    comments_2 = models.LongStringField(label="<b>5. </b>Welche Strategie haben sie als Ratender verfolgt?", initial='', max_length=500, blank=True)
+    freda_1 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>1. </b>"In meiner Familie werden Werte und Familienrituale über Generationen weitergegeben."', widget=widgets.RadioSelectHorizontal)
+    freda_2 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>2. </b>"Die Zuneigung und Unterstützung meiner Eltern hängen davon ab, inwiefern ich ihre Erwartungen erfülle."', widget=widgets.RadioSelectHorizontal)
+    freda_3 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>3. </b>"Ich weiß besser, was gut für mein (künftiges) Kind ist, als mein (künftiges) Kind selbst."', widget=widgets.RadioSelectHorizontal)
+    freda_4 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>4. </b>"Ich möchte, dass mein (künftiges) Kind wie ich ist, wenn es erwachsen ist."', widget=widgets.RadioSelectHorizontal)
+    freda_5 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>5. </b>"Es gibt eine gute Übereinstimmung zwischen dem, was mein Job mir bietet, und dem, was ich von einem Job erwarte."', widget=widgets.RadioSelectHorizontal)
+    freda_6 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>6. </b>"In meinem Job lerne ich häufig dazu, indem ich mich zum Beispiel auf den neuesten Stand bringe oder neue Aufgaben praktisch durchführe (“learning by doing”)."', widget=widgets.RadioSelectHorizontal)
+    freda_7 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>7. </b>"Meine Eltern gaben mir immer alle Freiheiten."', widget=widgets.RadioSelectHorizontal)
+    freda_8 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>8. </b>"Ich versuche, meinem (künftigen) Kind so viele Freiheiten zu geben, wie ich von meinen Eltern erhalten habe."', widget=widgets.RadioSelectHorizontal)
     understand_1 = models.StringField(choices=[['false', 'Die Hinweise werden dem Ratenden gezeigt'], ['true', 'Die Hinweise werden entfernt, bevor der Ratende sie sieht.'], ['false', 'Die Hinweise zählen doppelt'],['false', 'Der Gewinn der Gruppe wird verdoppelt']], label='<b>Frage 1:</b> Was passiert, wenn Spieler identische Hinweise geben?', widget=widgets.RadioSelect)
     understand_2 = models.StringField(choices=[['false', 'Unbegrenzt viele Versuche'],['false', 'Zwei Versuche'],['false', 'Drei Versuche'],['true', 'Nur einen Versuch']], label='<b>Frage 2:</b> Wie viele Versuche hat der Ratende, um das geheime Wort zu erraten?', widget=widgets.RadioSelect)
     understand_3 = models.StringField(choices=[['false,','Zwei'],['false', 'Drei'],['true', 'Vier'],['false', 'Fünf']], label='<b>Frage 3:</b> Wie viele Spieler bilden zusammen eine Gruppe?', widget=widgets.RadioSelect)
-    understand_4 = models.StringField(choices=[['false', 'Die meisten Hinweise aller Gruppen geben'],['true', 'Die meisten geheimen Wörter erraten von allen Gruppen'],['false', 'Die meisten identischen Hinweise aller Gruppen geben'],['false','Die wenigsten geheimen Wörter aller Gruppen erraten']], label='<b>Frage 4:</b> Was ist das Ziel Ihrer Gruppe?', widget=widgets.RadioSelect)
-    understand_5 = models.StringField(choices=[['true', '12 Euro für die Teilnahme an allen Runden'],['false', '3 Euro fix plus 9 Euro Bonus für die meisten Ideen'],['false', '3 Euro fix plus 9 Euro Bonus für die meisten erratenen geheimen Wörter'],['false','3 Euro fix plus 9 Euro Bonus für die originellsten Hinweise, die zur richtigen Erratung des Wortes führen']], label='<b>Frage 5:</b> Wie viel Geld können Sie maximal in diesem Experiment verdienen?', widget=widgets.RadioSelect)
-    understand_6 = models.StringField(choices=[['false', 'Time'], ['false', 'Zeitpunkt'],['false', 'ist Geld'],['false', 'Zeeeit'],['true', 'keiner der oben genannten Hinweise']], label='<b>Frage 6:</b> Welcher der folgenden Hinweise wäre ein gültiger Hinweis für das geheime Wort "Zeit"?', widget=widgets.RadioSelect)
-    strategy = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='"Ich habe ständig nur daran gedacht, welche Hinweise meine Mitspieler abgeben."', widget=widgets.RadioSelectHorizontal)
-    strategy_2 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='"Erst möglichst viele Ideen aufzuschreiben, hilft mir dabei, später bessere Hinweise zu geben."', widget=widgets.RadioSelectHorizontal)
-    strategy_3 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='"Ich habe versucht, möglichst originelle und einzigartige Hinweise zu geben, damit ich keine identischen Hinweise wie meine Mitspieler abgebe."', widget=widgets.RadioSelectHorizontal)
-    strategy_4 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='"Ich habe versucht, eindeutige und naheliegende Hinweise zu geben, auch auf die Gefahr hin, dass meine Mitspieler identische Hinweise abgegen."', widget=widgets.RadioSelectHorizontal)
-    strategy_5 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='"Der Wettkampf mit den anderen Gruppen hat mich motiviert, möglichst gute Hinweise zu geben und das geheime Wort zu erraten."', widget=widgets.RadioSelectHorizontal)
+    understand_4 = models.StringField(choices=[['true', '10 Euro fix für die Teilnahme an allen Runden'],['false', '5 Euro fix plus 5 Euro Bonus für die meisten Ideen'],['false', '5 Euro fix plus 5 Euro Bonus für die meisten erratenen geheimen Wörter'],['false','5 Euro fix plus 5 Euro Bonus für die originellsten Hinweise, die zur richtigen Erratung des Wortes führen']], label='<b>Frage 4:</b> Wie viel Geld können Sie maximal in diesem Experiment verdienen?', widget=widgets.RadioSelect)
+    understand_5 = models.StringField(choices=[['false', 'Time'], ['false', 'Zeitpunkt'],['false', 'ist Geld'],['false', 'Zeeeit'],['true', 'keiner der oben genannten Hinweise']], label='<b>Frage 5:</b> Welcher der folgenden Hinweise wäre ein gültiger Hinweis für das geheime Wort "Zeit"?', widget=widgets.RadioSelect)
+    strategy = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>6. </b>"Ich habe ständig nur daran gedacht, welche Hinweise meine Mitspieler abgeben."', widget=widgets.RadioSelectHorizontal)
+    strategy_2 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>7. </b>"Erst möglichst viele Ideen aufzuschreiben, hilft mir dabei, später bessere Hinweise zu geben."', widget=widgets.RadioSelectHorizontal)
+    strategy_3 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>8. </b>"Ich habe versucht, möglichst originelle und einzigartige Hinweise zu geben, damit ich keine identischen Hinweise wie meine Mitspieler abgebe."', widget=widgets.RadioSelectHorizontal)
+    strategy_4 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>9. </b>"Ich habe versucht, eindeutige und naheliegende Hinweise zu geben, auch auf die Gefahr hin, dass meine Mitspieler identische Hinweise abgegen."', widget=widgets.RadioSelectHorizontal)
+    strategy_5 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>10. </b>"Ein Wettkampf mit anderen Gruppen würde mich motivieren, möglichst gute Hinweise zu geben und das geheime Wort zu erraten."', widget=widgets.RadioSelectHorizontal)
+    strategy_6 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>11. </b>"Eine Bonuszahlung geknüpft an unsere Gruppenperformance würde mich motivieren, möglichst gute Hinweise zu geben und das geheime Wort zu erraten."', widget=widgets.RadioSelectHorizontal)
     Idea1 = models.StringField(label= '', initial='', blank=True)
     Idea2 = models.StringField(label= '', initial='', blank=True)
     Idea3 = models.StringField(label= '', initial='', blank=True)
@@ -71,17 +71,17 @@ class Player(BasePlayer):
     Idea10 = models.StringField(label= '', initial='', blank=True)
     Idea11 = models.StringField(label= '', initial='', blank=True)
     Idea12 = models.StringField(label= '', initial='', blank=True)
-    word1 = models.StringField(label= '', initial='', blank=True)
-    word2 = models.StringField(label= '', initial='', blank=True)
-    word3 = models.StringField(label= '', initial='', blank=True)
-    word4 = models.StringField(label= '', initial='', blank=True)
-    word5 = models.StringField(label= '', initial='', blank=True)
-    word6 = models.StringField(label= '', initial='', blank=True)
-    word7 = models.StringField(label= '', initial='', blank=True)
-    word8 = models.StringField(label= '', initial='', blank=True)
-    word9 = models.StringField(label= '', initial='', blank=True)
-    word10 = models.StringField(label= '', initial='', blank=True)
-    gender = models.IntegerField(choices=[[1, 'Männlich'],[2, 'Weiblich'],[3, 'Diverse'],], label='Geschlecht:')
+    word1 = models.StringField(label= '', initial='', blank=False)
+    word2 = models.StringField(label= '', initial='', blank=False)
+    word3 = models.StringField(label= '', initial='', blank=False)
+    word4 = models.StringField(label= '', initial='', blank=False)
+    word5 = models.StringField(label= '', initial='', blank=False)
+    word6 = models.StringField(label= '', initial='', blank=False)
+    word7 = models.StringField(label= '', initial='', blank=False)
+    word8 = models.StringField(label= '', initial='', blank=False)
+    word9 = models.StringField(label= '', initial='', blank=False)
+    word10 = models.StringField(label= '', initial='', blank=False)
+    gender = models.IntegerField(choices=[[1, 'Männlich'],[2, 'Weiblich'],[3, 'Divers'],], label='Geschlecht:')
     age = models.IntegerField(min=18, max=100, label='Alter:')
     identical = models.BooleanField()
     invalid = models.BooleanField()
@@ -109,22 +109,22 @@ class Introduction(Page):
         return player.round_number == 1
     
 class Intro(Page):
-    timeout_seconds = 150
+    timeout_seconds = 120
     def is_displayed(player):
         return player.round_number == 1
     
 class Intro2(Page):
-    timeout_seconds = 150
+    timeout_seconds = 120
     def is_displayed(player):
         return player.round_number == 1
     
 class Rules(Page):
-    timeout_seconds = 150
+    timeout_seconds = 120
     def is_displayed(player):
         return player.round_number == 1
     
 class DAT(Page):
-    timeout_seconds = 360
+    timeout_seconds = 300
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
     form_model = 'player'
@@ -159,7 +159,7 @@ class Round(Page):
         return dict(round_number = round_number, remaining_rounds = remaining_rounds)
 
 class Clue_Page(Page):
-    timeout_seconds = 180
+    timeout_seconds = 210
     def is_displayed(player):
         return player.role() == 'Hinweisgeber'   
     form_model = 'player'
@@ -231,22 +231,22 @@ def Idea11_error_message(player, value):
 def Idea12_error_message(player, value):
     if wordlength(player, value) == True:
         return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
-
+    
 class CluegiverWaitPage(WaitPage):
-    title_text = "Vielen Dank für deinen Hinweis!"
-    body_text = "Bitte warte, bis alle ihre Hinweise and Vermutungen abgegeben haben."
+    title_text = "Vielen Dank für Ihren Hinweis!"
+    body_text = "Bitte warten Sie, bis alle ihre Hinweise abgegeben haben und diese dem Ratenden angezeigt werden."
     def is_displayed(player):
         return player.role() == 'Hinweisgeber'
 
 class GuesserWaitPage(WaitPage):
-    title_text = "Du kannst deinen Tipp gleich abgeben!"
-    body_text = "Bitte warte, bis die anderen Spieler ihre Hinweise für dich abgegeben haben."
+    title_text = "Sie können Ihren Tipp bald abgeben"
+    body_text = "Bitte warten Sie, bis die anderen Spieler ihre Hinweise für Sie abgegeben haben. Dies kann ein paar Minuten dauern."
     def is_displayed(player): 
         return player.role() == 'Ratender'
     
 class ResultsWaitPage(WaitPage):
-    title_text = "Deine Gruppe ist fertig!"
-    body_text = "Bitte warte, bis alle Gruppen ihre Hinweise und Tipps abgegeben haben."
+    title_text = "Ihre Gruppe ist fertig!"
+    body_text = "Bitte warten Sie, bis alle Gruppen ihre Hinweise und Tipps abgegeben haben."
     wait_for_all_groups = True
 
 class Guess_Page(Page):
@@ -515,11 +515,11 @@ class Score(Page):
 
 class TestQuestions(Page):
     template_name = 'justone_deutsch/TestQuestions.html'
-    timeout_seconds = 180
+    timeout_seconds = 210
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
     form_model = 'player'
-    form_fields = ['known', 'understanding', 'role_question', 'comments', 'comments_2', 'strategy', 'strategy_2', 'strategy_3', 'strategy_4', 'strategy_5']
+    form_fields = ['known', 'understanding', 'role_question', 'comments', 'comments_2', 'strategy', 'strategy_2', 'strategy_3', 'strategy_4', 'strategy_5', 'strategy_6']
 
 class FredaQuestions(Page):
     template_name = 'justone_deutsch/FredaQuestions.html'
@@ -535,7 +535,7 @@ class UnderstandPage(Page):
     def is_displayed(player):
         return player.round_number == 1
     form_model = 'player'
-    form_fields = ['understand_1', 'understand_2', 'understand_3', 'understand_4', 'understand_5', 'understand_6']
+    form_fields = ['understand_1', 'understand_2', 'understand_3', 'understand_4', 'understand_5']
     def error_message(player, values):
         if values['understand_1'] == 'false':
             return 'Falsche Antwort bei Frage 1! Versuche es noch einmal.'
@@ -547,8 +547,6 @@ class UnderstandPage(Page):
             return 'Falsche Antwort bei Frage 4! Versuche es noch einmal.'
         if values['understand_5'] == 'false':
             return 'Falsche Antwort bei Frage 5! Versuche es noch einmal.'
-        if values['understand_6'] == 'false':
-            return 'Falsche Antwort bei Frage 6! Versuche es noch einmal.'
 
 class FinalPage(Page):
     def is_displayed(player):

@@ -6,15 +6,16 @@ SESSION_CONFIGS = [
     dict(name='eriks_game_2', display_name= "Mystery Word Game Quantity", app_sequence=['justone_welcome', 'justone'], num_demo_participants=24, treatment=2,),
     dict(name='eriks_game_3', display_name= "Mystery Word Game Quality", app_sequence=['justone_welcome', 'justone'], num_demo_participants=24, treatment=3,),
     dict(name='eriks_game_4', display_name= "Mystery Word Game Originality", app_sequence=['justone_welcome', 'justone'], num_demo_participants=24, treatment=4,),
-    dict(name='eriks_game_5', display_name= "Mystery Word Game deutsch Control", app_sequence=['justone_welcome_deutsch', 'justone_deutsch'], num_demo_participants=8, treatment=1,),
+    dict(name='eriks_game_5', display_name= "Mystery Word Game deutsch Pre-Test", app_sequence=['justone_welcome_deutsch', 'justone_deutsch'], num_demo_participants=8, treatment=1,),
     dict(name='eriks_game_6', display_name= "Mystery Word Game deutsch Quantity", app_sequence=['justone_welcome_deutsch', 'justone_deutsch'], num_demo_participants=8, treatment=2,),
     dict(name='eriks_game_7', display_name= "Mystery Word Game deutsch Quality", app_sequence=['justone_welcome_deutsch', 'justone_deutsch'], num_demo_participants=8, treatment=3,),
     dict(name='eriks_game_8', display_name= "Mystery Word Game deutsch Originality", app_sequence=['justone_welcome_deutsch', 'justone_deutsch'], num_demo_participants=8, treatment=4,),
-    dict(name='eriks_game_9', display_name= "New Mystery Word Game deutsch Control", app_sequence=['justone_welcome_deutsch', 'new_justone_deutsch'], num_demo_participants=8, treatment=1,),
+    dict(name='eriks_game_9', display_name= "New Mystery Word Game deutsch mit Regel Pre-Test", app_sequence=['justone_welcome_deutsch', 'new_justone_deutsch'], num_demo_participants=8, treatment=1,),
     dict(name='eriks_game_10', display_name= "New Mystery Word Game deutsch Quantity", app_sequence=['justone_welcome_deutsch', 'new_justone_deutsch'], num_demo_participants=8, treatment=2,),
     dict(name='eriks_game_11', display_name= "New Mystery Word Game deutsch Quality", app_sequence=['justone_welcome_deutsch', 'new_justone_deutsch'], num_demo_participants=8, treatment=3,),
-    dict(name='eriks_game_12', display_name= "New Mystery Word Game deutsch Originality", app_sequence=['justone_welcome_deutsch', 'new_justone_deutsch'], num_demo_participants=8, treatment=4,)
-    ]
+    dict(name='eriks_game_12', display_name= "New Mystery Word Game deutsch Originality", app_sequence=['justone_welcome_deutsch', 'new_justone_deutsch'], num_demo_participants=8, treatment=4,),
+    dict(name='eriks_game_13', display_name= "New Mystery Word Game deutsch ohne Regel Pre-Test ", app_sequence=['justone_welcome_deutsch', 'new_justone_deutsch_oR'], num_demo_participants=8, treatment=1, ),
+]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
 # in SESSION_CONFIGS, except those that explicitly override it.
