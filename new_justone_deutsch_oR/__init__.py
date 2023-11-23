@@ -338,7 +338,7 @@ class Clue_Page(Page):
             import translators as ts            
             def has_numbers(s):
                 return bool(re.search(r'\d',s))
-            with open('C:/Users/sarrazie/Desktop/otree/testproject/new_justone_deutsch_oR/wordlist-german.txt', 'r') as file:
+            with open("wordlist-german.txt", 'r') as file:
                 text = file.read()
                 wordlist= text.split()
             if len(ideas) > 0:
@@ -461,7 +461,7 @@ class VotingResultPage(Page):
         import re            
         def has_numbers(s):
             return bool(re.search(r'\d',s))
-        with open('C:/Users/sarrazie/Desktop/otree/testproject/new_justone_deutsch_oR/wordlist-german.txt', 'r') as file:
+        with open("wordlist-german.txt", 'r') as file:
             text = file.read()
             wordlist= text.split()
         if len(words) > 0:
@@ -678,7 +678,7 @@ class Generation_Page(Page):
             import translators as ts            
             def has_numbers(s):
                 return bool(re.search(r'\d',s))
-            with open('C:/Users/sarrazie/Desktop/otree/testproject/new_justone_deutsch_oR/wordlist-german.txt', 'r') as file:
+            with open("wordlist-german.txt", 'r') as file:
                 text = file.read()
                 wordlist= text.split()
             if len(ideas) > 0:

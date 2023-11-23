@@ -318,7 +318,7 @@ class Guess_Page(Page):
             clue_trans = clue_trans.lower()
             if mystery_word in clue_trans or clue_trans in mystery_word:
                 clues_group[2] = 'Ungültiger Hinweis'
-        with open('C:/Users/sarrazie/Desktop/otree/testproject/new_justone_deutsch/wordlist-german.txt', 'r') as file:
+        with open("wordlist-german.txt", 'r') as file:
             text = file.read()
             wordlist= text.split()
         if clues_group[0] != 'Identischer Hinweis' and clues_group[0] != 'Kein Hinweis gegeben':
@@ -392,7 +392,7 @@ class Results(Page):
                     if mystery_word in clue_trans or clue_trans in mystery_word:
                         player.invalid = True
                         invalid = 'Achtung! Ihr Hinweis war ungültig (Übersetzung des geheimen Wortes).'
-                with open('C:/Users/sarrazie/Desktop/otree/testproject/new_justone_deutsch/wordlist-german.txt', 'r') as file:
+                with open("wordlist-german.txt", 'r') as file:
                     text = file.read()
                     wordlist= text.split()
                     if own_clue not in wordlist and player.invalid == False:
@@ -426,7 +426,7 @@ class Results(Page):
                 for i in range(len(own_ideas)):
                     if own_ideas[i] in mystery_word or mystery_word in own_ideas[i]:
                         own_ideas[i] = 'false'
-            with open('C:/Users/sarrazie/Desktop/otree/testproject/new_justone_deutsch/wordlist-german.txt', 'r') as file:
+            with open("wordlist-german.txt", 'r') as file:
                 text = file.read()
                 wordlist= text.split()
                 if len(own_ideas) > 0:
