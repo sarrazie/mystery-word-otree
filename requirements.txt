@@ -4,3 +4,5 @@
 otree==5.10.3
 psycopg2>=2.8.4
 sentry-sdk>=0.7.9
+translators==5.8.7
+regex==2023.5.5

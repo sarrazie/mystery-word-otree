@@ -33,7 +33,7 @@ SESSION_CONFIGS
 
 # ISO-639 code
 # for example: de, fr, ja, ko, zh-hans
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'de'
 
 # e.g. EUR, GBP, CNY, JPY
 REAL_WORLD_CURRENCY_CODE = 'USD'
@@ -46,7 +46,7 @@ ROOMS = [
     ]
 ADMIN_USERNAME = 'admin'
 # for security, best to set admin password in an environment variable
-ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
+ADMIN_PASSWORD = 'admin'
 
 DEMO_PAGE_INTRO_HTML = """
 Here are some oTree games.
