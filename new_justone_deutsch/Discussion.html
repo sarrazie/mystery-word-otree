@@ -19,7 +19,7 @@
     });
 </script>
 </br>
-<p>Folgende <b>Hinweispaare</b> wurden von Ihren Mitspielern geschrieben.</p>
+<p>Folgende <b>Hinweispaare</b> wurden von Ihren Mitspielenden geschrieben.</p>
 <p><b>Bewerten</b> Sie, wie gut Sie das jeweilige Hinweispaar finden und machen Sie <b>Vorschläge</b>, welche Hinweise Sie ersetzen würden.</p>
 </br>
 {{ if number_pairs > 0 }}
@@ -31,7 +31,7 @@
         {{ formfield 'discussion1' }}  
 </details>
 </br>
-{{ else }} <b>Deine Mitspieler haben keine gültigen Hinweispaare geschrieben.</b> </br>{{ endif }}
+{{ else }} <b>Ihre Mitspielenden haben keine gültigen Hinweispaare geschrieben.</b> </br>{{ endif }}
 
 {{ if number_pairs > 1 }}
 <b>2. {{ Pair2 }}</b>
@@ -161,7 +161,7 @@
     <summary> Zusammenfassung der Regeln </summary>
 </br>
     <ul>    
-        <li> <b><u>Ziel:</u></b> Einer der Spieler – <i>der Ratende</i> – muss ein Geheimwort anhand eines Hinweispaars erraten, das von seinen Mitspielern geschrieben wurde.</li>
+        <li> <b><u>Ziel:</u></b> Einer der Spielenden – <i>der Ratende</i> – muss ein Geheimwort anhand eines Hinweispaars erraten, das von seinen Mitspielenden geschrieben wurde.</li>
         <li> Wenn zwei oder mehr Gruppen <b>identische Hinweispaare</b> schreiben, werden diese entfernt, bevor <i>der Ratende</i> sie sieht und die Runde ist beendet.</li>
         <li> <b>Ungültige Hinweispaare</b> enthalten Hinweise, die denselben Wortstamm wie das Geheimwort haben, eine Übersetzung des Geheimworts sind oder frei erfunden.</li>
     </ul>  

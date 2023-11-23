@@ -22,13 +22,13 @@ class Group(BaseGroup):
 class Player(BasePlayer): 
     def role(player):
         if player.round_number % 4 == 1:
-            return {1: 'Ratender', 2: 'Hinweisgeber', 3: 'Hinweisgeber', 4: 'Hinweisgeber'}[player.id_in_group]
+            return {1: 'Ratender', 2: 'Hinweisgebende', 3: 'Hinweisgebende', 4: 'Hinweisgebende'}[player.id_in_group]
         if player.round_number % 4 == 2:
-            return {1: 'Hinweisgeber', 2: 'Ratender', 3: 'Hinweisgeber', 4: 'Hinweisgeber'}[player.id_in_group]
+            return {1: 'Hinweisgebende', 2: 'Ratender', 3: 'Hinweisgebende', 4: 'Hinweisgebende'}[player.id_in_group]
         if player.round_number % 4 == 3:
-            return {1: 'Hinweisgeber', 2: 'Hinweisgeber', 3: 'Ratender', 4: 'Hinweisgeber'}[player.id_in_group]
+            return {1: 'Hinweisgebende', 2: 'Hinweisgebende', 3: 'Ratender', 4: 'Hinweisgebende'}[player.id_in_group]
         if player.round_number % 4 == 0:
-            return {1: 'Hinweisgeber', 2: 'Hinweisgeber', 3: 'Hinweisgeber', 4: 'Ratender'}[player.id_in_group]
+            return {1: 'Hinweisgebende', 2: 'Hinweisgebende', 3: 'Hinweisgebende', 4: 'Ratender'}[player.id_in_group]
         
     guess = models.StringField(label="Ihre Vermutung:", initial='')
     clues = models.StringField(label="Ihr finaler Hinweis:", initial='')
@@ -36,9 +36,9 @@ class Player(BasePlayer):
     result = models.StringField()
     incentive = models.IntegerField()
     known = models.StringField(choices=[['Ja', 'Ja'], ['Nein', 'Nein']], label='<b>1. </b>Kennen Sie das Spiel "Just One"?', widget=widgets.RadioSelect)
-    role_question = models.StringField(choices=[['Hinweisgeber', 'Hinweisgeber'], ['Ratender', 'Ratender']], label='<b>3. </b>In welcher Rolle haben sie sich wohler gefühlt?', widget=widgets.RadioSelect)
+    role_question = models.StringField(choices=[['Hinweisgebende', 'Hinweisgebende'], ['Ratender', 'Ratender']], label='<b>3. </b>In welcher Rolle haben sie sich wohler gefühlt?', widget=widgets.RadioSelect)
     understanding = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>2. </b>"Ich habe die Verfahrensweise und die Regeln schnell verstanden."', widget=widgets.RadioSelectHorizontal)
-    comments = models.LongStringField(label="<b>4. </b>Welche Strategie haben sie als Hinweisgeber verfolgt?", initial='', max_length=500, blank=True)
+    comments = models.LongStringField(label="<b>4. </b>Welche Strategie haben sie als Hinweisgebende verfolgt?", initial='', max_length=500, blank=True)
     comments_2 = models.LongStringField(label="<b>5. </b>Welche Strategie haben sie als Ratender verfolgt?", initial='', max_length=500, blank=True)
     freda_1 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>1. </b>"In meiner Familie werden Werte und Familienrituale über Generationen weitergegeben."', widget=widgets.RadioSelectHorizontal)
     freda_2 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>2. </b>"Die Zuneigung und Unterstützung meiner Eltern hängen davon ab, inwiefern ich ihre Erwartungen erfülle."', widget=widgets.RadioSelectHorizontal)
@@ -48,15 +48,15 @@ class Player(BasePlayer):
     freda_6 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>6. </b>"In meinem Job lerne ich häufig dazu, indem ich mich zum Beispiel auf den neuesten Stand bringe oder neue Aufgaben praktisch durchführe (“learning by doing”)."', widget=widgets.RadioSelectHorizontal)
     freda_7 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>7. </b>"Meine Eltern gaben mir immer alle Freiheiten."', widget=widgets.RadioSelectHorizontal)
     freda_8 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>8. </b>"Ich versuche, meinem (künftigen) Kind so viele Freiheiten zu geben, wie ich von meinen Eltern erhalten habe."', widget=widgets.RadioSelectHorizontal)
-    understand_1 = models.StringField(choices=[['false', 'Die Hinweise werden dem Ratenden gezeigt'], ['true', 'Die Hinweise werden entfernt, bevor der Ratende sie sieht.'], ['false', 'Die Hinweise zählen doppelt'],['false', 'Der Gewinn der Gruppe wird verdoppelt']], label='<b>Frage 1:</b> Was passiert, wenn Spieler identische Hinweise geben?', widget=widgets.RadioSelect)
+    understand_1 = models.StringField(choices=[['false', 'Die Hinweise werden dem Ratenden gezeigt'], ['true', 'Die Hinweise werden entfernt, bevor der Ratende sie sieht.'], ['false', 'Die Hinweise zählen doppelt'],['false', 'Der Gewinn der Gruppe wird verdoppelt']], label='<b>Frage 1:</b> Was passiert, wenn Spielende identische Hinweise geben?', widget=widgets.RadioSelect)
     understand_2 = models.StringField(choices=[['false', 'Unbegrenzt viele Versuche'],['false', 'Zwei Versuche'],['false', 'Drei Versuche'],['true', 'Nur einen Versuch']], label='<b>Frage 2:</b> Wie viele Versuche hat der Ratende, um das geheime Wort zu erraten?', widget=widgets.RadioSelect)
-    understand_3 = models.StringField(choices=[['false,','Zwei'],['false', 'Drei'],['true', 'Vier'],['false', 'Fünf']], label='<b>Frage 3:</b> Wie viele Spieler bilden zusammen eine Gruppe?', widget=widgets.RadioSelect)
+    understand_3 = models.StringField(choices=[['false,','Zwei'],['false', 'Drei'],['true', 'Vier'],['false', 'Fünf']], label='<b>Frage 3:</b> Wie viele Spielerinnen und Spieler bilden zusammen eine Gruppe?', widget=widgets.RadioSelect)
     understand_4 = models.StringField(choices=[['true', '10 Euro fix für die Teilnahme an allen Runden'],['false', '5 Euro fix plus 5 Euro Bonus für die meisten Ideen'],['false', '5 Euro fix plus 5 Euro Bonus für die meisten erratenen geheimen Wörter'],['false','5 Euro fix plus 5 Euro Bonus für die originellsten Hinweise, die zur richtigen Erratung des Wortes führen']], label='<b>Frage 4:</b> Wie viel Geld können Sie maximal in diesem Experiment verdienen?', widget=widgets.RadioSelect)
     understand_5 = models.StringField(choices=[['false', 'Time'], ['false', 'Zeitpunkt'],['false', 'ist Geld'],['false', 'Zeeeit'],['true', 'keiner der oben genannten Hinweise']], label='<b>Frage 5:</b> Welcher der folgenden Hinweise wäre ein gültiger Hinweis für das geheime Wort "Zeit"?', widget=widgets.RadioSelect)
-    strategy = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>6. </b>"Ich habe ständig nur daran gedacht, welche Hinweise meine Mitspieler abgeben."', widget=widgets.RadioSelectHorizontal)
+    strategy = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>6. </b>"Ich habe ständig nur daran gedacht, welche Hinweise meine Mitspielenden abgeben."', widget=widgets.RadioSelectHorizontal)
     strategy_2 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>7. </b>"Erst möglichst viele Ideen aufzuschreiben, hilft mir dabei, später bessere Hinweise zu geben."', widget=widgets.RadioSelectHorizontal)
-    strategy_3 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>8. </b>"Ich habe versucht, möglichst originelle und einzigartige Hinweise zu geben, damit ich keine identischen Hinweise wie meine Mitspieler abgebe."', widget=widgets.RadioSelectHorizontal)
-    strategy_4 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>9. </b>"Ich habe versucht, eindeutige und naheliegende Hinweise zu geben, auch auf die Gefahr hin, dass meine Mitspieler identische Hinweise abgegen."', widget=widgets.RadioSelectHorizontal)
+    strategy_3 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>8. </b>"Ich habe versucht, möglichst originelle und einzigartige Hinweise zu geben, damit ich keine identischen Hinweise wie meine Mitspielenden abgebe."', widget=widgets.RadioSelectHorizontal)
+    strategy_4 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>9. </b>"Ich habe versucht, eindeutige und naheliegende Hinweise zu geben, auch auf die Gefahr hin, dass meine Mitspielenden identische Hinweise abgeben."', widget=widgets.RadioSelectHorizontal)
     strategy_5 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>10. </b>"Ein Wettkampf mit anderen Gruppen würde mich motivieren, möglichst gute Hinweise zu geben und das geheime Wort zu erraten."', widget=widgets.RadioSelectHorizontal)
     strategy_6 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>11. </b>"Eine Bonuszahlung geknüpft an unsere Gruppenperformance würde mich motivieren, möglichst gute Hinweise zu geben und das geheime Wort zu erraten."', widget=widgets.RadioSelectHorizontal)
     Idea1 = models.StringField(label= '', initial='', blank=True)
@@ -83,6 +83,7 @@ class Player(BasePlayer):
     word10 = models.StringField(label= '', initial='', blank=False)
     gender = models.IntegerField(choices=[[1, 'Männlich'],[2, 'Weiblich'],[3, 'Divers'],], label='Geschlecht:')
     age = models.IntegerField(min=18, max=100, label='Alter:')
+    study = models.StringField(choices=[['Geisteswissenschaften', 'Geisteswissenschaften'],['Sport', 'Sport'],['Rechts-, Wirtschafts- und Sozialwissenschaften', 'Rechts-, Wirtschafts- und Sozialwissenschaften'],['Mathematik, Naturwissenschaften', 'Mathematik, Naturwissenschaften'],['Humanmedizin, Gesundheitswissenschaften', 'Humanmedizin, Gesundheitswissenschaften'],['Agrar-, Forst- und Ernährungswissenschaften, Veterinärmedizin', 'Agrar-, Forst- und Ernährungswissenschaften, Veterinärmedizin'], ['Ingenieurwissenschaften', 'Ingenieurwissenschaften'],['Kunst, Kunstwissenschaft', 'Kunst, Kunstwissenschaft'],['Sonstiges', 'Sonstiges'],], label='Studienbereich:', widget=widgets.RadioSelect)
     identical = models.BooleanField()
     invalid = models.BooleanField()
     missing = models.BooleanField()
@@ -128,7 +129,7 @@ class DAT(Page):
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
     form_model = 'player'
-    form_fields = ['word1', 'word2', 'word3', 'word4', 'word5', 'word6', 'word7', 'word8', 'word9', 'word10', 'gender', 'age']
+    form_fields = ['word1', 'word2', 'word3', 'word4', 'word5', 'word6', 'word7', 'word8', 'word9', 'word10', 'gender', 'age', 'study']
     def before_next_page(player, timeout_happened):
         if timeout_happened:
             player.invalid_DAT = True
@@ -161,7 +162,7 @@ class Round(Page):
 class Clue_Page(Page):
     timeout_seconds = 210
     def is_displayed(player):
-        return player.role() == 'Hinweisgeber'   
+        return player.role() == 'Hinweisgebende'   
     form_model = 'player'
     form_fields = ['clues', 'Idea1', 'Idea2', 'Idea3', 'Idea4', 'Idea5', 'Idea6', 'Idea7', 'Idea8', 'Idea9', 'Idea10', 'Idea11', 'Idea12']
     def vars_for_template(player):
@@ -182,65 +183,65 @@ def wordlength(player, value):
     
 def clues_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Dein Hinweis darf nicht länger als 18 Zeichen sein!'
+        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def Idea1_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+        return 'Ihre Idee darf nicht länger als 18 Zeichen sein!'
 
 def Idea2_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+        return 'Ihre Idee darf nicht länger als 18 Zeichen sein!'
 
 def Idea3_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+        return 'Ihre Idee darf nicht länger als 18 Zeichen sein!'
 
 def Idea4_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+        return 'Ihre Idee darf nicht länger als 18 Zeichen sein!'
 
 def Idea5_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+        return 'Ihre Idee darf nicht länger als 18 Zeichen sein!'
 
 def Idea6_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+        return 'Ihre Idee darf nicht länger als 18 Zeichen sein!'
 
 def Idea7_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+        return 'Ihre Idee darf nicht länger als 18 Zeichen sein!'
 
-def Idea8_error_message(player, value): 
+def Idea8_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+        return 'Ihre Idee darf nicht länger als 18 Zeichen sein!'
 
 def Idea9_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+        return 'Ihre Idee darf nicht länger als 18 Zeichen sein!'
 
 def Idea10_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
-    
+        return 'Ihre Idee darf nicht länger als 18 Zeichen sein!'
+
 def Idea11_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+        return 'Ihre Idee darf nicht länger als 18 Zeichen sein!'
 
 def Idea12_error_message(player, value):
     if wordlength(player, value) == True:
-        return 'Deine Idee darf nicht länger als 18 Zeichen sein!'
+        return 'Ihre Idee darf nicht länger als 18 Zeichen sein!'
     
 class CluegiverWaitPage(WaitPage):
     title_text = "Vielen Dank für Ihren Hinweis!"
     body_text = "Bitte warten Sie, bis alle ihre Hinweise abgegeben haben und diese dem Ratenden angezeigt werden."
     def is_displayed(player):
-        return player.role() == 'Hinweisgeber'
+        return player.role() == 'Hinweisgebende'
 
 class GuesserWaitPage(WaitPage):
     title_text = "Sie können Ihren Tipp bald abgeben"
-    body_text = "Bitte warten Sie, bis die anderen Spieler ihre Hinweise für Sie abgegeben haben. Dies kann ein paar Minuten dauern."
+    body_text = "Bitte warten Sie, bis die anderen Spielenden ihre Hinweise für Sie abgegeben haben. Dies kann ein paar Minuten dauern."
     def is_displayed(player): 
         return player.role() == 'Ratender'
     
@@ -346,7 +347,7 @@ class Results(Page):
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         mystery_word = mystery_word.lower()
-        if player.role() == 'Hinweisgeber':
+        if player.role() == 'Hinweisgebende':
             own_clue = player.clues
             clues = [p.clues for p in player.get_others_in_group()]
             guess = [p.guess for p in player.get_others_in_group()]
@@ -365,23 +366,23 @@ class Results(Page):
             guess_missing = ''
             if own_clue == 'Kein Hinweis gegeben':
                 player.missing = True
-                missing = 'Achtung! Du hast keinen Hinweis gegeben.'
+                missing = 'Achtung! Sie haben keinen Hinweis gegeben.'
             else:
                 if own_clue in clues[0] or clues[0] in own_clue or own_clue in clues[1] or clues[1] in own_clue:
                     player.identical = True
-                    identical = 'Achtung! Du hast einen identischen Hinweis gegeben.'
+                    identical = 'Achtung! Sie haben einen identischen Hinweis gegeben.'
                 if own_clue in mystery_word or mystery_word in own_clue:
                     player.invalid = True
-                    invalid = 'Achtung! Dein Hinweis war ungültig (gleiche Wortfamilie wie das geheimnisvolle Wort).'
+                    invalid = 'Achtung! Ihr Hinweis war ungültig (gleiche Wortfamilie wie das geheimnisvolle Wort).'
                 if ' ' in own_clue and player.invalid == False:
                     more = own_clue.split() 
                     if len(more)>1:
                         player.invalid = True
-                        invalid = 'Achtung! Dein Hinweis war ungültig (mehr als ein Wort).'
+                        invalid = 'Achtung! Ihr Hinweis war ungültig (mehr als ein Wort).'
                 import re
                 if re.search("[^a-zA-Z0-9s]", own_clue) and player.invalid == False:
                     player.invalid = True
-                    invalid = 'Achtung! Dein Hinweis war ungültig (Verwendung von Sonderzeichen).'
+                    invalid = 'Achtung! Ihr Hinweis war ungültig (Verwendung von Sonderzeichen).'
                 def num_there(s):
                     return any(i.isdigit() for i in s)
                 import translators as ts
@@ -390,13 +391,13 @@ class Results(Page):
                     clue_trans = clue_trans.lower()
                     if mystery_word in clue_trans or clue_trans in mystery_word:
                         player.invalid = True
-                        invalid = 'Achtung! Dein Hinweis war ungültig (Übersetzung des geheimen Wortes).'
+                        invalid = 'Achtung! Ihr Hinweis war ungültig (Übersetzung des geheimen Wortes).'
                 with open('C:/Users/sarrazie/Desktop/otree/testproject/justone_deutsch/wordlist-german.txt', 'r') as file:
                     text = file.read()
                     wordlist= text.split()
                     if own_clue not in wordlist and player.invalid == False:
                         player.invalid = True
-                        invalid = 'Achtung! Dein Hinweis war ungültig (Rechtschreibfehler oder kein echtes Wort).'
+                        invalid = 'Achtung! Ihr Hinweis war ungültig (Rechtschreibfehler oder kein echtes Wort).'
             clues.append(own_clue)
             player.Idea1 = player.Idea1.lower()
             player.Idea2 = player.Idea2.lower()
@@ -465,7 +466,7 @@ class Results(Page):
             clues = [p.clues for p in player.get_others_in_group()]
             if guess == 'Kein Tipp gegeben':
                 player.guess_missing = True
-                guess_missing = 'Achtung! Du hast keinen Tipp abgegeben.'
+                guess_missing = 'Achtung! Sie haben keinen Tipp abgegeben.'
         if mystery_word == guess:
             player.result = 'richtig'
             player.payoff = 1
