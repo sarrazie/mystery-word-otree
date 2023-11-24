@@ -15,6 +15,7 @@ SESSION_CONFIGS = [
     dict(name='eriks_game_11', display_name= "New Mystery Word Game deutsch Quality", app_sequence=['justone_welcome_deutsch', 'new_justone_deutsch'], num_demo_participants=8, treatment=3,),
     dict(name='eriks_game_12', display_name= "New Mystery Word Game deutsch Originality", app_sequence=['justone_welcome_deutsch', 'new_justone_deutsch'], num_demo_participants=8, treatment=4,),
     dict(name='eriks_game_13', display_name= "New Mystery Word Game deutsch ohne Regel Pre-Test ", app_sequence=['justone_welcome_deutsch', 'new_justone_deutsch_oR'], num_demo_participants=8, treatment=1, ),
+    dict(name='eriks_game_14', display_name= "New Mystery Word Game english mit Regel", app_sequence=['justone_welcome_deutsch', 'new_justone'], num_demo_participants=8, treatment=1,),
 ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs

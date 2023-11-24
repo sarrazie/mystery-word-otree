@@ -1,0 +1,56 @@
+{{ block title }}
+    Voting
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: yes; 
+    }
+</style>
+
+<p>The following <b>clue pairs</b> have been written by you and your fellow players.</p>
+<p>You now have <b>maximum 2 minutes</b> to decide on a clue pair. If a <b>majority (at least 2 players)</b> agrees on a clue pair, it will be submitted to the guesser. Otherwise, a clue pair will be randomly selected.</p>
+<p>You can use the <b>chat</b> to coordinate within your group.</p>
+<table class="table table-striped">
+    <tr>
+        <th>Selection</th>
+        <th>My Vote</th>
+    </tr>
+    {{ for pair in pairs }}    
+    <tr>
+        <th> {{ pair }} </th>       
+        <td>
+            <input type="radio" name="vote" value="{{ pair }}" id="radio-{{ pair }}" />
+        </td>
+    </tr>
+    {{ endfor }}
+</table>
+
+<h4>Chat</h4>
+{{ chat }}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 15) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+</br>
+<button class= "otree-btn btn btn-info">Next</button>
+</br>
+</br>
+<details>
+    <summary>Summary of Rules</summary>
+    <br>
+    <ul>    
+        <li><b><u>Objective:</u></b> One of the players – <i>the Guesser</i> – needs to guess a secret word based on a clue pair provided by the other players.</li>
+        <li>If two or more groups provide <b>identical clue pairs</b>, these will be removed before <i>the Guesser</i> sees them, and the round ends.</li>
+        <li><b>Invalid clue pairs</b> contain hints that share the same word stem as the secret word, are a translation of the secret word, or are entirely made up.</li>
+    </ul>  
+</details>
+
+{{ endblock }}

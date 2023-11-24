@@ -1,0 +1,22 @@
+{{ block title }}
+    Scoreboard
+{{ endblock }}
+
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+<p> Your group's score: <b>{{ score }} point(s)</b> </p>
+<p> Current scores of all groups: </p>
+
+<ul>
+    {% for item in overall_score %}
+       <li><b>{{ item }} point(s)</b></li>
+    {% endfor %}   
+</ul>
+<p> Your group is ranked <b>{{ rank }}</b> out of {{ number_groups }} groups. </p>
+<button class="otree-btn btn btn-info">Next</button>
+{{ endblock }}
