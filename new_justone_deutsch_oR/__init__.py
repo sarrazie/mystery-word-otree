@@ -154,6 +154,7 @@ class Player(BasePlayer):
     corrected_votes = models.StringField()
     pairsafter = models.StringField(label= '', initial='', blank=True)
     number_pairs = models.IntegerField()
+    group_individual = models.StringField(choices=[['Gruppe', 'Es war produktiv, in der Gruppe zu arbeiten'], ['Individuell', 'Ich hätte lieber alleine Hinweise gegeben']], label='<b>12. </b>Wie haben Sie die Zusammenarbeit in Ihrer Gruppe erlebt?', widget=widgets.RadioSelectHorizontal)
 
 def creating_session(subsession: Subsession):
     session = subsession.session
@@ -626,7 +627,7 @@ class TestQuestions(Page):
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
     form_model = 'player'
-    form_fields = ['known', 'understanding', 'role_question', 'comments', 'comments_2', 'strategy', 'strategy_2', 'strategy_3', 'strategy_4', 'strategy_5', 'strategy_6']
+    form_fields = ['known', 'understanding', 'role_question', 'comments', 'comments_2', 'strategy', 'strategy_2', 'strategy_3', 'strategy_4', 'strategy_5', 'strategy_6', 'group_individual']
 
 class FredaQuestions(Page):
     template_name = 'new_justone_deutsch_oR/FredaQuestions.html'
