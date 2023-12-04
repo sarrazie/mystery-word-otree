@@ -493,15 +493,18 @@ class VotingResultPage(Page):
             corrected_votes.append(' + '.join(words[i:i+2]))
         player.corrected_votes = str(corrected_votes)
         import random
+        random.seed(42)
         valid_votes = [v for v in corrected_votes if 'false' not in v]
         duplicates = [v for v in set(valid_votes) if valid_votes.count(v) >= 2]
         number_duplicates = len(duplicates)
         number_valid_votes = len(valid_votes)
+        valid_votes = sorted(valid_votes)
         if len(duplicates) > 0:
-            vote_group = random.choice(duplicates)
+            vote_group = duplicates[0]
         else:
             if len(valid_votes) > 0:
-                vote_group = random.choice(valid_votes) 
+                i = random.randint(0, len(valid_votes) - 1)
+                vote_group = valid_votes[i]
             else:
                 vote_group = 'Kein gültiges Hinweispaar'
         player.vote_group = vote_group
@@ -1150,6 +1153,7 @@ class Voting_Page(Page):
                 pairsafter.append(item)
             elif pairs.count(item) == 1:
                 pairsafter.append(item)
+        pairsafter = sorted(pairsafter)
         delimiter = ', '
         player.pairsafter = delimiter.join(pairsafter)
         number_pairs = len(pairsafter)

@@ -31,7 +31,7 @@
         {{ formfield 'discussion1' }}  
 </details>
 </br>
-{{ else }} <b>Ihre Mitspielenden haben keine gültigen Hinweispaare geschrieben.</b> </br>{{ endif }}
+{{ else }} <p><b>Ihre Mitspielenden haben keine gültigen Hinweispaare geschrieben.</b> </p> </br>{{ endif }}
 
 {{ if number_pairs > 1 }}
 <b>2. {{ Pair2 }}</b>
@@ -100,7 +100,7 @@
 {{ else }} {{ endif }} 
 
 {{ if number_pairs > 7 }}
-<b>{{ Pair8 }}</b>
+<b>8. {{ Pair8 }}</b>
 {{ formfield 'rating_before8' }}
 <details>
     <summary> Hinweis ersetzen </summary>
@@ -111,7 +111,7 @@
 {{ else }} {{ endif }}
 
 {{ if number_pairs > 8 }}
-<b>{{ Pair9 }}</b>
+<b>9. {{ Pair9 }}</b>
 {{ formfield 'rating_before9' }}
 <details>
     <summary> Hinweis ersetzen </summary>
@@ -122,7 +122,7 @@
 {{ else }} {{ endif }}
 
 {{ if number_pairs > 9 }}
-<b>{{ Pair10 }}</b>
+<b>10. {{ Pair10 }}</b>
 {{ formfield 'rating_before10' }}
 <details>
     <summary> Hinweis ersetzen </summary>
@@ -133,7 +133,7 @@
 {{ else }} {{ endif }}
 
 {{ if number_pairs > 10 }}
-<b>{{ Pair11 }}</b>
+<b>11. {{ Pair11 }}</b>
 {{ formfield 'rating_before11' }}
 <details>
     <summary> Hinweis ersetzen </summary>
@@ -144,7 +144,7 @@
 {{ else }} {{ endif }}
 
 {{ if number_pairs > 11 }}
-<b>{{ Pair12 }}</b>
+<b>12. {{ Pair12 }}</b>
 {{ formfield 'rating_before12' }}
 <details>
     <summary> Hinweis ersetzen </summary>

@@ -21,6 +21,9 @@
 </br>
 <p> Das <b>Geheimwort</b> in dieser Runde ist: </p>
 <p> <b>{{ mystery_word }}</b> </p>   
+{{ if player.pair1 == 'empty' and player.pair2 == 'empty' and player.pair3 == 'empty' and player.pair4 == 'empty' and player.pair5 == 'empty' and player.pair6 == 'empty' }}
+</br><p><b>Sie haben kein gültiges Hinweispaar abgegeben.</b></p>
+{{ else}}
 <p> Hier sind Ihre bisher abgegebenen Hinweispaare mit dem <b>Feedback</b> Ihrer Gruppenmitglieder:</p>
 {{ if player.pair1 != 'empty' }}  
 <b>1. Hinweispaar:</b>  
@@ -81,6 +84,7 @@
 {{ if Replace_6.0 != '' and R_word_6.0 != '' }} <p> Ersatzvorschlag für das <b>{{ Replace_6.0 }}</b> Wort: <b> {{ R_word_6.0 }} </b></p> {{ else }} {{ endif}}
 {{ if Replace_6.1 != '' and R_word_6.1 != '' }} <p> Ersatzvorschlag für das <b>{{ Replace_6.1 }}</b> Wort: <b> {{ R_word_6.1 }} </b></p> {{ else }} {{ endif}}
 {{ else }}
+{{ endif }}
 {{ endif }}
 </br>
 <button class= "otree-btn btn btn-info">Weiter</button>
