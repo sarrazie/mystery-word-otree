@@ -8,11 +8,20 @@ Ihre App-Beschreibung
 
 class C(BaseConstants):
     NAME_IN_URL = 'New_Mystery_Word_deutsch_oR'
-    NUM_ROUNDS = 5
+    NUM_ROUNDS = 8
     PLAYERS_PER_GROUP = 4
-    MYSTERY_WORDS = ['Schokolade', 'Haare', 'Krokodil', 'Senf', 'Brief']
+    MYSTERY_WORDS = ['Raum','Taube', 'Golf', 'Elektrizitaet', 'Leiter', 'Schraube', 'Ende', 'Sombrero']
     LANGUAGE_CODE = 'de'
-
+    TABOO_WORDS_1 = ['Hotel', 'Wohnen', 'Zimmer', 'Wand', 'Kueche']
+    TABOO_WORDS_2 = ['Vogel', 'Gurren', 'Fliegen', 'Bote', 'Frieden']
+    TABOO_WORDS_3 = ['Volkswagen', 'Schlaeger', 'Par', 'Birdie', 'Mini']
+    TABOO_WORDS_4 = ['Strom', 'Tesla', 'Edison', 'Spannung', 'Statisch']
+    TABOO_WORDS_5 = ['Sprosse', 'Klettern', 'Stufen', 'Treppe', 'Aufsteigen']
+    TABOO_WORDS_6 = ['Spirale', 'Drehen', 'Anziehen', 'Nagel', 'Metall']
+    TABOO_WORDS_7 = ['Finale', 'Schluss', 'Stopp', 'Tot', 'Anfang']
+    TABOO_WORDS_8 = ['Hut', 'Mexiko', 'Kopfbedeckung', 'Mariachi', 'Krempe']
+    TABOO_WORDS = [TABOO_WORDS_1, TABOO_WORDS_2, TABOO_WORDS_3, TABOO_WORDS_4, TABOO_WORDS_5, TABOO_WORDS_6, TABOO_WORDS_7, TABOO_WORDS_8]
+         
 class Subsession(BaseSubsession):
     pass
 
@@ -227,6 +236,7 @@ class Clue_Page(Page):
     form_fields = ['Idea1', 'Idea2', 'Idea3', 'Idea4', 'Idea5', 'Idea6', 'Idea7', 'Idea8', 'Idea9', 'Idea10', 'Idea11', 'Idea12']
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
+        taboo_words = C.TABOO_WORDS[player.round_number - 1]
         feedback1_group = [p.pair_feedback1 for p in player.get_others_in_group()]
         feedback1_group = list(filter(bool, feedback1_group))
         feedback2_group = [p.pair_feedback2 for p in player.get_others_in_group()]
@@ -321,7 +331,7 @@ class Clue_Page(Page):
                 rating_6.append(element_list[1])
                 replace_6.append(element_list[2])
                 r_word_6.append(element_list[3])
-        return dict(mystery_word = mystery_word, Rating_1 = rating_1, Replace_1 = replace_1, R_word_1 = r_word_1, Rating_2 = rating_2, Replace_2 = replace_2, R_word_2 = r_word_2, Rating_3 = rating_3, Replace_3 = replace_3, R_word_3 = r_word_3, Rating_4 = rating_4, Replace_4 = replace_4, R_word_4 = r_word_4, Rating_5 = rating_5, Replace_5 = replace_5, R_word_5 = r_word_5, Rating_6 = rating_6, Replace_6 = replace_6, R_word_6 = r_word_6, Feedback1 = feedback1_group, Feedback2 = feedback2_group, Feedback3 = feedback3_group, Feedback4 = feedback4_group, Feedback5 = feedback5_group, Feedback6 = feedback6_group, Feedback7 = feedback7_group, Feedback8 = feedback8_group, Feedback9 = feedback9_group, Feedback10 = feedback10_group, Feedback11 = feedback11_group, Feedback12 = feedback12_group)
+        return dict(mystery_word = mystery_word, taboo_words = taboo_words, Rating_1 = rating_1, Replace_1 = replace_1, R_word_1 = r_word_1, Rating_2 = rating_2, Replace_2 = replace_2, R_word_2 = r_word_2, Rating_3 = rating_3, Replace_3 = replace_3, R_word_3 = r_word_3, Rating_4 = rating_4, Replace_4 = replace_4, R_word_4 = r_word_4, Rating_5 = rating_5, Replace_5 = replace_5, R_word_5 = r_word_5, Rating_6 = rating_6, Replace_6 = replace_6, R_word_6 = r_word_6, Feedback1 = feedback1_group, Feedback2 = feedback2_group, Feedback3 = feedback3_group, Feedback4 = feedback4_group, Feedback5 = feedback5_group, Feedback6 = feedback6_group, Feedback7 = feedback7_group, Feedback8 = feedback8_group, Feedback9 = feedback9_group, Feedback10 = feedback10_group, Feedback11 = feedback11_group, Feedback12 = feedback12_group)
     
     def before_next_page(player, timeout_happened):
         if timeout_happened:
@@ -334,6 +344,9 @@ class Clue_Page(Page):
         else:
             mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
             mystery_word = mystery_word.lower()   
+            taboo_words = C.TABOO_WORDS[player.round_number - 1]
+            for i in range(len(taboo_words)):
+                taboo_words[i] = taboo_words[i].lower()
             ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12]
             import re            
             import translators as ts            
@@ -353,6 +366,9 @@ class Clue_Page(Page):
                             ideas[i] = 'false'
                     if ideas[i] in mystery_word or mystery_word in ideas[i]:
                         ideas[i] = 'false'
+                    for j in range(len(taboo_words)):
+                        if taboo_words[j] in ideas[i] or ideas[i] in taboo_words[j]:
+                            ideas[i] = 'false'
                     if ideas[i] not in wordlist:
                         ideas[i] = 'false' 
                     if re.search("[^a-zA-Z0-9s]", ideas[i]):
@@ -448,6 +464,9 @@ class VotingResultPage(Page):
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         mystery_word = mystery_word.lower()
+        taboo_words = C.TABOO_WORDS[player.round_number - 1]
+        for i in range(len(taboo_words)):
+            taboo_words[i] = taboo_words[i].lower()
         votes = [player.vote] + [p.vote for p in player.get_others_in_group()]
         while '' in votes:
             votes.remove('')
@@ -479,6 +498,9 @@ class VotingResultPage(Page):
                         words[i] = 'false'
                 if words[i] in mystery_word or mystery_word in words[i]:
                     words[i] = 'false'
+                for j in range(len(taboo_words)):
+                    if taboo_words[j] in words[i] or words[i] in taboo_words[j]:
+                        words[i] = 'false'
                 if words[i] not in wordlist:
                     words[i] = 'false'
         corrected_votes = []
@@ -492,16 +514,16 @@ class VotingResultPage(Page):
         number_duplicates = len(duplicates)
         number_valid_votes = len(valid_votes)
         valid_votes = sorted(valid_votes)
-        i = random.randint(0, len(valid_votes) - 1)
         if len(duplicates) > 0:
             vote_group = duplicates[0]
         else:
             if len(valid_votes) > 0:
+                i = random.randint(0, len(valid_votes) - 1)
                 vote_group = valid_votes[i]
             else:
                 vote_group = 'Kein gültiges Hinweispaar'
         player.vote_group = vote_group
-        return dict(mystery_word = mystery_word, vote_group = vote_group, duplicates = number_duplicates, valid_votes = number_valid_votes)
+        return dict(mystery_word = mystery_word, taboo_words = taboo_words, vote_group = vote_group, duplicates = number_duplicates, valid_votes = number_valid_votes)
 
 class Guess_Page(Page):
     timeout_seconds = 120
@@ -536,6 +558,9 @@ class Results(Page):
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         mystery_word = mystery_word.lower()
+        taboo_words = C.TABOO_WORDS[player.round_number - 1]
+        for i in range(len(taboo_words)):
+            taboo_words[i] = taboo_words[i].lower()
         if player.role() == 'Hinweisgebende':
             vote_group = [p.vote_group for p in player.get_others_in_group()]
             while '' in vote_group:
@@ -587,7 +612,7 @@ class Results(Page):
         player.group.payoff =  player.score 
         if player.participant.treatment == 1:
             player.group.payoff = 1000
-        return dict(mystery_word = mystery_word, vote_group = vote_group, guess = guess, result = player.result, invalid = invalid, missing = missing, guess_missing = guess_missing, number_ideas = player.quantity)
+        return dict(mystery_word = mystery_word, taboo_words = taboo_words, vote_group = vote_group, guess = guess, result = player.result, invalid = invalid, missing = missing, guess_missing = guess_missing, number_ideas = player.quantity)
 
 def score(group: Group):
     subsession = group.subsession
@@ -665,7 +690,8 @@ class Generation_Page(Page):
     form_fields = ['Idea1', 'Idea2', 'Idea3', 'Idea4', 'Idea5', 'Idea6', 'Idea7', 'Idea8', 'Idea9', 'Idea10', 'Idea11', 'Idea12']
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
-        return dict(mystery_word = mystery_word)
+        taboo_words = C.TABOO_WORDS[player.round_number - 1]
+        return dict(mystery_word = mystery_word, taboo_words = taboo_words)
     def before_next_page(player, timeout_happened):
         if timeout_happened:
             player.pair1 = 'empty'
@@ -676,7 +702,10 @@ class Generation_Page(Page):
             player.pair6 = 'empty'
         else:
             mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
-            mystery_word = mystery_word.lower()   
+            mystery_word = mystery_word.lower()  
+            taboo_words = C.TABOO_WORDS[player.round_number - 1]
+            for i in range(len(taboo_words)):
+                taboo_words[i] = taboo_words[i].lower()
             ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12]
             import re            
             import translators as ts            
@@ -696,6 +725,9 @@ class Generation_Page(Page):
                             ideas[i] = 'false'
                     if ideas[i] in mystery_word or mystery_word in ideas[i]:
                         ideas[i] = 'false'
+                    for j in range(len(taboo_words)):
+                        if taboo_words[j] in ideas[i] or ideas[i] in taboo_words[j]:
+                            ideas[i] = 'false'
                     if ideas[i] not in wordlist:
                         ideas[i] = 'false' 
                     if re.search("[^a-zA-Z0-9s]", ideas[i]):
@@ -800,6 +832,9 @@ class Discussion(Page):
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         mystery_word = mystery_word.lower()
+        taboo_words = C.TABOO_WORDS[player.round_number - 1]
+        for i in range(len(taboo_words)):
+            taboo_words[i] = taboo_words[i].lower()
         pairs = [player.pair1 for player in player.get_others_in_group()] + [player.pair2 for player in player.get_others_in_group()] + [player.pair3 for player in player.get_others_in_group()] + [player.pair4 for player in player.get_others_in_group()] + [player.pair5 for player in player.get_others_in_group()] + [player.pair6 for player in player.get_others_in_group()]
         while 'empty' in pairs:
             pairs.remove('empty')
@@ -845,7 +880,7 @@ class Discussion(Page):
         if number_pairs > 11:
             Pair12 = pairs[11]
         player.number_pairs = number_pairs 
-        return dict(mystery_word = mystery_word, number_pairs = number_pairs, Pair1 = Pair1, Pair2 = Pair2, Pair3 = Pair3, Pair4 = Pair4, Pair5 = Pair5, Pair6 = Pair6, Pair7 = Pair7, Pair8 = Pair8, Pair9 = Pair9, Pair10 = Pair10, Pair11 = Pair11, Pair12 = Pair12)   
+        return dict(mystery_word = mystery_word, taboo_words = taboo_words, number_pairs = number_pairs, Pair1 = Pair1, Pair2 = Pair2, Pair3 = Pair3, Pair4 = Pair4, Pair5 = Pair5, Pair6 = Pair6, Pair7 = Pair7, Pair8 = Pair8, Pair9 = Pair9, Pair10 = Pair10, Pair11 = Pair11, Pair12 = Pair12)   
     
     def before_next_page(player, timeout_happened):
         if timeout_happened:
@@ -1091,6 +1126,9 @@ class Voting_Page(Page):
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         mystery_word = mystery_word.lower()
+        taboo_words = C.TABOO_WORDS[player.round_number - 1]
+        for i in range(len(taboo_words)):
+            taboo_words[i] = taboo_words[i].lower()
         pairs = [player.pair1after] + [player.pair1after for player in player.get_others_in_group()] + [player.pair2after] + [player.pair2after for player in player.get_others_in_group()] + [player.pair3after] + [player.pair3after for player in player.get_others_in_group()] + [player.pair4after] + [player.pair4after for player in player.get_others_in_group()] + [player.pair5after] + [player.pair5after for player in player.get_others_in_group()] + [player.pair6after] + [player.pair6after for player in player.get_others_in_group()]
         while 'empty' in pairs:
             pairs.remove('empty')
@@ -1160,7 +1198,7 @@ class Voting_Page(Page):
             Pair17 = pairsafter[16]
         if number_pairs > 17:
             Pair18 = pairsafter[17]
-        return dict(mystery_word = mystery_word, number_pairs = number_pairs, Pair1 = Pair1, Pair2 = Pair2, Pair3 = Pair3, Pair4 = Pair4, Pair5 = Pair5, Pair6 = Pair6, Pair7 = Pair7, Pair8 = Pair8, Pair9 = Pair9, Pair10 = Pair10, Pair11 = Pair11, Pair12 = Pair12, Pair13 = Pair13, Pair14 = Pair14, Pair15 = Pair15, Pair16 = Pair16, Pair17 = Pair17, Pair18 = Pair18, pairs = pairsafter)
+        return dict(mystery_word = mystery_word, taboo_words= taboo_words, number_pairs = number_pairs, Pair1 = Pair1, Pair2 = Pair2, Pair3 = Pair3, Pair4 = Pair4, Pair5 = Pair5, Pair6 = Pair6, Pair7 = Pair7, Pair8 = Pair8, Pair9 = Pair9, Pair10 = Pair10, Pair11 = Pair11, Pair12 = Pair12, Pair13 = Pair13, Pair14 = Pair14, Pair15 = Pair15, Pair16 = Pair16, Pair17 = Pair17, Pair18 = Pair18, pairs = pairsafter)
 
 class VotingResultWaitPage(WaitPage):
     title_text = "Vielen Dank für Ihre Abstimmung!"

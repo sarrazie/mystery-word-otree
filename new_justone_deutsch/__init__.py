@@ -8,9 +8,9 @@ Ihre App-Beschreibung
 
 class C(BaseConstants):
     NAME_IN_URL = 'New_Mystery_Word_deutsch'
-    NUM_ROUNDS = 5
+    NUM_ROUNDS = 8
     PLAYERS_PER_GROUP = 4
-    MYSTERY_WORDS = ['Schokolade', 'Haare', 'Krokodil', 'Senf', 'Brief']
+    MYSTERY_WORDS = ['Raum','Taube', 'Golf', 'Elektrizität', 'Leiter', 'Schraube', 'Ende', 'Sombrero']
     LANGUAGE_CODE = 'de'
 
 class Subsession(BaseSubsession):

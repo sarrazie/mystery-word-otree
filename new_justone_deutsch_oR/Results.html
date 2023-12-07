@@ -14,6 +14,11 @@
 <p> <b><font color="#FF0000">{{ guess_missing }}</font></b> </p>
 <p> {{ if player.participant.treatment == 2 }} {{ if player.role() == 'Hinweisgebende' }} Sie haben {{ number_ideas }} <b>gültige</b> Hinweispaare eingereicht. {{ else }} {{ endif }} {{ else }} {{ endif }}</p>
 <p> Geheimes Wort: <b>{{ mystery_word }}</b> </p>
+<p> Tabuwörter: {{ for word in taboo_words }} </p>
+<ul>
+    <li> <b>{{ word }}</b></li>
+</ul>
+{{ endfor }}
 <p> Das abgegebene Hinweispaar Ihrer Gruppe: </p>
 <p><b>{{ vote_group }}</b></p>
 
