@@ -41,9 +41,12 @@ REAL_WORLD_CURRENCY_CODE = 'USD'
 USE_POINTS = True
 
 ROOMS = [
-    dict(name='Players_Room1', display_name='Players Room1', participant_label_file='participant_ labels.txt'),
-    dict(name='Players_Room2', display_name='Players Room2', participant_label_file='participant_labels_2.txt'),
-    dict(name='Rest_Room', display_name='Rest Room', participant_label_file='participant_labels_rest.txt'),
+    dict(name='Players_Room1', display_name='Players Room1', participant_label_file='participant_labels.txt'),
+    dict(name='Players_Room2', display_name='Players Room2', participant_label_file='participant_labels.txt'),
+    dict(name='Players_Room3', display_name='Players Room3', participant_label_file='participant_labels.txt'),
+    dict(name='Players_Room4', display_name='Players Room4', participant_label_file='participant_labels.txt'),
+    dict(name='Players_Room5', display_name='Players Room5', participant_label_file='participant_labels.txt'),
+    dict(name='Players_Room6', display_name='Players Room6', participant_label_file='participant_labels.txt'),
     ]
 ADMIN_USERNAME = 'admin'
 # for security, best to set admin password in an environment variable
