@@ -48,7 +48,7 @@ class Player(BasePlayer):
     freda_6 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>6. </b>"In meinem Job lerne ich häufig dazu, indem ich mich zum Beispiel auf den neuesten Stand bringe oder neue Aufgaben praktisch durchführe (“learning by doing”)."', widget=widgets.RadioSelectHorizontal)
     freda_7 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>7. </b>"Meine Eltern gaben mir immer alle Freiheiten."', widget=widgets.RadioSelectHorizontal)
     freda_8 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>8. </b>"Ich versuche, meinem (künftigen) Kind so viele Freiheiten zu geben, wie ich von meinen Eltern erhalten habe."', widget=widgets.RadioSelectHorizontal)
-    understand_1 = models.StringField(choices=[['false', 'Die Hinweise werden dem Ratenden gezeigt'], ['true', 'Die Hinweise werden entfernt, bevor der Ratende sie sieht.'], ['false', 'Die Hinweise zählen doppelt'],['false', 'Der Gewinn der Gruppe wird verdoppelt']], label='<b>Frage 1:</b> Was passiert, wenn Spielende identische Hinweise geben?', widget=widgets.RadioSelect)
+    understand_1 = models.StringField(choices=[['false', 'Die Hinweise werden dem Ratenden gezeigt'], ['true', 'Die Hinweise werden entfernt, bevor der Ratende sie sieht'], ['false', 'Die Hinweise zählen doppelt'],['false', 'Der Gewinn der Gruppe wird verdoppelt']], label='<b>Frage 1:</b> Was passiert, wenn Spielende identische Hinweise geben?', widget=widgets.RadioSelect)
     understand_2 = models.StringField(choices=[['false', 'Unbegrenzt viele Versuche'],['false', 'Zwei Versuche'],['false', 'Drei Versuche'],['true', 'Nur einen Versuch']], label='<b>Frage 2:</b> Wie viele Versuche hat der Ratende, um das geheime Wort zu erraten?', widget=widgets.RadioSelect)
     understand_3 = models.StringField(choices=[['false,','Zwei'],['false', 'Drei'],['true', 'Vier'],['false', 'Fünf']], label='<b>Frage 3:</b> Wie viele Spielerinnen und Spieler bilden zusammen eine Gruppe?', widget=widgets.RadioSelect)
     understand_4 = models.StringField(choices=[['true', '10 Euro fix für die Teilnahme an allen Runden'],['false', '5 Euro fix plus 5 Euro Bonus für die meisten Ideen'],['false', '5 Euro fix plus 5 Euro Bonus für die meisten erratenen geheimen Wörter'],['false','5 Euro fix plus 5 Euro Bonus für die originellsten Hinweise, die zur richtigen Erratung des Wortes führen']], label='<b>Frage 4:</b> Wie viel Geld können Sie maximal in diesem Experiment verdienen?', widget=widgets.RadioSelect)
@@ -356,6 +356,8 @@ class Results(Page):
         mystery_word = mystery_word.lower()
         if player.role() == 'Hinweisgebende':
             own_clue = player.clues
+            special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
+            own_clue = own_clue.translate(special_char_map)
             clues = [p.clues for p in player.get_others_in_group()]
             guess = [p.guess for p in player.get_others_in_group()]
             while '' in clues:
@@ -554,15 +556,15 @@ class UnderstandPage(Page):
     form_fields = ['understand_1', 'understand_2', 'understand_3', 'understand_4', 'understand_5']
     def error_message(player, values):
         if values['understand_1'] == 'false':
-            return 'Falsche Antwort bei Frage 1! Versuche es noch einmal.'
+            return 'Falsche Antwort bei Frage 1! Versuchen Sie es noch einmal.'
         if values['understand_2'] == 'false':
-            return 'Falsche Antwort bei Frage 2! Versuche es noch einmal.'
+            return 'Falsche Antwort bei Frage 2! Versuchen Sie es noch einmal.'
         if values['understand_3'] == 'false':
-            return 'Falsche Antwort bei Frage 3! Versuche es noch einmal.'
+            return 'Falsche Antwort bei Frage 3! Versuchen Sie es noch einmal.'
         if values['understand_4'] == 'false':
-            return 'Falsche Antwort bei Frage 4! Versuche es noch einmal.'
+            return 'Falsche Antwort bei Frage 4! Versuchen Sie es noch einmal.'
         if values['understand_5'] == 'false':
-            return 'Falsche Antwort bei Frage 5! Versuche es noch einmal.'
+            return 'Falsche Antwort bei Frage 5! Versuchen Sie es noch einmal.'
 
 class FinalPage(Page):
     def is_displayed(player):
