@@ -10,8 +10,17 @@ class C(BaseConstants):
     NAME_IN_URL = 'New_Mystery_Word_deutsch'
     NUM_ROUNDS = 8
     PLAYERS_PER_GROUP = 4
-    MYSTERY_WORDS = ['Raum','Taube', 'Golf', 'Elektrizität', 'Leiter', 'Schraube', 'Ende', 'Sombrero']
+    MYSTERY_WORDS = ['Raum','Taube', 'Golf', 'Elektrizitaet', 'Leiter', 'Schraube', 'Ende', 'Sombrero']
     LANGUAGE_CODE = 'de'
+    STEM_WORDS_1 = ['raum', 'raeum'] 
+    STEM_WORDS_2 = ['taub', 'taeub']
+    STEM_WORDS_3 = ['golf']
+    STEM_WORDS_4 = ['elektr']  
+    STEM_WORDS_5 = ['leit'] 
+    STEM_WORDS_6 = ['schraub']
+    STEM_WORDS_7 = ['end']
+    STEM_WORDS_8 = ['sombrero']
+    STEM_WORDS = [STEM_WORDS_1, STEM_WORDS_2, STEM_WORDS_3, STEM_WORDS_4, STEM_WORDS_5, STEM_WORDS_6, STEM_WORDS_7, STEM_WORDS_8]
 
 class Subsession(BaseSubsession):
     pass
@@ -348,6 +357,7 @@ class Clue_Page(Page):
         else:
             mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
             mystery_word = mystery_word.lower()   
+            stem_words = C.STEM_WORDS[player.round_number - 1]
             ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12]
             import re            
             import translators as ts            
@@ -365,8 +375,9 @@ class Clue_Page(Page):
                         more = ideas[i].split() 
                         if len(more)>1: 
                             ideas[i] = 'false'
-                    if ideas[i] in mystery_word or mystery_word in ideas[i]:
-                        ideas[i] = 'false'
+                    for j in range(len(stem_words)):
+                        if stem_words[j] in ideas[i] or ideas[i] in stem_words[j]:
+                            ideas[i] = 'false'
                     if ideas[i] not in wordlist:
                         ideas[i] = 'false' 
                     if re.search("[^a-zA-Z0-9s]", ideas[i]):
@@ -456,12 +467,13 @@ def Idea12_error_message(player, value):
         return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 class VotingResultPage(Page):
-    timeout_seconds = 45
+    timeout_seconds = 30
     def is_displayed(player):
         return player.role() == 'Hinweisgebende'
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         mystery_word = mystery_word.lower()
+        stem_words = C.STEM_WORDS[player.round_number - 1]
         votes = [player.vote] + [p.vote for p in player.get_others_in_group()]
         while '' in votes:
             votes.remove('')
@@ -491,8 +503,9 @@ class VotingResultPage(Page):
                     word_trans = word_trans.lower()
                     if mystery_word in word_trans or word_trans in mystery_word:  
                         words[i] = 'false'
-                if words[i] in mystery_word or mystery_word in words[i]:
-                    words[i] = 'false'
+                for j in range(len(stem_words)):
+                    if stem_words[j] in words[i] or words[i] in stem_words[j]:
+                        words[i] = 'false'
                 if words[i] not in wordlist:
                     words[i] = 'false'
         corrected_votes = []
@@ -742,7 +755,8 @@ class Generation_Page(Page):
             player.pair6 = 'empty'
         else:
             mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
-            mystery_word = mystery_word.lower()   
+            mystery_word = mystery_word.lower()  
+            stem_words = C.STEM_WORDS[player.round_number - 1] 
             ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12]
             import re            
             import translators as ts            
@@ -760,8 +774,9 @@ class Generation_Page(Page):
                         more = ideas[i].split() 
                         if len(more)>1: 
                             ideas[i] = 'false'
-                    if ideas[i] in mystery_word or mystery_word in ideas[i]:
-                        ideas[i] = 'false'
+                    for j in range(len(stem_words)):
+                        if stem_words[j] in ideas[i] or ideas[i] in stem_words[j]:
+                            ideas[i] = 'false'
                     if ideas[i] not in wordlist:
                         ideas[i] = 'false' 
                     if re.search("[^a-zA-Z0-9s]", ideas[i]):
@@ -858,7 +873,7 @@ class Generation_WaitPage(WaitPage):
         return player.role() == 'Hinweisgebende'
 
 class Discussion(Page):
-    timeout_seconds = 150
+    timeout_seconds = 210
     def is_displayed(player):
         return player.role() == 'Hinweisgebende'
     form_model = 'player'   

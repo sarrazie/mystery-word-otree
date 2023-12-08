@@ -9,6 +9,16 @@
         display: none;
     }
 </style>
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 20) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+</br>
 <p> <b><font color="#FF0000">{{ invalid }} </font></b></p>
 <p> <b><font color="#FF0000">{{ missing }}</b></font> </p>
 <p> <b><font color="#FF0000">{{ guess_missing }}</font></b> </p>

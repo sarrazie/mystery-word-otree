@@ -9,6 +9,15 @@
         display: none;
     }
 </style>
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 20) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
 <p> Der Punktestand Ihrer Gruppe: <b> {{ score }} Punkt(e) </b> </p>
 <p> Die aktuellen Punktestände aller Gruppen: </p>
 

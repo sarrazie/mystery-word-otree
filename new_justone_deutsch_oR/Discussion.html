@@ -12,14 +12,14 @@
 <script>
     document.addEventListener("DOMContentLoaded", function (event) {
         $('.otree-timer__time-left').on('update.countdown', function (event) {
-            if (event.offset.totalSeconds === 15) {
+            if (event.offset.totalSeconds === 20) {
                 $('.otree-timer').show();
             }
         });
     });
 </script>
 </br>
-<p>Folgende gültige<b>Hinweispaare</b> wurden von Ihren Mitspielenden geschrieben.</p>
+<p>Folgende gültige <b>Hinweispaare</b> wurden von Ihren Mitspielenden geschrieben.</p>
 <p><b>Bewerten</b> Sie, wie gut Sie das jeweilige Hinweispaar finden und machen Sie <b>Vorschläge</b>, welche Hinweise Sie ersetzen würden.</p>
 </br>
 {{ if number_pairs > 0 }}

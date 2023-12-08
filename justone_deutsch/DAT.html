@@ -10,6 +10,16 @@
     }
 </style>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 20) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+
 <p>Bitte geben Sie 10 Wörter ein, die so <strong>unterschiedlich</strong> wie möglich voneinander sind,
 in allen Bedeutungen und Verwendungen der Wörter.</p>
 <p><strong>Regeln:</strong></p>

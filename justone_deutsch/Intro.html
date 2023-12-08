@@ -10,6 +10,15 @@
     }
 </style>
 </br>
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 20) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
 
 <div class="info active">
 <p> Sie wurden <b>zu viert</b> in Gruppen eingeteilt. Zusammen in Ihrer Gruppe spielen Sie insgesamt <b>10 Runden.</b> </p>  

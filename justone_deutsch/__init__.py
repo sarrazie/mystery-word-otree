@@ -10,8 +10,19 @@ class C(BaseConstants):
     NAME_IN_URL = 'Mystery_Word_deutsch'
     NUM_ROUNDS = 10
     PLAYERS_PER_GROUP = 4
-    MYSTERY_WORDS = ['Raum','Taube', 'Golf', 'Elektrizität', 'Leiter', 'Schraube', 'Vase', 'Ende', 'Sombrero', 'Dessert']
+    MYSTERY_WORDS = ['Raum','Taube', 'Golf', 'Elektrizitaet', 'Leiter', 'Schraube', 'Vase', 'Ende', 'Sombrero', 'Dessert']
     LANGUAGE_CODE = 'de'
+    STEM_WORDS_1 = ['raum', 'raeum'] 
+    STEM_WORDS_2 = ['taub', 'taeub']
+    STEM_WORDS_3 = ['golf']
+    STEM_WORDS_4 = ['elektr']  
+    STEM_WORDS_5 = ['leit'] 
+    STEM_WORDS_6 = ['schraub']
+    STEM_WORDS_7 = ['vase']
+    STEM_WORDS_8 = ['end']
+    STEM_WORDS_9 = ['sombrero']
+    STEM_WORDS_10 = ['dessert']
+    STEM_WORDS = [STEM_WORDS_1, STEM_WORDS_2, STEM_WORDS_3, STEM_WORDS_4, STEM_WORDS_5, STEM_WORDS_6, STEM_WORDS_7, STEM_WORDS_8, STEM_WORDS_9, STEM_WORDS_10]
 
 class Subsession(BaseSubsession):
     pass
@@ -264,6 +275,7 @@ class Guess_Page(Page):
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         mystery_word = mystery_word.lower()
+        stem_words = C.STEM_WORDS[player.round_number - 1]
         clues_group = [p.clues for p in player.get_others_in_group()]
         special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
         clues_group[0] = clues_group[0].translate(special_char_map)
@@ -301,12 +313,13 @@ class Guess_Page(Page):
             clues_group[1] = 'Ungültiger Hinweis'
         if re.search("[^a-zA-Z0-9s]", clues_group[2]) and clues_group[2] != 'Identischer Hinweis' and clues_group[2] != 'Kein Hinweis gegeben':
             clues_group[2] = 'Ungültiger Hinweis'
-        if mystery_word in clues_group[0] or clues_group[0] in mystery_word:
-            clues_group[0] = 'Ungültiger Hinweis' 
-        if mystery_word in clues_group[1] or clues_group[1] in mystery_word:
-            clues_group[1] = 'Ungültiger Hinweis' 
-        if mystery_word in clues_group[2] or clues_group[2] in mystery_word:
-            clues_group[2] = 'Ungültiger Hinweis'
+        for i in range(len(stem_words)):
+            if stem_words[i] in clues_group[0] or clues_group[0] in stem_words[i]:
+                clues_group[0] = 'Ungültiger Hinweis'
+            if stem_words[i] in clues_group[1] or clues_group[1] in stem_words[i]:
+                clues_group[1] = 'Ungültiger Hinweis'
+            if stem_words[i] in clues_group[2] or clues_group[2] in stem_words[i]:
+                clues_group[2] = 'Ungültiger Hinweis'
         def num_there(s):
             return any(i.isdigit() for i in s)
         import translators as ts
@@ -354,6 +367,7 @@ class Results(Page):
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         mystery_word = mystery_word.lower()
+        stem_words = C.STEM_WORDS[player.round_number - 1]
         if player.role() == 'Hinweisgebende':
             own_clue = player.clues
             special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
@@ -380,9 +394,10 @@ class Results(Page):
                 if own_clue in clues[0] or clues[0] in own_clue or own_clue in clues[1] or clues[1] in own_clue:
                     player.identical = True
                     identical = 'Achtung! Sie haben einen identischen Hinweis gegeben.'
-                if own_clue in mystery_word or mystery_word in own_clue:
-                    player.invalid = True
-                    invalid = 'Achtung! Ihr Hinweis war ungültig (gleiche Wortfamilie wie das geheimnisvolle Wort).'
+                for i in range(len(stem_words)):
+                    if own_clue in stem_words[i] or stem_words[i] in own_clue:
+                        player.invalid = True
+                        invalid = 'Achtung! Ihr Hinweis war ungültig (gleiche Wortfamilie wie das geheimnisvolle Wort).'
                 if ' ' in own_clue and player.invalid == False:
                     more = own_clue.split() 
                     if len(more)>1:
@@ -433,8 +448,9 @@ class Results(Page):
                             own_ideas[i] = 'false'
             if len(own_ideas) > 0:
                 for i in range(len(own_ideas)):
-                    if own_ideas[i] in mystery_word or mystery_word in own_ideas[i]:
-                        own_ideas[i] = 'false'
+                    for j in range(len(stem_words)):
+                        if own_ideas[i] in stem_words[j] or stem_words[j] in own_ideas[i]:
+                            own_ideas[i] = 'false'     
             with open("wordlist-german.txt", 'r') as file:
                 text = file.read()
                 wordlist= text.split()
