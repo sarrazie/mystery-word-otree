@@ -59,6 +59,13 @@ class Player(BasePlayer):
     strategy_4 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>9. </b>"Ich habe versucht, eindeutige und naheliegende Hinweise zu geben, auch auf die Gefahr hin, dass meine Mitspielenden identische Hinweise abgeben."', widget=widgets.RadioSelectHorizontal)
     strategy_5 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>10. </b>"Ein Wettkampf mit anderen Gruppen würde mich motivieren, möglichst gute Hinweise zu geben und das geheime Wort zu erraten."', widget=widgets.RadioSelectHorizontal)
     strategy_6 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>11. </b>"Eine Bonuszahlung geknüpft an unsere Gruppenperformance würde mich motivieren, möglichst gute Hinweise zu geben und das geheime Wort zu erraten."', widget=widgets.RadioSelectHorizontal)
+    individualism_1 = models.IntegerField(choices=[-3, -2, -1, 0, 1, 2, 3], widget=widgets.RadioSelect)
+    individualism_2 = models.IntegerField(choices=[-3, -2, -1, 0, 1, 2, 3], widget=widgets.RadioSelect)
+    individualism_3 = models.IntegerField(choices=[-3, -2, -1, 0, 1, 2, 3], widget=widgets.RadioSelect)
+    individualism_4 = models.IntegerField(choices=[-3, -2, -1, 0, 1, 2, 3], widget=widgets.RadioSelect)
+    individualism_5 = models.IntegerField(choices=[-3, -2, -1, 0, 1, 2, 3], widget=widgets.RadioSelect)
+    future_1 = models.StringField(choices=[['mindestens einmal täglich', 'mindestens einmal täglich'], ['mindestens einmal wöchentlich', 'mindestens einmal wöchentlich'], ['mindestens einmal monatlich', 'mindestens einmal monatlich'], ['seltener als einmal im Monat', 'seltener als einmal im Monat']], label='<b>6. </b>Wie oft denken Sie darüber nach, wie der Klimawandel Ihre persönliche Zukunft beeinflusst?', widget=widgets.RadioSelect)
+    future_2 = models.StringField(choices=[['mindestens einmal täglich', 'mindestens einmal täglich'], ['mindestens einmal wöchentlich', 'mindestens einmal wöchentlich'], ['mindestens einmal monatlich', 'mindestens einmal monatlich'], ['seltener als einmal im Monat', 'seltener als einmal im Monat']], label='<b>7. </b>	Wie oft denken Sie darüber nach, wie der Klimawandel die Zukunft der Gesellschaft beeinflusst?', widget=widgets.RadioSelect)
     Idea1 = models.StringField(label= '', initial='', blank=True)
     Idea2 = models.StringField(label= '', initial='', blank=True)
     Idea3 = models.StringField(label= '', initial='', blank=True)
@@ -530,6 +537,14 @@ class FredaQuestions(Page):
     form_model = 'player'
     form_fields = ['freda_1', 'freda_2', 'freda_3', 'freda_4', 'freda_5', 'freda_6', 'freda_7', 'freda_8']
 
+class IndividualismQuestions(Page):
+    template_name = 'justone_deutsch/IndividualismQuestions.html'
+    timeout_seconds = 180
+    def is_displayed(player):
+        return player.round_number == C.NUM_ROUNDS
+    form_model = 'player'
+    form_fields = ['individualism_1', 'individualism_2', 'individualism_3', 'individualism_4', 'individualism_5', 'future_1', 'future_2']
+
 class UnderstandPage(Page):
     template_name = 'justone_deutsch/UnderstandPage.html'
     timeout_seconds = 180
@@ -553,4 +568,4 @@ class FinalPage(Page):
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
 
-page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, Instructions_2, UnderstandPage, Round, Clue_Page, GuesserWaitPage, Guess_Page, CluegiverWaitPage, ResultsWaitPage, Results, Score, TestQuestions, FredaQuestions, DAT, FinalPage]
+page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, Instructions_2, UnderstandPage, Round, Clue_Page, GuesserWaitPage, Guess_Page, CluegiverWaitPage, ResultsWaitPage, Results, Score, TestQuestions, FredaQuestions, IndividualismQuestions, DAT, FinalPage]

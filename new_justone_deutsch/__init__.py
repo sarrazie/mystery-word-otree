@@ -53,12 +53,19 @@ class Player(BasePlayer):
     understand_3 = models.StringField(choices=[['false,','Zwei'],['false', 'Drei'],['true', 'Vier'],['false', 'Fünf']], label='<b>Frage 3:</b> Wie viele Spielerinnen und Spieler bilden zusammen eine Gruppe?', widget=widgets.RadioSelect)
     understand_4 = models.StringField(choices=[['true', '10 Euro fix für die Teilnahme an allen Runden'],['false', '5 Euro fix plus 5 Euro Bonus für die meisten generierten Ideen'],['false', '5 Euro fix plus 5 Euro Bonus für die meisten erratenen geheimen Wörter'],['false','5 Euro fix plus 5 Euro Bonus für die originellsten Hinweispaare, die zur richtigen Erratung des Wortes führen']], label='<b>Frage 4:</b> Wie viel Geld können Sie maximal in diesem Experiment verdienen?', widget=widgets.RadioSelect)
     understand_5 = models.StringField(choices=[['false', 'Time'], ['false', 'Zeitpunkt'],['false', 'ist Geld'],['false', 'Zeeeit'],['true', 'keiner der oben genannten Hinweise']], label='<b>Frage 5:</b> Welcher der folgenden Hinweise wäre ein gültiger Hinweis in einem Hinweispaar für das geheime Wort "Zeit"?', widget=widgets.RadioSelect)
-    strategy = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>6. </b>"Ich habe ständig nur daran gedacht, welche Hinweise meine Mitspielenden abgeben."', widget=widgets.RadioSelectHorizontal)
+    strategy = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>6. </b>"Ich habe ständig nur daran gedacht, welche Hinweise andere Teilnehmende/Gruppen abgeben."', widget=widgets.RadioSelectHorizontal)
     strategy_2 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>7. </b>"Erst möglichst viele Ideen aufzuschreiben, hilft mir dabei, später bessere Hinweise zu geben."', widget=widgets.RadioSelectHorizontal)
-    strategy_3 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>8. </b>"Ich habe versucht, möglichst originelle und einzigartige Hinweise zu geben, damit ich keine identischen Hinweise wie meine Mitspielenden abgebe."', widget=widgets.RadioSelectHorizontal)
-    strategy_4 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>9. </b>"Ich habe versucht, eindeutige und naheliegende Hinweise zu geben, auch auf die Gefahr hin, dass meine Mitspielenden identische Hinweise abgeben."', widget=widgets.RadioSelectHorizontal)
-    strategy_5 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>10. </b>"Ein Wettkampf mit anderen Gruppen würde mich motivieren, möglichst gute Hinweise zu geben und das geheime Wort zu erraten."', widget=widgets.RadioSelectHorizontal)
-    strategy_6 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>11. </b>"Eine Bonuszahlung geknüpft an unsere Gruppenperformance würde mich motivieren, möglichst gute Hinweise zu geben und das geheime Wort zu erraten."', widget=widgets.RadioSelectHorizontal)
+    strategy_3 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>8. </b>"Ich habe versucht, möglichst originelle und einzigartige Hinweise zu geben, damit ich keine identischen Hinweise wie andere Teilnehmende/Gruppen abgebe."', widget=widgets.RadioSelectHorizontal)
+    strategy_4 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>9. </b>"Ich habe versucht, eindeutige und naheliegende Hinweise zu geben, auch auf die Gefahr hin, dass andere Teilnehmende/Gruppen identische Hinweise abgeben."', widget=widgets.RadioSelectHorizontal)
+    strategy_5 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>11. </b>"Ein Wettkampf mit anderen Gruppen würde mich motivieren, möglichst gute Hinweise zu geben und das geheime Wort zu erraten."', widget=widgets.RadioSelectHorizontal)
+    strategy_6 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>12. </b>"Eine Bonuszahlung geknüpft an unsere Gruppenperformance würde mich motivieren, möglichst gute Hinweise zu geben und das geheime Wort zu erraten."', widget=widgets.RadioSelectHorizontal)
+    individualism_1 = models.IntegerField(choices=[-3, -2, -1, 0, 1, 2, 3], widget=widgets.RadioSelect)
+    individualism_2 = models.IntegerField(choices=[-3, -2, -1, 0, 1, 2, 3], widget=widgets.RadioSelect)
+    individualism_3 = models.IntegerField(choices=[-3, -2, -1, 0, 1, 2, 3], widget=widgets.RadioSelect)
+    individualism_4 = models.IntegerField(choices=[-3, -2, -1, 0, 1, 2, 3], widget=widgets.RadioSelect)
+    individualism_5 = models.IntegerField(choices=[-3, -2, -1, 0, 1, 2, 3], widget=widgets.RadioSelect)
+    future_1 = models.StringField(choices=[['mindestens einmal täglich', 'mindestens einmal täglich'], ['mindestens einmal wöchentlich', 'mindestens einmal wöchentlich'], ['mindestens einmal monatlich', 'mindestens einmal monatlich'], ['seltener als einmal im Monat', 'seltener als einmal im Monat']], label='<b>6. </b>Wie oft denken Sie darüber nach, wie der Klimawandel Ihre persönliche Zukunft beeinflusst?', widget=widgets.RadioSelect)
+    future_2 = models.StringField(choices=[['mindestens einmal täglich', 'mindestens einmal täglich'], ['mindestens einmal wöchentlich', 'mindestens einmal wöchentlich'], ['mindestens einmal monatlich', 'mindestens einmal monatlich'], ['seltener als einmal im Monat', 'seltener als einmal im Monat']], label='<b>7. </b>	Wie oft denken Sie darüber nach, wie der Klimawandel die Zukunft der Gesellschaft beeinflusst?', widget=widgets.RadioSelect)
     Idea1 = models.StringField(label= '', initial='', blank=True)
     Idea2 = models.StringField(label= '', initial='', blank=True)
     Idea3 = models.StringField(label= '', initial='', blank=True)
@@ -156,7 +163,7 @@ class Player(BasePlayer):
     corrected_votes = models.StringField()
     pairsafter = models.StringField(label= '', initial='', blank=True)
     number_pairs = models.IntegerField()
-    group_individual = models.StringField(choices=[['Gruppe', 'Es war produktiv, in der Gruppe zu arbeiten'], ['Individuell', 'Ich hätte lieber alleine Hinweise gegeben']], label='<b>12.</b> Wie haben Sie die Zusammenarbeit in Ihrer Gruppe erlebt?', widget=widgets.RadioSelectHorizontal)
+    group_individual = models.StringField(choices=[['Gruppe', 'Es war produktiv, in der Gruppe zu arbeiten'], ['Individuell', 'Ich hätte lieber alleine Hinweise gegeben']], label='<b>10.</b> Wie haben Sie die Zusammenarbeit in Ihrer Gruppe erlebt?', widget=widgets.RadioSelectHorizontal)
 
 def creating_session(subsession: Subsession):
     session = subsession.session
@@ -679,7 +686,7 @@ class TestQuestions(Page):
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
     form_model = 'player'
-    form_fields = ['known', 'understanding', 'role_question', 'comments', 'comments_2', 'strategy', 'strategy_2', 'strategy_3', 'strategy_4', 'strategy_5', 'strategy_6', 'group_individual']
+    form_fields = ['known', 'understanding', 'role_question', 'comments', 'comments_2', 'strategy', 'strategy_2', 'strategy_3', 'strategy_4', 'group_individual' ,'strategy_5', 'strategy_6', ]
 
 class FredaQuestions(Page):
     template_name = 'new_justone_deutsch/FredaQuestions.html'
@@ -688,6 +695,14 @@ class FredaQuestions(Page):
         return player.round_number == C.NUM_ROUNDS
     form_model = 'player'
     form_fields = ['freda_1', 'freda_2', 'freda_3', 'freda_4', 'freda_5', 'freda_6', 'freda_7', 'freda_8']
+
+class IndividualismQuestions(Page):
+    template_name = 'justone_deutsch/IndividualismQuestions.html'
+    timeout_seconds = 180
+    def is_displayed(player):
+        return player.round_number == C.NUM_ROUNDS
+    form_model = 'player'
+    form_fields = ['individualism_1', 'individualism_2', 'individualism_3', 'individualism_4', 'individualism_5', 'future_1', 'future_2']
 
 class UnderstandPage(Page):
     template_name = 'new_justone_deutsch/UnderstandPage.html'
@@ -1257,4 +1272,4 @@ class FinalPage(Page):
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
 
-page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, Instructions_2, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, CluegiverWaitPage, Guess_Page, ResultsWaitPage, Results, Score, TestQuestions, FredaQuestions, DAT, FinalPage]
+page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, Instructions_2, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, CluegiverWaitPage, Guess_Page, ResultsWaitPage, Results, Score, TestQuestions, FredaQuestions, IndividualismQuestions, DAT, FinalPage]
