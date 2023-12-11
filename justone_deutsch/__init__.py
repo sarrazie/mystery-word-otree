@@ -322,6 +322,12 @@ class Guess_Page(Page):
                 clues_group[2] = 'Ungültiger Hinweis'
         def num_there(s):
             return any(i.isdigit() for i in s)
+        if num_there(clues_group[0]) == True:
+            clues_group[0] = 'Ungültiger Hinweis'
+        if num_there(clues_group[1]) == True:
+            clues_group[1] = 'Ungültiger Hinweis'
+        if num_there(clues_group[2]) == True:
+            clues_group[2] = 'Ungültiger Hinweis'
         import translators as ts
         if num_there(clues_group[0]) == False and clues_group[0] != 'Identischer Hinweis' and clues_group[0] != 'Kein Hinweis gegeben':
             clue_trans = ts.translate_text(query_text=clues_group[0], translator='google', from_language='auto', to_language='de')
@@ -409,6 +415,9 @@ class Results(Page):
                     invalid = 'Achtung! Ihr Hinweis war ungültig (Verwendung von Sonderzeichen).'
                 def num_there(s):
                     return any(i.isdigit() for i in s)
+                if num_there(own_clue) == True and player.invalid == False:
+                    player.invalid = True
+                    invalid = 'Achtung! Ihr Hinweis war ungültig (Verwendung von Zahlen).'
                 import translators as ts
                 if num_there(own_clue) == False and player.invalid == False:
                     clue_trans = ts.translate_text(query_text=own_clue, translator='google', from_language='auto', to_language='de')
@@ -468,11 +477,12 @@ class Results(Page):
             import translators as ts
             if len(own_ideas) > 0:
                 for i in range(len(own_ideas)):
-                    if has_numbers(own_ideas[i]) == False:
-                        clue_trans = ts.translate_text(query_text=own_ideas[i], translator='google', from_language='auto', to_language='de')
-                        clue_trans = clue_trans.lower()
-                        if mystery_word in clue_trans or clue_trans in mystery_word:  
-                            own_ideas[i] = 'false'
+                    if has_numbers(own_ideas[i]) == True:
+                        own_ideas[i] = 'false'
+                    clue_trans = ts.translate_text(query_text=own_ideas[i], translator='google', from_language='auto', to_language='de')
+                    clue_trans = clue_trans.lower()
+                    if mystery_word in clue_trans or clue_trans in mystery_word:  
+                        own_ideas[i] = 'false'
             while 'false' in own_ideas:
                 own_ideas.remove('false')
             own_ideas = list(dict.fromkeys(own_ideas))
