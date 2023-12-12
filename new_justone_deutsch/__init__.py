@@ -84,8 +84,6 @@ class Player(BasePlayer):
     Idea8 = models.StringField(label= '', initial='', blank=True)
     Idea9 = models.StringField(label= '', initial='', blank=True)
     Idea10 = models.StringField(label= '', initial='', blank=True)
-    Idea11 = models.StringField(label= '', initial='', blank=True)
-    Idea12 = models.StringField(label= '', initial='', blank=True)
     word1 = models.StringField(label= '', initial='', blank=False)
     word2 = models.StringField(label= '', initial='', blank=False)
     word3 = models.StringField(label= '', initial='', blank=False)
@@ -110,13 +108,11 @@ class Player(BasePlayer):
     pair3 = models.StringField(initial='')
     pair4 = models.StringField(initial='')
     pair5 = models.StringField(initial='')
-    pair6 = models.StringField(initial='')
     pair1after = models.StringField(initial='')
     pair2after = models.StringField(initial='')
     pair3after = models.StringField(initial='')
     pair4after = models.StringField(initial='')
     pair5after = models.StringField(initial='')
-    pair6after = models.StringField(initial='')
     rating_before1 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=[['&#128077;', '&#128077;'],['&#128078;', '&#128078;'],], label='', blank=True, initial='')
     rating_before2 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=[['&#128077;', '&#128077;'],['&#128078;', '&#128078;'],], label='', blank=True, initial='')
     rating_before3 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=[['&#128077;', '&#128077;'],['&#128078;', '&#128078;'],], label='', blank=True, initial='')
@@ -127,8 +123,6 @@ class Player(BasePlayer):
     rating_before8 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=[['&#128077;', '&#128077;'],['&#128078;', '&#128078;'],], label='', blank=True, initial='')
     rating_before9 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=[['&#128077;', '&#128077;'],['&#128078;', '&#128078;'],], label='', blank=True, initial='')
     rating_before10 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=[['&#128077;', '&#128077;'],['&#128078;', '&#128078;'],], label='', blank=True, initial='')
-    rating_before11 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=[['&#128077;', '&#128077;'],['&#128078;', '&#128078;'],], label='', blank=True, initial='')
-    rating_before12 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=[['&#128077;', '&#128077;'],['&#128078;', '&#128078;'],], label='', blank=True, initial='')
     discussion1 = models.StringField(label= '', initial='', blank=True)
     discussion2 = models.StringField(label= '', initial='', blank=True)
     discussion3 = models.StringField(label= '', initial='', blank=True)
@@ -139,8 +133,6 @@ class Player(BasePlayer):
     discussion8 = models.StringField(label= '', initial='', blank=True)
     discussion9 = models.StringField(label= '', initial='', blank=True)
     discussion10 = models.StringField(label= '', initial='', blank=True)
-    discussion11 = models.StringField(label= '', initial='', blank=True)
-    discussion12 = models.StringField(label= '', initial='', blank=True)
     other_pairs = models.StringField(label= '', initial='', blank=True)
     replace_word1 = models.StringField(widget = widgets.RadioSelectHorizontal, choices=[['erste', 'erste Wort durch:'],['zweite', 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
     replace_word2 = models.StringField(widget = widgets.RadioSelectHorizontal, choices=[['erste', 'erste Wort durch:'],['zweite', 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
@@ -152,8 +144,6 @@ class Player(BasePlayer):
     replace_word8 = models.StringField(widget = widgets.RadioSelectHorizontal, choices=[['erste', 'erste Wort durch:'],['zweite', 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
     replace_word9 = models.StringField(widget = widgets.RadioSelectHorizontal, choices=[['erste', 'erste Wort durch:'],['zweite', 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
     replace_word10 = models.StringField(widget = widgets.RadioSelectHorizontal, choices=[['erste', 'erste Wort durch:'],['zweite', 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
-    replace_word11 = models.StringField(widget = widgets.RadioSelectHorizontal, choices=[['erste', 'erste Wort durch:'],['zweite', 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
-    replace_word12 = models.StringField(widget = widgets.RadioSelectHorizontal, choices=[['erste', 'erste Wort durch:'],['zweite', 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
     pair_feedback1 = models.StringField(label= '', initial='', blank=True)
     pair_feedback2 = models.StringField(label= '', initial='', blank=True)
     pair_feedback3 = models.StringField(label= '', initial='', blank=True)
@@ -164,8 +154,6 @@ class Player(BasePlayer):
     pair_feedback8 = models.StringField(label= '', initial='', blank=True)
     pair_feedback9 = models.StringField(label= '', initial='', blank=True)
     pair_feedback10 = models.StringField(label= '', initial='', blank=True)
-    pair_feedback11 = models.StringField(label= '', initial='', blank=True)
-    pair_feedback12 = models.StringField(label= '', initial='', blank=True)
     vote = models.StringField(initial='')
     vote_group = models.StringField(initial='')
     corrected_votes = models.StringField()
@@ -250,7 +238,7 @@ class Clue_Page(Page):
     def is_displayed(player):
         return player.role() == 'Hinweisgebende'   
     form_model = 'player'
-    form_fields = ['Idea1', 'Idea2', 'Idea3', 'Idea4', 'Idea5', 'Idea6', 'Idea7', 'Idea8', 'Idea9', 'Idea10', 'Idea11', 'Idea12']
+    form_fields = ['Idea1', 'Idea2', 'Idea3', 'Idea4', 'Idea5', 'Idea6', 'Idea7', 'Idea8', 'Idea9', 'Idea10']
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         feedback1_group = [p.pair_feedback1 for p in player.get_others_in_group()]
@@ -273,10 +261,6 @@ class Clue_Page(Page):
         feedback9_group = list(filter(bool, feedback9_group))
         feedback10_group = [p.pair_feedback10 for p in player.get_others_in_group()]
         feedback10_group = list(filter(bool, feedback10_group))
-        feedback11_group = [p.pair_feedback11 for p in player.get_others_in_group()]
-        feedback11_group = list(filter(bool, feedback11_group))
-        feedback12_group = [p.pair_feedback12 for p in player.get_others_in_group()]
-        feedback12_group = list(filter(bool, feedback12_group))
         rating_1 = []
         replace_1 = []
         r_word_1 = []
@@ -292,9 +276,6 @@ class Clue_Page(Page):
         rating_5 = []
         replace_5 = []
         r_word_5 = []
-        rating_6 = []
-        replace_6 = []
-        r_word_6 = []
         all_feedback_groups = []
         if feedback1_group != ['', '']:
             all_feedback_groups = feedback1_group
@@ -316,10 +297,6 @@ class Clue_Page(Page):
             all_feedback_groups = feedback1_group + feedback2_group + feedback3_group + feedback4_group + feedback5_group + feedback6_group + feedback7_group + feedback8_group + feedback9_group
         if feedback1_group != ['', ''] and feedback2_group != ['', ''] and feedback3_group != ['', ''] and feedback4_group != ['', ''] and feedback5_group != ['', ''] and feedback6_group != ['', ''] and feedback7_group != ['', ''] and feedback8_group != ['', ''] and feedback9_group != ['', ''] and feedback10_group != ['', '']:
             all_feedback_groups = feedback1_group + feedback2_group + feedback3_group + feedback4_group + feedback5_group + feedback6_group + feedback7_group + feedback8_group + feedback9_group + feedback10_group
-        if feedback1_group != ['', ''] and feedback2_group != ['', ''] and feedback3_group != ['', ''] and feedback4_group != ['', ''] and feedback5_group != ['', ''] and feedback6_group != ['', ''] and feedback7_group != ['', ''] and feedback8_group != ['', ''] and feedback9_group != ['', ''] and feedback10_group != ['', ''] and feedback11_group != ['', '']:
-            all_feedback_groups = feedback1_group + feedback2_group + feedback3_group + feedback4_group + feedback5_group + feedback6_group + feedback7_group + feedback8_group + feedback9_group + feedback10_group + feedback11_group
-        if feedback1_group != ['', ''] and feedback2_group != ['', ''] and feedback3_group != ['', ''] and feedback4_group != ['', ''] and feedback5_group != ['', ''] and feedback6_group != ['', ''] and feedback7_group != ['', ''] and feedback8_group != ['', ''] and feedback9_group != ['', ''] and feedback10_group != ['', ''] and feedback11_group != ['', ''] and feedback12_group != ['', '']:
-            all_feedback_groups = feedback1_group + feedback2_group + feedback3_group + feedback4_group + feedback5_group + feedback6_group + feedback7_group + feedback8_group + feedback9_group + feedback10_group + feedback11_group + feedback12_group
         import ast
         for element in all_feedback_groups:
             element_list = ast.literal_eval(element)
@@ -343,18 +320,14 @@ class Clue_Page(Page):
                 rating_5.append(element_list[1])
                 replace_5.append(element_list[2])
                 r_word_5.append(element_list[3])
-            if element_list[0] == player.pair6:
-                rating_6.append(element_list[1])
-                replace_6.append(element_list[2])
-                r_word_6.append(element_list[3])
-        return dict(mystery_word = mystery_word, Rating_1 = rating_1, Replace_1 = replace_1, R_word_1 = r_word_1, Rating_2 = rating_2, Replace_2 = replace_2, R_word_2 = r_word_2, Rating_3 = rating_3, Replace_3 = replace_3, R_word_3 = r_word_3, Rating_4 = rating_4, Replace_4 = replace_4, R_word_4 = r_word_4, Rating_5 = rating_5, Replace_5 = replace_5, R_word_5 = r_word_5, Rating_6 = rating_6, Replace_6 = replace_6, R_word_6 = r_word_6, Feedback1 = feedback1_group, Feedback2 = feedback2_group, Feedback3 = feedback3_group, Feedback4 = feedback4_group, Feedback5 = feedback5_group, Feedback6 = feedback6_group, Feedback7 = feedback7_group, Feedback8 = feedback8_group, Feedback9 = feedback9_group, Feedback10 = feedback10_group, Feedback11 = feedback11_group, Feedback12 = feedback12_group)
+        return dict(mystery_word = mystery_word, Rating_1 = rating_1, Replace_1 = replace_1, R_word_1 = r_word_1, Rating_2 = rating_2, Replace_2 = replace_2, R_word_2 = r_word_2, Rating_3 = rating_3, Replace_3 = replace_3, R_word_3 = r_word_3, Rating_4 = rating_4, Replace_4 = replace_4, R_word_4 = r_word_4, Rating_5 = rating_5, Replace_5 = replace_5, R_word_5 = r_word_5, Feedback1 = feedback1_group, Feedback2 = feedback2_group, Feedback3 = feedback3_group, Feedback4 = feedback4_group, Feedback5 = feedback5_group, Feedback6 = feedback6_group, Feedback7 = feedback7_group, Feedback8 = feedback8_group, Feedback9 = feedback9_group, Feedback10 = feedback10_group)
     
     def before_next_page(player, timeout_happened):
         if timeout_happened:
             mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
             mystery_word = mystery_word.lower()   
             stem_words = C.STEM_WORDS[player.round_number - 1]
-            ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12]
+            ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10]
             import re            
             import translators as ts            
             def has_numbers(s):
@@ -409,15 +382,11 @@ class Clue_Page(Page):
                 player.pair5after = ideas[8] + ' + ' + ideas[9]
             else:
                 player.pair5after = 'empty'
-            if ((ideas[10] != '' and ideas[10] != 'false') and (ideas[11] != '' and ideas[11] != 'false')):
-                player.pair6after = ideas[10] + ' + ' + ideas[11]
-            else:
-                player.pair6after = 'empty'
         else:
             mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
             mystery_word = mystery_word.lower()   
             stem_words = C.STEM_WORDS[player.round_number - 1]
-            ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12]
+            ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10]
             import re            
             import translators as ts            
             def has_numbers(s):
@@ -472,10 +441,6 @@ class Clue_Page(Page):
                 player.pair5after = ideas[8] + ' + ' + ideas[9]
             else:
                 player.pair5after = 'empty'
-            if ((ideas[10] != '' and ideas[10] != 'false') and (ideas[11] != '' and ideas[11] != 'false')):
-                player.pair6after = ideas[10] + ' + ' + ideas[11]
-            else:
-                player.pair6after = 'empty'
             
 def wordlength(player, value):
     value = value.lower()
@@ -519,14 +484,6 @@ def Idea9_error_message(player, value):
         return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 def Idea10_error_message(player, value):
-    if wordlength(player, value) == True:
-        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
-
-def Idea11_error_message(player, value):
-    if wordlength(player, value) == True:
-        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
-    
-def Idea12_error_message(player, value):
     if wordlength(player, value) == True:
         return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
@@ -686,7 +643,7 @@ class Results(Page):
             player.missing = False
             guess_missing = ''
             missing = ''
-            pairs = [player.pair1after] + [player.pair2after] + [player.pair3after] + [player.pair4after] + [player.pair5after] + [player.pair6after]
+            pairs = [player.pair1after] + [player.pair2after] + [player.pair3after] + [player.pair4after] + [player.pair5after]
             for i in range(len(pairs)):
                 if pairs[i] == 'empty':
                     pairs[i] = ''
@@ -806,7 +763,7 @@ class Generation_Page(Page):
     def is_displayed(player):
         return player.role() == 'Hinweisgebende'   
     form_model = 'player'
-    form_fields = ['Idea1', 'Idea2', 'Idea3', 'Idea4', 'Idea5', 'Idea6', 'Idea7', 'Idea8', 'Idea9', 'Idea10', 'Idea11', 'Idea12']
+    form_fields = ['Idea1', 'Idea2', 'Idea3', 'Idea4', 'Idea5', 'Idea6', 'Idea7', 'Idea8', 'Idea9', 'Idea10']
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         return dict(mystery_word = mystery_word)
@@ -816,7 +773,7 @@ class Generation_Page(Page):
             mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
             mystery_word = mystery_word.lower()  
             stem_words = C.STEM_WORDS[player.round_number - 1] 
-            ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12]
+            ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10]
             import re            
             import translators as ts            
             def has_numbers(s):
@@ -871,11 +828,7 @@ class Generation_Page(Page):
                 player.pair5 = ideas[8] + ' + ' + ideas[9]
             else:
                 player.pair5 = 'empty'
-            if ((ideas[10] != '' and ideas[10] != 'false') and (ideas[11] != '' and ideas[11] != 'false')):
-                player.pair6 = ideas[10] + ' + ' + ideas[11]
-            else:
-                player.pair6 = 'empty'
-            pairs = [player.pair1] + [player.pair2] + [player.pair3] + [player.pair4] + [player.pair5] + [player.pair6]
+            pairs = [player.pair1] + [player.pair2] + [player.pair3] + [player.pair4] + [player.pair5] 
             while 'empty' in pairs:
                 pairs.remove('empty')
             player.before_quantity = len(pairs)
@@ -887,7 +840,7 @@ class Generation_Page(Page):
             mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
             mystery_word = mystery_word.lower()  
             stem_words = C.STEM_WORDS[player.round_number - 1] 
-            ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12]
+            ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10]
             import re            
             import translators as ts            
             def has_numbers(s):
@@ -942,11 +895,7 @@ class Generation_Page(Page):
                 player.pair5 = ideas[8] + ' + ' + ideas[9]
             else:
                 player.pair5 = 'empty'
-            if ((ideas[10] != '' and ideas[10] != 'false') and (ideas[11] != '' and ideas[11] != 'false')):
-                player.pair6 = ideas[10] + ' + ' + ideas[11]
-            else:
-                player.pair6 = 'empty'
-            pairs = [player.pair1] + [player.pair2] + [player.pair3] + [player.pair4] + [player.pair5] + [player.pair6]
+            pairs = [player.pair1] + [player.pair2] + [player.pair3] + [player.pair4] + [player.pair5] 
             while 'empty' in pairs:
                 pairs.remove('empty')
             player.before_quantity = len(pairs)
@@ -997,14 +946,6 @@ def Idea9_error_message(player, value):
 def Idea10_error_message(player, value):
     if wordlength(player, value) == True:
         return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
-    
-def Idea11_error_message(player, value):
-    if wordlength(player, value) == True:
-        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
-
-def Idea12_error_message(player, value):
-    if wordlength(player, value) == True:
-        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
 class Generation_WaitPage(WaitPage):
     title_text = "Vielen Dank für Ihre Hinweispaare!"
@@ -1018,11 +959,11 @@ class Discussion(Page):
     def is_displayed(player):
         return player.role() == 'Hinweisgebende'
     form_model = 'player'   
-    form_fields = ['rating_before1', 'rating_before2', 'rating_before3', 'rating_before4', 'rating_before5', 'rating_before6', 'rating_before7', 'rating_before8', 'rating_before9', 'rating_before10', 'rating_before11', 'rating_before12', 'replace_word1', 'replace_word2', 'replace_word3', 'replace_word4', 'replace_word5', 'replace_word6', 'replace_word7', 'replace_word8', 'replace_word9', 'replace_word10', 'replace_word11', 'replace_word12', 'discussion1','discussion2', 'discussion3', 'discussion4', 'discussion5', 'discussion6', 'discussion7', 'discussion8', 'discussion9', 'discussion10', 'discussion11', 'discussion12']
+    form_fields = ['rating_before1', 'rating_before2', 'rating_before3', 'rating_before4', 'rating_before5', 'rating_before6', 'rating_before7', 'rating_before8', 'rating_before9', 'rating_before10', 'replace_word1', 'replace_word2', 'replace_word3', 'replace_word4', 'replace_word5', 'replace_word6', 'replace_word7', 'replace_word8', 'replace_word9', 'replace_word10', 'discussion1','discussion2', 'discussion3', 'discussion4', 'discussion5', 'discussion6', 'discussion7', 'discussion8', 'discussion9', 'discussion10']
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         mystery_word = mystery_word.lower()
-        pairs = [player.pair1 for player in player.get_others_in_group()] + [player.pair2 for player in player.get_others_in_group()] + [player.pair3 for player in player.get_others_in_group()] + [player.pair4 for player in player.get_others_in_group()] + [player.pair5 for player in player.get_others_in_group()] + [player.pair6 for player in player.get_others_in_group()]
+        pairs = [player.pair1 for player in player.get_others_in_group()] + [player.pair2 for player in player.get_others_in_group()] + [player.pair3 for player in player.get_others_in_group()] + [player.pair4 for player in player.get_others_in_group()] + [player.pair5 for player in player.get_others_in_group()] 
         while 'empty' in pairs:
             pairs.remove('empty')
         while '' in pairs:
@@ -1040,8 +981,6 @@ class Discussion(Page):
         Pair8 = ''
         Pair9 = ''
         Pair10 = ''
-        Pair11 = ''
-        Pair12 = ''
         if number_pairs > 0:
             Pair1 = pairs[0]
         if number_pairs > 1:
@@ -1062,16 +1001,12 @@ class Discussion(Page):
             Pair9 = pairs[8]
         if number_pairs > 9:
             Pair10 = pairs[9]
-        if number_pairs > 10:
-            Pair11 = pairs[10]
-        if number_pairs > 11:
-            Pair12 = pairs[11]
         player.number_pairs = number_pairs 
-        return dict(mystery_word = mystery_word, number_pairs = number_pairs, Pair1 = Pair1, Pair2 = Pair2, Pair3 = Pair3, Pair4 = Pair4, Pair5 = Pair5, Pair6 = Pair6, Pair7 = Pair7, Pair8 = Pair8, Pair9 = Pair9, Pair10 = Pair10, Pair11 = Pair11, Pair12 = Pair12)   
+        return dict(mystery_word = mystery_word, number_pairs = number_pairs, Pair1 = Pair1, Pair2 = Pair2, Pair3 = Pair3, Pair4 = Pair4, Pair5 = Pair5, Pair6 = Pair6, Pair7 = Pair7, Pair8 = Pair8, Pair9 = Pair9, Pair10 = Pair10)   
     
     def before_next_page(player, timeout_happened):
         if timeout_happened:
-            pairs = [player.pair1 for player in player.get_others_in_group()] + [player.pair2 for player in player.get_others_in_group()] + [player.pair3 for player in player.get_others_in_group()] + [player.pair4 for player in player.get_others_in_group()] + [player.pair5 for player in player.get_others_in_group()] + [player.pair6 for player in player.get_others_in_group()] 
+            pairs = [player.pair1 for player in player.get_others_in_group()] + [player.pair2 for player in player.get_others_in_group()] + [player.pair3 for player in player.get_others_in_group()] + [player.pair4 for player in player.get_others_in_group()] + [player.pair5 for player in player.get_others_in_group()] 
             while 'empty' in pairs:
                 pairs.remove('empty')
             while '' in pairs:
@@ -1116,16 +1051,8 @@ class Discussion(Page):
                 feedback_10 = [player.other_pairs.split(', ')[9]] + [player.rating_before10] + [player.replace_word10] + [player.discussion10]
                 feedback_10 = str(feedback_10)
                 player.pair_feedback10 = feedback_10
-            if len(pairs) > 10:
-                feedback_11 = [player.other_pairs.split(', ')[10]] + [player.rating_before11] + [player.replace_word11] + [player.discussion11]
-                feedback_11 = str(feedback_11)
-                player.pair_feedback11 = feedback_11
-            if len(pairs) > 11:
-                feedback_12 = [player.other_pairs.split(', ')[11]] + [player.rating_before12] + [player.replace_word12] + [player.discussion12]
-                feedback_12 = str(feedback_12)
-                player.pair_feedback12 = feedback_12
         else:
-            pairs = [player.pair1 for player in player.get_others_in_group()] + [player.pair2 for player in player.get_others_in_group()] + [player.pair3 for player in player.get_others_in_group()] + [player.pair4 for player in player.get_others_in_group()] + [player.pair5 for player in player.get_others_in_group()] + [player.pair6 for player in player.get_others_in_group()] 
+            pairs = [player.pair1 for player in player.get_others_in_group()] + [player.pair2 for player in player.get_others_in_group()] + [player.pair3 for player in player.get_others_in_group()] + [player.pair4 for player in player.get_others_in_group()] + [player.pair5 for player in player.get_others_in_group()]  
             while 'empty' in pairs:
                 pairs.remove('empty')
             while '' in pairs:
@@ -1170,14 +1097,6 @@ class Discussion(Page):
                 feedback_10 = [player.other_pairs.split(', ')[9]] + [player.rating_before10] + [player.replace_word10] + [player.discussion10]
                 feedback_10 = str(feedback_10)
                 player.pair_feedback10 = feedback_10
-            if len(pairs) > 10:
-                feedback_11 = [player.other_pairs.split(', ')[10]] + [player.rating_before11] + [player.replace_word11] + [player.discussion11]
-                feedback_11 = str(feedback_11)
-                player.pair_feedback11 = feedback_11
-            if len(pairs) > 11:
-                feedback_12 = [player.other_pairs.split(', ')[11]] + [player.rating_before12] + [player.replace_word12] + [player.discussion12]
-                feedback_12 = str(feedback_12)
-                player.pair_feedback12 = feedback_12
 
 def rating_before1_error_message(player, value):
     if value == '' and player.number_pairs > 0:
@@ -1217,14 +1136,6 @@ def rating_before9_error_message(player, value):
 
 def rating_before10_error_message(player, value):
     if value == '' and player.number_pairs > 9:
-        return 'Bitte wählen Sie eine Antwort aus!'
-
-def rating_before11_error_message(player, value):
-    if value == '' and player.number_pairs > 10:
-        return 'Bitte wählen Sie eine Antwort aus!'
-
-def rating_before12_error_message(player, value):
-    if value == '' and player.number_pairs > 11:
         return 'Bitte wählen Sie eine Antwort aus!'
     
 def wordlength(player, value):
@@ -1272,16 +1183,8 @@ def discussion10_error_message(player, value):
     if wordlength(player, value) == True:
         return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
 
-def discussion11_error_message(player, value):
-    if wordlength(player, value) == True:
-        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
-
-def discussion12_error_message(player, value):
-    if wordlength(player, value) == True:
-        return 'Ihr Hinweis darf nicht länger als 18 Zeichen sein!'
-
 class Voting_Page(Page):
-    timeout_seconds = 120
+    timeout_seconds = 90
     def is_displayed(player):
         return player.role() == 'Hinweisgebende'
     form_model = 'player'
@@ -1289,7 +1192,7 @@ class Voting_Page(Page):
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         mystery_word = mystery_word.lower()
-        pairs = [player.pair1after] + [player.pair1after for player in player.get_others_in_group()] + [player.pair2after] + [player.pair2after for player in player.get_others_in_group()] + [player.pair3after] + [player.pair3after for player in player.get_others_in_group()] + [player.pair4after] + [player.pair4after for player in player.get_others_in_group()] + [player.pair5after] + [player.pair5after for player in player.get_others_in_group()] + [player.pair6after] + [player.pair6after for player in player.get_others_in_group()]
+        pairs = [player.pair1after] + [player.pair1after for player in player.get_others_in_group()] + [player.pair2after] + [player.pair2after for player in player.get_others_in_group()] + [player.pair3after] + [player.pair3after for player in player.get_others_in_group()] + [player.pair4after] + [player.pair4after for player in player.get_others_in_group()] + [player.pair5after] + [player.pair5after for player in player.get_others_in_group()] 
         while 'empty' in pairs:
             pairs.remove('empty')
         while '' in pairs:
@@ -1319,9 +1222,6 @@ class Voting_Page(Page):
         Pair13 = ''
         Pair14 = ''
         Pair15 = ''
-        Pair16 = ''
-        Pair17 = ''
-        Pair18 = ''
         if number_pairs > 0:
             Pair1 = pairsafter[0]
         if number_pairs > 1:
@@ -1352,13 +1252,7 @@ class Voting_Page(Page):
             Pair14 = pairsafter[13]
         if number_pairs > 14:
             Pair15 = pairsafter[14]
-        if number_pairs > 15:
-            Pair16 = pairsafter[15]
-        if number_pairs > 16:
-            Pair17 = pairsafter[16]
-        if number_pairs > 17:
-            Pair18 = pairsafter[17]
-        return dict(mystery_word = mystery_word, number_pairs = number_pairs, Pair1 = Pair1, Pair2 = Pair2, Pair3 = Pair3, Pair4 = Pair4, Pair5 = Pair5, Pair6 = Pair6, Pair7 = Pair7, Pair8 = Pair8, Pair9 = Pair9, Pair10 = Pair10, Pair11 = Pair11, Pair12 = Pair12, Pair13 = Pair13, Pair14 = Pair14, Pair15 = Pair15, Pair16 = Pair16, Pair17 = Pair17, Pair18 = Pair18, pairs = pairsafter)
+        return dict(mystery_word = mystery_word, number_pairs = number_pairs, Pair1 = Pair1, Pair2 = Pair2, Pair3 = Pair3, Pair4 = Pair4, Pair5 = Pair5, Pair6 = Pair6, Pair7 = Pair7, Pair8 = Pair8, Pair9 = Pair9, Pair10 = Pair10, Pair11 = Pair11, Pair12 = Pair12, Pair13 = Pair13, Pair14 = Pair14, Pair15 = Pair15, pairs = pairsafter)
 
 class VotingResultWaitPage(WaitPage):
     title_text = "Vielen Dank für Ihre Abstimmung!"
