@@ -21,7 +21,7 @@
 </script>
 
 <div class="info active">
-<p> Sie wurden <b>zu viert</b> in Gruppen eingeteilt. Zusammen in Ihrer Gruppe spielen Sie insgesamt <b>10 Runden.</b> </p>  
+<p> Sie wurden <b>zu viert</b> in Gruppen eingeteilt. Zusammen in Ihrer Gruppe spielen Sie insgesamt <b>8 Runden.</b> </p>  
 </div>
 <div class="info">
 <p> <b><u>Ziel:</u></b> Einer der Spielenden – <i>der Ratende</i> – muss ein geheimes Wort anhand der Hinweise der anderen Spielenden erraten. </p>
@@ -31,7 +31,7 @@
 <p> Wenn zwei oder mehr Spielende dasselbe Wort schreiben, werden <b>alle identischen Wörter entfernt,</b> bevor <i>der Ratende</i> sie sieht. </p> 
 </div>
 <div class="info">
-<p> {{ if player.participant.treatment != 1}} Ihre Auszahlung besteht aus einer Teilnahmegebühr von <b>3,50€</b> und einem Bonus von <b>bis zu 8€,</b> abhängig von Ihrer Leistung. {{ else }} Sie erhalten <b>10€,</b> wenn Sie an allen 10 Runden teilnehmen. {{ endif }} </p>
+<p> {{ if player.participant.treatment != 1}} Ihre Auszahlung besteht aus einer Teilnahmegebühr von <b>3,50€</b> und einem Bonus von <b>bis zu 8€,</b> abhängig von Ihrer Leistung. {{ else }} Sie erhalten <b>10€,</b> wenn Sie an allen 8 Runden teilnehmen. {{ endif }} </p>
 <p> {{ if player.participant.treatment == 3}} Sie können den <b>Bonus</b> erhalten, wenn Ihre Gruppe die <b>beste Punktzahl aller Gruppen</b> in dieser Sitzung erreicht. {{ else }} {{ endif }} </p>
 <p> {{ if player.participant.treatment == 2}} Sie können den <b>Bonus</b> erhalten, wenn Ihre Gruppe die <b>meisten Ideen für Hinweise</b> in dieser Sitzung entwickelt. {{ else }} {{ endif }} </p>
 <p> {{ if player.participant.treatment == 4}} Sie können den <b>Bonus</b> erhalten, wenn Ihre Gruppe die <b>exklusivsten und einzigartigsten Hinweise</b> in dieser Sitzung gibt. {{ else }} {{ endif }} </p>

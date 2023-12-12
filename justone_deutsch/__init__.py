@@ -8,9 +8,9 @@ Ihre App-Beschreibung
 
 class C(BaseConstants):
     NAME_IN_URL = 'Mystery_Word_deutsch'
-    NUM_ROUNDS = 10
+    NUM_ROUNDS = 8
     PLAYERS_PER_GROUP = 4
-    MYSTERY_WORDS = ['Raum','Taube', 'Golf', 'Elektrizitaet', 'Leiter', 'Schraube', 'Vase', 'Ende', 'Sombrero', 'Dessert']
+    MYSTERY_WORDS = ['Raum','Taube', 'Golf', 'Elektrizitaet', 'Leiter', 'Schraube', 'Ende', 'Sombrero']
     LANGUAGE_CODE = 'de'
     STEM_WORDS_1 = ['raum', 'raeum'] 
     STEM_WORDS_2 = ['taub', 'taeub']
@@ -18,11 +18,9 @@ class C(BaseConstants):
     STEM_WORDS_4 = ['elektr']  
     STEM_WORDS_5 = ['leit'] 
     STEM_WORDS_6 = ['schraub']
-    STEM_WORDS_7 = ['vase']
-    STEM_WORDS_8 = ['end']
-    STEM_WORDS_9 = ['sombrero']
-    STEM_WORDS_10 = ['dessert']
-    STEM_WORDS = [STEM_WORDS_1, STEM_WORDS_2, STEM_WORDS_3, STEM_WORDS_4, STEM_WORDS_5, STEM_WORDS_6, STEM_WORDS_7, STEM_WORDS_8, STEM_WORDS_9, STEM_WORDS_10]
+    STEM_WORDS_7 = ['end']
+    STEM_WORDS_8 = ['sombrero']
+    STEM_WORDS = [STEM_WORDS_1, STEM_WORDS_2, STEM_WORDS_3, STEM_WORDS_4, STEM_WORDS_5, STEM_WORDS_6, STEM_WORDS_7, STEM_WORDS_8]
 
 class Subsession(BaseSubsession):
     pass
@@ -87,8 +85,6 @@ class Player(BasePlayer):
     Idea8 = models.StringField(label= '', initial='', blank=True)
     Idea9 = models.StringField(label= '', initial='', blank=True)
     Idea10 = models.StringField(label= '', initial='', blank=True)
-    Idea11 = models.StringField(label= '', initial='', blank=True)
-    Idea12 = models.StringField(label= '', initial='', blank=True)
     word1 = models.StringField(label= '', initial='', blank=False)
     word2 = models.StringField(label= '', initial='', blank=False)
     word3 = models.StringField(label= '', initial='', blank=False)
@@ -128,7 +124,7 @@ class Introduction(Page):
         return player.round_number == 1
     
 class Intro(Page):
-    timeout_seconds = 120
+    timeout_seconds = 100
     def is_displayed(player):
         return player.round_number == 1
     
@@ -138,7 +134,7 @@ class Intro2(Page):
         return player.round_number == 1
     
 class Rules(Page):
-    timeout_seconds = 120
+    timeout_seconds = 90
     def is_displayed(player):
         return player.round_number == 1
     
@@ -182,7 +178,7 @@ class Clue_Page(Page):
     def is_displayed(player):
         return player.role() == 'Hinweisgebende'   
     form_model = 'player'
-    form_fields = ['clues', 'Idea1', 'Idea2', 'Idea3', 'Idea4', 'Idea5', 'Idea6', 'Idea7', 'Idea8', 'Idea9', 'Idea10', 'Idea11', 'Idea12']
+    form_fields = ['clues', 'Idea1', 'Idea2', 'Idea3', 'Idea4', 'Idea5', 'Idea6', 'Idea7', 'Idea8', 'Idea9', 'Idea10']
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         return dict(mystery_word = mystery_word)
@@ -240,14 +236,6 @@ def Idea9_error_message(player, value):
         return 'Ihre Idee darf nicht länger als 18 Zeichen sein!'
 
 def Idea10_error_message(player, value):
-    if wordlength(player, value) == True:
-        return 'Ihre Idee darf nicht länger als 18 Zeichen sein!'
-
-def Idea11_error_message(player, value):
-    if wordlength(player, value) == True:
-        return 'Ihre Idee darf nicht länger als 18 Zeichen sein!'
-
-def Idea12_error_message(player, value):
     if wordlength(player, value) == True:
         return 'Ihre Idee darf nicht länger als 18 Zeichen sein!'
     
@@ -442,9 +430,7 @@ class Results(Page):
             player.Idea8 = player.Idea8.lower()
             player.Idea9 = player.Idea9.lower()
             player.Idea10 = player.Idea10.lower()
-            player.Idea11 = player.Idea11.lower()
-            player.Idea12 = player.Idea12.lower()
-            own_ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12] 
+            own_ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10] 
             while '' in own_ideas:
                 own_ideas.remove('')
             if len(own_ideas) > 0:
@@ -551,7 +537,7 @@ class Score(Page):
 
 class TestQuestions(Page):
     template_name = 'justone_deutsch/TestQuestions.html'
-    timeout_seconds = 210
+    timeout_seconds = 270
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
     form_model = 'player'
@@ -559,7 +545,7 @@ class TestQuestions(Page):
 
 class FredaQuestions(Page):
     template_name = 'justone_deutsch/FredaQuestions.html'
-    timeout_seconds = 180
+    timeout_seconds = 150
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
     form_model = 'player'
@@ -567,7 +553,7 @@ class FredaQuestions(Page):
 
 class IndividualismQuestions(Page):
     template_name = 'justone_deutsch/IndividualismQuestions.html'
-    timeout_seconds = 180
+    timeout_seconds = 150
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
     form_model = 'player'
