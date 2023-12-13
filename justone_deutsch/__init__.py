@@ -134,7 +134,7 @@ class Intro2(Page):
         return player.round_number == 1
     
 class Rules(Page):
-    timeout_seconds = 90
+    timeout_seconds = 80
     def is_displayed(player):
         return player.round_number == 1
     
@@ -561,7 +561,7 @@ class IndividualismQuestions(Page):
 
 class UnderstandPage(Page):
     template_name = 'justone_deutsch/UnderstandPage.html'
-    timeout_seconds = 180
+    timeout_seconds = 150
     def is_displayed(player):
         return player.round_number == 1
     form_model = 'player'

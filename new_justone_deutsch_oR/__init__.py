@@ -192,7 +192,7 @@ class Introduction(Page):
         return player.round_number == 1
     
 class Intro(Page):
-    timeout_seconds = 120
+    timeout_seconds = 100
     def is_displayed(player):
         return player.round_number == 1
 
@@ -202,7 +202,7 @@ class Intro2(Page):
         return player.round_number == 1
     
 class Rules(Page):
-    timeout_seconds = 120
+    timeout_seconds = 90
     def is_displayed(player):
         return player.round_number == 1
     
@@ -237,7 +237,7 @@ class Round(Page):
         return dict(round_number = round_number, remaining_rounds = remaining_rounds)
 
 class Clue_Page(Page):
-    timeout_seconds = 180
+    timeout_seconds = 150
     def is_displayed(player):
         return player.role() == 'Hinweisgebende'   
     form_model = 'player'
@@ -684,7 +684,7 @@ class Score(Page):
 
 class TestQuestions(Page):
     template_name = 'new_justone_deutsch_oR/TestQuestions.html'
-    timeout_seconds = 210
+    timeout_seconds = 270
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
     form_model = 'player'
@@ -692,7 +692,7 @@ class TestQuestions(Page):
 
 class FredaQuestions(Page):
     template_name = 'new_justone_deutsch_oR/FredaQuestions.html'
-    timeout_seconds = 180
+    timeout_seconds = 150
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
     form_model = 'player'
@@ -700,7 +700,7 @@ class FredaQuestions(Page):
 
 class IndividualismQuestions(Page):
     template_name = 'justone_deutsch/IndividualismQuestions.html'
-    timeout_seconds = 180
+    timeout_seconds = 150
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
     form_model = 'player'
@@ -708,7 +708,7 @@ class IndividualismQuestions(Page):
 
 class UnderstandPage(Page):
     template_name = 'new_justone_deutsch_oR/UnderstandPage.html'
-    timeout_seconds = 150
+    timeout_seconds = 120
     def is_displayed(player):
         return player.round_number == 1
     form_model = 'player'
@@ -920,7 +920,7 @@ class Generation_WaitPage(WaitPage):
         return player.role() == 'Hinweisgebende'
 
 class Discussion(Page):
-    timeout_seconds = 210
+    timeout_seconds = 180
     def is_displayed(player):
         return player.role() == 'Hinweisgebende'
     form_model = 'player'   
