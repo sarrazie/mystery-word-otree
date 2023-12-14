@@ -124,17 +124,17 @@ class Introduction(Page):
         return player.round_number == 1
     
 class Intro(Page):
-    timeout_seconds = 100
+    timeout_seconds = 150
     def is_displayed(player):
         return player.round_number == 1
     
 class Intro2(Page):
-    timeout_seconds = 120
+    timeout_seconds = 150
     def is_displayed(player):
         return player.round_number == 1
     
 class Rules(Page):
-    timeout_seconds = 80
+    timeout_seconds = 90
     def is_displayed(player):
         return player.round_number == 1
     
@@ -153,12 +153,12 @@ class DAT(Page):
             return player.invalid_DAT
    
 class Instructions(Page):
-    timeout_seconds = 120
+    timeout_seconds = 150
     def is_displayed(player):
         return player.round_number == 1
     
 class Instructions_2(Page):
-    timeout_seconds = 120
+    timeout_seconds = 150
     def is_displayed(player):
         return player.round_number == 1
   
