@@ -24,7 +24,8 @@
 {{ if player.pair1 == 'empty' and player.pair2 == 'empty' and player.pair3 == 'empty' and player.pair4 == 'empty' and player.pair5 == 'empty' }}
 </br><p><b>Sie haben kein gültiges Hinweispaar abgegeben.</b></p>
 {{ else}}
-<p> Hier sind Ihre bisher abgegebenen und gültigen Hinweispaare mit dem <b>Feedback</b> Ihrer Gruppenmitglieder:</p>
+<p> Hier sind Ihre bisher abgegebenen und gültigen Hinweispaare mit dem <b>Feedback</b> Ihrer Gruppenmitglieder. </p>
+<p> Diese können Sie nun noch einmal <b>überarbeiten</b>.</p>
 {{ if player.pair1 != 'empty' }}  
 <b>1. Hinweispaar:</b>  
 {{ formfield 'Idea1' }}

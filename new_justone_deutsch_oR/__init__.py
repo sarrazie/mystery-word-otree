@@ -8,28 +8,24 @@ Ihre App-Beschreibung
 
 class C(BaseConstants):
     NAME_IN_URL = 'New_Mystery_Word_deutsch_oR'
-    NUM_ROUNDS = 8
+    NUM_ROUNDS = 6
     PLAYERS_PER_GROUP = 4
-    MYSTERY_WORDS = ['Raum','Taube', 'Golf', 'Elektrizitaet', 'Leiter', 'Schraube', 'Ende', 'Sombrero']
+    MYSTERY_WORDS = ['Raum','Taube', 'Golf', 'Elektrizitaet', 'Ende', 'Sombrero']
     LANGUAGE_CODE = 'de'
     TABOO_WORDS_1 = ['Hotel', 'Wohnen', 'Zimmer', 'Wand', 'Kueche']
     TABOO_WORDS_2 = ['Vogel', 'Gurren', 'Fliegen', 'Bote', 'Frieden']
     TABOO_WORDS_3 = ['Volkswagen', 'Schlaeger', 'Par', 'Birdie', 'Mini']
     TABOO_WORDS_4 = ['Strom', 'Tesla', 'Edison', 'Spannung', 'Statisch']
-    TABOO_WORDS_5 = ['Sprosse', 'Klettern', 'Stufen', 'Treppe', 'Aufsteigen']
-    TABOO_WORDS_6 = ['Spirale', 'Drehen', 'Anziehen', 'Nagel', 'Metall']
-    TABOO_WORDS_7 = ['Finale', 'Schluss', 'Stopp', 'Tot', 'Anfang']
-    TABOO_WORDS_8 = ['Hut', 'Mexiko', 'Kopfbedeckung', 'Mariachi', 'Krempe']
-    TABOO_WORDS = [TABOO_WORDS_1, TABOO_WORDS_2, TABOO_WORDS_3, TABOO_WORDS_4, TABOO_WORDS_5, TABOO_WORDS_6, TABOO_WORDS_7, TABOO_WORDS_8]
+    TABOO_WORDS_5 = ['Finale', 'Schluss', 'Stopp', 'Tot', 'Anfang']
+    TABOO_WORDS_6 = ['Hut', 'Mexiko', 'Kopfbedeckung', 'Mariachi', 'Krempe']
+    TABOO_WORDS = [TABOO_WORDS_1, TABOO_WORDS_2, TABOO_WORDS_3, TABOO_WORDS_4, TABOO_WORDS_5, TABOO_WORDS_6]
     STEM_WORDS_1 = ['raum', 'raeum', 'zimmer', 'hotel', 'wohn', 'wand', 'waend', 'kuech', 'koch'] 
     STEM_WORDS_2 = ['taub', 'taeub', 'gurr', 'flieg', 'flug', 'fluege', 'vogel', 'voegel', 'bot', 'fried']
     STEM_WORDS_3 = ['golf', 'vw', 'wagen', 'volk', 'voelk', 'schlaeg', 'schlag', 'par', 'birdie', 'mini']
     STEM_WORDS_4 = ['elektr', 'strom', 'tesla', 'edison', 'spann', 'stati']  
-    STEM_WORDS_5 = ['leit', 'spross', 'klett', 'stuf', 'trepp', 'auf', 'steig', 'stieg'] 
-    STEM_WORDS_6 = ['schraub', 'dreh', 'an', 'zieh', 'zug', 'nagel', 'naegel', 'metall', 'spiral']
-    STEM_WORDS_7 = ['end', 'final', 'schluss', 'stopp', 'tot', 'tod', 'an', 'fang', 'schluess', 'faeng']
-    STEM_WORDS_8 = ['sombrero', 'hut', 'huet', 'mexik', 'mexic', 'kopf', 'koepf', 'bedeck', 'mariach', 'kremp']
-    STEM_WORDS = [STEM_WORDS_1, STEM_WORDS_2, STEM_WORDS_3, STEM_WORDS_4, STEM_WORDS_5, STEM_WORDS_6, STEM_WORDS_7, STEM_WORDS_8]
+    STEM_WORDS_5 = ['end', 'final', 'schluss', 'stopp', 'tot', 'tod', 'an', 'fang', 'schluess', 'faeng']
+    STEM_WORDS_6 = ['sombrero', 'hut', 'huet', 'mexik', 'mexic', 'kopf', 'koepf', 'bedeck', 'mariach', 'kremp']
+    STEM_WORDS = [STEM_WORDS_1, STEM_WORDS_2, STEM_WORDS_3, STEM_WORDS_4, STEM_WORDS_5, STEM_WORDS_6]
 
 class Subsession(BaseSubsession):
     pass
@@ -192,22 +188,22 @@ class Introduction(Page):
         return player.round_number == 1
     
 class Intro(Page):
-    timeout_seconds = 150
+    timeout_seconds = 120
     def is_displayed(player):
         return player.round_number == 1
 
 class Intro2(Page):
-    timeout_seconds = 150
+    timeout_seconds = 120
     def is_displayed(player):
         return player.round_number == 1
     
 class Rules(Page):
-    timeout_seconds = 90
+    timeout_seconds = 70
     def is_displayed(player):
         return player.round_number == 1
     
 class DAT(Page):
-    timeout_seconds = 300
+    timeout_seconds = 270
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
     form_model = 'player'
@@ -221,7 +217,7 @@ class DAT(Page):
             return player.invalid_DAT
    
 class Instructions(Page):
-    timeout_seconds = 150
+    timeout_seconds = 120
     def is_displayed(player):
         return player.round_number == 1
   
@@ -332,8 +328,7 @@ class Clue_Page(Page):
             mystery_word = mystery_word.lower()   
             stem_words = C.STEM_WORDS[player.round_number - 1]
             ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10]
-            import re            
-            import translators as ts            
+            import re                      
             def has_numbers(s):
                 return bool(re.search(r'\d',s))
             with open("wordlist-german.txt", 'r') as file:
@@ -356,10 +351,6 @@ class Clue_Page(Page):
                         if re.search("[^a-zA-Z0-9s]", ideas[i]):
                             ideas[i] = 'false'          
                         if has_numbers(ideas[i]) == True:
-                            ideas[i] = 'false'
-                        idea_trans = ts.translate_text(query_text=ideas[i], translator='google', from_language='auto', to_language='de')
-                        idea_trans = idea_trans.lower()
-                        if mystery_word in idea_trans or idea_trans in mystery_word:  
                             ideas[i] = 'false'
                         if ideas[i] not in wordlist:
                             ideas[i] = 'false' 
@@ -391,8 +382,7 @@ class Clue_Page(Page):
             mystery_word = mystery_word.lower()   
             stem_words = C.STEM_WORDS[player.round_number - 1]
             ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10]
-            import re            
-            import translators as ts            
+            import re                       
             def has_numbers(s):
                 return bool(re.search(r'\d',s))
             with open("wordlist-german.txt", 'r') as file:
@@ -415,10 +405,6 @@ class Clue_Page(Page):
                         if re.search("[^a-zA-Z0-9s]", ideas[i]):
                             ideas[i] = 'false'          
                         if has_numbers(ideas[i]) == True:
-                            ideas[i] = 'false'
-                        idea_trans = ts.translate_text(query_text=ideas[i], translator='google', from_language='auto', to_language='de')
-                        idea_trans = idea_trans.lower()
-                        if mystery_word in idea_trans or idea_trans in mystery_word:  
                             ideas[i] = 'false'
                         if ideas[i] not in wordlist:
                             ideas[i] = 'false' 
@@ -510,7 +496,6 @@ class VotingResultPage(Page):
                 if len(words) >= 3:  
                     votes[i] = 'false false'
         words = [word for vote in votes for word in vote.split()]
-        import translators as ts 
         import re            
         def has_numbers(s):
             return bool(re.search(r'\d',s))
@@ -525,11 +510,7 @@ class VotingResultPage(Page):
                 if re.search("[^a-zA-Z0-9s]", words[i]):
                     words[i] = 'false' 
                 if has_numbers(words[i]) == True:
-                    words[i] = 'false'
-                word_trans = ts.translate_text(query_text=words[i], translator='google', from_language='auto', to_language='de')
-                word_trans = word_trans.lower()
-                if mystery_word in word_trans or word_trans in mystery_word:  
-                    words[i] = 'false'                
+                    words[i] = 'false'               
                 for j in range(len(stem_words)):
                     if stem_words[j] in words[i] or words[i] in stem_words[j]:
                         words[i] = 'false'                          
@@ -559,7 +540,7 @@ class VotingResultPage(Page):
         return dict(mystery_word = mystery_word, taboo_words = taboo_words, vote_group = vote_group, duplicates = number_duplicates, valid_votes = number_valid_votes)
 
 class Guess_Page(Page):
-    timeout_seconds = 120
+    timeout_seconds = 90
     def is_displayed(player):
         return player.role() == 'Ratender'
     def vars_for_template(player):  
@@ -587,7 +568,7 @@ class Guess_Page(Page):
             return player.guess
         
 class Results(Page):
-    timeout_seconds = 45
+    timeout_seconds = 40
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         mystery_word = mystery_word.lower()
@@ -692,7 +673,7 @@ class TestQuestions(Page):
 
 class FredaQuestions(Page):
     template_name = 'new_justone_deutsch_oR/FredaQuestions.html'
-    timeout_seconds = 150
+    timeout_seconds = 140
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
     form_model = 'player'
@@ -700,7 +681,7 @@ class FredaQuestions(Page):
 
 class IndividualismQuestions(Page):
     template_name = 'justone_deutsch/IndividualismQuestions.html'
-    timeout_seconds = 150
+    timeout_seconds = 120
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
     form_model = 'player'
@@ -708,7 +689,7 @@ class IndividualismQuestions(Page):
 
 class UnderstandPage(Page):
     template_name = 'new_justone_deutsch_oR/UnderstandPage.html'
-    timeout_seconds = 140
+    timeout_seconds = 100
     def is_displayed(player):
         return player.round_number == 1
     form_model = 'player'
@@ -724,7 +705,7 @@ class UnderstandPage(Page):
             return 'Falsche Antwort bei Frage 4! Versuchen Sie es noch einmal.'
 
 class Generation_Page(Page):
-    timeout_seconds = 210
+    timeout_seconds = 180
     def is_displayed(player):
         return player.role() == 'Hinweisgebende'   
     form_model = 'player'
@@ -740,8 +721,7 @@ class Generation_Page(Page):
             mystery_word = mystery_word.lower()  
             stem_words = C.STEM_WORDS[player.round_number - 1]
             ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10]
-            import re            
-            import translators as ts            
+            import re                      
             def has_numbers(s):
                 return bool(re.search(r'\d',s))
             with open("wordlist-german.txt", 'r') as file:
@@ -764,10 +744,6 @@ class Generation_Page(Page):
                         if re.search("[^a-zA-Z0-9s]", ideas[i]):
                             ideas[i] = 'false'          
                         if has_numbers(ideas[i]) == True:
-                            ideas[i] = 'false'
-                        idea_trans = ts.translate_text(query_text=ideas[i], translator='google', from_language='auto', to_language='de')
-                        idea_trans = idea_trans.lower()
-                        if mystery_word in idea_trans or idea_trans in mystery_word:  
                             ideas[i] = 'false'
                         if ideas[i] not in wordlist:
                             ideas[i] = 'false' 
@@ -806,8 +782,7 @@ class Generation_Page(Page):
             mystery_word = mystery_word.lower()  
             stem_words = C.STEM_WORDS[player.round_number - 1]
             ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10]
-            import re            
-            import translators as ts            
+            import re                        
             def has_numbers(s):
                 return bool(re.search(r'\d',s))
             with open("wordlist-german.txt", 'r') as file:
@@ -830,10 +805,6 @@ class Generation_Page(Page):
                         if re.search("[^a-zA-Z0-9s]", ideas[i]):
                             ideas[i] = 'false'          
                         if has_numbers(ideas[i]) == True:
-                            ideas[i] = 'false'
-                        idea_trans = ts.translate_text(query_text=ideas[i], translator='google', from_language='auto', to_language='de')
-                        idea_trans = idea_trans.lower()
-                        if mystery_word in idea_trans or idea_trans in mystery_word:  
                             ideas[i] = 'false'
                         if ideas[i] not in wordlist:
                             ideas[i] = 'false' 
@@ -920,7 +891,7 @@ class Generation_WaitPage(WaitPage):
         return player.role() == 'Hinweisgebende'
 
 class Discussion(Page):
-    timeout_seconds = 180
+    timeout_seconds = 150
     def is_displayed(player):
         return player.role() == 'Hinweisgebende'
     form_model = 'player'   
