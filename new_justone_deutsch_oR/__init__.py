@@ -233,7 +233,7 @@ class Round(Page):
         return dict(round_number = round_number, remaining_rounds = remaining_rounds)
 
 class Clue_Page(Page):
-    timeout_seconds = 150
+    timeout_seconds = 130
     def is_displayed(player):
         return player.role() == 'Hinweisgebende'   
     form_model = 'player'
@@ -705,7 +705,7 @@ class UnderstandPage(Page):
             return 'Falsche Antwort bei Frage 4! Versuchen Sie es noch einmal.'
 
 class Generation_Page(Page):
-    timeout_seconds = 180
+    timeout_seconds = 160
     def is_displayed(player):
         return player.role() == 'Hinweisgebende'   
     form_model = 'player'
@@ -891,7 +891,7 @@ class Generation_WaitPage(WaitPage):
         return player.role() == 'Hinweisgebende'
 
 class Discussion(Page):
-    timeout_seconds = 150
+    timeout_seconds = 130
     def is_displayed(player):
         return player.role() == 'Hinweisgebende'
     form_model = 'player'   
