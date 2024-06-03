@@ -1,0 +1,28 @@
+{{ block title }}
+    Fragen 
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 20) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+</br>
+ <p> <b>Vielen Dank,</b> dass Sie am Experiment teilgenommen haben! Jetzt werden Ihnen einige Fragen zum gerade gespielten Experiment gestellt. </p>
+ <p> Bitte beantworten Sie die folgenden <b>Fragen</b> oder geben Sie Ihr <b>Zustimmungsniveau</b> zu den folgenden Aussagen an. </p>
+{{formfields }}
+</br>
+<button class= "otree-btn btn btn-info">Weiter</button>
+
+{{ endblock }}

@@ -1,0 +1,84 @@
+{% include '_static/global/next_button.html' %}
+{{ block title }}
+    Regeln
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 20) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+
+</br>
+<div class="info active">
+<p> 
+    <b><u>Ungültiges Hinweispaar:</u></b>
+</p>
+</div>
+
+<div class="info">
+<ul>
+    <li> Das Hinweispaar enthält eins der <b>fünf Tabuwörter</b>, die zu Beginn gezeigt und ausgeschlossen wurden.</li>
+    <ul>
+        <li> <font color=#DF013A>Beispiel: Das Hinweispaar <i>"gegenwärtig" + "Minute"</i> ist nicht erlaubt, wenn "Gegenwart" zu den fünf Tabuwörtern gehört.</font></li>
+    </ul>
+</ul>
+</div>
+    
+<div class="info">
+<ul>
+    <li> Das Hinweispaar enthält mehr als ein <b>einzelnes Wort</b> pro Hinweis. </li>
+        <ul>
+            <li> <font color=#DF013A> Beispiel: Das Hinweispaar <i>"sehr gefährlich" + "grün"</i> ist nicht erlaubt, da es insgesamt mehr als zwei Wörter enthält.</font></li>
+        </ul>
+    <li> Das Hinweispaar enthält das geheime Wort in <b>anderer Schreibweise.</b></li>
+        <ul>
+            <li> <font color=#DF013A>Beispiel: <i>Fussball</i> ist nicht erlaubt, wenn das geheime Wort <i>Fußball</i> ist.</font></li>
+        </ul> 
+</ul>   
+</div>
+
+<div class="info">
+<ul>
+    <li> Das Hinweispaar enthält das geheime Wort in einer <b>anderen Sprache.</b> </li>
+        <ul>
+            <li> <font color=#DF013A>Beispiel: <i>Black</i> ist nicht erlaubt, wenn das geheime Wort <i>Schwarz</i> ist.</font></li>
+        </ul>
+    <li> Das Hinweispaar enthält ein Wort mit demselben <b>Wortstamm wie das geheime Wort.</b> </li>
+        <ul>
+            <li> <font color=#DF013A>Beispiel: <i>Prinzessin</i> ist nicht erlaubt, wenn das geheime Wort 
+            <i>Prinz</i> ist.</font></li>
+        </ul>
+</ul>
+</div>
+
+<div class="info">
+<ul>
+    <li> Das Hinweispaar enthält ein <b>erfundenes Wort</b>.</li>
+    <ul>
+        <li> <font color=#DF013A>Beispiel: <i>Süßding</i> ist nicht erlaubt, wenn das geheime Wort <i>Torte</i> ist.</font> </li>
+    </ul> 
+    <li> Das Hinweispaar enthält einen Hinweis mit <b>Sonderzeichen oder Zahlen.</b></li>
+    <ul>
+        <li> <font color=#DF013A>Beispiel: <i>#süß*</i> ist nicht erlaubt, wenn das geheime Wort <i>Schokolade</i> ist.</font> </li>
+    </ul>
+</ul>
+</br>
+<button class= "otree-btn btn btn-info">Weiter</button>    
+</div>
+</br>
+<p style="text-align: left">
+    <button class="otree-btn btn btn-info" type="button" id="next">Weiter</button>
+</p>
+
+{{ endblock }}
