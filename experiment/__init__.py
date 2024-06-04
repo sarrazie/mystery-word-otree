@@ -35,7 +35,9 @@ class Group(BaseGroup):
     payoff = models.IntegerField(initial=1000)
 
 class Player(BasePlayer):        
-    guess = models.StringField(label="Ihre Vermutung:", initial='')
+    guess1 = models.StringField(label="Ihre Vermutung:", initial='')
+    guess2 = models.StringField(label="Ihre Vermutung:", initial='', blank= True)
+    guess3 = models.StringField(label="Ihre Vermutung:", initial='', blank= True)
     score = models.IntegerField()
     result = models.StringField()
     player_role = models.StringField()
@@ -555,28 +557,33 @@ class VotingResultPage(Page):
         return dict(mystery_word = mystery_word, taboo_words = taboo_words, vote_group = vote_group, duplicates = number_duplicates, valid_votes = number_valid_votes)
 
 class Guess_Page(Page):
-    timeout_seconds = 90
+    timeout_seconds = 5000
     def is_displayed(player):
         return player.player_role == 'Ratender'
     
     def vars_for_template(player):  
+        mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
+        mystery_word = mystery_word.lower()
         hint_groups = [g for g in player.subsession.get_groups() if g.get_players()[0].player_role == 'Hinweisgebende']
         index = (player.id_in_group - 1 + player.round_number - 1) % len(hint_groups)
         vote_group = hint_groups[index].get_players()[0].vote_group
         player.vote_group = vote_group
-        return dict(vote_group=vote_group)
+        return dict(vote_group=vote_group, mystery_word = mystery_word)
     form_model = 'player'
-    form_fields = ['guess'] 
-
+    form_fields = ['guess1', 'guess2', 'guess3'] 
     def before_next_page(player, timeout_happened):
         if timeout_happened:
-            player.guess = 'Kein Tipp gegeben'
+            player.guess1 = 'Kein Tipp gegeben'
+            player.guess2 = 'Kein Tipp gegeben'
+            player.guess3 = 'Kein Tipp gegeben'
         else:
-            player.guess = player.guess.lower()
-            return player.guess
+            player.guess1 = player.guess1.lower()
+            player.guess2 = player.guess2.lower()
+            player.guess3 = player.guess3.lower()
+            return player.guess1, player.guess2, player.guess3
         
 class Results(Page):
-    timeout_seconds = 40
+    timeout_seconds = 5000
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         mystery_word = mystery_word.lower()
@@ -596,9 +603,13 @@ class Results(Page):
             group_vote = player.vote_group
             guesser = next((p for p in player.subsession.get_players() if p.vote_group == group_vote and p.player_role == 'Ratender' and p.group != player.group), None)
             if guesser is not None:
-                guess = guesser.guess  
+                guess1 = guesser.guess1  
+                guess2 = guesser.guess2
+                guess3 = guesser.guess3 
             else:
-                guess = None
+                guess1 = None
+                guess2 = None
+                guess3 = None
             player.guess_missing = False
             player.missing = False
             guess_missing = ''
@@ -622,11 +633,19 @@ class Results(Page):
             invalid = ''
             missing = ''
             guess_missing = ''
-            guess = player.guess
-            if guess == 'Kein Tipp gegeben':
+            guess1 = player.guess1
+            guess2 = player.guess2
+            guess3 = player.guess3
+            if guess1 == 'Kein Tipp gegeben':
                 player.guess_missing = True
                 guess_missing = 'Achtung! Sie haben keinen Tipp abgegeben.'
-        if mystery_word == guess:
+        if mystery_word == guess1:
+            player.result = 'richtig'
+            player.payoff = 3
+        elif mystery_word == guess2:
+            player.result = 'richtig'
+            player.payoff = 2
+        elif mystery_word == guess3:
             player.result = 'richtig'
             player.payoff = 1
         else:
@@ -636,7 +655,7 @@ class Results(Page):
         player.group.payoff =  player.score 
         if player.participant.treatment == 1:
             player.group.payoff = 1000
-        return dict(mystery_word = mystery_word, taboo_words = taboo_words, vote_group = vote_group, guess = guess, result = player.result, invalid = invalid, missing = missing, guess_missing = guess_missing, number_ideas = player.quantity)
+        return dict(mystery_word = mystery_word, taboo_words = taboo_words, vote_group = vote_group, payoff = player.payoff, guess1 = guess1, guess2 = guess2, guess3 = guess3, result = player.result, invalid = invalid, missing = missing, guess_missing = guess_missing, number_ideas = player.quantity)
 
 def score(group: Group):
     subsession = group.subsession

@@ -18,6 +18,7 @@
         });
     });
 </script>
+
 </br>
 <p> Dies ist das <b>Hinweispaar</b>, das Sie von Ihren drei Gruppenmitgliedern erhalten haben: </p> 
 <ul>
@@ -25,9 +26,59 @@
 <p><b>{{ vote_group }}</b></p>
 
 </ul>
-<p> Bitte geben Sie Ihre <b>Vermutung</b> für das geheime Wort ein. {{ formfields }} </p>
-</br>
+<div class="info active">
+    <p> Bitte geben Sie Ihre <b>Vermutung</b> für das geheime Wort ein. {{ formfield 'guess1' }} </p>
+    <p style="text-align: left">
+        <button class="otree-btn btn btn-info" type="button" id="submit" >Weiter</button>
+    </p>
+</div>
+
+{% if player.guess1 == mystery_word %}
+<div class="info">
+Korrekt im ersten Versuch!
 <button class= "otree-btn btn btn-info">Weiter</button>
+</div>
+{% endif %}
+
+{% if player.guess1 != mystery_word and player.guess1 != "" %}
+<div class="info">
+<p> Ihre erste <b>Vermutung</b> war nicht korrekt. Versuchen Sie es erneut. {{ formfield 'guess2' }} </p>
+<p style="text-align: left">
+    <button class="otree-btn btn btn-info" type="button" id="submit" >Weiter</button>
+</p>
+</div>
+{% endif %}
+
+{% if player.guess2 == mystery_word %}
+<div class="info">
+Korrekt im zweiten Versuch!
+<button class= "otree-btn btn btn-info">Weiter</button>
+</div>
+{% endif %}
+
+{% if player.guess2 != mystery_word and player.guess2 != "" %}
+<div class="info">
+<p> Ihre zweite <b>Vermutung</b> war nicht korrekt. Versuchen Sie es ein letztes Mal. {{ formfield 'guess3' }} </p>
+<p style="text-align: left">
+    <button class="otree-btn btn btn-info" type="button" id="submit" >Weiter</button>
+</p>
+</div>
+{% endif %}
+
+{% if player.guess3 == mystery_word %}
+<div class="info">
+Korrekt im dritten Versuch!
+<button class= "otree-btn btn btn-info">Weiter</button>
+</div>
+{% endif %}
+
+{% if player.guess3 != mystery_word and player.guess3 != "" %}
+<div class="info">
+<p> Dies war leider ebenfalls nicht korrekt.</p>
+<button class= "otree-btn btn btn-info">Weiter</button> 
+</div>
+{% endif %}
+
 </br>
 </br>
 <details>
