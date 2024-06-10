@@ -36,8 +36,11 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):        
     guess1 = models.StringField(label="Ihre Vermutung:", initial='')
-    guess2 = models.StringField(label="Ihre Vermutung:", initial='', blank= True)
-    guess3 = models.StringField(label="Ihre Vermutung:", initial='', blank= True)
+    guess2 = models.StringField(label="Ihre Vermutung:", initial='')
+    guess3 = models.StringField(label="Ihre Vermutung:", initial='')
+    correct_guess1 = models.BooleanField(field_maybe_empty=True)
+    correct_guess2 = models.BooleanField(field_maybe_empty=True)
+    correct_guess3 = models.BooleanField(field_maybe_empty=True)
     score = models.IntegerField()
     result = models.StringField()
     player_role = models.StringField()
@@ -556,7 +559,7 @@ class VotingResultPage(Page):
         player.vote_group = vote_group
         return dict(mystery_word = mystery_word, taboo_words = taboo_words, vote_group = vote_group, duplicates = number_duplicates, valid_votes = number_valid_votes)
 
-class Guess_Page(Page):
+class Guess_Page1(Page):
     timeout_seconds = 5000
     def is_displayed(player):
         return player.player_role == 'Ratender'
@@ -569,18 +572,69 @@ class Guess_Page(Page):
         vote_group = hint_groups[index].get_players()[0].vote_group
         player.vote_group = vote_group
         return dict(vote_group=vote_group, mystery_word = mystery_word)
+    
     form_model = 'player'
-    form_fields = ['guess1', 'guess2', 'guess3'] 
+    form_fields = ['guess1'] 
+    
     def before_next_page(player, timeout_happened):
         if timeout_happened:
             player.guess1 = 'Kein Tipp gegeben'
-            player.guess2 = 'Kein Tipp gegeben'
-            player.guess3 = 'Kein Tipp gegeben'
+            player.correct_guess1 = False
         else:
             player.guess1 = player.guess1.lower()
+            if player.guess1 == C.MYSTERY_WORDS[player.round_number - 1].lower():
+                player.correct_guess1 = True
+            else:
+                player.correct_guess1 = False
+        
+class Guess_Page2(Page):
+    timeout_seconds = 5000
+    def is_displayed(player):
+        return player.player_role == 'Ratender' and player.correct_guess1 == False
+    
+    def vars_for_template(player):  
+        vote_group = player.vote_group
+        mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
+        return dict(vote_group=vote_group, mystery_word = mystery_word)
+    
+    form_model = 'player'
+    form_fields = ['guess2'] 
+    
+    def before_next_page(player, timeout_happened):
+        if timeout_happened:
+            player.guess2 = 'Kein Tipp gegeben'
+            player.correct_guess2 = False
+        else:
             player.guess2 = player.guess2.lower()
+            if player.guess2 == C.MYSTERY_WORDS[player.round_number - 1].lower():
+                player.correct_guess2 = True
+            else:
+                player.correct_guess2 = False
+
+class Guess_Page3(Page):
+    timeout_seconds = 5000
+   
+    def is_displayed(player): 
+        return player.player_role == 'Ratender' and player.field_maybe_none('correct_guess2') == False
+    
+    def vars_for_template(player):  
+        vote_group = player.vote_group
+        mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
+        return dict(vote_group=vote_group, mystery_word = mystery_word)
+    
+    form_model = 'player'
+    form_fields = ['guess3'] 
+    
+    def before_next_page(player, timeout_happened):
+        if timeout_happened:
+            player.guess3 = 'Kein Tipp gegeben'
+            player.correct_guess3 = False
+        else:
             player.guess3 = player.guess3.lower()
-            return player.guess1, player.guess2, player.guess3
+            if player.guess3 == C.MYSTERY_WORDS[player.round_number - 1].lower():
+                player.correct_guess3 = True
+            else:
+                player.correct_guess3 = False
         
 class Results(Page):
     timeout_seconds = 5000
@@ -1269,4 +1323,4 @@ class FinalPage(Page):
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
 
-page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, CluegiverWaitPage, Guess_Page, ResultsWaitPage, Results, Score, TestQuestions, FredaQuestions, IndividualismQuestions, DAT, FinalPage]
+page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, CluegiverWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, ResultsWaitPage, Results, Score, TestQuestions, FredaQuestions, IndividualismQuestions, DAT, FinalPage]
