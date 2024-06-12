@@ -49,14 +49,6 @@ class Player(BasePlayer):
     understanding = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>2. </b> "Ich habe die Verfahrensweise und die Regeln schnell verstanden."', widget=widgets.RadioSelectHorizontal)
     comments = models.LongStringField(label="<b>4. </b> Welche Strategie haben sie als Hinweisgebende verfolgt?", initial='', max_length=500, blank=True)
     comments_2 = models.LongStringField(label="<b>5. </b> Welche Strategie haben sie als Ratender verfolgt?", initial='', max_length=500, blank=True)
-    freda_1 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>1. </b>"In meiner Familie werden Werte und Familienrituale über Generationen weitergegeben."', widget=widgets.RadioSelectHorizontal)
-    freda_2 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>2. </b>"Die Zuneigung und Unterstützung meiner Eltern hängen davon ab, inwiefern ich ihre Erwartungen erfülle."', widget=widgets.RadioSelectHorizontal)
-    freda_3 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>3. </b>"Ich weiß besser, was gut für mein (künftiges) Kind ist, als mein (künftiges) Kind selbst."', widget=widgets.RadioSelectHorizontal)
-    freda_4 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>4. </b>"Ich möchte, dass mein (künftiges) Kind wie ich ist, wenn es erwachsen ist."', widget=widgets.RadioSelectHorizontal)
-    freda_5 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>5. </b>"Es gibt eine gute Übereinstimmung zwischen dem, was mein Job mir bietet, und dem, was ich von einem Job erwarte."', widget=widgets.RadioSelectHorizontal)
-    freda_6 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>6. </b>"In meinem Job lerne ich häufig dazu, indem ich mich zum Beispiel auf den neuesten Stand bringe oder neue Aufgaben praktisch durchführe (“learning by doing”)."', widget=widgets.RadioSelectHorizontal)
-    freda_7 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>7. </b>"Meine Eltern gaben mir immer alle Freiheiten."', widget=widgets.RadioSelectHorizontal)
-    freda_8 = models.StringField(choices=[['stimme voll zu', 'stimme voll zu'], ['stimme eher zu', 'stimme eher zu'], ['weder noch', 'weder noch'], ['stimme eher nicht zu', 'stimme eher nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>8. </b>"Ich versuche, meinem (künftigen) Kind so viele Freiheiten zu geben, wie ich von meinen Eltern erhalten habe."', widget=widgets.RadioSelectHorizontal)
     understand_1 = models.StringField(choices=[['false', 'Unbegrenzt viele Versuche'],['false', 'Zwei Versuche'],['false', 'Drei Versuche'],['true', 'Nur einen Versuch']], label='<b>Frage 1:</b> Wie viele Versuche hat der Ratende, um das geheime Wort zu erraten?', widget=widgets.RadioSelect)
     understand_2 = models.StringField(choices=[['false,','Zwei'],['false', 'Drei'],['true', 'Vier'],['false', 'Fünf']], label='<b>Frage 2:</b> Wie viele Spielerinnen und Spieler bilden zusammen eine Gruppe?', widget=widgets.RadioSelect)
     understand_3= models.StringField(choices=[['true', '10 Euro fix für die Teilnahme an allen Runden'],['false', '5 Euro fix plus 5 Euro Bonus für die meisten generierten Ideen'],['false', '5 Euro fix plus 5 Euro Bonus für die meisten erratenen geheimen Wörter'],['false','5 Euro fix plus 5 Euro Bonus für die originellsten Hinweispaare, die zur richtigen Erratung des Wortes führen']], label='<b>Frage 3:</b> Wie viel Geld können Sie maximal in diesem Experiment verdienen?', widget=widgets.RadioSelect)
@@ -73,8 +65,6 @@ class Player(BasePlayer):
     individualism_3 = models.IntegerField(choices=[-3, -2, -1, 0, 1, 2, 3], widget=widgets.RadioSelect)
     individualism_4 = models.IntegerField(choices=[-3, -2, -1, 0, 1, 2, 3], widget=widgets.RadioSelect)
     individualism_5 = models.IntegerField(choices=[-3, -2, -1, 0, 1, 2, 3], widget=widgets.RadioSelect)
-    future_1 = models.StringField(choices=[['mindestens einmal täglich', 'mindestens einmal täglich'], ['mindestens einmal wöchentlich', 'mindestens einmal wöchentlich'], ['mindestens einmal monatlich', 'mindestens einmal monatlich'], ['seltener als einmal im Monat', 'seltener als einmal im Monat']], label='<b>6. </b>Wie oft denken Sie darüber nach, wie der Klimawandel Ihre persönliche Zukunft beeinflusst?', widget=widgets.RadioSelect)
-    future_2 = models.StringField(choices=[['mindestens einmal täglich', 'mindestens einmal täglich'], ['mindestens einmal wöchentlich', 'mindestens einmal wöchentlich'], ['mindestens einmal monatlich', 'mindestens einmal monatlich'], ['seltener als einmal im Monat', 'seltener als einmal im Monat']], label='<b>7. </b>	Wie oft denken Sie darüber nach, wie der Klimawandel die Zukunft der Gesellschaft beeinflusst?', widget=widgets.RadioSelect)
     Idea1 = models.StringField(label= '', initial='', blank=True)
     Idea2 = models.StringField(label= '', initial='', blank=True)
     Idea3 = models.StringField(label= '', initial='', blank=True)
@@ -164,6 +154,7 @@ class Player(BasePlayer):
     before_missing = models.BooleanField()
     before_invalid = models.IntegerField()
     after_invalid = models.IntegerField()
+    check_invalid = models.StringField(initial='')
 
 def creating_session(subsession: Subsession):
     session = subsession.session
@@ -635,6 +626,23 @@ class Guess_Page3(Page):
                 player.correct_guess3 = True
             else:
                 player.correct_guess3 = False
+
+class PairCheck(Page):
+    timeout_seconds = 5000
+    def is_displayed(player):
+        return player.player_role == 'Ratender'
+    form_model = 'player'
+    form_fields = ['check_invalid']
+    
+    def vars_for_template(player):  
+        mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
+        mystery_word = mystery_word.lower()
+        hint_groups = [g for g in player.subsession.get_groups() if g.get_players()[0].player_role == 'Hinweisgebende']
+        index = (player.id_in_group - 1 + player.round_number - 1) % len(hint_groups)
+        pairs = hint_groups[index].get_players()[0].pairsafter 
+        pairs = pairs.split(', ')
+        return dict(mystery_word = mystery_word, pairs = pairs)
+
         
 class Results(Page):
     timeout_seconds = 5000
@@ -674,7 +682,7 @@ class Results(Page):
                     pairs[i] = ''
             while '' in pairs:
                 pairs.remove('')
-            player.quantity = len(pairs)
+            player.quantity = len(pairs) 
             if player.quantity == 0:
                 player.missing = True
                 missing = 'Achtung! Sie haben kein Hinweispaar abgegeben.'
@@ -754,21 +762,13 @@ class TestQuestions(Page):
     form_model = 'player'
     form_fields = ['known', 'understanding', 'comments', 'comments_2', 'strategy', 'strategy_2', 'strategy_3', 'strategy_4', 'strategy_5', 'group_individual', 'strategy_6', 'strategy_7']
 
-class FredaQuestions(Page):
-    template_name = 'new_justone_deutsch_oR/FredaQuestions.html'
-    timeout_seconds = 140
-    def is_displayed(player):
-        return player.round_number == C.NUM_ROUNDS
-    form_model = 'player'
-    form_fields = ['freda_1', 'freda_2', 'freda_3', 'freda_4', 'freda_5', 'freda_6', 'freda_7', 'freda_8']
-
 class IndividualismQuestions(Page):
     template_name = 'justone_deutsch/IndividualismQuestions.html'
     timeout_seconds = 120
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
     form_model = 'player'
-    form_fields = ['individualism_1', 'individualism_2', 'individualism_3', 'individualism_4', 'individualism_5', 'future_1', 'future_2']
+    form_fields = ['individualism_1', 'individualism_2', 'individualism_3', 'individualism_4', 'individualism_5']
 
 class UnderstandPage(Page):
     template_name = 'new_justone_deutsch_oR/UnderstandPage.html'
@@ -1323,4 +1323,4 @@ class FinalPage(Page):
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
 
-page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, CluegiverWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, ResultsWaitPage, Results, Score, TestQuestions, FredaQuestions, IndividualismQuestions, DAT, FinalPage]
+page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, CluegiverWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, PairCheck, ResultsWaitPage, Results, Score, TestQuestions, IndividualismQuestions, DAT, FinalPage]
