@@ -31,7 +31,7 @@
         <tr>       
         <th> {{ pair }} </th>       
             <td>
-                <input type="checkbox" name="check_invalid" value="{{ pair }} " id="checkbox-{{ pair }}" />
+                <input type="checkbox" name="check_invalid_{{ forloop.counter }}" value="{{ pair }} " id="check_invalid_{{ forloop.counter }}" /> 
             </td>
         </tr>
     {{ endfor }}    

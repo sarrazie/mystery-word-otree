@@ -154,7 +154,21 @@ class Player(BasePlayer):
     before_missing = models.BooleanField()
     before_invalid = models.IntegerField()
     after_invalid = models.IntegerField()
-    check_invalid = models.StringField(initial='')
+    check_invalid_1 = models.StringField(initial='')
+    check_invalid_2 = models.StringField(initial='')
+    check_invalid_3 = models.StringField(initial='')
+    check_invalid_4 = models.StringField(initial='')
+    check_invalid_5 = models.StringField(initial='')
+    check_invalid_6 = models.StringField(initial='')
+    check_invalid_7 = models.StringField(initial='')
+    check_invalid_8 = models.StringField(initial='')
+    check_invalid_9 = models.StringField(initial='')
+    check_invalid_10 = models.StringField(initial='')
+    check_invalid_11 = models.StringField(initial='')
+    check_invalid_12 = models.StringField(initial='')
+    check_invalid_13 = models.StringField(initial='')
+    check_invalid_14 = models.StringField(initial='')
+    check_invalid_15 = models.StringField(initial='')
 
 def creating_session(subsession: Subsession):
     session = subsession.session
@@ -631,9 +645,16 @@ class PairCheck(Page):
     timeout_seconds = 5000
     def is_displayed(player):
         return player.player_role == 'Ratender'
+
     form_model = 'player'
-    form_fields = ['check_invalid']
-    
+    def get_form_fields(player: Player):
+        hint_groups = [g for g in player.subsession.get_groups() if g.get_players()[0].player_role == 'Hinweisgebende']
+        index = (player.id_in_group - 1 + player.round_number - 1) % len(hint_groups)
+        pairs = hint_groups[index].get_players()[0].pairsafter 
+        pairs = pairs.split(', ')
+        form_fields = ['check_invalid_' + str(i) for i in range(1, len(pairs))]
+        return form_fields
+
     def vars_for_template(player):  
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         mystery_word = mystery_word.lower()
@@ -643,7 +664,6 @@ class PairCheck(Page):
         pairs = pairs.split(', ')
         return dict(mystery_word = mystery_word, pairs = pairs)
 
-        
 class Results(Page):
     timeout_seconds = 5000
     def vars_for_template(player):
