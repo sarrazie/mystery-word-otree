@@ -154,21 +154,22 @@ class Player(BasePlayer):
     before_missing = models.BooleanField()
     before_invalid = models.IntegerField()
     after_invalid = models.IntegerField()
-    check_invalid_1 = models.StringField(initial='')
-    check_invalid_2 = models.StringField(initial='')
-    check_invalid_3 = models.StringField(initial='')
-    check_invalid_4 = models.StringField(initial='')
-    check_invalid_5 = models.StringField(initial='')
-    check_invalid_6 = models.StringField(initial='')
-    check_invalid_7 = models.StringField(initial='')
-    check_invalid_8 = models.StringField(initial='')
-    check_invalid_9 = models.StringField(initial='')
-    check_invalid_10 = models.StringField(initial='')
-    check_invalid_11 = models.StringField(initial='')
-    check_invalid_12 = models.StringField(initial='')
-    check_invalid_13 = models.StringField(initial='')
-    check_invalid_14 = models.StringField(initial='')
-    check_invalid_15 = models.StringField(initial='')
+    check_invalid_1 = models.StringField(blank=True)
+    check_invalid_2 = models.StringField(blank=True)
+    check_invalid_3 = models.StringField(blank=True)
+    check_invalid_4 = models.StringField(blank=True)
+    check_invalid_5 = models.StringField(blank=True)
+    check_invalid_6 = models.StringField(blank=True)
+    check_invalid_7 = models.StringField(blank=True)
+    check_invalid_8 = models.StringField(blank=True)
+    check_invalid_9 = models.StringField(blank=True)
+    check_invalid_10 = models.StringField(blank=True)
+    check_invalid_11 = models.StringField(blank=True)
+    check_invalid_12 = models.StringField(blank=True)
+    check_invalid_13 = models.StringField(blank=True)
+    check_invalid_14 = models.StringField(blank=True)
+    check_invalid_15 = models.StringField(blank=True)
+
 
 def creating_session(subsession: Subsession):
     session = subsession.session
@@ -587,6 +588,8 @@ class Guess_Page1(Page):
             player.correct_guess1 = False
         else:
             player.guess1 = player.guess1.lower()
+            special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
+            player.guess1 = player.guess1.translate(special_char_map) 
             if player.guess1 == C.MYSTERY_WORDS[player.round_number - 1].lower():
                 player.correct_guess1 = True
             else:
@@ -611,6 +614,8 @@ class Guess_Page2(Page):
             player.correct_guess2 = False
         else:
             player.guess2 = player.guess2.lower()
+            special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
+            player.guess2 = player.guess2.translate(special_char_map) 
             if player.guess2 == C.MYSTERY_WORDS[player.round_number - 1].lower():
                 player.correct_guess2 = True
             else:
@@ -636,6 +641,8 @@ class Guess_Page3(Page):
             player.correct_guess3 = False
         else:
             player.guess3 = player.guess3.lower()
+            special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
+            player.guess3 = player.guess3.translate(special_char_map) 
             if player.guess3 == C.MYSTERY_WORDS[player.round_number - 1].lower():
                 player.correct_guess3 = True
             else:
@@ -652,7 +659,7 @@ class PairCheck(Page):
         index = (player.id_in_group - 1 + player.round_number - 1) % len(hint_groups)
         pairs = hint_groups[index].get_players()[0].pairsafter 
         pairs = pairs.split(', ')
-        form_fields = ['check_invalid_' + str(i) for i in range(1, len(pairs))]
+        form_fields = ['check_invalid_' + str(i+1) for i in range(len(pairs))]
         return form_fields
 
     def vars_for_template(player):  
@@ -683,11 +690,19 @@ class Results(Page):
                 player.invalid = True
                 invalid = 'Achtung! Das Hinweispaar Ihrer Gruppe war ungültig.'
             group_vote = player.vote_group
+            pairs = player.pairsafter
+            pairs = pairs.split(', ')
             guesser = next((p for p in player.subsession.get_players() if p.vote_group == group_vote and p.player_role == 'Ratender' and p.group != player.group), None)
+            check_invalid = []
             if guesser is not None:
                 guess1 = guesser.guess1  
                 guess2 = guesser.guess2
                 guess3 = guesser.guess3 
+                for i in range(len(pairs)):
+                    attr_name = f"check_invalid_{i+1}"  
+                    attr_value = getattr(guesser, attr_name, None)  
+                    if attr_value is not None:
+                        check_invalid.append(attr_value)
             else:
                 guess1 = None
                 guess2 = None
@@ -696,16 +711,10 @@ class Results(Page):
             player.missing = False
             guess_missing = ''
             missing = ''
-            pairs = [player.pair1after] + [player.pair2after] + [player.pair3after] + [player.pair4after] + [player.pair5after] 
-            for i in range(len(pairs)):
-                if pairs[i] == 'empty':
-                    pairs[i] = ''
-            while '' in pairs:
-                pairs.remove('')
-            player.quantity = len(pairs) 
+            player.quantity = len(pairs) - len(check_invalid)
             if player.quantity == 0:
                 player.missing = True
-                missing = 'Achtung! Sie haben kein Hinweispaar abgegeben.'
+                missing = 'Achtung! Sie haben kein gültiges Hinweispaar abgegeben.'
         if player.player_role == 'Ratender':
             vote_group = player.vote_group
             player.invalid = False
