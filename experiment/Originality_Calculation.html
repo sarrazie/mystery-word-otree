@@ -1,0 +1,26 @@
+{{ block title }}
+    Ergebnisse
+{{ endblock }}
+
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 20) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+</br>
+
+<p>{{ vote_group }}: {{ originality }}</p>
+
+<button class= "otree-btn btn btn-info">Weiter</button>
+{{ endblock }}

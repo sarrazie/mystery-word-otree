@@ -28,25 +28,35 @@
 {{ endfor }}
 </br>
 <p> Bitte geben Sie <b>alle</b> Hinweispaare ein, die Ihnen zu diesem Wort einfallen <font color="#FF0000"><b>(ein Hinweis pro Textfeld)</b></font>: </p>
-    {{ formfield 'Idea1' }} <b>+</b> {{ formfield 'Idea2' }}
+<div style="display: flex; align-items: center;">
+    {{ formfield 'Idea1' }} &nbsp; <b> + </b> &nbsp;{{ formfield 'Idea2' }}
+</div>
+<details>
+    <summary> Fügen Sie ein zweites Hinweispaar hinzu </summary>
+    <div style="display: flex; align-items: center;">
+        {{ formfield 'Idea3' }} &nbsp; <b> + </b> &nbsp; {{ formfield 'Idea4' }}
+    </div>
+    <details>
+        <summary> Fügen Sie ein drittes Hinweispaar hinzu </summary>
+        <div style="display: flex; align-items: center;">
+            {{ formfield 'Idea5' }} &nbsp; <b> + </b> &nbsp; {{ formfield 'Idea6' }}
+        </div>
         <details>
-        <summary> Fügen Sie ein zweites Hinweispaar hinzu </summary>
-        {{ formfield 'Idea3' }}<b>+</b> {{ formfield 'Idea4' }}
+            <summary> Fügen Sie ein viertes Hinweispaar hinzu </summary>
+            <div style="display: flex; align-items: center;">
+                {{ formfield 'Idea7' }} &nbsp; <b> + </b> &nbsp; {{ formfield 'Idea8' }}
+            </div>
             <details>
-            <summary> Fügen Sie ein drittes Hinweispaar hinzu </summary>
-            {{ formfield 'Idea5' }} <b>+</b> {{ formfield 'Idea6' }}
-                <details>
-                <summary> Fügen Sie ein viertes Hinweispaar hinzu </summary>
-                {{ formfield 'Idea7' }} <b>+</b> {{ formfield 'Idea8' }}
-                    <details>
-                    <summary> Fügen Sie ein fünftes Hinweispaar hinzu </summary>
-                    {{ formfield 'Idea9' }} <b>+</b> {{ formfield 'Idea10' }}
-                    <p>Sie haben das <b>Maximum</b> an Hinweispaaren erreicht, die eingereicht werden können.</p>
-                    </details>
-                </details>
+                <summary> Fügen Sie ein fünftes Hinweispaar hinzu </summary>
+                <div style="display: flex; align-items: center;">
+                    {{ formfield 'Idea9' }} &nbsp; <b> + </b> &nbsp; {{ formfield 'Idea10' }}
+                </div>
+                <p>Sie haben das <b>Maximum</b> an Hinweispaaren erreicht, die eingereicht werden können.</p>
             </details>
-        </details>   
-    </br>    
+        </details>
+    </details>
+</details>
+</br>    
 <button class= "otree-btn btn btn-info">Weiter</button>
 </br>
 </br>

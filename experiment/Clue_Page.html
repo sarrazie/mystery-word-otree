@@ -34,9 +34,9 @@
 <p> Diese können Sie nun noch einmal <b>überarbeiten</b>.</p>
 {{ if player.pair1 != 'empty' }}  
 <b>1. Hinweispaar:</b>  
-{{ formfield 'Idea1' }}
-<b>+</b>
-{{ formfield 'Idea2' }}
+<div style="display: flex; align-items: center;">
+    {{ formfield 'Idea1' }} &nbsp; <b> + </b> &nbsp;{{ formfield 'Idea2' }}
+</div>
 {{ if Rating_1.0 != 'empty' and Rating_1.1 != 'empty'}} <p> Bewertung Ihrer Gruppenmitglieder: <b> {{ Rating_1.0 }} {{ Rating_1.1 }}</b> </p> {{ elif Rating_1.0 != 'empty' and Rating_1.1 == 'empty' }} <p>Bewertung eines Gruppenmitglieds: <b>{{ Rating_1.0 }}</b></p> {{ elif Rating_1.1 != 'empty' and Rating_1.0 == 'empty'}} <p>Bewertung eines Gruppenmitglieds: <b>{{ Rating_1.1 }}</b></p> {{ else }} <p>Sie haben kein Feedback für dieses Paar erhalten.</p> {{ endif }}
 {{ if Replace_1.0 != '' and R_word_1.0 != '' }} <p>Ersatzvorschlag für das <b>{{ Replace_1.0 }}</b> Wort: <b> {{ R_word_1.0 }} </b></p> {{ else }} {{ endif}}
 {{ if Replace_1.1 != '' and R_word_1.1 != '' }} <p>Ersatzvorschlag für das <b>{{ Replace_1.1 }}</b> Wort: <b> {{ R_word_1.1 }} </b></p> {{ else }} {{ endif}}
@@ -44,9 +44,9 @@
 {{ endif }}
 {{ if player.pair2 != 'empty' }}    
 <b>2. Hinweispaar:</b>
-{{ formfield 'Idea3' }}
-<b>+</b>
-{{ formfield 'Idea4' }}
+<div style="display: flex; align-items: center;">
+    {{ formfield 'Idea3' }} &nbsp; <b> + </b> &nbsp;{{ formfield 'Idea4' }}
+</div>
 {{ if Rating_2.0 != 'empty' and Rating_2.1 != 'empty'}} <p> Bewertung Ihrer Gruppenmitglieder: <b> {{ Rating_2.0 }} {{ Rating_2.1 }}</b> </p> {{ elif Rating_2.0 != 'empty' and Rating_2.1 == 'empty' }} <p>Bewertung eines Gruppenmitglieds: <b>{{ Rating_2.0 }}</b></p> {{ elif Rating_2.1 != 'empty' and Rating_2.0 == 'empty'}} <p>Bewertung eines Gruppenmitglieds: <b>{{ Rating_2.1 }}</b></p> {{ else }} <p>Sie haben kein Feedback für dieses Paar erhalten.</p> {{ endif }}
 {{ if Replace_2.0 != '' and R_word_2.0 != '' }} <p> Ersatzvorschlag für das <b>{{ Replace_2.0 }}</b> Wort: <b> {{ R_word_2.0 }} </b></p> {{ else }} {{ endif}}
 {{ if Replace_2.1 != '' and R_word_2.1 != '' }} <p> Ersatzvorschlag für das <b>{{ Replace_2.1 }}</b> Wort: <b> {{ R_word_2.1 }} </b></p> {{ else }} {{ endif}}
@@ -54,9 +54,9 @@
 {{ endif }}
 {{ if player.pair3 != 'empty' }}    
 <b>3. Hinweispaar:</b>
-{{ formfield 'Idea5' }}
-<b>+</b>
-{{ formfield 'Idea6' }}
+<div style="display: flex; align-items: center;">
+    {{ formfield 'Idea5' }} &nbsp; <b> + </b> &nbsp;{{ formfield 'Idea6' }}
+</div>
 {{ if Rating_3.0 != 'empty' and Rating_3.1 != 'empty'}} <p> Bewertung Ihrer Gruppenmitglieder: <b> {{ Rating_3.0 }} {{ Rating_3.1 }}</b> </p> {{ elif Rating_3.0 != 'empty' and Rating_3.1 == 'empty' }} <p>Bewertung eines Gruppenmitglieds: <b>{{ Rating_3.0 }}</b></p> {{ elif Rating_3.1 != 'empty' and Rating_3.0 == 'empty'}} <p>Bewertung eines Gruppenmitglieds: <b>{{ Rating_3.1 }}</b></p> {{ else }} <p>Sie haben kein Feedback für dieses Paar erhalten.</p> {{ endif }}
 {{ if Replace_3.0 != '' and R_word_3.0 != '' }} <p> Ersatzvorschlag für das <b>{{ Replace_3.0 }}</b> Wort: <b> {{ R_word_3.0 }} </b></p> {{ else }} {{ endif}}
 {{ if Replace_3.1 != '' and R_word_3.1 != '' }} <p> Ersatzvorschlag für das <b>{{ Replace_3.1 }}</b> Wort: <b> {{ R_word_3.1 }} </b></p> {{ else }} {{ endif}}
@@ -64,9 +64,9 @@
 {{ endif }}
 {{ if player.pair4 != 'empty' }}  
 <b>4. Hinweispaar:</b>
-{{ formfield 'Idea7' }}
-<b>+</b>
-{{ formfield 'Idea8' }}
+<div style="display: flex; align-items: center;">
+    {{ formfield 'Idea7' }} &nbsp; <b> + </b> &nbsp;{{ formfield 'Idea8' }}
+</div>
 {{ if Rating_4.0 != 'empty' and Rating_4.1 != 'empty'}} <p> Bewertung Ihrer Gruppenmitglieder: <b> {{ Rating_4.0 }} {{ Rating_4.1 }}</b> </p> {{ elif Rating_4.0 != 'empty' and Rating_4.1 == 'empty' }} <p>Bewertung eines Gruppenmitglieds <b>{{ Rating_4.0 }}</b></p> {{ elif Rating_4.1 != 'empty' and Rating_4.0 == 'empty'}} <p>Bewertung eines Gruppenmitglieds: <b>{{ Rating_4.1 }}</b></p> {{ else }} <p>Sie haben kein Feedback für dieses Paar erhalten.</p> {{ endif }}
 {{ if Replace_4.0 != '' and R_word_4.0 != '' }} <p> Ersatzvorschlag für das <b>{{ Replace_4.0 }}</b> Wort: <b> {{ R_word_4.0 }} </b></p> {{ else }} {{ endif}}
 {{ if Replace_4.1 != '' and R_word_4.1 != '' }} <p> Ersatzvorschlag für das <b>{{ Replace_4.1 }}</b> Wort: <b> {{ R_word_4.1 }} </b></p> {{ else }} {{ endif}}
@@ -74,9 +74,9 @@
 {{ endif }}
 {{ if player.pair5 != 'empty' }} 
 <b>5. Hinweispaar:</b>
-{{ formfield 'Idea9' }}
-<b>+</b>
-{{ formfield 'Idea10' }}
+<div style="display: flex; align-items: center;">
+    {{ formfield 'Idea9' }} &nbsp; <b> + </b> &nbsp;{{ formfield 'Idea10' }}
+</div>
 {{ if Rating_5.0 != 'empty' and Rating_5.1 != 'empty'}} <p> Bewertung Ihrer Gruppenmitglieder: <b> {{ Rating_5.0 }} {{ Rating_5.1 }}</b> </p> {{ elif Rating_5.0 != 'empty' and Rating_5.1 == 'empty' }} <p>Bewertung eines Gruppenmitglieds: <b>{{ Rating_5.0 }}</b></p> {{ elif Rating_5.1 != 'empty' and Rating_5.0 == 'empty'}} <p>Bewertung eines Gruppenmitglieds: <b>{{ Rating_5.1 }}</b></p> {{ else }} <p>Sie haben kein Feedback für dieses Paar erhalten.</p> {{ endif }}
 {{ if Replace_5.0 != '' and R_word_5.0 != '' }} <p> Ersatzvorschlag für das <b>{{ Replace_5.0 }}</b> Wort: <b> {{ R_word_5.0 }} </b></p> {{ else }} {{ endif}}
 {{ if Replace_5.1 != '' and R_word_5.1 != '' }} <p> Ersatzvorschlag für das <b>{{ Replace_5.1 }}</b> Wort: <b> {{ R_word_5.1 }} </b></p> {{ else }} {{ endif}}
