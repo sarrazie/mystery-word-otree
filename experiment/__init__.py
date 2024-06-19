@@ -39,6 +39,7 @@ class Subsession(BaseSubsession):
 class Group(BaseGroup):
     payoff = models.IntegerField(initial=1000)
     quantity = models.IntegerField(initial=1000)
+    originality = models.FloatField(initial=1000)
 
 class Player(BasePlayer):        
     guess1 = models.StringField(label="Ihre Vermutung:", initial='')
@@ -302,6 +303,7 @@ class Round(Page):
         if round_number > 1:
             group.payoff = group.in_round(round_number - 1).payoff
             group.quantity = group.in_round(round_number - 1).quantity
+            group.originality = group.in_round(round_number - 1).originality
         return dict(round_number = round_number, remaining_rounds = remaining_rounds)
 
 class Clue_Page(Page):
@@ -618,14 +620,18 @@ class Originality_Calculation(Page):
     def vars_for_template(player):
         vote_group = player.vote_group
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1].lower()
-        with Model() as model:
-            originality_measures = []
-            with ThreadPoolExecutor() as executor:
-                future = executor.submit(model.calculate_originality, vote_group, mystery_word)
-                originality_measures.append(future)
+        if vote_group != 'Kein gültiges Hinweispaar':
+            with Model() as model:
+                originality_measures = []
+                with ThreadPoolExecutor() as executor:
+                    future = executor.submit(model.calculate_originality, vote_group, mystery_word)
+                    originality_measures.append(future)
 
-            for idx, originality in enumerate(originality_measures, start=1):
-                originality = future.result()
+                for idx, originality in enumerate(originality_measures, start=1):
+                    originality = future.result()
+            player.group.originality = originality
+        else:
+            player.group.originality = 1000
         return dict(vote_group = vote_group, originality = originality)
 
 class Guess_Page1(Page):
@@ -836,6 +842,17 @@ def score2(group: Group):
                 overall_quantity.remove(1000)
             sorted_overall_quantity = sorted(overall_quantity, reverse = True) 
     return sorted_overall_quantity
+
+def score3(group: Group):
+    subsession = group.subsession
+    groups = subsession.get_groups()
+    overall_originality = []
+    for group in groups:
+            overall_originality.append(group.originality)
+            if group.originality == 1000:
+                overall_originality.remove(1000)
+            sorted_overall_originality = sorted(overall_originality, reverse = True) 
+    return sorted_overall_originality
       
 class Score(Page):
     timeout_seconds = 30
@@ -884,6 +901,30 @@ class Score2(Page):
                 rank = 5
         number_groups = len(overall_quantity)
         return dict(overall_quantity = overall_quantity, quantity = player.quantity, rank = rank, number_groups = number_groups)
+    
+class Score3(Page): 
+    timeout_seconds = 30
+    def is_displayed(player):
+        return player.player_role == 'Hinweisgebende' and player.participant.treatment == 4
+    def vars_for_template(player):
+        player.originality = player.group.originality
+        overall_originality = score3(player.group)
+        rank = 0
+        if player.originality == overall_originality[0]:
+            rank = 1
+        if player.originality == overall_originality[1] and player.originality != overall_originality[0]:
+            rank = 2
+        if len(overall_originality) > 2:
+            if player.originality == overall_originality[2] and player.originality != overall_originality[0] and player.originality != overall_originality[1]:
+                rank = 3
+        if len(overall_originality) > 3:
+            if player.originality == overall_originality[3] and player.originality != overall_originality[0] and player.originality != overall_originality[1] and player.originality != overall_originality[2]:
+                rank = 4
+        if len(overall_originality) > 4:
+            if player.originality == overall_originality[4] and player.originality != overall_originality[0] and player.originality != overall_originality[1] and player.originality != overall_originality[2] and player.originality != overall_originality[3]:
+                rank = 5
+        number_groups = len(overall_originality)
+        return dict(overall_originality = overall_originality, originality = player.originality, rank = rank, number_groups = number_groups)
 
 class TestQuestions(Page):
     template_name = 'new_justone_deutsch_oR/TestQuestions.html'
@@ -1454,4 +1495,4 @@ class FinalPage(Page):
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
 
-page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, Originality_Calculation, GuesserWaitPage, CluegiverWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, PairCheck, ResultsWaitPage, Results, Score, Score2, TestQuestions, IndividualismQuestions, DAT, FinalPage]
+page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, Originality_Calculation, GuesserWaitPage, CluegiverWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, PairCheck, ResultsWaitPage, Results, Score, Score2, Score3, TestQuestions, IndividualismQuestions, DAT, FinalPage]

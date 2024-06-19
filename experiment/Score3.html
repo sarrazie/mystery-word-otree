@@ -1,5 +1,5 @@
 {{ block title }}
-    Ergebnisse
+    Punktestand
 {{ endblock }}
 
 {{ block content }}
@@ -18,11 +18,14 @@
         });
     });
 </script>
-</br>
+<p> Der Punktestand Ihrer Gruppe: <b> {{ originality }} Punkt(e) </b> </p>
+<p> Die aktuellen Punktestände aller Gruppen: </p>
 
-<p>Das final ausgewählte Hinweispaar Deiner Gruppe erreicht auf der Originalitätsskala von 0 bis 100 folgenden Wert: </p>
-<p> {{ if vote_group != "Kein gültiges Hinweispaar" }} <b> {{ vote_group }}: {{ originality }} </b> {{ else }} <b>Originalitätsmaß nicht berechenbar. Kein gültiges Hinweispaar!</b> {{ endif }} </p>
-   
-
+<ul>
+    {{ for item in overall_originality}}
+       <li><b>{{ item }} Punkt(e) </b></li>
+    {{ endfor }}   
+</ul>
+<p> Ihre Gruppe belegt Platz <b> {{ rank }} </b> von {{ number_groups }} Gruppen. </p>
 <button class= "otree-btn btn btn-info">Weiter</button>
 {{ endblock }}
