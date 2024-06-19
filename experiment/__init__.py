@@ -99,6 +99,7 @@ class Player(BasePlayer):
     missing = models.BooleanField()
     guess_missing = models.BooleanField()
     quantity = models.IntegerField()
+    originality = models.FloatField()
     invalid_DAT = models.BooleanField()
     pair1 = models.StringField(initial='')
     pair2 = models.StringField(initial='')
@@ -629,9 +630,13 @@ class Originality_Calculation(Page):
 
                 for idx, originality in enumerate(originality_measures, start=1):
                     originality = future.result()
-            player.group.originality = originality
+                    if originality is not None:
+                        originality = round(originality, 2)
+                    else: 
+                        originality = 0
         else:
-            player.group.originality = 1000
+            originality = 0
+        player.group.originality = originality
         return dict(vote_group = vote_group, originality = originality)
 
 class Guess_Page1(Page):
