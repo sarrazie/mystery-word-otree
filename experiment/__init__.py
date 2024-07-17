@@ -541,7 +541,7 @@ class Voting_Page(Page):
             elif pairs.count(item) == 1:
                 pairsafter.append(item)
         pairsafter = sorted(pairsafter)
-        player.pairsafter = ','.join(pairsafter)
+        player.pairsafter = ', '.join(pairsafter)
         number_pairs = len(pairsafter)
         pairs_dict = {f'Pair{i+1}': pairsafter[i] if i < number_pairs else '' for i in range(15)}
         Pair1, Pair2, Pair3, Pair4, Pair5, Pair6, Pair7, Pair8, Pair9, Pair10, Pair11, Pair12, Pair13, Pair14, Pair15 = pairs_dict.values()
