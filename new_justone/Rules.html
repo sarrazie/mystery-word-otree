@@ -1,0 +1,36 @@
+{% include '_static/global/next_button.html' %}
+{{ block title }}
+    Example
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+</br>
+
+<div class="info active">
+    <p> Here is an <b>example</b> of a successful round: </p>  
+</div>
+<div class="info">
+    <p> <b>Mystery word:</b> Time </p>
+</div>
+<div class="info">
+    <p> Group's valid <b>clue pair:</b> Clock + Minute </p> 
+</div>
+<div class="info">
+    <p> Guesser's <b>guess:</b> Time </p>
+</div>
+<div class="info">
+    <p> <b><font color="#04B404">Correct answer!</font></b> </p>
+</br>
+<button class= "otree-btn btn btn-info">Next</button>
+</div>
+</br>
+<p style="text-align: left">
+    <button class="otree-btn btn btn-info" type="button" id="next">Next</button>
+</p>
+
+{{ endblock }}

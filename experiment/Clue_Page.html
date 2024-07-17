@@ -1,0 +1,99 @@
+{{ block title }}
+    Hinweispaar
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 20) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+</br>
+<p> Das <b>Geheimwort</b> in dieser Runde ist: </p>
+<p> <b>{{ mystery_word }}</b> </p>  
+<p> Die fünf Tabuwörter sind: {{ for word in taboo_words }} </p>
+<ul>
+    <li> <b>{{ word }}</b></li>
+</ul>
+{{ endfor }}
+</br> 
+{{ if player.pair1 == 'empty' and player.pair2 == 'empty' and player.pair3 == 'empty' and player.pair4 == 'empty' and player.pair5 == 'empty' }}
+</br><p><b>Sie haben kein gültiges Hinweispaar abgegeben.</b></p>
+{{ else}}
+<p> Hier sind Ihre bisher abgegebenen und gültigen Hinweispaare mit dem <b>Feedback</b> Ihrer Gruppenmitglieder. </p>
+<p> Diese können Sie nun noch einmal <b>überarbeiten</b>.</p>
+{{ if player.pair1 != 'empty' }}  
+<b>1. Hinweispaar:</b>  
+<div style="display: flex; align-items: center;">
+    {{ formfield 'Idea1' }} &nbsp; <b> + </b> &nbsp;{{ formfield 'Idea2' }}
+</div>
+{{ if Rating_1.0 != 'empty' and Rating_1.1 != 'empty'}} <p> Bewertung Ihrer Gruppenmitglieder: <b> {{ Rating_1.0 }} {{ Rating_1.1 }}</b> </p> {{ elif Rating_1.0 != 'empty' and Rating_1.1 == 'empty' }} <p>Bewertung eines Gruppenmitglieds: <b>{{ Rating_1.0 }}</b></p> {{ elif Rating_1.1 != 'empty' and Rating_1.0 == 'empty'}} <p>Bewertung eines Gruppenmitglieds: <b>{{ Rating_1.1 }}</b></p> {{ else }} <p>Sie haben kein Feedback für dieses Paar erhalten.</p> {{ endif }}
+{{ if Replace_1.0 != '' and R_word_1.0 != '' }} <p>Ersatzvorschlag für das <b>{{ Replace_1.0 }}</b> Wort: <b> {{ R_word_1.0 }} </b></p> {{ else }} {{ endif}}
+{{ if Replace_1.1 != '' and R_word_1.1 != '' }} <p>Ersatzvorschlag für das <b>{{ Replace_1.1 }}</b> Wort: <b> {{ R_word_1.1 }} </b></p> {{ else }} {{ endif}}
+{{ else }}
+{{ endif }}
+{{ if player.pair2 != 'empty' }}    
+<b>2. Hinweispaar:</b>
+<div style="display: flex; align-items: center;">
+    {{ formfield 'Idea3' }} &nbsp; <b> + </b> &nbsp;{{ formfield 'Idea4' }}
+</div>
+{{ if Rating_2.0 != 'empty' and Rating_2.1 != 'empty'}} <p> Bewertung Ihrer Gruppenmitglieder: <b> {{ Rating_2.0 }} {{ Rating_2.1 }}</b> </p> {{ elif Rating_2.0 != 'empty' and Rating_2.1 == 'empty' }} <p>Bewertung eines Gruppenmitglieds: <b>{{ Rating_2.0 }}</b></p> {{ elif Rating_2.1 != 'empty' and Rating_2.0 == 'empty'}} <p>Bewertung eines Gruppenmitglieds: <b>{{ Rating_2.1 }}</b></p> {{ else }} <p>Sie haben kein Feedback für dieses Paar erhalten.</p> {{ endif }}
+{{ if Replace_2.0 != '' and R_word_2.0 != '' }} <p> Ersatzvorschlag für das <b>{{ Replace_2.0 }}</b> Wort: <b> {{ R_word_2.0 }} </b></p> {{ else }} {{ endif}}
+{{ if Replace_2.1 != '' and R_word_2.1 != '' }} <p> Ersatzvorschlag für das <b>{{ Replace_2.1 }}</b> Wort: <b> {{ R_word_2.1 }} </b></p> {{ else }} {{ endif}}
+{{ else }}
+{{ endif }}
+{{ if player.pair3 != 'empty' }}    
+<b>3. Hinweispaar:</b>
+<div style="display: flex; align-items: center;">
+    {{ formfield 'Idea5' }} &nbsp; <b> + </b> &nbsp;{{ formfield 'Idea6' }}
+</div>
+{{ if Rating_3.0 != 'empty' and Rating_3.1 != 'empty'}} <p> Bewertung Ihrer Gruppenmitglieder: <b> {{ Rating_3.0 }} {{ Rating_3.1 }}</b> </p> {{ elif Rating_3.0 != 'empty' and Rating_3.1 == 'empty' }} <p>Bewertung eines Gruppenmitglieds: <b>{{ Rating_3.0 }}</b></p> {{ elif Rating_3.1 != 'empty' and Rating_3.0 == 'empty'}} <p>Bewertung eines Gruppenmitglieds: <b>{{ Rating_3.1 }}</b></p> {{ else }} <p>Sie haben kein Feedback für dieses Paar erhalten.</p> {{ endif }}
+{{ if Replace_3.0 != '' and R_word_3.0 != '' }} <p> Ersatzvorschlag für das <b>{{ Replace_3.0 }}</b> Wort: <b> {{ R_word_3.0 }} </b></p> {{ else }} {{ endif}}
+{{ if Replace_3.1 != '' and R_word_3.1 != '' }} <p> Ersatzvorschlag für das <b>{{ Replace_3.1 }}</b> Wort: <b> {{ R_word_3.1 }} </b></p> {{ else }} {{ endif}}
+{{ else }}
+{{ endif }}
+{{ if player.pair4 != 'empty' }}  
+<b>4. Hinweispaar:</b>
+<div style="display: flex; align-items: center;">
+    {{ formfield 'Idea7' }} &nbsp; <b> + </b> &nbsp;{{ formfield 'Idea8' }}
+</div>
+{{ if Rating_4.0 != 'empty' and Rating_4.1 != 'empty'}} <p> Bewertung Ihrer Gruppenmitglieder: <b> {{ Rating_4.0 }} {{ Rating_4.1 }}</b> </p> {{ elif Rating_4.0 != 'empty' and Rating_4.1 == 'empty' }} <p>Bewertung eines Gruppenmitglieds <b>{{ Rating_4.0 }}</b></p> {{ elif Rating_4.1 != 'empty' and Rating_4.0 == 'empty'}} <p>Bewertung eines Gruppenmitglieds: <b>{{ Rating_4.1 }}</b></p> {{ else }} <p>Sie haben kein Feedback für dieses Paar erhalten.</p> {{ endif }}
+{{ if Replace_4.0 != '' and R_word_4.0 != '' }} <p> Ersatzvorschlag für das <b>{{ Replace_4.0 }}</b> Wort: <b> {{ R_word_4.0 }} </b></p> {{ else }} {{ endif}}
+{{ if Replace_4.1 != '' and R_word_4.1 != '' }} <p> Ersatzvorschlag für das <b>{{ Replace_4.1 }}</b> Wort: <b> {{ R_word_4.1 }} </b></p> {{ else }} {{ endif}}
+{{ else }}
+{{ endif }}
+{{ if player.pair5 != 'empty' }} 
+<b>5. Hinweispaar:</b>
+<div style="display: flex; align-items: center;">
+    {{ formfield 'Idea9' }} &nbsp; <b> + </b> &nbsp;{{ formfield 'Idea10' }}
+</div>
+{{ if Rating_5.0 != 'empty' and Rating_5.1 != 'empty'}} <p> Bewertung Ihrer Gruppenmitglieder: <b> {{ Rating_5.0 }} {{ Rating_5.1 }}</b> </p> {{ elif Rating_5.0 != 'empty' and Rating_5.1 == 'empty' }} <p>Bewertung eines Gruppenmitglieds: <b>{{ Rating_5.0 }}</b></p> {{ elif Rating_5.1 != 'empty' and Rating_5.0 == 'empty'}} <p>Bewertung eines Gruppenmitglieds: <b>{{ Rating_5.1 }}</b></p> {{ else }} <p>Sie haben kein Feedback für dieses Paar erhalten.</p> {{ endif }}
+{{ if Replace_5.0 != '' and R_word_5.0 != '' }} <p> Ersatzvorschlag für das <b>{{ Replace_5.0 }}</b> Wort: <b> {{ R_word_5.0 }} </b></p> {{ else }} {{ endif}}
+{{ if Replace_5.1 != '' and R_word_5.1 != '' }} <p> Ersatzvorschlag für das <b>{{ Replace_5.1 }}</b> Wort: <b> {{ R_word_5.1 }} </b></p> {{ else }} {{ endif}}
+{{ else }}
+{{ endif }}
+{{ endif }}
+</br>
+<button class= "otree-btn btn btn-info">Weiter</button>
+</br>
+</br>
+<details>
+    <summary> Zusammenfassung der Regeln </summary>
+</br>
+    <ul>    
+        <li> <b><u>Ziel:</u></b> Einer der Spielenden – <i>der Ratende</i> – muss ein Geheimwort anhand eines Hinweispaars erraten, das von seinen Mitspielenden geschrieben wurde.</li>
+        <li> <b>Ungültige Hinweispaare</b> enthalten Hinweise, die denselben Wortstamm wie das Geheimwort oder wie eins der fünf Tabuwörter haben, eine Übersetzung des Geheimworts sind oder frei erfunden.</li>
+    </ul>  
+</details>
+
+{{ endblock }}

@@ -1,0 +1,148 @@
+{{ block title }}
+    Diskussion
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 20) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+</br>
+<p>Folgende gültige <b>Hinweispaare</b> wurden von Ihren Mitspielenden geschrieben.</p>
+<p><b>Bewerten</b> Sie, wie gut Sie das jeweilige Hinweispaar finden und machen Sie <b>Vorschläge</b>, welche Hinweise Sie ersetzen würden.</p>
+</br>
+{{ if number_pairs > 0 }}
+<b> 1. {{ Pair1 }} </b>
+{{ formfield 'rating_before1' }}
+<details>
+    <summary> Hinweis ersetzen </summary>
+        {{ formfield 'replace_word1' }}
+        {{ formfield 'discussion1' }}  
+</details>
+</br>
+{{ else }} <p><b>Ihre Mitspielenden haben keine gültigen Hinweispaare geschrieben.</b> </p> </br>{{ endif }}
+
+{{ if number_pairs > 1 }}
+<b>2. {{ Pair2 }}</b>
+{{ formfield 'rating_before2' }}
+<details>
+    <summary> Hinweis ersetzen </summary>
+        {{ formfield 'replace_word2' }}
+        {{ formfield 'discussion2' }}
+</details>
+</br>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 2 }}
+<b>3. {{ Pair3 }}</b>
+{{ formfield 'rating_before3' }}
+<details>
+    <summary> Hinweis ersetzen </summary>
+        {{ formfield 'replace_word3' }}
+        {{ formfield 'discussion3' }}
+</details>
+</br>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 3 }}
+<b>4. {{ Pair4 }}</b>
+{{ formfield 'rating_before4' }}
+<details>
+    <summary> Hinweis ersetzen </summary>
+        {{ formfield 'replace_word4' }}
+        {{ formfield 'discussion4' }}
+</details>
+</br>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 4 }}
+<b>5. {{ Pair5 }}</b>
+{{ formfield 'rating_before5' }}
+<details>
+    <summary> Hinweis ersetzen </summary>
+        {{ formfield 'replace_word5' }}
+        {{ formfield 'discussion5' }}
+</details>
+</br>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 5 }}
+<b>6. {{ Pair6 }}</b>
+{{ formfield 'rating_before6' }}
+<details>
+    <summary> Hinweis ersetzen </summary>
+        {{ formfield 'replace_word6' }}
+        {{ formfield 'discussion6' }}
+</details>
+</br>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 6 }}
+<b>7. {{ Pair7 }}</b>
+{{ formfield 'rating_before7' }}
+<details>
+    <summary> Hinweis ersetzen </summary>
+        {{ formfield 'replace_word7' }}
+        {{ formfield 'discussion7' }}
+</details>
+</br>
+{{ else }} {{ endif }} 
+
+{{ if number_pairs > 7 }}
+<b>8. {{ Pair8 }}</b>
+{{ formfield 'rating_before8' }}
+<details>
+    <summary> Hinweis ersetzen </summary>
+        {{ formfield 'replace_word8' }}
+        {{ formfield 'discussion8' }}
+</details>
+</br>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 8 }}
+<b>9. {{ Pair9 }}</b>
+{{ formfield 'rating_before9' }}
+<details>
+    <summary> Hinweis ersetzen </summary>
+        {{ formfield 'replace_word9' }}
+        {{ formfield 'discussion9' }}
+</details>
+</br>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 9 }}
+<b>10. {{ Pair10 }}</b>
+{{ formfield 'rating_before10' }}
+<details>
+    <summary> Hinweis ersetzen </summary>
+        {{ formfield 'replace_word10' }}
+        {{ formfield 'discussion10' }}
+</details>
+</br>
+{{ else }} {{ endif }}
+
+<button class= "otree-btn btn btn-info">Weiter</button>
+</br>
+</br>
+<details>
+    <summary> Zusammenfassung der Regeln </summary>
+</br>
+    <ul>    
+        <li> <b><u>Ziel:</u></b> Einer der Spielenden – <i>der Ratende</i> – muss ein Geheimwort anhand eines Hinweispaars erraten, das von seinen Mitspielenden geschrieben wurde.</li>
+        <li> Wenn zwei oder mehr Gruppen <b>identische Hinweispaare</b> schreiben, werden diese entfernt, bevor <i>der Ratende</i> sie sieht und die Runde ist beendet.</li>
+        <li> <b>Ungültige Hinweispaare</b> enthalten Hinweise, die denselben Wortstamm wie das Geheimwort haben, eine Übersetzung des Geheimworts sind oder frei erfunden.</li>
+    </ul>  
+</details>
+
+{{ endblock }}

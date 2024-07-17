@@ -1,0 +1,46 @@
+{% include '_static/global/next_button.html' %}
+{{ block title }}
+    Worträtsel
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 20) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+</br>
+
+<div class="info active">
+<p> Sie wurden <b>zu dritt</b> in Gruppen eingeteilt. Zusammen in Ihrer Gruppe spielen Sie insgesamt <b>6 Runden.</b> </p>  
+</div>
+<div class="info">
+<p> <b><u>Ziel:</u></b> Einer der Spielenden – <i>der Ratende</i> – muss ein geheimes Wort anhand eines Hinweispaars der anderen Spielenden erraten. </p>
+<p> Ein Hinweispaar besteht aus zwei <b>einzelnen Wörtern.</b> </p>
+</div>
+<div class="info">
+<p> <b>Fünf Tabuwörter</b> werden zu Beginn gezeigt. Diese Wörter dürfen <b>nicht</b> Bestandteil des Hinweispaars sein. </p>
+</div>
+<div class="info">
+<p> {{ if player.participant.treatment != 1}} Ihre Auszahlung besteht aus einer Teilnahmegebühr von <b>3,50€</b> und einem Bonus von <b>bis zu 8€,</b> abhängig von Ihrer Leistung. {{ else }} Sie erhalten <b>10€,</b> wenn Sie an allen 6 Runden teilnehmen. {{ endif }} </p>
+<p> {{ if player.participant.treatment == 3}} Sie können den <b>Bonus</b> erhalten, wenn Ihre Gruppe die <b>beste Punktzahl aller Gruppen</b> in dieser Sitzung erreicht. {{ else }} {{ endif }} </p>
+<p> {{ if player.participant.treatment == 2}} Sie können den <b>Bonus</b> erhalten, wenn Ihre Gruppe die <b>meisten Ideen für Hinweispaare</b> in dieser Sitzung entwickelt. {{ else }} {{ endif }} </p>
+<p> {{ if player.participant.treatment == 4}} Sie können den <b>Bonus</b> erhalten, wenn Ihre Gruppe die <b>exklusivsten und einzigartigsten Hinweispaare</b> in dieser Sitzung gibt. {{ else }} {{ endif }} </p>
+{{ formfields }}
+<button class= "otree-btn btn btn-info">Weiter</button>
+</div>
+
+<p style="text-align: left">
+    <button class="otree-btn btn btn-info" type="button" id="next">Weiter</button>
+</p>
+
+{{ endblock }}

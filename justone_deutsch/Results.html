@@ -1,0 +1,38 @@
+{{ block title }}
+    Ergebnisse
+{{ endblock }}
+
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 20) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+<p> <b><font color="#FF0000">{{ identical }}</font></b> </p>
+<p> <b><font color="#FF0000">{{ invalid }} </font></b></p>
+<p> <b><font color="#FF0000">{{ missing }}</b></font> </p>
+<p> <b><font color="#FF0000">{{ guess_missing }}</font></b> </p>
+<p> {{ if player.participant.treatment == 2 }} {{ if player.role() == 'Hinweisgebende' }} Sie haben {{ number_ideas }} <b>gültige</b> Idee(n) eingereicht. {{ else }} {{ endif }} {{ else }} {{ endif }}</p>
+<p> Geheimes Wort: <b>{{ mystery_word }}</b> </p>
+<p> Die Hinweise Ihrer Gruppe: </p>
+<ul>
+    {{ for item in clues }}
+        <li><b>{{ item }}</b></li>
+    {{ endfor }} 
+</ul>
+
+<p> Die Vermutung Ihrer Gruppe: <b>{{ guess }}</b> </p>
+{{ if result == 'falsch' }} <p>Diese Vermutung war <b><font color="#FF0000">{{ result }}.</font></b></p> {{ elif result == 'richtig' }} <p>Diese Vermutung war <font color="#04B404"><b>{{ result }}.</b></font></p> {{ endif }}
+
+<button class= "otree-btn btn btn-info">Weiter</button>
+{{ endblock }}

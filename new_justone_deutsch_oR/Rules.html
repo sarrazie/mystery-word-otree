@@ -1,0 +1,49 @@
+{% include '_static/global/next_button.html' %}
+{{ block title }}
+    Beispiel
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 20) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+</br>
+
+<div class="info active">
+<p> Hier finden Sie ein <b>Beispiel</b> für eine gelungene Runde: </b> </p>  
+</div>
+<div class="info">
+<p> <b>Geheimwort:</b> <i>Zeit</i> </p>
+</div>
+<div class="info">
+<p> Fünf Tabuwörter, die <b>nicht</b> Bestandteil des Hinweispaars sein dürfen: </p>
+<p><i>Gegenwart, Vergangenheit, Augenblick, Ewigkeit, Stunde</i></p> 
+</div>
+<div class="info">
+<p> Gültiges <b>Hinweispaar</b> der Gruppe: <i>Uhr + Minute</i> </p> 
+</div>
+<div class="info">
+<p> <b>Vermutung</b> des Ratenden: <i>Zeit</i> </p>
+</div>
+<div class="info">
+<p> <b><font color="#04B404">Richtige Antwort!</font></b> </p>
+</br>
+<button class= "otree-btn btn btn-info">Weiter</button>
+</div>
+</br>
+<p style="text-align: left">
+    <button class="otree-btn btn btn-info" type="button" id="next">Weiter</button>
+</p>
+
+{{ endblock }}

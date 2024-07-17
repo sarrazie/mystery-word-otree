@@ -1,0 +1,41 @@
+{{ block title }}
+    Guess
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 15) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+</br>
+<p> This is the <b>clue pair</b> you received from your three group members:</p> 
+<ul>
+    <p><b>{{ vote_group }}</b></p>
+</ul>
+<p> Please enter your <b>guess</b> for the mystery word. {{ formfields }} </p>
+<br>
+<button class="otree-btn btn btn-info">Next</button>
+<br><br>
+
+<details>
+    <summary>Summary of Rules</summary>
+    <br>
+    <ul>    
+        <li><b><u>Objective:</u></b> One of the players – <i>the Guesser</i> – needs to guess a secret word based on a clue pair provided by the other players.</li>
+        <li>If two or more groups provide <b>identical clue pairs</b>, these will be removed before <i>the Guesser</i> sees them, and the round ends.</li>
+        <li><b>Invalid clue pairs</b> contain hints that share the same word stem as the secret word, are a translation of the secret word, or are entirely made up.</li>
+    </ul>  
+</details>
+
+{{ endblock }}

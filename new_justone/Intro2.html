@@ -1,0 +1,47 @@
+{% include '_static/global/next_button.html' %}
+{{ block title }}
+    Word Puzzle
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+</br>
+
+<div class="info active">
+    <p> Each round is divided into <b>six phases:</b></p>
+</div>
+<div class="info">
+    <p><b>1.</b> All players except <i>the guesser</i> are informed of the secret word they need to provide a clue pair for.</p>
+</div>
+<div class="info">
+    <p><b>2.</b> Without communicating, each <i>clue giver</i> generates clue pairs individually.</p>
+</div>
+<div class="info">
+    <p><b>3.</b> Next, the <i>clue givers</i> come together and <b>comment</b> on their previously written clue pairs.</p>
+</div>
+<div class="info">
+    <p><b>4.</b> Afterwards, each <i>clue giver</i> has time to revise their clue pairs.</p>
+</div>
+<div class="info">
+    <p><b>5.</b> Now, the <i>clue givers</i> collectively decide which <b>single</b> clue pair they want to pass <i>to the guesser.</i></p>
+</div>
+<div class="info">
+    <p><b>6.</b> Before <i>the guesser </i> sees them, identical clue pairs are removed. <i>The guesser</i> has only <b>one attempt</b> to guess the mystery word.</p>
+</div>
+<div class="info">   
+    <p>After the round, the group is informed whether <i>the guesser</i> correctly guessed the mystery word. The next round begins, and another group member becomes <i>the guesser.</i></p>
+    </br>
+    {{ formfields }}
+    <button class= "otree-btn btn btn-info">Next</button>
+</div>
+</br>
+<p style="text-align: left">
+    <button class="otree-btn btn btn-info" type="button" id="next">Next</button>
+</p>
+    
+{{ endblock }}
+

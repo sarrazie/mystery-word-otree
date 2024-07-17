@@ -1,0 +1,47 @@
+{% include '_static/global/next_button.html' %}
+{{ block title }}
+    Worträtsel
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 20) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+</br>
+<div class="info active">
+    <p> Jede Runde ist in <b>vier Phasen</b> unterteilt:</p>
+</div>
+<div class="info">
+        <p><b>1.</b> Allen Spielenden außer <i>dem Ratenden</i> wird mitgeteilt, für welches geheime Wort sie einen Hinweis geben müssen.</p>
+</div>
+<div class="info">
+        <p><b>2.</b> Ohne miteinander zu kommunizieren und ohne es jemandem zu zeigen, gibt jede <i>Hinweisgebende</i> einen Hinweis ein.</p>
+</div>
+<div class="info">
+        <p><b>3.</b> Sobald alle Spielenden ihre Hinweise geschrieben haben, werden identische oder ungültige Hinweise entfernt.  </p>
+</div>
+<div class="info">
+        <p><b>4.</b> <i>Der Ratende</i> sieht alle verbleibenden Hinweise und hat <b>nur einen Versuch,</b> um das geheime Wort zu erraten.</i></p>
+</div>
+<div class="info">
+    <p> Der Gruppe wird nach der Runde mitgeteilt, ob <i>der Ratende</i> das geheime Wort korrekt erraten hat oder nicht. Die nächste Runde beginnt, und ein anderes Gruppenmitglied wird <i>der Ratende.</i></p>
+</br>
+    {{ formfields }}
+    <button class= "otree-btn btn btn-info">Weiter</button>
+</div>
+</br>
+<p style="text-align: left">
+    <button class="otree-btn btn btn-info" type="button" id="next">Weiter</button>
+</p> 
+    {{ endblock }}

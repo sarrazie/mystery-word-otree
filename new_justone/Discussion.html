@@ -1,0 +1,170 @@
+{{ block title }}
+    Discussion
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 15) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+</br>
+<p>The following <b>clue pairs</b> were written by your fellow players.</p>
+<p><b>Evaluate</b> how well you find each clue pair and make <b>suggestions</b> for which clues you would replace.</p>
+</br>
+{{ if number_pairs > 0 }}
+<b> 1. {{ Pair1 }} </b>
+{{ formfield 'rating_before1' }}
+<details>
+    <summary> Replace clue </summary>
+        {{ formfield 'replace_word1' }}
+        {{ formfield 'discussion1' }}  
+</details>
+</br>
+{{ else }} <b>Your fellow players haven't provided valid clue pairs.</b> </br>{{ endif }}
+
+{{ if number_pairs > 1 }}
+<b>2. {{ Pair2 }}</b>
+{{ formfield 'rating_before2' }}
+<details>
+    <summary> Replace clue </summary>
+        {{ formfield 'replace_word2' }}
+        {{ formfield 'discussion2' }}
+</details>
+</br>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 2 }}
+<b>3. {{ Pair3 }}</b>
+{{ formfield 'rating_before3' }}
+<details>
+    <summary> Replace clue </summary>
+        {{ formfield 'replace_word3' }}
+        {{ formfield 'discussion3' }}
+</details>
+</br>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 3 }}
+<b>4. {{ Pair4 }}</b>
+{{ formfield 'rating_before4' }}
+<details>
+    <summary> Replace clue </summary>
+        {{ formfield 'replace_word4' }}
+        {{ formfield 'discussion4' }}
+</details>
+</br>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 4 }}
+<b>5. {{ Pair5 }}</b>
+{{ formfield 'rating_before5' }}
+<details>
+    <summary> Replace clue </summary>
+        {{ formfield 'replace_word5' }}
+        {{ formfield 'discussion5' }}
+</details>
+</br>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 5 }}
+<b>6. {{ Pair6 }}</b>
+{{ formfield 'rating_before6' }}
+<details>
+    <summary> Replace clue </summary>
+        {{ formfield 'replace_word6' }}
+        {{ formfield 'discussion6' }}
+</details>
+</br>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 6 }}
+<b>7. {{ Pair7 }}</b>
+{{ formfield 'rating_before7' }}
+<details>
+    <summary> Replace clue </summary>
+        {{ formfield 'replace_word7' }}
+        {{ formfield 'discussion7' }}
+</details>
+</br>
+{{ else }} {{ endif }} 
+
+{{ if number_pairs > 7 }}
+<b>{{ Pair8 }}</b>
+{{ formfield 'rating_before8' }}
+<details>
+    <summary> Replace clue </summary>
+        {{ formfield 'replace_word8' }}
+        {{ formfield 'discussion8' }}
+</details>
+</br>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 8 }}
+<b>{{ Pair9 }}</b>
+{{ formfield 'rating_before9' }}
+<details>
+    <summary> Replace clue </summary>
+        {{ formfield 'replace_word9' }}
+        {{ formfield 'discussion9' }}
+</details>
+</br>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 9 }}
+<b>{{ Pair10 }}</b>
+{{ formfield 'rating_before10' }}
+<details>
+    <summary> Replace clue </summary>
+        {{ formfield 'replace_word10' }}
+        {{ formfield 'discussion10' }}
+</details>
+</br>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 10 }}
+<b>{{ Pair11 }}</b>
+{{ formfield 'rating_before11' }}
+<details>
+    <summary> Replace clue </summary>
+        {{ formfield 'replace_word11' }}
+        {{ formfield 'discussion11' }}
+</details>
+</br>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 11 }}
+<b>{{ Pair12 }}</b>
+{{ formfield 'rating_before12' }}
+<details>
+    <summary> Replace clue </summary>
+        {{ formfield 'replace_word12' }}
+        {{ formfield 'discussion12' }}
+</details>
+</br>
+{{ else }} {{ endif }}
+
+<button class= "otree-btn btn btn-info">Next</button>
+</br>
+</br>
+<details>
+    <summary>Summary of Rules</summary>
+    <br>
+    <ul>    
+        <li><b><u>Objective:</u></b> One of the players – <i>the Guesser</i> – needs to guess a secret word based on a clue pair provided by the other players.</li>
+        <li>If two or more groups provide <b>identical clue pairs</b>, these will be removed before <i>the Guesser</i> sees them, and the round ends.</li>
+        <li><b>Invalid clue pairs</b> contain hints that share the same word stem as the secret word, are a translation of the secret word, or are entirely made up.</li>
+    </ul>  
+</details>
+
+{{ endblock }}

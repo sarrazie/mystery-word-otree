@@ -1,0 +1,38 @@
+{{ block title }}
+    Abstimmungsergebnis
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 20) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+</br>
+<p> {{ if duplicates > 0 }} Ihre Gruppe hat <b>mehrheitlich</b> für das Hinweispaar <b> {{ vote_group }} </b> gestimmt. {{ else }} Leider hat sich <b>keine Mehrheit</b> für ein Hinweispaar gefunden. Per Zufall wurde folgendes Hinweispaar ausgewählt: <b>{{ vote_group }}.</b> {{ endif }} </p>
+<p> {{ if valid_votes > 0 }} Dieses Hinweispaar ist <b>gültig</b> und wird dem Ratenden angezeigt, sofern es nicht identisch zu einem Hinweispaar einer anderen Gruppe ist. {{ else }} Dieses Hinweispaar ist <b>ungültig</b> und wird dem Ratenden nicht angezeigt. {{ endif }} </p>
+</br>
+<button class= "otree-btn btn btn-info">Weiter</button>
+</br>
+</br>
+<details>
+    <summary> Zusammenfassung der Regeln </summary>
+</br>
+    <ul>    
+        <li> <b><u>Ziel:</u></b> Einer der Spielenden – <i>der Ratende</i> – muss ein Geheimwort anhand eines Hinweispaars erraten, das von seinen Mitspielenden geschrieben wurde.</li>
+        <li> Wenn zwei oder mehr Gruppen <b>identische Hinweispaare</b> schreiben, werden diese entfernt, bevor <i>der Ratende</i> sie sieht und die Runde ist beendet.</li>
+        <li> <b>Ungültige Hinweispaare</b> enthalten Hinweise, die denselben Wortstamm wie das Geheimwort haben, eine Übersetzung des Geheimworts sind oder frei erfunden.</li>
+    </ul>  
+</details>
+
+{{ endblock }}

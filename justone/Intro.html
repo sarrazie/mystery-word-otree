@@ -1,0 +1,48 @@
+{% include '_static/global/next_button.html' %}
+{{ block title }}
+    Mystery Word Game
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+</br>
+
+<div class="info active">
+<p> You were randomly assigned to <b>groups of four.</b> Together in your group you play in a total of <b>12 turns.</b> </p>  
+</div>
+<div class="info">
+<p> <b><u>Goal:</u></b> One of the players – <i>the guesser</i> – has to guess a mystery word based on clues given by the other players. </p>
+<p> A clue consists only of a <b>single word.</b> </p>
+</div>
+<div class="info">
+<p>If two or more players write the same word, <b>all identical words will be canceled</b> before <i>the guesser</i> gets to see them. </p> 
+</div>
+<div class="info">
+<p> {{ if player.participant.treatment != 1}} Your payoff consists of a participation fee of <b>3.50€</b> and a bonus of <b>up to 8€</b> depending on your performance. {{ else }} You get <b>10€</b> if you participate in all 12 turns. {{ endif }} </p>
+<p> {{ if player.participant.treatment == 3}} You can get the <b>bonus</b> if your group reaches the <b>best score of all groups</b> in this session. {{ else }} {{ endif }} </p>
+<p> {{ if player.participant.treatment == 2}} You can get the <b>bonus</b> if your group develops the <b>most ideas for clues</b> in this session. {{ else }} {{ endif }} </p>
+<p> {{ if player.participant.treatment == 4}} You can get the <b>bonus</b> if your group gives the <b>most exclusive and unique clues</b> in this session. {{ else }} {{ endif }} </p>
+</div>
+<div class="info">
+<p> Each turn is divided in <b>four phases:</b></p>
+<ol>
+    <li>  All players except <i>the guesser</i> are told which mystery word they have to provide a clue for.</li>
+    <li>  Without communicating with each other and without showing it to anyone, each <i>cluegiver</i> types one clue in.</li>
+    <li>  Once all player have written their clues, the identical or invalid clues are canceled. <i>The guesser</i> is shown all remaining clues and has <b>only one guess</b> to identify the mystery word.</li>
+    <li>  The group is told whether <i>the guesser </i> guessed the mystery word correctly or not. The next turn begins with another player becoming <i>the guesser.</i></li>
+</ol>
+</br>
+{{ formfields }}
+{{ next_button }}
+</div>
+
+<p style="text-align: left">
+    <button class="otree-btn btn btn-info" type="button" id="next">Next information</button>
+</p>
+
+{{ endblock }}
+

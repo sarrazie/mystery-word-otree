@@ -1,0 +1,97 @@
+{{ block title }}
+    Clue
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 15) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+</br>
+<p> The <b>mystery word</b> in this round is: </p>
+<p> <b>{{ mystery_word }}</b> </p>   
+<p> Please enter <b>all</b> of your ideas for this word (one idea per text box): </p>
+    <b>{{ formfield 'Idea1' }}</b>
+        <details>
+        <summary> Add a second idea </summary>
+        {{ formfield 'Idea2' }}
+            <details>
+            <summary> Add a third idea  </summary>
+            {{ formfield 'Idea3' }}
+                <details>
+                <summary> Add a fourth idea </summary>
+                {{ formfield 'Idea4' }}
+                    <details>
+                    <summary> Add a fifth idea </summary>
+                    {{ formfield 'Idea5' }}
+                        <details>
+                        <summary> Add a sixth idea</summary>
+                        {{ formfield 'Idea6' }}
+                            <details>
+                            <summary> Add a seventh idea</summary> 
+                            {{ formfield 'Idea7' }}
+                                <details>
+                                <summary> Add an eighth idea</summary> 
+                                {{ formfield 'Idea8' }}
+                                    <details>
+                                    <summary> Add a ninth idea</summary> 
+                                    {{ formfield 'Idea9' }}
+                                        <details>
+                                        <summary> Add a tenth idea</summary> 
+                                        {{ formfield 'Idea10' }}
+                                            <details>
+                                            <summary> Add an eleventh idea</summary>
+                                            {{ formfield 'Idea11' }}
+                                                <details>
+                                                <summary> Add a twelfth idea </summary>
+                                                {{ formfield 'Idea12' }}
+                                                    <details>
+                                                    <summary> Add a thirteenth idea </summary>
+                                                    {{ formfield 'Idea13' }}
+                                                        <details>
+                                                        <summary> Add a fourteenth idea </summary>
+                                                        {{ formfield 'Idea14' }}
+                                                            <details>
+                                                            <summary> Add a fifteenth idea </summary>
+                                                            {{ formfield 'Idea15' }}
+                                                            <p>You've reached the maximum of ideas that can be submitted.</p>        
+                                                            </details>
+                                                        </details>
+                                                    </details>
+                                                </details>
+                                            </details>
+                                        </details>
+                                    </details>
+                                </details>
+                            </details>
+                        </details>
+                    </details>
+                </details>
+            </details>
+        </details>       
+</br>
+<p> Please decide now for your final clue and enter it here. <b>{{ formfield 'clues' }}</b> </p>
+</br>
+   {{ next_button }}
+</br>
+<details>
+    <summary> Recap Rules </summary>
+    <ul>    
+        <li> <b><u>Goal:</u></b> One of the players – <i>the guesser</i> – has to guess a mystery word based on clues given by the other players.</li>
+        <li> If two or more players write the same clue, all identical clues (also clues from the same word family) will be canceled before <i>the guesser</i> gets to see them.</li>
+        <li> <b>Invalid clues:</b> Clues that are from the same word family as the mystery word, only a translation of the mystery word, or fictitious.</li>
+</ul>  
+</details>
+
+{{ endblock }}

@@ -1,0 +1,62 @@
+{% include '_static/global/next_button.html' %}
+{{ block title }}
+    Regeln II
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 20) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+
+</br>
+<div class="info active">
+<p>
+    <b><u>Identische Hinweise:</u></b>
+</p> 
+</div>
+
+<div class="info">
+<ul>
+    <li> Mindestens zwei Hinweise aus der Gruppe sind <b>identische Wörter.</b> </li>
+        <ul>
+            <li><font color=#DF013A>Beispiel: Wenn eine Hinweisgebende <i>Maus</i> schreibt und eine andere ebenfalls <i>Maus</i>, dann gelten beide Hinweise als identisch und werden entfernt.</font></li>
+        </ul>
+</ul>
+</div>
+
+<div class="info">
+<ul>
+    <li> Mindestens zwei Hinweise aus der Gruppe sind Wörter, die <b>denselben Wortstamm</b> haben.</li>
+        <ul>
+            <li><font color=#DF013A>Beispiel: Wenn eine Hinweisgebende <i>Gruppe</i> schreibt und eine andere <i>Gruppenaufgabe</i>, dann gelten beide Hinweise als identisch und werden entfernt.</font></li>
+        </ul>
+</ul>
+</div>
+
+<div class= "info">
+<ul>
+    <li> Mindestens zwei Hinweise aus der Gruppe sind <b>Varianten desselben Wortes:</b> Plural, Geschlechtsunterscheidungen, und Rechtschreibfehler. </li>
+        <ul>
+            <li><font color=#DF013A>Beispiel: Wenn eine Hinweisgebende <i>Bäcker</i> schreibt und eine andere <i>Bäckerin</i>, dann gelten beide Hinweise als identisch und werden entfernt.</font></li>
+        </ul>
+</ul>    
+</br>
+<button class= "otree-btn btn btn-info">Weiter</button>    
+</div>
+</br>
+<p style="text-align: left">
+    <button class="otree-btn btn btn-info" type="button" id="next">Weiter</button>
+</p>
+
+{{ endblock }}

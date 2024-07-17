@@ -1,0 +1,52 @@
+{{ block title }}
+    Check Hinweispaare
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 20) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+</br>
+<p> Das geheime Wort war <b>{{ mystery_word }}</b>. Bitte überprüfen Sie, ob alle Hinweispaare der Gruppe gültig waren. Markieren Sie alle Hinweispaare, die gar nichts mit dem geheimen Wort zu tun haben und bei der Erratung nicht weiterhelfen.</p>
+</br>
+<p> <b>Die Hinweispaare einer Gruppe waren:</b> </p> 
+    <table class="table table-striped">
+        <tr>
+            <th>Auswahl</th>
+            <th>Ungültig</th>
+        </tr>
+    {{ for pair in pairs }}    
+        <tr>       
+        <th> {{ pair }} </th>       
+            <td>
+                <input type="checkbox" name="check_invalid_{{ forloop.counter }}" value="{{ pair }}" id="check_invalid_{{ forloop.counter }}" /> 
+            </td>
+        </tr>
+    {{ endfor }}    
+    </table>
+<button class= "otree-btn btn btn-info">Weiter</button>
+</br>
+</br>
+<details>
+    <summary> Zusammenfassung der Regeln </summary>
+</br>
+    <ul>    
+        <li> <b><u>Ziel:</u></b> Einer der Spielenden – <i>der Ratende</i> – muss ein Geheimwort anhand eines Hinweispaars erraten, das von seinen Mitspielenden geschrieben wurde.</li>
+        <li> <b>Ungültige Hinweispaare</b> enthalten Hinweise, die denselben Wortstamm wie das Geheimwort oder wie eins der fünf Tabuwörter haben, eine Übersetzung des Geheimworts sind oder frei erfunden.</li>
+    </ul>  
+</details>
+
+{{ endblock }}
+

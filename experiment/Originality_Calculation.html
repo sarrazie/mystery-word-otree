@@ -1,0 +1,28 @@
+{{ block title }}
+    Ergebnisse
+{{ endblock }}
+
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 20) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+</br>
+
+<p>Das final ausgewählte Hinweispaar Deiner Gruppe erreicht auf der Originalitätsskala von 0 bis 100 folgenden Wert: </p>
+<p> {{ if vote_group != "Kein gültiges Hinweispaar" }} <b> {{ vote_group }}: {{ originality }} </b> {{ else }} <b>Originalitätsmaß nicht berechenbar. Kein gültiges Hinweispaar!</b> {{ endif }} </p>
+   
+
+<button class= "otree-btn btn btn-info">Weiter</button>
+{{ endblock }}

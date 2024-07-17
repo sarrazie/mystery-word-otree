@@ -1,0 +1,77 @@
+{% include '_static/global/next_button.html' %}
+{{ block title }}
+    Rules
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+
+</br>
+<div class="info active">
+<p> 
+    <b><u>Invalid clues:</u></b>
+</p>
+</div>
+    
+<div class="info">
+<ul>
+    <li> More than a <b>single word.</b> </li>
+    <li> The mystery word but written differently.</li>
+        <ul>
+            <li> Example: <i>Shurt</i> is not allowed when trying to make the 
+            player guess <i>Shirt.</i> </li>
+        </ul> 
+</ul>   
+</div>
+
+<div class="info">
+<ul>
+    <li> The mystery word written in a <b>foreign language.</b> </li>
+    <li> A word from the <b>same family as the mystery word.</b> </li>
+        <ul>
+            <li> Example: <i>Princess</i> is not allowed if the word to be guessed 
+            is <i>Prince.</i> </li>
+        </ul>
+</ul>
+</div>
+
+<div class="info">
+<ul>
+    <li> An <b>invented</b> word.</li> 
+    <li> Use of special characters.</li>
+</ul>
+</div> 
+
+<div class="info">
+</br>
+<p>
+    <b><u>Identical clues:</u></b>
+</p> 
+</div>
+
+<div class="info">
+<ul>
+    <li> Two identical words.</li>
+    <li> Two words that are <b>variants from the same word family.</b> </li>
+</ul>
+</div>
+
+<div class="info">
+<ul>
+    <li> Two words that are <b>variants of the same word:</b> Plurals, gender differentiations, 
+         and spelling mistakes. </li>
+</ul>    
+</br>    
+{{ next_button }}
+</div>
+
+<p style="text-align: left">
+    <button class="otree-btn btn btn-info" type="button" id="next">Next rule</button>
+</p>
+
+{{ endblock }}
+

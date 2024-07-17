@@ -1,0 +1,38 @@
+{% include '_static/global/next_button.html' %}
+{{ block title }}
+        Word Puzzle
+{{ endblock }}
+{{ block content }}
+    
+    <style>
+        .otree-timer {
+            display: none;
+        }
+    </style>
+    </br>
+    
+    <div class="info active">
+    <p> You have been divided into groups of <b>four.</b> Together in your group, you will play a total of <b>12 rounds.</b> </p>  
+    </div>
+    <div class="info">
+    <p> <b><u>Objective:</u></b> One of the players – <i>the guesser</i> – must guess a mystery word based on a pair of clues provided by other players. </p>
+    <p> A clue pair consists of two <b>single words.</b> </p>
+    </div>
+    <div class="info">
+    <p> If two or more groups write an identical clue pair, the <b>clue pair will be removed</b> before the guesser sees it, and the round will end. </p> 
+    </div>
+    <div class="info">
+    <p> {{ if player.participant.treatment != 1}} Your payment consists of a participation fee of <b>3.50€</b> and a bonus of <b>up to 8€,</b> depending on your performance. {{ else }} You will receive <b>10€,</b> if you participate in all 12 rounds. {{ endif }} </p>
+    <p> {{ if player.participant.treatment == 3}} You can receive the <b>bonus</b> if your group achieves the <b>highest score among all groups</b> in this session. {{ else }} {{ endif }} </p>
+    <p> {{ if player.participant.treatment == 2}} You can receive the <b>bonus</b> if your group generates the <b>most ideas for clue pairs</b> in this session. {{ else }} {{ endif }} </p>
+    <p> {{ if player.participant.treatment == 4}} You can receive the <b>bonus</b> if your group provides the <b>most exclusive and unique clue pairs</b> in this session. {{ else }} {{ endif }} </p>
+    {{ formfields }}
+    <button class= "otree-btn btn btn-info">Next</button>
+    </div>
+    
+    <p style="text-align: left">
+        <button class="otree-btn btn btn-info" type="button" id="next">Next</button>
+    </p>
+    
+{{ endblock }}
+

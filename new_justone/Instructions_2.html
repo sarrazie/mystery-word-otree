@@ -1,0 +1,55 @@
+{% include '_static/global/next_button.html' %}
+{{ block title }}
+    Rules II
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+
+</br>
+<div class="info active">
+    <p>
+        <b><u>Identical Clue Pairs:</u></b>
+    </p> 
+</div>
+
+<div class="info">
+    <ul>
+        <li> Your group's clue pair contains at least one word that is <b>identical</b> to a word in a clue pair from another group. </li>
+        <ul>
+            <li><font color=#DF013A>Example: If one group writes <i>Mouse</i> and another group also writes <i>Mouse</i>, then both groups' complete clue pairs are considered identical.</font></li>
+        </ul>
+    </ul>
+</div>
+
+<div class="info">
+    <ul>
+        <li>Your group's clue pair contains at least one word that shares the <b>same root word</b> as a word in a clue pair from another group.</li>
+        <ul>
+            <li><font color=#DF013A>Example: If one group writes <i>Player</i> and another group writes <i>Playfield</i>, then both groups' complete clue pairs are considered identical.</font></li>
+        </ul>
+    </ul>
+</div>
+
+<div class= "info">
+    <ul>
+        <li> The clue pair contain words that are <b>variations of the same word:</b> Plural forms, gender differentiations, and spelling errors.</li>
+        <ul>
+            <li><font color=#DF013A>Example: If one group writes <i>Bakery</i> and another group writes <i>Bakeries</i>, then both groups' complete clue pairs are considered identical.</font></li>
+        </ul>
+</ul>    
+</br>
+<button class= "otree-btn btn btn-info">Weiter</button>    
+</div>
+</br>
+<p style="text-align: left">
+    <button class="otree-btn btn btn-info" type="button" id="next">Weiter</button>
+</p>
+
+{{ endblock }}
+
+

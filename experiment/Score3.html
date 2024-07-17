@@ -1,0 +1,31 @@
+{{ block title }}
+    Punktestand
+{{ endblock }}
+
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 20) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+<p> Der Punktestand Ihrer Gruppe: <b> {{ originality }} Punkt(e) </b> </p>
+<p> Die aktuellen Punktestände aller Gruppen: </p>
+
+<ul>
+    {{ for item in overall_originality}}
+       <li><b>{{ item }} Punkt(e) </b></li>
+    {{ endfor }}   
+</ul>
+<p> Ihre Gruppe belegt Platz <b> {{ rank }} </b> von {{ number_groups }} Gruppen. </p>
+<button class= "otree-btn btn btn-info">Weiter</button>
+{{ endblock }}

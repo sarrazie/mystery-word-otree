@@ -1,0 +1,27 @@
+{{ block title }}
+    Runde {{ round_number }}
+{{ endblock }}
+
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+</br>
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 20) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+<p> In dieser Runde sind Sie <b>{{ player.role }}</b>. </p>
+<p> Es sind noch <b>{{ remaining_rounds }} Runde(n)</b> übrig. </p>
+</br>
+<p> Klicken Sie hier, um zu starten.</p>
+<button class= "otree-btn btn btn-info">Weiter</button>
+{{ endblock }}

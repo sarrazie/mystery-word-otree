@@ -1,0 +1,43 @@
+{{ block title }}
+    Task for Divergent Association
+{{ endblock }}
+
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+
+<p>Please enter 10 words that are as <strong>different</strong> as possible from each other in all meanings and uses of the words.</p>
+<p><strong>Rules:</strong></p>
+<ol>
+    <li>Only <strong>single words</strong> <font color="#FF0000"><b>in English.</b></font></li>
+    <li>Only <strong>nouns</strong> (e.g., things, objects, concepts).</li>
+    <li><strong>No proper names</strong> (e.g., no specific persons or places).</li>
+    <li><strong>No specialized vocabulary</strong> (e.g., technical terms).</li>
+    <li>Think of the words <strong>on your own</strong> (e.g., don't just look at objects in your surroundings).</li>
+</ol>
+<p><strong>Enter Words:</strong></p>
+<b><ol>
+    <li>{{ formfield 'word1' }}</li>
+    <li>{{ formfield 'word2' }}</li>
+    <li>{{ formfield 'word3' }}</li>
+    <li>{{ formfield 'word4' }}</li>
+    <li>{{ formfield 'word5' }}</li>
+    <li>{{ formfield 'word6' }}</li>
+    <li>{{ formfield 'word7' }}</li>
+    <li>{{ formfield 'word8' }}</li>
+    <li>{{ formfield 'word9' }}</li>
+    <li>{{ formfield 'word10' }}</li>
+</ol></b>
+</br>
+<p><strong>Demographic Information:</strong></p>
+<p> {{formfield 'age'}} </p>
+<p> {{formfield 'gender'}} </p>
+<p> {{formfield 'study'}}</p>
+</br>  
+    
+<button class= "otree-btn btn btn-info">Next</button>
+{{ endblock }}

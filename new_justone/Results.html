@@ -1,0 +1,25 @@
+{{ block title }}
+    Results
+{{ endblock }}
+
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+<p> <b><font color="#FF0000">{{ identical }}</font></b> </p>
+<p> <b><font color="#FF0000">{{ invalid }} </font></b></p>
+<p> <b><font color="#FF0000">{{ missing }}</font></b> </p>
+<p> <b><font color="#FF0000">{{ guess_missing }}</font></b> </p>
+<p> {{ if player.participant.treatment == 2 }} {{ if player.role() == 'Cluegiver' }} You submitted {{ number_ideas }} <b>valid</b> clue pairs. {{ else }} {{ endif }} {{ else }} {{ endif }}</p>
+<p> Mystery Word: <b>{{ mystery_word }}</b> </p>
+<p> Your group's submitted clue pair: </p>
+<p><b>{{ vote_group }}</b></p>
+
+<p> Your group's guess: <b>{{ guess }}</b> </p>
+{{ if result == 'falsch' }} <p>This guess was <b><font color="#FF0000">{{ result }}.</font></b></p> {{ elif result == 'correct' }} <p>This guess was <font color="#04B404"><b>{{ result }}.</b></font></p> {{ endif }}
+
+<button class= "otree-btn btn btn-info">Next</button>
+{{ endblock }}

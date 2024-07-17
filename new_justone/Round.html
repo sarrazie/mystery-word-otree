@@ -1,0 +1,18 @@
+{{ block title }}
+    Round {{ round_number }}
+{{ endblock }}
+
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+</br>
+<p> In this round, you are <b>{{ player.role }}</b>. </p>
+<p> There are <b>{{ remaining_rounds }} round(s)</b> remaining. </p>
+</br>
+<p> Click here to start.</p>
+<button class= "otree-btn btn btn-info">Next</button>
+{{ endblock }}

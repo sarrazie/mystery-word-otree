@@ -1,0 +1,65 @@
+{% include '_static/global/next_button.html' %}
+{{ block title }}
+    Rules
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+
+</br>
+<div class="info active">
+<p> 
+    <b><u>Invalid Clue Pair:</u></b>
+</p>
+</div>
+    
+<div class="info">
+<ul>
+    <li> The clue pair contains more than <b>one single word</b> per clue. </li>
+        <ul>
+            <li> <font color=#DF013A> Example: The clue pair <i>"very dangerous" + "green"</i> is not allowed since it contains more than two words in total.</font></li>
+        </ul>
+    <li> The clue pair contains the mystery word in <b>a different spelling.</b></li>
+        <ul>
+            <li> <font color=#DF013A>Example: <i>Pyjamas</i> is not allowed if the mystery word is <i>Pajamas</i>.</font></li>
+        </ul> 
+</ul>   
+</div>
+
+<div class="info">
+<ul>
+    <li> The clue pair contains the mystery word in <b>another language.</b> </li>
+        <ul>
+            <li> <font color=#DF013A>Example: <i>Schwarz</i> is not allowed if the mystery word is <i>Black</i>.</font></li>
+        </ul>
+    <li> The clue pair contains a word with the <b>same root as the mystery word.</b> </li>
+        <ul>
+            <li> <font color=#DF013A>Example: <i>Princess</i> is not allowed if the mystery word is <i>Prince</i>.</font></li>
+        </ul>
+</ul>
+</div>
+
+<div class="info">
+<ul>
+    <li> The clue pair contains a <b>made-up word.</b></li>
+    <ul>
+        <li> <font color=#DF013A>Example: <i>Sweetthing</i> is not allowed if the mystery word is <i>cake</i>.</font> </li>
+    </ul> 
+    <li> The clue pair contains a clue with <b>special characters.</b></li>
+    <ul>
+        <li> <font color=#DF013A>Example: <i>#sweet*</i> is not allowed if the mystery word is <i>chocolate</i>.</font> </li>
+    </ul>
+</ul>
+</br>
+<button class= "otree-btn btn btn-info">Next</button>    
+</div>
+</br>
+<p style="text-align: left">
+    <button class="otree-btn btn btn-info" type="button" id="next">Next</button>
+</p>
+
+{{ endblock }}

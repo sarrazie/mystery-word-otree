@@ -1,0 +1,43 @@
+{{ block title }}
+    Guess
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 15) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+</br>
+<p> These are the <b>clues</b> you have received from your three group members: </p> 
+<ul>
+
+{{ for item in clues }}
+    <li><b>{{ item }}</b></li>
+{{ endfor }}
+
+</ul>
+<p> Please enter your guess for the mystery word. {{ formfields }} </p>
+</br>
+{{ next_button }}
+</br>
+<details>
+    <summary> Recap Rules </summary>
+    <ul>    
+        <li> <b><u>Goal:</u></b> One of the players – <i>the guesser</i> – has to guess a mystery word based on clues given by the other players.</li>
+        <li> If two or more players write the same clue, all identical clues (also clues from the same word family) will be canceled before <i>the guesser</i> gets to see them.</li>
+        <li> <b>Invalid clues:</b> Clues that are from the same word family as the mystery word, only a translation of the mystery word, or fictitious.</li>
+</ul>  
+</details>
+
+{{ endblock }}

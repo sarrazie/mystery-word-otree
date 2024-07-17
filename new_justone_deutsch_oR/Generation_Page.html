@@ -1,0 +1,62 @@
+{{ block title }}
+    Hinweispaare
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 20) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+</br>
+<p> Das <b>Geheimwort</b> in dieser Runde ist: </p>
+<p> <b>{{ mystery_word }}</b> </p>  
+<p> Die fünf Tabuwörter sind: {{ for word in taboo_words }} </p>
+<ul>
+    <li> <b>{{ word }}</b></li>
+</ul>
+{{ endfor }}
+</br>
+<p> Bitte geben Sie <b>alle</b> Hinweispaare ein, die Ihnen zu diesem Wort einfallen <font color="#FF0000"><b>(ein Hinweis pro Textfeld)</b></font>: </p>
+    {{ formfield 'Idea1' }} <b>+</b> {{ formfield 'Idea2' }}
+        <details>
+        <summary> Fügen Sie ein zweites Hinweispaar hinzu </summary>
+        {{ formfield 'Idea3' }}<b>+</b> {{ formfield 'Idea4' }}
+            <details>
+            <summary> Fügen Sie ein drittes Hinweispaar hinzu </summary>
+            {{ formfield 'Idea5' }} <b>+</b> {{ formfield 'Idea6' }}
+                <details>
+                <summary> Fügen Sie ein viertes Hinweispaar hinzu </summary>
+                {{ formfield 'Idea7' }} <b>+</b> {{ formfield 'Idea8' }}
+                    <details>
+                    <summary> Fügen Sie ein fünftes Hinweispaar hinzu </summary>
+                    {{ formfield 'Idea9' }} <b>+</b> {{ formfield 'Idea10' }}
+                    <p>Sie haben das <b>Maximum</b> an Hinweispaaren erreicht, die eingereicht werden können.</p>
+                    </details>
+                </details>
+            </details>
+        </details>   
+    </br>    
+<button class= "otree-btn btn btn-info">Weiter</button>
+</br>
+</br>
+<details>
+    <summary> Zusammenfassung der Regeln </summary>
+</br>
+    <ul>    
+        <li> <b><u>Ziel:</u></b> Einer der Spielenden – <i>der Ratende</i> – muss ein Geheimwort anhand eines Hinweispaars erraten, das von seinen Mitspielenden geschrieben wurde.</li>
+        <li> <b>Ungültige Hinweispaare</b> enthalten Hinweise, die denselben Wortstamm wie das Geheimwort oder wie eins der fünf Tabuwörter haben, eine Übersetzung des Geheimworts sind oder frei erfunden.</li>
+    </ul>  
+</details>
+
+{{ endblock }}
