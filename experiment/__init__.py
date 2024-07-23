@@ -179,6 +179,8 @@ class Player(BasePlayer):
     check_invalid_13 = models.StringField(blank=True)
     check_invalid_14 = models.StringField(blank=True)
     check_invalid_15 = models.StringField(blank=True)
+    group_number_check = models.IntegerField()
+    group_number_guess = models.IntegerField()
 
 class Model:
     def __init__(player, model="vectors_german.txt.gz", dictionary="vocab_german.txt", pattern="^[a-z][a-z-]*[a-z]$"):
@@ -249,7 +251,8 @@ def validate_ideas(player, ideas):
     stem_words = C.STEM_WORDS[player.round_number - 1]     
     with open("wordlist-german.txt", 'r') as file:
         wordlist = set(file.read().split())
-    special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}    
+    special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}                    
+    occurrences = {}
     if len(ideas) > 0:
         for i in range(len(ideas)): 
             if ideas[i] != '':
@@ -259,18 +262,20 @@ def validate_ideas(player, ideas):
                 if ' ' in ideas[i]:
                     ideas[i] = ideas[i].replace(' ', '')
                 for j in range(len(stem_words)):
-                    if stem_words[j] in ideas[i] or ideas[i] in stem_words[j]:
+                    if stem_words[j] == ideas[i]:
                         ideas[i] = 'false'
-                if re.search("[^a-zA-Z0-9\s]", ideas[i]):
+                if re.search(r"[^a-zA-Z0-9\s]", ideas[i]):
                     ideas[i] = 'false'  
                 if ideas[i] not in wordlist:
                     ideas[i] = 'false'
                 if bool(re.search(r'\d',ideas[i])):
                     ideas[i] = 'false'
-        for i in range(0, len(ideas), 2):
-            if ideas[i] != 'false' and ideas[i] != '':
-                if ideas[i] == ideas[i + 1]:
-                    ideas[i] = ideas[i + 1] = 'false'
+                if ideas[i] != 'false':
+                    if ideas[i] in occurrences:
+                        occurrences[ideas[i]] += 1
+                        ideas[i] = 'false'
+                    else:
+                        occurrences[ideas[i]] = 1
         return ideas    
 
 # PAGES
@@ -573,31 +578,6 @@ class VotingResultPage(Page):
         player.vote_group = vote_group
         return dict(vote_group=vote_group, duplicates=number_duplicates, number_votes=number_votes)
     
-class Originality_Calculation(Page):
-    timeout_seconds = 5000
-    def is_displayed(player):
-        return player.player_role == 'Hinweisgebende' and player.participant.treatment == 4
-    def vars_for_template(player):
-        vote_group = player.vote_group
-        mystery_word = C.MYSTERY_WORDS[player.round_number - 1].lower()
-        if vote_group != 'Kein gültiges Hinweispaar':
-            with Model() as model:
-                originality_measures = []
-                with ThreadPoolExecutor() as executor:
-                    future = executor.submit(model.calculate_originality, vote_group, mystery_word)
-                    originality_measures.append(future)
-
-                for idx, originality in enumerate(originality_measures, start=1):
-                    originality = future.result()
-                    if originality is not None:
-                        originality = round(originality, 2)
-                    else: 
-                        originality = 0
-        else:
-            originality = 0
-        player.group.originality = originality
-        return dict(vote_group = vote_group, originality = originality)
-
 class Guess_Page1(Page):
     timeout_seconds = 5000
     def is_displayed(player):
@@ -609,6 +589,7 @@ class Guess_Page1(Page):
         index = (player.id_in_group - 1 + player.round_number - 1) % len(hint_groups)
         vote_group = hint_groups[index].get_players()[0].vote_group
         player.vote_group = vote_group
+        player.group_number_guess = hint_groups[index].id_in_subsession
         return dict(vote_group=vote_group, mystery_word = mystery_word)
     
     form_model = 'player'
@@ -676,31 +657,59 @@ class Guess_Page3(Page):
             else:
                 player.correct_guess3 = False
 
+class Originality_Calculation(Page):
+    timeout_seconds = 5000
+    def is_displayed(player):
+        return player.player_role == 'Hinweisgebende' and player.participant.treatment == 4
+    def vars_for_template(player):
+        vote_group = player.vote_group
+        mystery_word = C.MYSTERY_WORDS[player.round_number - 1].lower()
+        if vote_group != 'Kein gültiges Hinweispaar':
+            with Model() as model:
+                originality_measures = []
+                with ThreadPoolExecutor() as executor:
+                    future = executor.submit(model.calculate_originality, vote_group, mystery_word)
+                    originality_measures.append(future)
+
+                for idx, originality in enumerate(originality_measures, start=1):
+                    originality = future.result()
+                    if originality is not None:
+                        originality = round(originality, 2)
+                    else: 
+                        originality = 0
+        else:
+            originality = 0
+        player.group.originality = originality
+        return dict(vote_group = vote_group, originality = originality)
+
 class PairCheck(Page):
     timeout_seconds = 5000
     def is_displayed(player):
         return player.player_role == 'Ratender'
-
-    form_model = 'player'
-    def get_form_fields(player: Player):
-        hint_groups = [g for g in player.subsession.get_groups() if g.get_players()[0].player_role == 'Hinweisgebende']
-        index = (player.id_in_group - 1 + player.round_number - 1) % len(hint_groups)
-        pairs = hint_groups[index].get_players()[0].pairsafter.split(', ') 
-        form_fields = ['check_invalid_' + str(i+1) for i in range(len(pairs))]
-        return form_fields
-
-    def vars_for_template(player):  
+    
+    def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         hint_groups = [g for g in player.subsession.get_groups() if g.get_players()[0].player_role == 'Hinweisgebende']
-        index = (player.id_in_group - 1 + player.round_number - 1) % len(hint_groups)
+        index = (player.id_in_group -1 + player.round_number) % len(hint_groups)  
         pairs = hint_groups[index].get_players()[0].pairsafter.split(', ')
-        return dict(mystery_word = mystery_word, pairs = pairs)
+        player.group_number_check = hint_groups[index].id_in_subsession
+        return dict(mystery_word=mystery_word, pairs=pairs)
+    
+    form_model = 'player'
+    def get_form_fields(player:Player):
+        hint_groups = [g for g in player.subsession.get_groups() if g.get_players()[0].player_role == 'Hinweisgebende']
+        index = (player.id_in_group - 1 + player.round_number) % len(hint_groups)  
+        pairs = hint_groups[index].get_players()[0].pairsafter.split(', ')
+        form_fields = ['check_invalid_' + str(i+1) for i in range(len(pairs))]
+        return form_fields
 
 class Results(Page):
     timeout_seconds = 5000
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         taboo_words = C.TABOO_WORDS[player.round_number - 1]
+        guesser = next((p for p in player.subsession.get_players() if p.player_role == 'Ratender' and p.group_number_guess == player.group.id_in_subsession), None)
+        rater = next((p for p in player.subsession.get_players() if p.player_role == 'Ratender' and p.group_number_check == player.group.id_in_subsession), None)
 
         def calculate_result(player, guesses, mystery_word):
             if mystery_word == guesses[0]:
@@ -723,17 +732,17 @@ class Results(Page):
                 player.invalid = True
                 invalid = 'Achtung! Das Hinweispaar Ihrer Gruppe war ungültig.'
             pairs = player.pairsafter.split(', ')
-            guesser = next((p for p in player.subsession.get_players() if p.vote_group == player.vote_group and p.player_role == 'Ratender' and p.group != player.group), None)
             check_invalid = []
             if guesser is not None:
                 guesses = [guesser.guess1, guesser.guess2, guesser.guess3]
-                for i in range(len(pairs)):
-                    attr_name = f"check_invalid_{i+1}"  
-                    attr_value = getattr(guesser, attr_name, None)  
-                    if attr_value is not None:
-                        check_invalid.append(attr_value)
             else:
                 guesses = [None, None, None]
+            if rater is not None:
+                for i in range(len(pairs)):
+                    attr_name = f"check_invalid_{i+1}"  
+                    attr_value = getattr(rater, attr_name, None)  
+                    if attr_value is not None:
+                        check_invalid.append(attr_value)
             player.missing = False
             missing = ''
             while '' in check_invalid:
@@ -881,31 +890,24 @@ class VotingWaitPage(WaitPage):
     wait_for_all_players = True
     def is_displayed(player):
         return player.player_role == 'Hinweisgebende'   
-    
+
 class VotingResultWaitPage(WaitPage):
-    title_text = "Vielen Dank für Ihre Abstimmung!"
-    body_text = "Bitte warten Sie, bis alle ihre Stimmen abgegeben haben."
+    title_text = "Vielen Dank für Ihre Hinweispaare"
+    body_text = "Bitte warten Sie, bis alle ihre Hinweispaare abgegeben haben."
     wait_for_all_players = True
     def is_displayed(player):
         return player.player_role == 'Hinweisgebende'
-    
+       
 class GuesserWaitPage(WaitPage):
     title_text = "Sie können Ihren Tipp bald abgeben"
     body_text = "Bitte warten Sie, bis die anderen Spielenden ein Hinweispaar für Sie abgegeben haben. Dies kann ein paar Minuten dauern."
     def is_displayed(player): 
         return player.player_role == 'Ratender'
     wait_for_all_groups = True    
-
-class CluegiverWaitPage(WaitPage):
-    title_text = "Vielen Dank für Ihr Hinweispaar!"
-    body_text = "Das Hinweispaar wird nun dem Ratenden gezeigt."
-    def is_displayed(player):
-        return player.player_role == 'Hinweisgebende'
-    wait_for_all_groups = True
    
 class ResultsWaitPage(WaitPage):
     title_text = "Ihre Gruppe ist fertig!"
     body_text = "Bitte warten Sie, bis alle Gruppen ihre Hinweispaare und Tipps abgegeben haben."
     wait_for_all_groups = True
 
-page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, Originality_Calculation, GuesserWaitPage, CluegiverWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, PairCheck, ResultsWaitPage, Results, Score, Score2, Score3, TestQuestions, IndividualismQuestions, DAT, FinalPage]
+page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, PairCheck, Originality_Calculation, ResultsWaitPage, Results, Score, Score2, Score3, TestQuestions, IndividualismQuestions, DAT, FinalPage]
