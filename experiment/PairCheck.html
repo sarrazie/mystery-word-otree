@@ -21,6 +21,10 @@
 </br>
 <p> Das geheime Wort war <b>{{ mystery_word }}</b>. Bitte überprüfen Sie, ob alle Hinweispaare der Gruppe gültig waren. Markieren Sie alle Hinweispaare, die gar nichts mit dem geheimen Wort zu tun haben und bei der Erratung nicht weiterhelfen.</p>
 </br>
+{{ if number_pairs == 0 }}
+    <p> <b>Es wurden keine gültigen Hinweispaare von der Gruppe erstellt.</b> </p>
+</br>
+{{ else }}
 <p> <b>Die Hinweispaare einer Gruppe waren:</b> </p> 
     <table class="table table-striped">
         <tr>
@@ -36,6 +40,8 @@
         </tr>
     {{ endfor }}    
     </table>
+</br>
+{{ endif }}
 <button class= "otree-btn btn btn-info">Weiter</button>
 </br>
 </br>

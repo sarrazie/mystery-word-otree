@@ -1,0 +1,64 @@
+{{ block title }}
+    Bewertung Paare 
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 20) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+</br>
+<p> Das geheime Wort war <b>{{ mystery_word }}</b>.
+<p> Bewerten Sie bitte folgende Hinweispaare, inwieweit sie diese insgesamt als kreativ (sowohl nützlich als auch originell und neu) empfinden.</p>
+<p> <b>Bitte wählen Sie für jedes Hinweispaar eine Antwort aus.</b> </p>
+</br>
+{% if number_pairs == 0 %}
+    <p> <b>Es wurden keine gültigen Hinweispaare von der Gruppe erstellt.</b> </p>
+</br> 
+{% else %}
+    {% for pair in pairs %}
+        {% with outer_counter=forloop.counter %}
+        <p><b>{{ outer_counter }}. {{ pair }}</b></p>
+        <p>
+           überhaupt nicht kreativ &nbsp; &nbsp;
+            {% for i in choices %}
+                <input type="radio" name="creativity_{{ outer_counter }}" value="{{ pair }}={{ i }}" id="creativity_{{ outer_counter }}_{{i}}">
+                <label for="creativity_{{ outer_counter }}_{{i}}">{{ i }}</label> &nbsp;
+            {% endfor %}
+            &nbsp; sehr kreativ
+        </p>
+        {% endwith %}
+    {% endfor %}
+</br>
+{% endif %}
+{{ formfield_errors 'creativity_1' }}
+{{ formfield_errors 'creativity_2' }}
+{{ formfield_errors 'creativity_3' }}
+{{ formfield_errors 'creativity_4' }}
+{{ formfield_errors 'creativity_5' }}
+{{ formfield_errors 'creativity_6' }}
+{{ formfield_errors 'creativity_7' }}
+{{ formfield_errors 'creativity_8' }}
+{{ formfield_errors 'creativity_9' }}
+{{ formfield_errors 'creativity_10' }}
+{{ formfield_errors 'creativity_11' }}
+{{ formfield_errors 'creativity_12' }}
+{{ formfield_errors 'creativity_13' }}
+{{ formfield_errors 'creativity_14' }}
+{{ formfield_errors 'creativity_15' }}
+
+</br>
+<button class= "otree-btn btn btn-info">Weiter</button>
+
+{{ endblock }}

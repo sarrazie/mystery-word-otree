@@ -1,0 +1,64 @@
+{{ block title }}
+    Bewertung Paare 
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 20) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+</br>
+<p> Das geheime Wort war <b>{{ mystery_word }}</b>.
+<p> Bewerten Sie bitte folgende Hinweispaare, inwieweit sie originell und neu sind.</p>
+<p> <b>Bitte wählen Sie für jedes Hinweispaar eine Antwort aus.</b> </p>
+</br>
+{% if number_pairs == 0 %}
+    <p> <b>Es wurden keine gültigen Hinweispaare von der Gruppe erstellt.</b> </p>
+</br> 
+{% else %}
+    {% for pair in pairs %}
+        {% with outer_counter=forloop.counter %}
+        <p><b>{{ outer_counter }}. {{ pair }}</b></p>
+        <p>
+            überhaupt nicht originell &nbsp; &nbsp;
+            {% for i in choices %}
+                <input type="radio" name="originality_{{ outer_counter }}" value="{{ pair }}={{ i }}" id="originality_{{ outer_counter }}_{{i}}">
+                <label for="originality_{{ outer_counter }}_{{i}}">{{ i }}</label> &nbsp;
+            {% endfor %}
+            &nbsp; sehr originell
+        </p>
+        {% endwith %}
+    {% endfor %}
+</br>
+{% endif %}
+{{ formfield_errors 'originality_1' }}
+{{ formfield_errors 'originality_2' }}
+{{ formfield_errors 'originality_3' }}
+{{ formfield_errors 'originality_4' }}
+{{ formfield_errors 'originality_5' }}
+{{ formfield_errors 'originality_6' }}
+{{ formfield_errors 'originality_7' }}
+{{ formfield_errors 'originality_8' }}
+{{ formfield_errors 'originality_9' }}
+{{ formfield_errors 'originality_10' }}
+{{ formfield_errors 'originality_11' }}
+{{ formfield_errors 'originality_12' }}
+{{ formfield_errors 'originality_13' }}
+{{ formfield_errors 'originality_14' }}
+{{ formfield_errors 'originality_15' }}
+
+</br>
+<button class= "otree-btn btn btn-info">Weiter</button>
+
+{{ endblock }}

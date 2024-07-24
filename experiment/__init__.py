@@ -181,6 +181,53 @@ class Player(BasePlayer):
     check_invalid_15 = models.StringField(blank=True)
     group_number_check = models.IntegerField()
     group_number_guess = models.IntegerField()
+    group_number_rating = models.IntegerField()
+    usefulness_1 = models.StringField(blank=True)
+    usefulness_2 = models.StringField(blank=True)
+    usefulness_3 = models.StringField(blank=True)
+    usefulness_4 = models.StringField(blank=True)
+    usefulness_5 = models.StringField(blank=True)
+    usefulness_6 = models.StringField(blank=True)
+    usefulness_7 = models.StringField(blank=True)
+    usefulness_8 = models.StringField(blank=True)
+    usefulness_9 = models.StringField(blank=True)
+    usefulness_10 = models.StringField(blank=True)
+    usefulness_11 = models.StringField(blank=True)
+    usefulness_12 = models.StringField(blank=True)
+    usefulness_13 = models.StringField(blank=True)
+    usefulness_14 = models.StringField(blank=True)
+    usefulness_15 = models.StringField(blank=True)
+    originality_1 = models.StringField(blank=True)
+    originality_2 = models.StringField(blank=True)
+    originality_3 = models.StringField(blank=True)
+    originality_4 = models.StringField(blank=True)
+    originality_5 = models.StringField(blank=True)
+    originality_6 = models.StringField(blank=True)
+    originality_7 = models.StringField(blank=True)
+    originality_8 = models.StringField(blank=True)
+    originality_9 = models.StringField(blank=True)
+    originality_10 = models.StringField(blank=True)
+    originality_11 = models.StringField(blank=True)
+    originality_12 = models.StringField(blank=True)
+    originality_13 = models.StringField(blank=True)
+    originality_14 = models.StringField(blank=True)
+    originality_15 = models.StringField(blank=True)
+    creativity_1 = models.StringField(blank=True)
+    creativity_2 = models.StringField(blank=True)
+    creativity_3 = models.StringField(blank=True)
+    creativity_4 = models.StringField(blank=True)
+    creativity_5 = models.StringField(blank=True)
+    creativity_6 = models.StringField(blank=True)
+    creativity_7 = models.StringField(blank=True)
+    creativity_8 = models.StringField(blank=True)
+    creativity_9 = models.StringField(blank=True)
+    creativity_10 = models.StringField(blank=True)
+    creativity_11 = models.StringField(blank=True)
+    creativity_12 = models.StringField(blank=True)
+    creativity_13 = models.StringField(blank=True)
+    creativity_14 = models.StringField(blank=True)
+    creativity_15 = models.StringField(blank=True)
+    number_pairs_after = models.IntegerField()
 
 class Model:
     def __init__(player, model="vectors_german.txt.gz", dictionary="vocab_german.txt", pattern="^[a-z][a-z-]*[a-z]$"):
@@ -657,6 +704,30 @@ class Guess_Page3(Page):
             else:
                 player.correct_guess3 = False
 
+class PairCheck(Page):
+    timeout_seconds = 5000
+    def is_displayed(player):
+        return player.player_role == 'Ratender'
+    
+    def vars_for_template(player):
+        mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
+        hint_groups = [g for g in player.subsession.get_groups() if g.get_players()[0].player_role == 'Hinweisgebende']
+        index = (player.id_in_group -1 + player.round_number) % len(hint_groups)  
+        pairs = hint_groups[index].get_players()[0].pairsafter.split(', ')
+        player.group_number_check = hint_groups[index].id_in_subsession
+        while '' in pairs:
+            pairs.remove('')
+        number_pairs = len(pairs)
+        return dict(mystery_word=mystery_word, pairs=pairs, number_pairs = number_pairs)
+    
+    form_model = 'player'
+    def get_form_fields(player:Player):
+        hint_groups = [g for g in player.subsession.get_groups() if g.get_players()[0].player_role == 'Hinweisgebende']
+        index = (player.id_in_group - 1 + player.round_number) % len(hint_groups)  
+        pairs = hint_groups[index].get_players()[0].pairsafter.split(', ')
+        form_fields = ['check_invalid_' + str(i+1) for i in range(len(pairs))]
+        return form_fields
+    
 class Originality_Calculation(Page):
     timeout_seconds = 5000
     def is_displayed(player):
@@ -681,28 +752,7 @@ class Originality_Calculation(Page):
             originality = 0
         player.group.originality = originality
         return dict(vote_group = vote_group, originality = originality)
-
-class PairCheck(Page):
-    timeout_seconds = 5000
-    def is_displayed(player):
-        return player.player_role == 'Ratender'
     
-    def vars_for_template(player):
-        mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
-        hint_groups = [g for g in player.subsession.get_groups() if g.get_players()[0].player_role == 'Hinweisgebende']
-        index = (player.id_in_group -1 + player.round_number) % len(hint_groups)  
-        pairs = hint_groups[index].get_players()[0].pairsafter.split(', ')
-        player.group_number_check = hint_groups[index].id_in_subsession
-        return dict(mystery_word=mystery_word, pairs=pairs)
-    
-    form_model = 'player'
-    def get_form_fields(player:Player):
-        hint_groups = [g for g in player.subsession.get_groups() if g.get_players()[0].player_role == 'Hinweisgebende']
-        index = (player.id_in_group - 1 + player.round_number) % len(hint_groups)  
-        pairs = hint_groups[index].get_players()[0].pairsafter.split(', ')
-        form_fields = ['check_invalid_' + str(i+1) for i in range(len(pairs))]
-        return form_fields
-
 class Results(Page):
     timeout_seconds = 5000
     def vars_for_template(player):
@@ -796,6 +846,244 @@ def calculate_rank(score, sorted_scores):
         rank = 5
     return rank
 
+class Usefulness(Page):
+    timeout_seconds = 5000
+    def is_displayed(player):
+        return player.player_role == 'Ratender'
+    
+    def vars_for_template(player):
+        mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
+        hint_groups = [g for g in player.subsession.get_groups() if g.get_players()[0].player_role == 'Hinweisgebende']
+        index = (player.id_in_group + player.round_number) % len(hint_groups)  
+        pairs = hint_groups[index].get_players()[0].pairsafter.split(', ')
+        player.group_number_rating = hint_groups[index].id_in_subsession
+        while '' in pairs:
+            pairs.remove('')
+        player.number_pairs_after = len(pairs)
+        choices=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        return dict(mystery_word=mystery_word, pairs=pairs, choices = choices, number_pairs = player.number_pairs_after)
+    
+    form_model = 'player'
+    form_fields = ['usefulness_1', 'usefulness_2', 'usefulness_3', 'usefulness_4', 'usefulness_5', 'usefulness_6', 'usefulness_7', 'usefulness_8', 'usefulness_9', 'usefulness_10', 'usefulness_11', 'usefulness_12', 'usefulness_13', 'usefulness_14', 'usefulness_15']
+    
+def usefulness_1_error_message(player, value):
+    if value == '' and player.number_pairs_after > 0:
+        return 'Bitte wählen Sie eine Antwort für Paar 1 aus!'
+
+def usefulness_2_error_message(player, value):
+    if value == '' and player.number_pairs_after > 1:
+        return 'Bitte wählen Sie eine Antwort für Paar 2 aus!'
+    
+def usefulness_3_error_message(player, value):
+    if value == '' and player.number_pairs_after > 2:
+        return 'Bitte wählen Sie eine Antwort für Paar 3 aus!'
+
+def usefulness_4_error_message(player, value):
+    if value == '' and player.number_pairs_after > 3:
+        return 'Bitte wählen Sie eine Antwort für Paar 4 aus!'
+    
+def usefulness_5_error_message(player, value):
+    if value == '' and player.number_pairs_after > 4:
+        return 'Bitte wählen Sie eine Antwort für Paar 5 aus!'
+    
+def usefulness_6_error_message(player, value):
+    if value == '' and player.number_pairs_after > 5:
+        return 'Bitte wählen Sie eine Antwort für Paar 6 aus!'
+
+def usefulness_7_error_message(player, value):
+    if value == '' and player.number_pairs_after > 6:
+        return 'Bitte wählen Sie eine Antwort für Paar 7 aus!'
+    
+def usefulness_8_error_message(player, value):
+    if value == '' and player.number_pairs_after > 7:
+        return 'Bitte wählen Sie eine Antwort für Paar 8 aus!'
+
+def usefulness_9_error_message(player, value):
+    if value == '' and player.number_pairs_after > 8:
+        return 'Bitte wählen Sie eine Antwort für Paar 9 aus!'
+    
+def usefulness_10_error_message(player, value):
+    if value == '' and player.number_pairs_after > 9:
+        return 'Bitte wählen Sie eine Antwort für Paar 10 aus!'
+    
+def usefulness_11_error_message(player, value):
+    if value == '' and player.number_pairs_after > 10:
+        return 'Bitte wählen Sie eine Antwort für Paar 11 aus!'
+    
+def usefulness_12_error_message(player, value):
+    if value == '' and player.number_pairs_after > 11:
+        return 'Bitte wählen Sie eine Antwort für Paar 12 aus!'
+    
+def usefulness_13_error_message(player, value):
+    if value == '' and player.number_pairs_after > 12:
+        return 'Bitte wählen Sie eine Antwort für Paar 13 aus!'
+    
+def usefulness_14_error_message(player, value):
+    if value == '' and player.number_pairs_after > 13:
+        return 'Bitte wählen Sie eine Antwort für Paar 14 aus!'
+    
+def usefulness_15_error_message(player, value):
+    if value == '' and player.number_pairs_after > 14:
+        return 'Bitte wählen Sie eine Antwort für Paar 15 aus!'
+    
+class Originality(Page):
+    timeout_seconds = 5000
+    def is_displayed(player):
+        return player.player_role == 'Ratender'
+    
+    def vars_for_template(player):
+        mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
+        hint_groups = [g for g in player.subsession.get_groups() if g.get_players()[0].player_role == 'Hinweisgebende']
+        index = (player.id_in_group + player.round_number) % len(hint_groups)  
+        pairs = hint_groups[index].get_players()[0].pairsafter.split(', ')
+        while '' in pairs:
+            pairs.remove('')
+        player.number_pairs_after = len(pairs)
+        choices=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        return dict(mystery_word=mystery_word, pairs=pairs, choices = choices, number_pairs = player.number_pairs_after)
+    
+    form_model = 'player'
+    form_fields = ['originality_1', 'originality_2', 'originality_3', 'originality_4', 'originality_5', 'originality_6', 'originality_7', 'originality_8', 'originality_9', 'originality_10', 'originality_11', 'originality_12', 'originality_13', 'originality_14', 'originality_15']
+    
+def originality_1_error_message(player, value):
+    if value == '' and player.number_pairs_after > 0:
+        return 'Bitte wählen Sie eine Antwort für Paar 1 aus!'
+
+def originality_2_error_message(player, value):
+    if value == '' and player.number_pairs_after > 1:
+        return 'Bitte wählen Sie eine Antwort für Paar 2 aus!'
+    
+def originality_3_error_message(player, value):
+    if value == '' and player.number_pairs_after > 2:
+        return 'Bitte wählen Sie eine Antwort für Paar 3 aus!'
+
+def originality_4_error_message(player, value):
+    if value == '' and player.number_pairs_after > 3:
+        return 'Bitte wählen Sie eine Antwort für Paar 4 aus!'
+    
+def originality_5_error_message(player, value):
+    if value == '' and player.number_pairs_after > 4:
+        return 'Bitte wählen Sie eine Antwort für Paar 5 aus!'
+    
+def originality_6_error_message(player, value):
+    if value == '' and player.number_pairs_after > 5:
+        return 'Bitte wählen Sie eine Antwort für Paar 6 aus!'
+
+def originality_7_error_message(player, value):
+    if value == '' and player.number_pairs_after > 6:
+        return 'Bitte wählen Sie eine Antwort für Paar 7 aus!'
+    
+def originality_8_error_message(player, value):
+    if value == '' and player.number_pairs_after > 7:
+        return 'Bitte wählen Sie eine Antwort für Paar 8 aus!'
+
+def originality_9_error_message(player, value):
+    if value == '' and player.number_pairs_after > 8:
+        return 'Bitte wählen Sie eine Antwort für Paar 9 aus!'
+    
+def originality_10_error_message(player, value):
+    if value == '' and player.number_pairs_after > 9:
+        return 'Bitte wählen Sie eine Antwort für Paar 10 aus!'
+    
+def originality_11_error_message(player, value):
+    if value == '' and player.number_pairs_after > 10:
+        return 'Bitte wählen Sie eine Antwort für Paar 11 aus!'
+    
+def originality_12_error_message(player, value):
+    if value == '' and player.number_pairs_after > 11:
+        return 'Bitte wählen Sie eine Antwort für Paar 12 aus!'
+    
+def originality_13_error_message(player, value):
+    if value == '' and player.number_pairs_after > 12:
+        return 'Bitte wählen Sie eine Antwort für Paar 13 aus!'
+    
+def originality_14_error_message(player, value):
+    if value == '' and player.number_pairs_after > 13:
+        return 'Bitte wählen Sie eine Antwort für Paar 14 aus!'
+    
+def originality_15_error_message(player, value):
+    if value == '' and player.number_pairs_after > 14:
+        return 'Bitte wählen Sie eine Antwort für Paar 15 aus!'
+
+class Overall_Creativity(Page):
+    timeout_seconds = 5000
+    def is_displayed(player):
+        return player.player_role == 'Ratender'
+    
+    def vars_for_template(player):
+        mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
+        hint_groups = [g for g in player.subsession.get_groups() if g.get_players()[0].player_role == 'Hinweisgebende']
+        index = (player.id_in_group + player.round_number) % len(hint_groups)  
+        pairs = hint_groups[index].get_players()[0].pairsafter.split(', ')
+        while '' in pairs:
+            pairs.remove('')
+        player.number_pairs_after = len(pairs)
+        choices=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        return dict(mystery_word=mystery_word, pairs=pairs, choices = choices, number_pairs = player.number_pairs_after)
+    
+    form_model = 'player'
+    form_fields = ['creativity_1', 'creativity_2', 'creativity_3', 'creativity_4', 'creativity_5', 'creativity_6', 'creativity_7', 'creativity_8', 'creativity_9', 'creativity_10', 'creativity_11', 'creativity_12', 'creativity_13', 'creativity_14', 'creativity_15']
+    
+def creativity_1_error_message(player, value):
+    if value == '' and player.number_pairs_after > 0:
+        return 'Bitte wählen Sie eine Antwort für Paar 1 aus!'
+
+def creativity_2_error_message(player, value):
+    if value == '' and player.number_pairs_after > 1:
+        return 'Bitte wählen Sie eine Antwort für Paar 2 aus!'
+    
+def creativity_3_error_message(player, value):
+    if value == '' and player.number_pairs_after > 2:
+        return 'Bitte wählen Sie eine Antwort für Paar 3 aus!'
+
+def creativity_4_error_message(player, value):
+    if value == '' and player.number_pairs_after > 3:
+        return 'Bitte wählen Sie eine Antwort für Paar 4 aus!'
+    
+def creativity_5_error_message(player, value):
+    if value == '' and player.number_pairs_after > 4:
+        return 'Bitte wählen Sie eine Antwort für Paar 5 aus!'
+    
+def creativity_6_error_message(player, value):
+    if value == '' and player.number_pairs_after > 5:
+        return 'Bitte wählen Sie eine Antwort für Paar 6 aus!'
+
+def creativity_7_error_message(player, value):
+    if value == '' and player.number_pairs_after > 6:
+        return 'Bitte wählen Sie eine Antwort für Paar 7 aus!'
+    
+def creativity_8_error_message(player, value):
+    if value == '' and player.number_pairs_after > 7:
+        return 'Bitte wählen Sie eine Antwort für Paar 8 aus!'
+
+def creativity_9_error_message(player, value):
+    if value == '' and player.number_pairs_after > 8:
+        return 'Bitte wählen Sie eine Antwort für Paar 9 aus!'
+    
+def creativity_10_error_message(player, value):
+    if value == '' and player.number_pairs_after > 9:
+        return 'Bitte wählen Sie eine Antwort für Paar 10 aus!'
+    
+def creativity_11_error_message(player, value):
+    if value == '' and player.number_pairs_after > 10:
+        return 'Bitte wählen Sie eine Antwort für Paar 11 aus!'
+    
+def creativity_12_error_message(player, value):
+    if value == '' and player.number_pairs_after > 11:
+        return 'Bitte wählen Sie eine Antwort für Paar 12 aus!'
+    
+def creativity_13_error_message(player, value):
+    if value == '' and player.number_pairs_after > 12:
+        return 'Bitte wählen Sie eine Antwort für Paar 13 aus!'
+    
+def creativity_14_error_message(player, value):
+    if value == '' and player.number_pairs_after > 13:
+        return 'Bitte wählen Sie eine Antwort für Paar 14 aus!'
+    
+def creativity_15_error_message(player, value):
+    if value == '' and player.number_pairs_after > 14:
+        return 'Bitte wählen Sie eine Antwort für Paar 15 aus!'
+    
 class Score(Page):
     timeout_seconds = 30
     def is_displayed(player):
@@ -892,8 +1180,8 @@ class VotingWaitPage(WaitPage):
         return player.player_role == 'Hinweisgebende'   
 
 class VotingResultWaitPage(WaitPage):
-    title_text = "Vielen Dank für Ihre Hinweispaare"
-    body_text = "Bitte warten Sie, bis alle ihre Hinweispaare abgegeben haben."
+    title_text = "Vielen Dank für Ihre Abstimmung"
+    body_text = "Bitte warten Sie, bis alle ihre Stimmen abgegeben haben."
     wait_for_all_players = True
     def is_displayed(player):
         return player.player_role == 'Hinweisgebende'
@@ -910,4 +1198,4 @@ class ResultsWaitPage(WaitPage):
     body_text = "Bitte warten Sie, bis alle Gruppen ihre Hinweispaare und Tipps abgegeben haben."
     wait_for_all_groups = True
 
-page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, PairCheck, Originality_Calculation, ResultsWaitPage, Results, Score, Score2, Score3, TestQuestions, IndividualismQuestions, DAT, FinalPage]
+page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, PairCheck, Originality_Calculation, ResultsWaitPage, Results, Usefulness, Originality, Overall_Creativity, Score, Score2, Score3, TestQuestions, IndividualismQuestions, DAT, FinalPage]
