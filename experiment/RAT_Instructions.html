@@ -1,0 +1,46 @@
+{% include '_static/global/next_button.html' %}
+{{ block title }}
+    Aufgabe
+{{ endblock }}
+
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 20) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+</br>
+
+<div class="info active">
+<p>Ihnen werden gleich jeweils <b>drei Wörter</b> präsentiert. </p>
+<p>Ihre Aufgabe besteht darin, ein <b>viertes Wort zu finden</b>, das mit allen drei vorgegebenen Wörtern in Beziehung steht. </p>
+</div>   
+<div class="info">
+<p><b>Beispiel:</b> <i>Schirm - Finsternis - Blume</i></p>
+<p><b>Lösung:</b> <i>Sonne</i> </p>
+</div>
+<div class="info">
+<p>Insgesamt haben Sie für 10 Begriffe <b>10 Minuten Zeit.</b> Ein Timer wird Ihnen die verbleibende Zeit anzeigen.</p>
+</br>
+<button class= "otree-btn btn btn-info">Los geht's!</button>
+</div>
+
+<p style="text-align: left">
+    <button class="otree-btn btn btn-info" type="button" id="next">Weiter</button>
+</p>
+
+{{ endblock }}
+
+
+
+ 

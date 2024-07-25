@@ -1,0 +1,178 @@
+{% extends "global/Page.html" %}
+{% load static %}
+{% block title %}Wie gut kannst du dich mit deiner Gruppe identifizieren?{% endblock %}
+{% block content %}
+
+<style> 
+  .otree-timer {
+        display: none;
+   }
+
+  #circle-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: auto;
+  }
+  .circle {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: rgba(95, 93, 165, 0.721);
+    cursor: pointer;
+  }
+  #yourself {
+    left: -50px; /* Adjust default position */
+    top: 100px;
+  }
+  #yourgroup {
+    left: 200px;
+    top: 100px;
+  }
+  .circle-label {
+    position: absolute;
+    top: 10px;
+    text-align: center;
+    width: 100px;
+    font-size: 18px;
+    color: #333;
+  }
+  #yourself-label {
+    left: 0px;
+  }
+  #yourgroup-label {
+    left: 250px;
+  }
+  #slider-value {
+    text-align: center;
+    font-size: 16px;
+    position: relative; 
+    left: -30px;
+    margin-top: 20px; 
+  }
+</style>
+ 
+<div id="circle-container">
+  <div id="yourself" class="circle" data-label="yourself"></div>
+  <div id="yourgroup" class="circle" data-label="yourgroup"></div>
+  <div id="yourself-label" class="circle-label">Du</div>
+  <div id="yourgroup-label" class="circle-label">Deine Gruppe</div>
+</div>
+ 
+<div id="slider-value">Identifikation: Keine</div>
+ 
+<form id="overlap-form" method="post">
+  {{ form }}
+  <input type="hidden" name="circle_overlap" id="circle_overlap_input">
+  <br>
+  <button type="submit" class="btn btn-primary">Weiter</button>
+  <button type="button" id="reset-button" class="btn btn-secondary">Zurücksetzen</button>
+</form>
+ 
+<script>
+  document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 20) {
+                $('.otree-timer').show();
+            }
+        });
+   });
+  const yourself = document.getElementById('yourself');
+  const yourgroup = document.getElementById('yourgroup');
+  const circleOverlapInput = document.getElementById('circle_overlap_input');
+  const sliderValue = document.getElementById('slider-value');
+  const resetButton = document.getElementById('reset-button');
+ 
+  let isDraggingyourself = false;
+  let offsetX;
+ 
+  const originalPosition = {
+    left: yourself.style.left,
+    top: yourself.style.top
+  };
+ 
+  yourself.addEventListener('mousedown', function(e) {
+    isDraggingyourself = true;
+    offsetX = e.clientX - yourself.offsetLeft;
+  });
+ 
+  document.addEventListener('mousemove', function(e) {
+    if (isDraggingyourself) {
+      let newX = e.clientX - offsetX;
+      const yourgroupLeft = yourgroup.offsetLeft;
+ 
+      // Limit movement of yourself
+      newX = Math.min(Math.max(newX, -50), yourgroupLeft); // Adjusted to allow dragging back to initial position
+      yourself.style.left = newX + 'px';
+    }
+  });
+ 
+  document.addEventListener('mouseup', function() {
+    isDraggingyourself = false;
+    calculateOverlap();
+  });
+ 
+  resetButton.addEventListener('click', function() {
+    yourself.style.left = originalPosition.left;
+    yourself.style.top = originalPosition.top;
+    calculateOverlap();
+  });
+ 
+  function calculateOverlap() {
+    const rectyourself = yourself.getBoundingClientRect();
+    const rectyourgroup = yourgroup.getBoundingClientRect();
+ 
+    // Coordinates of the centers of the circles
+    const cx1 = rectyourself.left + rectyourself.width / 2;
+    const cy1 = rectyourself.top + rectyourself.height / 2;
+    const cx2 = rectyourgroup.left + rectyourgroup.width / 2;
+    const cy2 = rectyourgroup.top + rectyourgroup.height / 2;
+ 
+    // Radius of the circles (assuming equal size)
+    const radius = rectyourself.width / 2;
+ 
+    // Distance between the centers of the circles
+    const dx = cx2 - cx1;
+    const dy = cy2 - cy1;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+ 
+    // Calculate overlap percentage based on distance and radius
+    const overlapPercentage = 100 * Math.max(0, 1 - distance / (2 * radius));
+    circleOverlapInput.value = overlapPercentage.toFixed(2);
+ 
+    // Update the text value
+    sliderValue.textContent = 'Identifikation: ' + getOverlapDescription(overlapPercentage);
+  }
+ 
+  function getOverlapDescription(percentage) {
+    if (percentage === 0) {
+      return 'Keine Identifikation';
+    } else if (percentage > 0 && percentage <= 20) {
+      return 'Sehr geringe Identifikation';
+    } else if (percentage > 20 && percentage <= 40) {
+      return 'Geringe Identifikation';
+    } else if (percentage > 40 && percentage <= 60) {
+      return 'Mittlere Identifikation';
+    } else if (percentage > 60 && percentage <= 80) {
+      return 'Starke Identifikation';
+    } else if (percentage > 80 && percentage <= 100) {
+      return 'Sehr starke Identifikation';
+    } else {
+      return 'Unbekannt';
+    }
+  }
+ 
+  // Submit form with calculated overlap percentage
+  document.getElementById('overlap-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission
+ 
+    // Calculate overlap one more time to ensure latest position is used
+    calculateOverlap();
+ 
+    // Now submit the form
+    this.submit();
+  });
+</script>
+ 
+{% endblock %}

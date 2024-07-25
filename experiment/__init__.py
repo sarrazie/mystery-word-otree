@@ -55,22 +55,22 @@ class Player(BasePlayer):
     result = models.StringField()
     player_role = models.StringField()
     incentive = models.IntegerField()
-    known = models.StringField(choices=[['Ja', 'Ja'], ['Nein', 'Nein']], label='<b>1. </b> Kennen Sie das Spiel "Just One"?', widget=widgets.RadioSelect)
-    understanding = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>2. </b> "Ich habe die Verfahrensweise und die Regeln schnell verstanden."', widget=widgets.RadioSelectHorizontal)
+    known = models.BooleanField(choices=[[1, 'Ja'], [0, 'Nein']], label='<b>1. </b> Kennen Sie das Spiel "Just One"?', widget=widgets.RadioSelect)
+    understanding = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [2, 'stimme überhaupt nicht zu']], label='<b>2. </b> "Ich habe die Verfahrensweise und die Regeln schnell verstanden."', widget=widgets.RadioSelectHorizontal)
     comments = models.LongStringField(label="<b>4. </b> Welche Strategie haben sie als Hinweisgebende verfolgt?", initial='', max_length=500, blank=True)
     comments_2 = models.LongStringField(label="<b>5. </b> Welche Strategie haben sie als Ratender verfolgt?", initial='', max_length=500, blank=True)
     understand_1 = models.StringField(choices=[['false', 'Unbegrenzt viele Versuche'],['false', 'Zwei Versuche'],['false', 'Drei Versuche'],['true', 'Nur einen Versuch']], label='<b>Frage 1:</b> Wie viele Versuche hat der Ratende, um das geheime Wort zu erraten?', widget=widgets.RadioSelect)
     understand_2 = models.StringField(choices=[['false,','Zwei'],['false', 'Drei'],['true', 'Vier'],['false', 'Fünf']], label='<b>Frage 2:</b> Wie viele Spielerinnen und Spieler bilden zusammen eine Gruppe?', widget=widgets.RadioSelect)
     understand_3= models.StringField(choices=[['true', '10 Euro fix für die Teilnahme an allen Runden'],['false', '5 Euro fix plus 5 Euro Bonus für die meisten generierten Ideen'],['false', '5 Euro fix plus 5 Euro Bonus für die meisten erratenen geheimen Wörter'],['false','5 Euro fix plus 5 Euro Bonus für die originellsten Hinweispaare, die zur richtigen Erratung des Wortes führen']], label='<b>Frage 3:</b> Wie viel Geld können Sie maximal in diesem Experiment verdienen?', widget=widgets.RadioSelect)
     understand_4 = models.StringField(choices=[['false', 'Time'], ['false', 'Zeitpunkt'],['false', 'ist Geld'],['false', 'Zeeeit'],['true', 'keiner der oben genannten Hinweise']], label='<b>Frage 4:</b> Welcher der folgenden Hinweise wäre ein gültiger Hinweis in einem Hinweispaar für das geheime Wort "Zeit"?', widget=widgets.RadioSelect)
-    strategy = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>6. </b>"Ich habe ständig nur daran gedacht, welche Hinweise andere Teilnehmende abgeben."', widget=widgets.RadioSelectHorizontal)
-    strategy_2 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>7. </b>"Erst möglichst viele Ideen aufzuschreiben, hilft mir dabei, später bessere Hinweise zu geben."', widget=widgets.RadioSelectHorizontal)
-    strategy_3 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>8. </b>"Ich habe versucht, möglichst originelle und einzigartige Hinweise zu geben, damit ich keine identischen Hinweise wie andere Teilnehmende abgebe."', widget=widgets.RadioSelectHorizontal)
-    strategy_4 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>9. </b>"Ich habe versucht, eindeutige und naheliegende Hinweise zu geben, auch auf die Gefahr hin, dass andere Teilnehmende identische Hinweise abgeben."', widget=widgets.RadioSelectHorizontal)
-    strategy_5 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>10. </b>"Es fiel mir aufgrund der fünf Tabuwörter sehr schwer, gute Hinweise zu schreiben."', widget=widgets.RadioSelectHorizontal)
+    strategy = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>6. </b>"Ich habe ständig nur daran gedacht, welche Hinweise andere Teilnehmende abgeben."', widget=widgets.RadioSelectHorizontal)
+    strategy_2 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>7. </b>"Erst möglichst viele Ideen aufzuschreiben, hilft mir dabei, später bessere Hinweise zu geben."', widget=widgets.RadioSelectHorizontal)
+    strategy_3 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>8. </b>"Ich habe versucht, möglichst originelle und einzigartige Hinweise zu geben, damit ich keine identischen Hinweise wie andere Teilnehmende abgebe."', widget=widgets.RadioSelectHorizontal)
+    strategy_4 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>9. </b>"Ich habe versucht, eindeutige und naheliegende Hinweise zu geben, auch auf die Gefahr hin, dass andere Teilnehmende identische Hinweise abgeben."', widget=widgets.RadioSelectHorizontal)
+    strategy_5 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>10. </b>"Es fiel mir aufgrund der fünf Tabuwörter sehr schwer, gute Hinweise zu schreiben."', widget=widgets.RadioSelectHorizontal)
     group_individual = models.StringField(choices=[['Gruppe', 'Es war produktiv, in der Gruppe zu arbeiten'], ['Individuell', 'Ich hätte lieber alleine Hinweise gegeben']], label='<b>11. </b>Wie haben Sie die Zusammenarbeit in Ihrer Gruppe erlebt?', widget=widgets.RadioSelectHorizontal)
-    strategy_6 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>12. </b>"Ein Wettkampf mit anderen Gruppen würde mich motivieren, möglichst gute Hinweise zu geben und das geheime Wort zu erraten."', widget=widgets.RadioSelectHorizontal)
-    strategy_7 = models.StringField(choices=[['stimme vollkommen zu', 'stimme vollkommen zu'], ['stimme zu', 'stimme zu'], ['neutral', 'neutral'], ['stimme nicht zu', 'stimme nicht zu'], ['stimme überhaupt nicht zu', 'stimme überhaupt nicht zu']], label='<b>13. </b>"Eine Bonuszahlung geknüpft an unsere Gruppenperformance würde mich motivieren, möglichst gute Hinweise zu geben und das geheime Wort zu erraten."', widget=widgets.RadioSelectHorizontal)
+    strategy_6 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>12. </b>"Ein Wettkampf mit anderen Gruppen würde mich motivieren, möglichst gute Hinweise zu geben und das geheime Wort zu erraten."', widget=widgets.RadioSelectHorizontal)
+    strategy_7 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>13. </b>"Eine Bonuszahlung geknüpft an unsere Gruppenperformance würde mich motivieren, möglichst gute Hinweise zu geben und das geheime Wort zu erraten."', widget=widgets.RadioSelectHorizontal)
     individualism_1 = models.IntegerField(choices=[-3, -2, -1, 0, 1, 2, 3], widget=widgets.RadioSelect)
     individualism_2 = models.IntegerField(choices=[-3, -2, -1, 0, 1, 2, 3], widget=widgets.RadioSelect)
     individualism_3 = models.IntegerField(choices=[-3, -2, -1, 0, 1, 2, 3], widget=widgets.RadioSelect)
@@ -96,9 +96,9 @@ class Player(BasePlayer):
     word8 = models.StringField(label= '', initial='', blank=False)
     word9 = models.StringField(label= '', initial='', blank=False)
     word10 = models.StringField(label= '', initial='', blank=False)
-    gender = models.IntegerField(choices=[[1, 'Männlich'],[2, 'Weiblich'],[3, 'Divers'],], label='Geschlecht:')
-    age = models.IntegerField(min=18, max=100, label='Alter:')
-    study = models.StringField(choices=[['Geisteswissenschaften', 'Geisteswissenschaften'],['Sport', 'Sport'],['Rechts-, Wirtschafts- und Sozialwissenschaften', 'Rechts-, Wirtschafts- und Sozialwissenschaften'],['Mathematik, Naturwissenschaften', 'Mathematik, Naturwissenschaften'],['Humanmedizin, Gesundheitswissenschaften', 'Humanmedizin, Gesundheitswissenschaften'],['Agrar-, Forst- und Ernährungswissenschaften, Veterinärmedizin', 'Agrar-, Forst- und Ernährungswissenschaften, Veterinärmedizin'], ['Ingenieurwissenschaften', 'Ingenieurwissenschaften'],['Kunst, Kunstwissenschaft', 'Kunst, Kunstwissenschaft'],['Sonstiges', 'Sonstiges'],], label='Studienbereich:', widget=widgets.RadioSelect)
+    gender = models.IntegerField(choices=[[1, 'Männlich'],[2, 'Weiblich'],[3, 'Divers'],], label='Geschlecht:', blank=False)
+    age = models.IntegerField(min=18, max=100, label='Alter:', blank=False)
+    study = models.StringField(choices=[['Geisteswissenschaften', 'Geisteswissenschaften'],['Sport', 'Sport'],['Rechts-, Wirtschafts- und Sozialwissenschaften', 'Rechts-, Wirtschafts- und Sozialwissenschaften'],['Mathematik, Naturwissenschaften', 'Mathematik, Naturwissenschaften'],['Humanmedizin, Gesundheitswissenschaften', 'Humanmedizin, Gesundheitswissenschaften'],['Agrar-, Forst- und Ernährungswissenschaften, Veterinärmedizin', 'Agrar-, Forst- und Ernährungswissenschaften, Veterinärmedizin'], ['Ingenieurwissenschaften', 'Ingenieurwissenschaften'],['Kunst, Kunstwissenschaft', 'Kunst, Kunstwissenschaft'],['Sonstiges', 'Sonstiges'],], label='Studienbereich:', widget=widgets.RadioSelect, blank=False)
     invalid = models.BooleanField()
     missing = models.BooleanField()
     guess_missing = models.BooleanField()
@@ -228,6 +228,21 @@ class Player(BasePlayer):
     creativity_14 = models.StringField(blank=True)
     creativity_15 = models.StringField(blank=True)
     number_pairs_after = models.IntegerField()
+    circle_overlap = models.FloatField(label="Overlap Percentage",blank=True)
+    satisfaction = models.StringField(choices=[[-2, 'überhaupt nicht zufrieden'], [-1, 'nicht zufrieden'], [0, 'neutral'], [1, 'zufrieden'], [2, 'voll und ganz zufrieden']], label='<b>Wie zufrieden sind Sie mit dem Entscheidungsprozess in Ihrer Gruppe?</b>', widget=widgets.RadioSelectHorizontal, blank = False)
+    confidence = models.StringField(choices=[[-2, 'überhaupt nicht überzeugt'], [-1, 'nicht überzeugt'], [0, 'neutral'], [1, 'überzeugt'], [2, 'voll und ganz überzeugt']], label='<b>Wie überzeugt sind Sie von der finalen Auswahl Ihrer Gruppe?</b>', widget=widgets.RadioSelectHorizontal, blank = False)
+    explanation = models.LongStringField(label='Bitte erklären Sie, wie Ihre Gruppe zu dieser Entscheidung gekommen ist.', blank=True, max_length=500)
+    explanation_2 = models.LongStringField(label='Bitte erklären Sie, warum sich Ihre Gruppe final für dieses Hinweispaar entschieden hat.', blank=True, max_length=500)
+    rat1 = models.StringField(label= '', initial='', blank=True, max_length=18)
+    rat2 = models.StringField(label= '', initial='', blank=True, max_length=18)
+    rat3 = models.StringField(label= '', initial='', blank=True, max_length=18)
+    rat4 = models.StringField(label= '', initial='', blank=True, max_length=18)
+    rat5 = models.StringField(label= '', initial='', blank=True, max_length=18)
+    rat6 = models.StringField(label= '', initial='', blank=True, max_length=18)
+    rat7 = models.StringField(label= '', initial='', blank=True, max_length=18)
+    rat8 = models.StringField(label= '', initial='', blank=True, max_length=18)
+    rat9 = models.StringField(label= '', initial='', blank=True, max_length=18)
+    rat10 = models.StringField(label= '', initial='', blank=True, max_length=18)
 
 class Model:
     def __init__(player, model="vectors_german.txt.gz", dictionary="vocab_german.txt", pattern="^[a-z][a-z-]*[a-z]$"):
@@ -463,45 +478,39 @@ class Discussion(Page):
                 feedback = [player.other_pairs.split(', ')[i], getattr(player, f'rating_before{i + 1}'), getattr(player, f'replace_word{i + 1}'), getattr(player, f'discussion{i + 1}')]
                 setattr(player, f'pair_feedback{i + 1}', str(feedback))
 
-def rating_before1_error_message(player, value):
-    if value == '' and player.number_pairs > 0:
+def rating_before_error_message(player, value, threshold):
+    if value == None and player.number_pairs > threshold:
         return 'Bitte wählen Sie eine Antwort aus!'
+
+def rating_before1_error_message(player, value):
+    return rating_before_error_message(player, value, 0)
 
 def rating_before2_error_message(player, value):
-    if value == '' and player.number_pairs > 1:
-        return 'Bitte wählen Sie eine Antwort aus!'
+    return rating_before_error_message(player, value, 1)
 
 def rating_before3_error_message(player, value):
-    if value == '' and player.number_pairs > 2:
-        return 'Bitte wählen Sie eine Antwort aus!'
+    return rating_before_error_message(player, value, 2)
 
 def rating_before4_error_message(player, value):
-    if value == '' and player.number_pairs > 3:
-        return 'Bitte wählen Sie eine Antwort aus!'
+    return rating_before_error_message(player, value, 3)
 
 def rating_before5_error_message(player, value):
-    if value == '' and player.number_pairs > 4:
-        return 'Bitte wählen Sie eine Antwort aus!'
+    return rating_before_error_message(player, value, 4)
 
 def rating_before6_error_message(player, value):
-    if value == '' and player.number_pairs > 5:
-        return 'Bitte wählen Sie eine Antwort aus!'
+    return rating_before_error_message(player, value, 5)
 
 def rating_before7_error_message(player, value):
-    if value == '' and player.number_pairs > 6:
-        return 'Bitte wählen Sie eine Antwort aus!'
+    return rating_before_error_message(player, value, 6)
 
 def rating_before8_error_message(player, value):
-    if value == '' and player.number_pairs > 7:
-        return 'Bitte wählen Sie eine Antwort aus!'
+    return rating_before_error_message(player, value, 7)
 
 def rating_before9_error_message(player, value):
-    if value == '' and player.number_pairs > 8:
-        return 'Bitte wählen Sie eine Antwort aus!'
+    return rating_before_error_message(player, value, 8)
 
 def rating_before10_error_message(player, value):
-    if value == '' and player.number_pairs > 9:
-        return 'Bitte wählen Sie eine Antwort aus!'
+    return rating_before_error_message(player, value, 9)
     
 class Clue_Page(Page):
     timeout_seconds = 130
@@ -753,6 +762,19 @@ class Originality_Calculation(Page):
         player.group.originality = originality
         return dict(vote_group = vote_group, originality = originality)
     
+class DecisionConfidence(Page):
+    timeout_seconds = 5000
+    def is_displayed(player):
+        return player.player_role == 'Hinweisgebende'
+    form_model = 'player'
+    form_fields = ['satisfaction', 'explanation', 'confidence', 'explanation_2']
+    def vars_for_template(player):
+        mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
+        taboo_words = C.TABOO_WORDS[player.round_number - 1]
+        own_vote = player.vote
+        group_vote = player.vote_group
+        return dict(mystery_word = mystery_word, taboo_words = taboo_words, own_vote = own_vote, group_vote = group_vote)
+    
 class Results(Page):
     timeout_seconds = 5000
     def vars_for_template(player):
@@ -865,67 +887,56 @@ class Usefulness(Page):
     
     form_model = 'player'
     form_fields = ['usefulness_1', 'usefulness_2', 'usefulness_3', 'usefulness_4', 'usefulness_5', 'usefulness_6', 'usefulness_7', 'usefulness_8', 'usefulness_9', 'usefulness_10', 'usefulness_11', 'usefulness_12', 'usefulness_13', 'usefulness_14', 'usefulness_15']
-    
+
+def dimension_error_message(player, value, threshold):
+    if value == '' and player.number_pairs_after > threshold:
+        return f'Bitte wählen Sie eine Antwort für Paar {threshold + 1} aus!'
+
 def usefulness_1_error_message(player, value):
-    if value == '' and player.number_pairs_after > 0:
-        return 'Bitte wählen Sie eine Antwort für Paar 1 aus!'
+    return dimension_error_message(player, value, 0)
 
 def usefulness_2_error_message(player, value):
-    if value == '' and player.number_pairs_after > 1:
-        return 'Bitte wählen Sie eine Antwort für Paar 2 aus!'
-    
+    return dimension_error_message(player, value, 1)
+
 def usefulness_3_error_message(player, value):
-    if value == '' and player.number_pairs_after > 2:
-        return 'Bitte wählen Sie eine Antwort für Paar 3 aus!'
+    return dimension_error_message(player, value, 2)
 
 def usefulness_4_error_message(player, value):
-    if value == '' and player.number_pairs_after > 3:
-        return 'Bitte wählen Sie eine Antwort für Paar 4 aus!'
-    
+    return dimension_error_message(player, value, 3)
+
 def usefulness_5_error_message(player, value):
-    if value == '' and player.number_pairs_after > 4:
-        return 'Bitte wählen Sie eine Antwort für Paar 5 aus!'
-    
+    return dimension_error_message(player, value, 4)
+
 def usefulness_6_error_message(player, value):
-    if value == '' and player.number_pairs_after > 5:
-        return 'Bitte wählen Sie eine Antwort für Paar 6 aus!'
+    return dimension_error_message(player, value, 5)
 
 def usefulness_7_error_message(player, value):
-    if value == '' and player.number_pairs_after > 6:
-        return 'Bitte wählen Sie eine Antwort für Paar 7 aus!'
-    
+    return dimension_error_message(player, value, 6)
+
 def usefulness_8_error_message(player, value):
-    if value == '' and player.number_pairs_after > 7:
-        return 'Bitte wählen Sie eine Antwort für Paar 8 aus!'
+    return dimension_error_message(player, value, 7)
 
 def usefulness_9_error_message(player, value):
-    if value == '' and player.number_pairs_after > 8:
-        return 'Bitte wählen Sie eine Antwort für Paar 9 aus!'
-    
+    return dimension_error_message(player, value, 8)
+
 def usefulness_10_error_message(player, value):
-    if value == '' and player.number_pairs_after > 9:
-        return 'Bitte wählen Sie eine Antwort für Paar 10 aus!'
-    
+    return dimension_error_message(player, value, 9)
+
 def usefulness_11_error_message(player, value):
-    if value == '' and player.number_pairs_after > 10:
-        return 'Bitte wählen Sie eine Antwort für Paar 11 aus!'
-    
+    return dimension_error_message(player, value, 10)
+
 def usefulness_12_error_message(player, value):
-    if value == '' and player.number_pairs_after > 11:
-        return 'Bitte wählen Sie eine Antwort für Paar 12 aus!'
-    
+    return dimension_error_message(player, value, 11)
+
 def usefulness_13_error_message(player, value):
-    if value == '' and player.number_pairs_after > 12:
-        return 'Bitte wählen Sie eine Antwort für Paar 13 aus!'
-    
+    return dimension_error_message(player, value, 12)
+
 def usefulness_14_error_message(player, value):
-    if value == '' and player.number_pairs_after > 13:
-        return 'Bitte wählen Sie eine Antwort für Paar 14 aus!'
-    
+    return dimension_error_message(player, value, 13)
+
 def usefulness_15_error_message(player, value):
-    if value == '' and player.number_pairs_after > 14:
-        return 'Bitte wählen Sie eine Antwort für Paar 15 aus!'
-    
+    return dimension_error_message(player, value, 14)
+   
 class Originality(Page):
     timeout_seconds = 5000
     def is_displayed(player):
@@ -944,66 +955,51 @@ class Originality(Page):
     
     form_model = 'player'
     form_fields = ['originality_1', 'originality_2', 'originality_3', 'originality_4', 'originality_5', 'originality_6', 'originality_7', 'originality_8', 'originality_9', 'originality_10', 'originality_11', 'originality_12', 'originality_13', 'originality_14', 'originality_15']
-    
+
 def originality_1_error_message(player, value):
-    if value == '' and player.number_pairs_after > 0:
-        return 'Bitte wählen Sie eine Antwort für Paar 1 aus!'
+    return dimension_error_message(player, value, 0)
 
 def originality_2_error_message(player, value):
-    if value == '' and player.number_pairs_after > 1:
-        return 'Bitte wählen Sie eine Antwort für Paar 2 aus!'
-    
+    return dimension_error_message(player, value, 1)
+
 def originality_3_error_message(player, value):
-    if value == '' and player.number_pairs_after > 2:
-        return 'Bitte wählen Sie eine Antwort für Paar 3 aus!'
+    return dimension_error_message(player, value, 2)
 
 def originality_4_error_message(player, value):
-    if value == '' and player.number_pairs_after > 3:
-        return 'Bitte wählen Sie eine Antwort für Paar 4 aus!'
-    
+    return dimension_error_message(player, value, 3)
+
 def originality_5_error_message(player, value):
-    if value == '' and player.number_pairs_after > 4:
-        return 'Bitte wählen Sie eine Antwort für Paar 5 aus!'
-    
+    return dimension_error_message(player, value, 4)
+
 def originality_6_error_message(player, value):
-    if value == '' and player.number_pairs_after > 5:
-        return 'Bitte wählen Sie eine Antwort für Paar 6 aus!'
+    return dimension_error_message(player, value, 5)
 
 def originality_7_error_message(player, value):
-    if value == '' and player.number_pairs_after > 6:
-        return 'Bitte wählen Sie eine Antwort für Paar 7 aus!'
-    
+    return dimension_error_message(player, value, 6)
+
 def originality_8_error_message(player, value):
-    if value == '' and player.number_pairs_after > 7:
-        return 'Bitte wählen Sie eine Antwort für Paar 8 aus!'
+    return dimension_error_message(player, value, 7)
 
 def originality_9_error_message(player, value):
-    if value == '' and player.number_pairs_after > 8:
-        return 'Bitte wählen Sie eine Antwort für Paar 9 aus!'
-    
+    return dimension_error_message(player, value, 8)
+
 def originality_10_error_message(player, value):
-    if value == '' and player.number_pairs_after > 9:
-        return 'Bitte wählen Sie eine Antwort für Paar 10 aus!'
-    
+    return dimension_error_message(player, value, 9)
+
 def originality_11_error_message(player, value):
-    if value == '' and player.number_pairs_after > 10:
-        return 'Bitte wählen Sie eine Antwort für Paar 11 aus!'
-    
+    return dimension_error_message(player, value, 10)
+
 def originality_12_error_message(player, value):
-    if value == '' and player.number_pairs_after > 11:
-        return 'Bitte wählen Sie eine Antwort für Paar 12 aus!'
-    
+    return dimension_error_message(player, value, 11)
+
 def originality_13_error_message(player, value):
-    if value == '' and player.number_pairs_after > 12:
-        return 'Bitte wählen Sie eine Antwort für Paar 13 aus!'
-    
+    return dimension_error_message(player, value, 12)
+
 def originality_14_error_message(player, value):
-    if value == '' and player.number_pairs_after > 13:
-        return 'Bitte wählen Sie eine Antwort für Paar 14 aus!'
-    
+    return dimension_error_message(player, value, 13)
+
 def originality_15_error_message(player, value):
-    if value == '' and player.number_pairs_after > 14:
-        return 'Bitte wählen Sie eine Antwort für Paar 15 aus!'
+    return dimension_error_message(player, value, 14)
 
 class Overall_Creativity(Page):
     timeout_seconds = 5000
@@ -1025,64 +1021,49 @@ class Overall_Creativity(Page):
     form_fields = ['creativity_1', 'creativity_2', 'creativity_3', 'creativity_4', 'creativity_5', 'creativity_6', 'creativity_7', 'creativity_8', 'creativity_9', 'creativity_10', 'creativity_11', 'creativity_12', 'creativity_13', 'creativity_14', 'creativity_15']
     
 def creativity_1_error_message(player, value):
-    if value == '' and player.number_pairs_after > 0:
-        return 'Bitte wählen Sie eine Antwort für Paar 1 aus!'
+    return dimension_error_message(player, value, 0)
 
 def creativity_2_error_message(player, value):
-    if value == '' and player.number_pairs_after > 1:
-        return 'Bitte wählen Sie eine Antwort für Paar 2 aus!'
+    return dimension_error_message(player, value, 1)
     
 def creativity_3_error_message(player, value):
-    if value == '' and player.number_pairs_after > 2:
-        return 'Bitte wählen Sie eine Antwort für Paar 3 aus!'
+    return dimension_error_message(player, value, 2)
 
 def creativity_4_error_message(player, value):
-    if value == '' and player.number_pairs_after > 3:
-        return 'Bitte wählen Sie eine Antwort für Paar 4 aus!'
-    
+    return dimension_error_message(player, value, 3)
+
 def creativity_5_error_message(player, value):
-    if value == '' and player.number_pairs_after > 4:
-        return 'Bitte wählen Sie eine Antwort für Paar 5 aus!'
+    return dimension_error_message(player, value, 4)
     
 def creativity_6_error_message(player, value):
-    if value == '' and player.number_pairs_after > 5:
-        return 'Bitte wählen Sie eine Antwort für Paar 6 aus!'
+    return dimension_error_message(player, value, 5)
 
 def creativity_7_error_message(player, value):
-    if value == '' and player.number_pairs_after > 6:
-        return 'Bitte wählen Sie eine Antwort für Paar 7 aus!'
+    return dimension_error_message(player, value, 6)
     
 def creativity_8_error_message(player, value):
-    if value == '' and player.number_pairs_after > 7:
-        return 'Bitte wählen Sie eine Antwort für Paar 8 aus!'
+    return dimension_error_message(player, value, 7)
 
 def creativity_9_error_message(player, value):
-    if value == '' and player.number_pairs_after > 8:
-        return 'Bitte wählen Sie eine Antwort für Paar 9 aus!'
+    return dimension_error_message(player, value, 8)
     
 def creativity_10_error_message(player, value):
-    if value == '' and player.number_pairs_after > 9:
-        return 'Bitte wählen Sie eine Antwort für Paar 10 aus!'
+    return dimension_error_message(player, value, 9)
     
 def creativity_11_error_message(player, value):
-    if value == '' and player.number_pairs_after > 10:
-        return 'Bitte wählen Sie eine Antwort für Paar 11 aus!'
+    return dimension_error_message(player, value, 10)
     
 def creativity_12_error_message(player, value):
-    if value == '' and player.number_pairs_after > 11:
-        return 'Bitte wählen Sie eine Antwort für Paar 12 aus!'
+    return dimension_error_message(player, value, 11)
     
 def creativity_13_error_message(player, value):
-    if value == '' and player.number_pairs_after > 12:
-        return 'Bitte wählen Sie eine Antwort für Paar 13 aus!'
+    return dimension_error_message(player, value, 12)
     
 def creativity_14_error_message(player, value):
-    if value == '' and player.number_pairs_after > 13:
-        return 'Bitte wählen Sie eine Antwort für Paar 14 aus!'
+    return dimension_error_message(player, value, 13)
     
 def creativity_15_error_message(player, value):
-    if value == '' and player.number_pairs_after > 14:
-        return 'Bitte wählen Sie eine Antwort für Paar 15 aus!'
+    return dimension_error_message(player, value, 14)
     
 class Score(Page):
     timeout_seconds = 30
@@ -1133,10 +1114,20 @@ class IndividualismQuestions(Page):
     form_model = 'player'
     form_fields = ['individualism_1', 'individualism_2', 'individualism_3', 'individualism_4', 'individualism_5']
 
+class Identification(Page):
+    timeout_seconds = 270
+    def is_displayed(player):
+        return player.player_role == 'Hinweisgebende' and player.round_number == C.NUM_ROUNDS
+    form_model = 'player'
+    form_fields = ['circle_overlap']
+ 
+    def js_vars(player: Player):
+        return {}
+
 class DAT(Page):
     timeout_seconds = 270
     def is_displayed(player):
-        return player.round_number == C.NUM_ROUNDS
+        return player.player_role == 'Hinweisgebende' and player.round_number == C.NUM_ROUNDS
     form_model = 'player'
     form_fields = ['word1', 'word2', 'word3', 'word4', 'word5', 'word6', 'word7', 'word8', 'word9', 'word10', 'gender', 'age', 'study']
     def before_next_page(player, timeout_happened):
@@ -1146,6 +1137,18 @@ class DAT(Page):
         else:
             player.invalid_DAT = False
             return player.invalid_DAT
+
+class RAT_Instructions(Page):
+    timeout_seconds = 300
+    def is_displayed(player):
+        return player.player_role == 'Ratender' and player.round_number == C.NUM_ROUNDS
+
+class RAT(Page):
+    timeout_seconds = 600
+    def is_displayed(player):
+        return player.player_role == 'Ratender' and player.round_number == C.NUM_ROUNDS
+    form_model = 'player'
+    form_fields = ['rat1', 'rat2', 'rat3', 'rat4', 'rat5', 'rat6', 'rat7', 'rat8', 'rat9', 'rat10']
 
 class FinalPage(Page):
     def is_displayed(player):
@@ -1198,4 +1201,4 @@ class ResultsWaitPage(WaitPage):
     body_text = "Bitte warten Sie, bis alle Gruppen ihre Hinweispaare und Tipps abgegeben haben."
     wait_for_all_groups = True
 
-page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, PairCheck, Originality_Calculation, ResultsWaitPage, Results, Usefulness, Originality, Overall_Creativity, Score, Score2, Score3, TestQuestions, IndividualismQuestions, DAT, FinalPage]
+page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, PairCheck, Originality_Calculation, DecisionConfidence, ResultsWaitPage, Results, Usefulness, Originality, Overall_Creativity, Score, Score2, Score3, TestQuestions, IndividualismQuestions, Identification, DAT, RAT_Instructions, RAT, FinalPage]
