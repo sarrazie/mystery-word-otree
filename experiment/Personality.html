@@ -1,0 +1,47 @@
+{{ block title }}
+    Letzte Fragen 
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 20) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+</br>
+<p> Inwieweit stimmen Sie jeder der folgenden Aussagen zu beziehungsweise nicht zu? </p>
+<p> <b>Bitte wählen Sie für jede Aussage eine Antwort aus.</b> </p>
+<p> {{ formfield 'creative_self1' }}</p>
+<p> {{ formfield 'creative_self2' }}</p>
+<p> {{ formfield 'creative_self3' }}</p>
+<p> {{ formfield 'creative_self4' }}</p>
+<p> {{ formfield 'creative_self5' }}</p>
+<p> {{ formfield 'creative_self6' }}</p>
+<p> {{ formfield 'creative_self7' }}</p>
+<p> {{ formfield 'creative_self8' }}</p>
+<p> {{ formfield 'creative_self9' }}</p>
+<p> {{ formfield 'creative_self10' }}</p>
+<p> {{ formfield 'creative_self11' }}</p>
+</br>
+<p><b>12. </b>Wie schätzen Sie sich persönlich ein: Sind Sie im allgemeinen ein risikobereiter Mensch oder versuchen Sie, Risiken zu vermeiden?</p>
+<p>
+    gar nicht risikobereit &nbsp;
+    {{ for choice in form.risk }}
+        {{ choice }}
+    {{ endfor }}
+    &nbsp; sehr risikobereit
+</p>
+</br>
+<button class= "otree-btn btn btn-info">Weiter</button>
+
+{{ endblock }}

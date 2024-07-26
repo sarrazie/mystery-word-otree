@@ -1,6 +1,6 @@
 {% extends "global/Page.html" %}
 {% load static %}
-{% block title %}Wie gut kannst du dich mit deiner Gruppe identifizieren?{% endblock %}
+{% block title %}Wie sehr hast du dich mit deiner Gruppe identifiziert?{% endblock %}
 {% block content %}
 
 <style> 
@@ -52,7 +52,16 @@
     margin-top: 20px; 
   }
 </style>
- 
+
+<div id="text-container">
+  <span>Du kannst den linken Kreis mit der Maus bewegen und ihn über den rechten Kreis ziehen, um die Frage zu beantworten, wie sehr du dich mit deiner Gruppe identifiziert hast.</span>
+  <br>
+  <span>Wir interessieren uns für den <b style='color:#000000 !important;'>Grad der Überlappung der beiden Kreise</b>. Je stärker die beiden Kreise übereinander liegen, desto stärker war deine Identifikation mit der Gruppe.</span>
+  <br>
+  <span>Über den 'Zurücksetzen'-Button kannst du die Position des linken Kreises jederzeit zurücksetzen.</span>
+</div>
+<br><br>
+
 <div id="circle-container">
   <div id="yourself" class="circle" data-label="yourself"></div>
   <div id="yourgroup" class="circle" data-label="yourgroup"></div>

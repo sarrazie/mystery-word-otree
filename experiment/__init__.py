@@ -35,6 +35,7 @@ class C(BaseConstants):
         ['end', 'final', 'schluss', 'stopp', 'tot', 'tod', 'an', 'fang', 'schluess', 'faeng'],
         ['sombrero', 'hut', 'huet', 'mexik', 'mexic', 'kopf', 'koepf', 'bedeck', 'mariach', 'kremp']
     ]
+    ACHIEVEMENTS= ['Bildende_Kunst', 'Musik', 'Tanz', 'Architektur', 'Literatur', 'Humor', 'Erfindungen', 'Wissenschaftliche_Entdeckungen', 'Theater_und_Film', 'Kochen']
 
 class Subsession(BaseSubsession):
     pass
@@ -71,11 +72,91 @@ class Player(BasePlayer):
     group_individual = models.StringField(choices=[['Gruppe', 'Es war produktiv, in der Gruppe zu arbeiten'], ['Individuell', 'Ich hätte lieber alleine Hinweise gegeben']], label='<b>11. </b>Wie haben Sie die Zusammenarbeit in Ihrer Gruppe erlebt?', widget=widgets.RadioSelectHorizontal)
     strategy_6 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>12. </b>"Ein Wettkampf mit anderen Gruppen würde mich motivieren, möglichst gute Hinweise zu geben und das geheime Wort zu erraten."', widget=widgets.RadioSelectHorizontal)
     strategy_7 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>13. </b>"Eine Bonuszahlung geknüpft an unsere Gruppenperformance würde mich motivieren, möglichst gute Hinweise zu geben und das geheime Wort zu erraten."', widget=widgets.RadioSelectHorizontal)
-    individualism_1 = models.IntegerField(choices=[-3, -2, -1, 0, 1, 2, 3], widget=widgets.RadioSelect)
-    individualism_2 = models.IntegerField(choices=[-3, -2, -1, 0, 1, 2, 3], widget=widgets.RadioSelect)
-    individualism_3 = models.IntegerField(choices=[-3, -2, -1, 0, 1, 2, 3], widget=widgets.RadioSelect)
-    individualism_4 = models.IntegerField(choices=[-3, -2, -1, 0, 1, 2, 3], widget=widgets.RadioSelect)
-    individualism_5 = models.IntegerField(choices=[-3, -2, -1, 0, 1, 2, 3], widget=widgets.RadioSelect)
+    individualism_1 = models.IntegerField(choices=[-3, -2, -1, 0, 1, 2, 3], widget=widgets.RadioSelect, blank=False)
+    individualism_2 = models.IntegerField(choices=[-3, -2, -1, 0, 1, 2, 3], widget=widgets.RadioSelect, blank=False)
+    individualism_3 = models.IntegerField(choices=[-3, -2, -1, 0, 1, 2, 3], widget=widgets.RadioSelect, blank=False)
+    individualism_4 = models.IntegerField(choices=[-3, -2, -1, 0, 1, 2, 3], widget=widgets.RadioSelect, blank=False)
+    individualism_5 = models.IntegerField(choices=[-3, -2, -1, 0, 1, 2, 3], widget=widgets.RadioSelect, blank=False)
+    Bildende_Kunst = models.BooleanField(blank=True, initial=False)
+    Musik = models.BooleanField(blank=True, initial=False)
+    Tanz = models.BooleanField(blank=True, initial=False)
+    Architektur = models.BooleanField(blank=True, initial=False)
+    Literatur = models.BooleanField(blank=True, initial=False)
+    Humor = models.BooleanField(blank=True, initial=False)
+    Erfindungen = models.BooleanField(blank=True, initial=False)
+    Wissenschaftliche_Entdeckungen = models.BooleanField(blank=True, initial=False)
+    Theater_und_Film = models.BooleanField(blank=True, initial=False)
+    Kochen = models.BooleanField(blank=True, initial=False)
+    Bildende_Kunst_2_1 = models.IntegerField(blank=True)
+    Bildende_Kunst_2_2 = models.IntegerField(blank=True)
+    Bildende_Kunst_2_3 = models.IntegerField(blank=True)
+    Bildende_Kunst_2_4 = models.IntegerField(blank=True)
+    Bildende_Kunst_2_5 = models.IntegerField(blank=True)
+    Bildende_Kunst_2_6 = models.IntegerField(blank=True)
+    Bildende_Kunst_2_7 = models.IntegerField(blank=True)
+    Musik_2_1 = models.IntegerField(blank=True) 
+    Musik_2_2 = models.IntegerField(blank=True)
+    Musik_2_3 = models.IntegerField(blank=True)
+    Musik_2_4 = models.IntegerField(blank=True)
+    Musik_2_5 = models.IntegerField(blank=True)
+    Musik_2_6 = models.IntegerField(blank=True)
+    Musik_2_7 = models.IntegerField(blank=True) 
+    Tanz_2_1 = models.IntegerField(blank=True)
+    Tanz_2_2 = models.IntegerField(blank=True)
+    Tanz_2_3 = models.IntegerField(blank=True)
+    Tanz_2_4 = models.IntegerField(blank=True)
+    Tanz_2_5 = models.IntegerField(blank=True)
+    Tanz_2_6 = models.IntegerField(blank=True)
+    Tanz_2_7 = models.IntegerField(blank=True)
+    Architektur_2_1 = models.IntegerField(blank=True)
+    Architektur_2_2 = models.IntegerField(blank=True)
+    Architektur_2_3 = models.IntegerField(blank=True)
+    Architektur_2_4 = models.IntegerField(blank=True)
+    Architektur_2_5 = models.IntegerField(blank=True)
+    Architektur_2_6 = models.IntegerField(blank=True)
+    Architektur_2_7 = models.IntegerField(blank=True)
+    Literatur_2_1 = models.IntegerField(blank=True)
+    Literatur_2_2 = models.IntegerField(blank=True)
+    Literatur_2_3 = models.IntegerField(blank=True)
+    Literatur_2_4 = models.IntegerField(blank=True)
+    Literatur_2_5 = models.IntegerField(blank=True)
+    Literatur_2_6 = models.IntegerField(blank=True)
+    Literatur_2_7 = models.IntegerField(blank=True)
+    Humor_2_1 = models.IntegerField(blank=True)
+    Humor_2_2 = models.IntegerField(blank=True)
+    Humor_2_3 = models.IntegerField(blank=True)
+    Humor_2_4 = models.IntegerField(blank=True)
+    Humor_2_5 = models.IntegerField(blank=True)
+    Humor_2_6 = models.IntegerField(blank=True)
+    Humor_2_7 = models.IntegerField(blank=True)
+    Erfindungen_2_1 = models.IntegerField(blank=True)
+    Erfindungen_2_2 = models.IntegerField(blank=True)
+    Erfindungen_2_3 = models.IntegerField(blank=True)
+    Erfindungen_2_4 = models.IntegerField(blank=True)
+    Erfindungen_2_5 = models.IntegerField(blank=True)
+    Erfindungen_2_6 = models.IntegerField(blank=True)
+    Erfindungen_2_7 = models.IntegerField(blank=True)
+    Wissenschaftliche_Entdeckungen_2_1 = models.IntegerField(blank=True)
+    Wissenschaftliche_Entdeckungen_2_2 = models.IntegerField(blank=True)
+    Wissenschaftliche_Entdeckungen_2_3 = models.IntegerField(blank=True)
+    Wissenschaftliche_Entdeckungen_2_4 = models.IntegerField(blank=True)
+    Wissenschaftliche_Entdeckungen_2_5 = models.IntegerField(blank=True)
+    Wissenschaftliche_Entdeckungen_2_6 = models.IntegerField(blank=True)
+    Wissenschaftliche_Entdeckungen_2_7 = models.IntegerField(blank=True)
+    Theater_und_Film_2_1 = models.IntegerField(blank=True)
+    Theater_und_Film_2_2 = models.IntegerField(blank=True)
+    Theater_und_Film_2_3 = models.IntegerField(blank=True)
+    Theater_und_Film_2_4 = models.IntegerField(blank=True)
+    Theater_und_Film_2_5 = models.IntegerField(blank=True)
+    Theater_und_Film_2_6 = models.IntegerField(blank=True)
+    Theater_und_Film_2_7 = models.IntegerField(blank=True)
+    Kochen_2_1 = models.IntegerField(blank=True)
+    Kochen_2_2 = models.IntegerField(blank=True)
+    Kochen_2_3 = models.IntegerField(blank=True)
+    Kochen_2_4 = models.IntegerField(blank=True)
+    Kochen_2_5 = models.IntegerField(blank=True)
+    Kochen_2_6 = models.IntegerField(blank=True)
+    Kochen_2_7 = models.IntegerField(blank=True)
     Idea1 = models.StringField(label= '', initial='', blank=True, max_length=18)
     Idea2 = models.StringField(label= '', initial='', blank=True, max_length=18)
     Idea3 = models.StringField(label= '', initial='', blank=True, max_length=18)
@@ -243,6 +324,18 @@ class Player(BasePlayer):
     rat8 = models.StringField(label= '', initial='', blank=True, max_length=18)
     rat9 = models.StringField(label= '', initial='', blank=True, max_length=18)
     rat10 = models.StringField(label= '', initial='', blank=True, max_length=18)
+    risk = models.IntegerField(choices=[0, 1, 2, 3 ,4, 5, 6, 7, 8, 9, 10], widget=widgets.RadioSelect, blank= False) 
+    creative_self1 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=False, label = '<b> 1. </b>Ich denke, dass ich eine kreative Person bin.')
+    creative_self2 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=False, label = '<b> 2. </b>Meine Kreativität ist wichtig für mein Selbstbild.')
+    creative_self3 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=False, label = '<b> 3. </b>Ich weiß, dass ich auch komplizierte Probleme effizient lösen kann.')
+    creative_self4 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=False, label = '<b> 4. </b>Ich vertraue meinen kreativen Fähigkeiten.' )
+    creative_self5 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=False, label = '<b> 5. </b>Meine Vorstellungskraft und mein Einfallsreichtum unterscheiden mich von meinen Freunden.')
+    creative_self6 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=False, label = '<b> 6. </b>Ich habe oft bewiesen, dass ich mit schwierigen Situationen umgehen kann.')
+    creative_self7 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=False, label = '<b> 7. </b>Es ist mir wichtig, eine kreative Person zu sein.')
+    creative_self8 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=False, label = '<b> 8. </b>Ich bin sicher, dass ich Probleme lösen kann, die kreatives Denken erfordern.')
+    creative_self9 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=False, label = '<b> 9. </b>Ich bin gut darin, originelle Lösungen für Probleme zu finden.')
+    creative_self10 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=False, label = '<b> 10. </b>Kreativität ist ein wichtiger Teil von mir.')
+    creative_self11 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=False, label = '<b> 11. </b>Einfallsreichtum ist eine Eigenschaft, die mir wichtig ist.')
 
 class Model:
     def __init__(player, model="vectors_german.txt.gz", dictionary="vocab_german.txt", pattern="^[a-z][a-z-]*[a-z]$"):
@@ -363,7 +456,7 @@ class Instructions(Page):
         return player.round_number == 1
     
 class UnderstandPage(Page):
-    template_name = 'new_justone_deutsch_oR/UnderstandPage.html'
+    template_name = 'experiment/UnderstandPage.html'
     timeout_seconds = 100
     def is_displayed(player):
         return player.round_number == 1
@@ -1099,7 +1192,7 @@ class Score3(Page):
         return dict(overall_originality = overall_originality, originality = player.originality, rank = rank, number_groups = number_groups)
 
 class TestQuestions(Page):
-    template_name = 'new_justone_deutsch_oR/TestQuestions.html'
+    template_name = 'experiment/TestQuestions.html'
     timeout_seconds = 270
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
@@ -1107,12 +1200,30 @@ class TestQuestions(Page):
     form_fields = ['known', 'understanding', 'comments', 'comments_2', 'strategy', 'strategy_2', 'strategy_3', 'strategy_4', 'strategy_5', 'group_individual', 'strategy_6', 'strategy_7']
 
 class IndividualismQuestions(Page):
-    template_name = 'justone_deutsch/IndividualismQuestions.html'
+    template_name = 'experiment/IndividualismQuestions.html'
     timeout_seconds = 120
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
     form_model = 'player'
-    form_fields = ['individualism_1', 'individualism_2', 'individualism_3', 'individualism_4', 'individualism_5']
+    form_fields = ['individualism_1', 'individualism_2', 'individualism_3', 'individualism_4', 'individualism_5', 'Bildende_Kunst', 'Musik', 'Tanz', 'Architektur', 'Literatur', 'Humor', 'Erfindungen', 'Wissenschaftliche_Entdeckungen', 'Theater_und_Film', 'Kochen']
+
+class CreativeActivities(Page):
+    timeout_seconds = 1000
+    def is_displayed(player):
+        return player.round_number == C.NUM_ROUNDS
+    def vars_for_template(player):
+        choices = [1, 2, 3, 4, 5, 6, 7]
+        ratings = [player.Bildende_Kunst, player.Musik, player.Tanz, player.Architektur, player.Literatur, player.Humor, player.Erfindungen, player.Wissenschaftliche_Entdeckungen, player.Theater_und_Film, player.Kochen]
+        return dict(ratings = ratings, choices = choices)
+    form_model = 'player'
+    form_fields = ['Bildende_Kunst_2_1', 'Bildende_Kunst_2_2', 'Bildende_Kunst_2_3', 'Bildende_Kunst_2_4', 'Bildende_Kunst_2_5', 'Bildende_Kunst_2_6', 'Bildende_Kunst_2_7', 'Musik_2_1', 'Musik_2_2', 'Musik_2_3', 'Musik_2_4', 'Musik_2_5', 'Musik_2_6', 'Musik_2_7', 'Tanz_2_1', 'Tanz_2_2', 'Tanz_2_3', 'Tanz_2_4', 'Tanz_2_5', 'Tanz_2_6', 'Tanz_2_7', 'Architektur_2_1', 'Architektur_2_2', 'Architektur_2_3', 'Architektur_2_4', 'Architektur_2_5', 'Architektur_2_6', 'Architektur_2_7', 'Literatur_2_1', 'Literatur_2_2', 'Literatur_2_3', 'Literatur_2_4', 'Literatur_2_5', 'Literatur_2_6', 'Literatur_2_7', 'Humor_2_1', 'Humor_2_2', 'Humor_2_3', 'Humor_2_4', 'Humor_2_5', 'Humor_2_6', 'Humor_2_7', 'Erfindungen_2_1', 'Erfindungen_2_2', 'Erfindungen_2_3', 'Erfindungen_2_4', 'Erfindungen_2_5', 'Erfindungen_2_6', 'Erfindungen_2_7', 'Wissenschaftliche_Entdeckungen_2_1', 'Wissenschaftliche_Entdeckungen_2_2', 'Wissenschaftliche_Entdeckungen_2_3', 'Wissenschaftliche_Entdeckungen_2_4', 'Wissenschaftliche_Entdeckungen_2_5', 'Wissenschaftliche_Entdeckungen_2_6', 'Wissenschaftliche_Entdeckungen_2_7', 'Theater_und_Film_2_1', 'Theater_und_Film_2_2', 'Theater_und_Film_2_3', 'Theater_und_Film_2_4', 'Theater_und_Film_2_5', 'Theater_und_Film_2_6', 'Theater_und_Film_2_7', 'Kochen_2_1', 'Kochen_2_2', 'Kochen_2_3', 'Kochen_2_4', 'Kochen_2_5', 'Kochen_2_6', 'Kochen_2_7']
+
+class Personality(Page):
+    timeout_seconds = 270
+    def is_displayed(player):
+        return player.round_number == C.NUM_ROUNDS
+    form_model = 'player'
+    form_fields = ['risk', 'creative_self1', 'creative_self2', 'creative_self3', 'creative_self4', 'creative_self5', 'creative_self6', 'creative_self7', 'creative_self8', 'creative_self9', 'creative_self10', 'creative_self11']
 
 class Identification(Page):
     timeout_seconds = 270
@@ -1157,7 +1268,7 @@ class FinalPage(Page):
 # WAIT PAGES
 
 class GroupWaitPage(WaitPage):
-    template_name = 'new_justone_deutsch_oR/GroupWaitPage.html'
+    template_name = 'experiment/GroupWaitPage.html'
     def is_displayed(player):
         return player.round_number == 1
         
@@ -1201,4 +1312,4 @@ class ResultsWaitPage(WaitPage):
     body_text = "Bitte warten Sie, bis alle Gruppen ihre Hinweispaare und Tipps abgegeben haben."
     wait_for_all_groups = True
 
-page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, PairCheck, Originality_Calculation, DecisionConfidence, ResultsWaitPage, Results, Usefulness, Originality, Overall_Creativity, Score, Score2, Score3, TestQuestions, IndividualismQuestions, Identification, DAT, RAT_Instructions, RAT, FinalPage]
+page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, PairCheck, Originality_Calculation, DecisionConfidence, ResultsWaitPage, Results, Usefulness, Originality, Overall_Creativity, Score, Score2, Score3, TestQuestions, IndividualismQuestions, CreativeActivities, Personality, Identification, DAT, RAT_Instructions, RAT, FinalPage]

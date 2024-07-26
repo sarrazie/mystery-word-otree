@@ -1,0 +1,303 @@
+{{ block title }}
+    Letzte Fragen 
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 20) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+</br>
+{% if ratings == [False, False, False, False, False, False, False, False, False, False] %}
+<p>Da sie auf der vorherigen Seite keine Aktivitäten ausgewählt haben, können Sie direkt weiter fortfahren. </p>
+{% else %}
+<p> Sie haben auf der vorherigen Seite folgende Aktivitäten ausgewählt, zu denen wir nun noch weitere Informationen sammeln möchten: </p>
+<p> <b>Markieren Sie bitte alle Sätze, die auf Sie zutreffen. </b></p>
+</br>
+{% if player.Bildende_Kunst == 1 %}
+<p><b>Bildende Kunst:</b></p>
+        {% for choice in choices %}
+            <p><input type="checkbox" name="Bildende_Kunst_2_{{choice}}" value="{{ choice }}" id="Bildende_Kunst_2_{{choice}}">
+            {% if choice == 1 %}
+                <label for="Bildende_Kunst_2_{{choice}}">Ich habe Unterricht in diesem Bereich erhalten.</label></p>
+            {% endif %}
+            {% if choice == 2 %}
+                <label for="Bildende_Kunst_2_{{choice}}">Menschen haben sich zu meinem Talent in diesem Bereich geäußert.</label>
+            {% endif %}
+            {% if choice == 3 %}
+                <label for="Bildende_Kunst_2_{{choice}}">Ich habe durch eine Jurybewertung einen oder mehrere Preise auf Kunstausstellungen gewonnen.</label>
+            {% endif %}
+            {% if choice == 4 %}
+                <label for="Bildende_Kunst_2_{{choice}}">Meine Werke wurden in einer Galerie ausgestellt.</label>
+            {% endif %}
+            {% if choice == 5 %}
+                <label for="Bildende_Kunst_2_{{choice}}">Ich habe eines meiner Werke verkauft.</label>
+            {% endif %}
+            {% if choice == 6 %}
+                <label for="Bildende_Kunst_2_{{choice}}">Meine Arbeit wurde in regional erscheinenden Veröffentlichungen besprochen.</label>
+            {% endif %}
+            {% if choice == 7 %}
+                <label for="Bildende_Kunst_2_{{choice}}">Meine Arbeit wurde in bundesweit erscheinenden Veröffentlichungen besprochen.</label>
+            {% endif %}
+            {% endfor %}
+{% endif %}
+{% if player.Musik == 1 %}
+<p><b>Musik:</b></p>
+        {% for choice in choices %}
+            <p><input type="checkbox" name="Musik_2_{{choice}}" value="{{ choice }}" id="Musik_2_{{choice}}">
+            {% if choice == 1 %}
+                <label for="Musik_2_{{choice}}">Ich spiele ein oder mehrere Instrumente gut.</label></p>
+            {% endif %}
+            {% if choice == 2 %}
+                <label for="Musik_2_{{choice}}">Ich habe mit einem Orchester oder einer anerkannten Band gespielt.</label>
+            {% endif %}
+            {% if choice == 3 %}
+                <label for="Musik_2_{{choice}}">Ich habe ein Musikstück komponiert.</label>
+            {% endif %}
+            {% if choice == 4 %}
+                <label for="Musik_2_{{choice}}">Mein musikalisches Talent wurde in regional erscheinenden Veröffentlichungen besprochen.</label>
+            {% endif %}
+            {% if choice == 5 %}
+                <label for="Musik_2_{{choice}}">Von mir komponierte Musikstücke wurden aufgenommen/aufgezeichnet.</label>
+            {% endif %}
+            {% if choice == 6 %}
+                <label for="Musik_2_{{choice}}">Aufnahmen meiner Komposition wurden öffentlich verkauft.</label>
+            {% endif %}
+            {% if choice == 7 %}
+                <label for="Musik_2_{{choice}}">Meine Kompositionen wurden in bundesweit erscheinenden Veröffentlichungen besprochen.</label>
+            {% endif %}
+            {% endfor %}
+{% endif %}
+{% if player.Tanz == 1 %}
+<p><b>Tanz:</b></p>
+        {% for choice in choices %}
+            <p><input type="checkbox" name="Tanz_2_{{choice}}" value="{{ choice }}" id="Tanz_2_{{choice}}">
+            {% if choice == 1 %}
+                <label for="Tanz_2_{{choice}}">Ich habe mit einer anerkannten Tanzgruppe getanzt.</label></p>
+            {% endif %}
+            {% if choice == 2 %}
+                <label for="Tanz_2_{{choice}}">Ich habe eine selbst entwickelte Tanznummer aufgeführt.</label>
+            {% endif %}
+            {% if choice == 3 %}
+                <label for="Tanz_2_{{choice}}">Meine Choreografie wurde öffentlich aufgeführt.</label>
+            {% endif %}
+            {% if choice == 4 %}
+                <label for="Tanz_2_{{choice}}">Meine tänzerischen Fähigkeiten wurden in regional erscheinenden Veröffentlichungen erwähnt.</label>
+            {% endif %}
+            {% if choice == 5 %}
+                <label for="Tanz_2_{{choice}}">Ich habe Tanzchoreografien professionell aufgeführt.</label>
+            {% endif %}
+            {% if choice == 6 %}
+                <label for="Tanz_2_{{choice}}">Meine Choreografie wurde in einer regional erscheinenden Veröffentlichung gewürdigt.</label>
+            {% endif %}
+            {% if choice == 7 %}
+                <label for="Tanz_2_{{choice}}">Meine Choreografie wurde in einer bundesweit erscheinenden Veröffentlichung gewürdigt.</label>
+            {% endif %}
+            {% endfor %}
+{% endif %}
+{% if player.Architektur == 1 %}
+<p><b>Architektur:</b></p>
+        {% for choice in choices %}
+            <p><input type="checkbox" name="Architektur_2_{{choice}}" value="{{ choice }}" id="Architektur_2_{{choice}}">
+            {% if choice == 1 %}
+                <label for="Architektur_2_{{choice}}">Ich habe eine eigene architektonische Planung oder einen eigenen architektonischen Entwurf entwickelt.</label></p>
+            {% endif %}
+            {% if choice == 2 %}
+                <label for="Architektur_2_{{choice}}">Eine Struktur oder ein Entwurf, von mir entwickelt, wurde umgesetzt.</label>
+            {% endif %}
+            {% if choice == 3 %}
+                <label for="Architektur_2_{{choice}}">Ich habe einen selbst entwickelten Entwurf oder eine Planung verkauft.</label>
+            {% endif %}
+            {% if choice == 4 %}
+                <label for="Architektur_2_{{choice}}">Eine Struktur oder ein Aufbau, von mir entwickelt und verkauft, wurde professionell gebaut.</label>
+            {% endif %}
+            {% if choice == 5 %}
+                <label for="Architektur_2_{{choice}}">Mein architektonischer Entwurf hat eine oder mehrere Auszeichnungen gewonnen.</label>
+            {% endif %}
+            {% if choice == 6 %}
+                <label for="Architektur_2_{{choice}}">Mein architektonischer Entwurf wurde in einer regional erscheinenden Veröffentlichung gewürdigt.</label>
+            {% endif %}
+            {% if choice == 7 %}
+                <label for="Architektur_2_{{choice}}">Mein architektonischer Entwurf wurde in einer bundesweit erscheinenden Veröffentlichung gewürdigt.</label>
+            {% endif %}
+            {% endfor %}
+{% endif %}
+{% if player.Literatur == 1 %}
+<p><b>Literatur:</b></p>
+        {% for choice in choices %}
+            <p><input type="checkbox" name="Literatur_2_{{choice}}" value="{{ choice }}" id="Literatur_2_{{choice}}">
+            {% if choice == 1 %}
+                <label for="Literatur_2_{{choice}}">Ich habe ein eigenes kurzes Werk geschrieben (Gedicht oder Kurzgeschichte).</label></p>
+            {% endif %}
+            {% if choice == 2 %}
+                <label for="Literatur_2_{{choice}}">Meine Arbeit hat einen Preis oder eine Auszeichnung erhalten.</label>
+            {% endif %}
+            {% if choice == 3 %}
+                <label for="Literatur_2_{{choice}}">Ich habe ein eigenes größeres Werk verfasst (Epos, Roman oder Schauspiel).</label>
+            {% endif %}
+            {% if choice == 4 %}
+                <label for="Literatur_2_{{choice}}">Ich habe meine Arbeit an einen Verlag verkauft.</label>
+            {% endif %}
+            {% if choice == 5 %}
+                <label for="Literatur_2_{{choice}}">Meine Arbeit wurde gedruckt und öffentlich verkauft.</label>
+            {% endif %}
+            {% if choice == 6 %}
+                <label for="Literatur_2_{{choice}}">Meine Arbeit wurde in regional erscheinenden Veröffentlichungen rezensiert.</label>
+            {% endif %}
+            {% if choice == 7 %}
+                <label for="Literatur_2_{{choice}}">Meine Arbeit wurde in bundesweit erscheinenden Veröffentlichungen rezensiert.</label>
+            {% endif %}
+            {% endfor %}
+{% endif %}
+{% if player.Humor == 1 %}
+<p><b>Humor:</b></p>
+        {% for choice in choices %}
+            <p><input type="checkbox" name="Humor_2_{{choice}}" value="{{ choice }}" id="Humor_2_{{choice}}">
+            {% if choice == 1 %}
+                <label for="Humor_2_{{choice}}">Menschen haben sich oft zu meinem originellen Humor geäußert.</label></p>
+            {% endif %}
+            {% if choice == 2 %}
+                <label for="Humor_2_{{choice}}">Ich habe mir Witze ausgedacht, die jetzt regelmäßig von anderen erzählt werden.</label>
+            {% endif %}
+            {% if choice == 3 %}
+                <label for="Humor_2_{{choice}}">Ich habe Witze für andere Leute geschrieben.</label>
+            {% endif %}
+            {% if choice == 4 %}
+                <label for="Humor_2_{{choice}}">Ich habe einen Witz oder ein Cartoon geschrieben, der veröffentlicht wurde.</label>
+            {% endif %}
+            {% if choice == 5 %}
+                <label for="Humor_2_{{choice}}">Ich habe als professioneller Humorist, Komiker oder Comedian gearbeitet.</label>
+            {% endif %}
+            {% if choice == 6 %}
+                <label for="Humor_2_{{choice}}">Ich habe als professioneller Comedy- oder Komödien-Schreiber gearbeitet.</label>
+            {% endif %}
+            {% if choice == 7 %}
+                <label for="Humor_2_{{choice}}">Mein Humor wurde in bundesweit erscheinenden Veröffentlichungen gewürdigt.</label>
+            {% endif %}
+            {% endfor %}
+{% endif %}
+{% if player.Erfindungen == 1 %}
+<p><b>Erfindungen:</b></p>
+        {% for choice in choices %}
+            <p><input type="checkbox" name="Erfindungen_2_{{choice}}" value="{{ choice }}" id="Erfindungen_2_{{choice}}">
+            {% if choice == 1 %}
+                <label for="Erfindungen_2_{{choice}}">Ich finde regelmäßig neue Verwendungszwecke für Haushaltsobjekte.</label></p>
+            {% endif %}
+            {% if choice == 2 %}
+                <label for="Erfindungen_2_{{choice}}">Ich habe eine Erfindung entworfen und an ihren Schwachstellen gearbeitet.</label>
+            {% endif %}
+            {% if choice == 3 %}
+                <label for="Erfindungen_2_{{choice}}">Ich habe eine eigene Software für Computer entwickelt.</label>
+            {% endif %}
+            {% if choice == 4 %}
+                <label for="Erfindungen_2_{{choice}}">Ich habe einen Prototyp einer meiner Erfindungen entwickelt.</label>
+            {% endif %}
+            {% if choice == 5 %}
+                <label for="Erfindungen_2_{{choice}}">Ich habe meine Erfindungen an Leute, die ich kenne, verkauft.</label>
+            {% endif %}
+            {% if choice == 6 %}
+                <label for="Erfindungen_2_{{choice}}">Ich habe ein Patent für eine meiner Erfindungen erhalten.</label>
+            {% endif %}
+            {% if choice == 7 %}
+                <label for="Erfindungen_2_{{choice}}">Ich habe eine meiner Erfindungen an eine Herstellerfirma verkauft.</label>
+            {% endif %}
+            {% endfor %}
+{% endif %}
+{% if player.Wissenschaftliche_Entdeckungen == 1 %}
+<p><b>Wissenschaftliche Entdeckungen:</b></p>
+        {% for choice in choices %}
+            <p><input type="checkbox" name="Wissenschaftliche_Entdeckungen_2_{{choice}}" value="{{ choice }}" id="Wissenschaftliche_Entdeckungen_2_{{choice}}">
+            {% if choice == 1 %}
+                <label for="Wissenschaftliche_Entdeckungen_2_{{choice}}">Ich denke oft darüber nach, wie wissenschaftliche Probleme gelöst werden könnten.</label></p>
+            {% endif %}
+            {% if choice == 2 %}
+                <label for="Wissenschaftliche_Entdeckungen_2_{{choice}}">Ich habe einen Preis gewonnen bei einer wissenschaftlichen Messe oder einem anderen regional erscheinenden Wettbewerb.</label>
+            {% endif %}
+            {% if choice == 3 %}
+                <label for="Wissenschaftliche_Entdeckungen_2_{{choice}}">Ich habe ein Stipendium für meine Arbeit in Naturwissenschaften oder Medizin erhalten.</label>
+            {% endif %}
+            {% if choice == 4 %}
+                <label for="Wissenschaftliche_Entdeckungen_2_{{choice}}">Ich war Autor oder Co-Autor einer Studie, die in einem wissenschaftlichen Journal veröffentlicht wurde.</label>
+            {% endif %}
+            {% if choice == 5 %}
+                <label for="Wissenschaftliche_Entdeckungen_2_{{choice}}">Ich habe einen bundesweit ausgeschriebenen Preis im Bereich der Naturwissenschaften oder Medizin gewonnen.</label>
+            {% endif %}
+            {% if choice == 6 %}
+                <label for="Wissenschaftliche_Entdeckungen_2_{{choice}}">Ich habe eine Förderung (z.B. aus öffentlichen Mitteln) erhalten, um meiner wissenschaftlichen oder medizinischen Arbeit nachzugehen.</label>
+            {% endif %}
+            {% if choice == 7 %}
+                <label for="Wissenschaftliche_Entdeckungen_2_{{choice}}">Meine Arbeit wurde von anderen Wissenschaftlern in einer wissenschaftlichen Fachzeitschrift („Journal“) zitiert.</label>
+            {% endif %}
+            {% endfor %}
+{% endif %}
+{% if player.Theater_und_Film == 1 %}
+<p><b>Theater und Film:</b></p>
+        {% for choice in choices %}
+            <p><input type="checkbox" name="Theater_und_Film_2_{{choice}}" value="{{ choice }}" id="Theater_und_Film_2_{{choice}}">
+            {% if choice == 1 %}
+                <label for="Theater_und_Film_2_{{choice}}">Ich bin in einem Theaterstück oder Film aufgetreten.</label></p>
+            {% endif %}
+            {% if choice == 2 %}
+                <label for="Theater_und_Film_2_{{choice}}">Meine schauspielerischen Fähigkeiten wurden in regional erscheinenden Veröffentlichungen gewürdigt.</label>
+            {% endif %}
+            {% if choice == 3 %}
+                <label for="Theater_und_Film_2_{{choice}}">Ich war Produktionsverantwortlicher oder Regisseur bei einer Theaterinszenierung oder einem Film.</label>
+            {% endif %}
+            {% if choice == 4 %}
+                <label for="Theater_und_Film_2_{{choice}}">Ich habe eine Auszeichnung oder Preis für schauspielerische Leistungen in einem Theaterstück oder Film erhalten.</label>
+            {% endif %}
+            {% if choice == 5 %}
+                <label for="Theater_und_Film_2_{{choice}}">Ich wurde bezahlt, um in einem Theaterstück oder Film mitzuspielen.</label>
+            {% endif %}
+            {% if choice == 6 %}
+                <label for="Theater_und_Film_2_{{choice}}">Ich wurde bezahlt, um Regie bei einem Theaterstück oder Film zu führen.</label>
+            {% endif %}
+            {% if choice == 7 %}
+                <label for="Theater_und_Film_2_{{choice}}">Meine Leistung im Bereich Theater und Film wurde in einer bundesweit erscheinenden Veröffentlichung gewürdigt.</label>
+            {% endif %}
+            {% endfor %}
+{% endif %}
+{% if player.Kochen == 1 %}
+<p><b>Kochen:</b></p>
+        {% for choice in choices %}
+            <p><input type="checkbox" name="Kochen_2_{{choice}}" value="{{ choice }}" id="Kochen_2_{{choice}}">
+            {% if choice == 1 %}
+                <label for="Kochen_2_{{choice}}">Ich experimentiere oft mit Kochrezepten.</label></p>
+            {% endif %}
+            {% if choice == 2 %}
+                <label for="Kochen_2_{{choice}}">Meine Kochrezepte wurden in einem regionalen Kochbuch veröffentlicht.</label>
+            {% endif %}
+            {% if choice == 3 %}
+                <label for="Kochen_2_{{choice}}">Meine Rezepte wurden in Restaurants oder anderen öffentlichen Gastronomiebetrieben benutzt.</label>
+            {% endif %}
+            {% if choice == 4 %}
+                <label for="Kochen_2_{{choice}}">Ich wurde gebeten, Essen für Prominente oder Würdenträger zuzubereiten.</label>
+            {% endif %}
+            {% if choice == 5 %}
+                <label for="Kochen_2_{{choice}}">Meine Rezepte haben einen Preis oder eine Auszeichnung erhalten.</label>
+            {% endif %}
+            {% if choice == 6 %}
+                <label for="Kochen_2_{{choice}}">Ich habe für mein kulinarisches Gesamtwerk eine Auszeichnung erhalten.</label>
+            {% endif %}
+            {% if choice == 7 %}
+                <label for="Kochen_2_{{choice}}">Meine Rezepte sind bundesweit veröffentlicht worden.</label>
+            {% endif %}
+            {% endfor %}
+{% endif %}
+{% endif %}
+</br>
+</br>
+<button class= "otree-btn btn btn-info">Weiter</button>
+
+{{ endblock }}
