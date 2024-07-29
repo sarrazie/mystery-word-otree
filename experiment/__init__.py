@@ -1280,8 +1280,9 @@ class RAT(Page):
     form_fields = ['rat1', 'rat2', 'rat3', 'rat4', 'rat5', 'rat6', 'rat7', 'rat8', 'rat9', 'rat10']
     
 class TrustGame(Page):
+    timeout_seconds = 60
     def is_displayed(player):
-        return player.round_number == 1 and player.player_role == 'Hinweisgebende' 
+        return player.round_number == C.NUM_ROUNDS and player.player_role == 'Hinweisgebende' 
     form_model = 'player'
     form_fields = ['trust_game']
 
