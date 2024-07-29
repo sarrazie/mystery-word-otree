@@ -55,6 +55,7 @@ class Player(BasePlayer):
     score = models.IntegerField()
     result = models.StringField()
     player_role = models.StringField()
+    player_role2 = models.StringField()
     incentive = models.IntegerField()
     known = models.BooleanField(choices=[[1, 'Ja'], [0, 'Nein']], label='<b>1. </b> Kennen Sie das Spiel "Just One"?', widget=widgets.RadioSelect)
     understanding = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [2, 'stimme überhaupt nicht zu']], label='<b>2. </b> "Ich habe die Verfahrensweise und die Regeln schnell verstanden."', widget=widgets.RadioSelectHorizontal)
@@ -72,6 +73,7 @@ class Player(BasePlayer):
     group_individual = models.StringField(choices=[['Gruppe', 'Es war produktiv, in der Gruppe zu arbeiten'], ['Individuell', 'Ich hätte lieber alleine Hinweise gegeben']], label='<b>11. </b>Wie haben Sie die Zusammenarbeit in Ihrer Gruppe erlebt?', widget=widgets.RadioSelectHorizontal)
     strategy_6 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>12. </b>"Ein Wettkampf mit anderen Gruppen würde mich motivieren, möglichst gute Hinweise zu geben und das geheime Wort zu erraten."', widget=widgets.RadioSelectHorizontal)
     strategy_7 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>13. </b>"Eine Bonuszahlung geknüpft an unsere Gruppenperformance würde mich motivieren, möglichst gute Hinweise zu geben und das geheime Wort zu erraten."', widget=widgets.RadioSelectHorizontal)
+    motivation = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>14. </b>"Mir hat die Arbeit an der Aufgabe Spaß gemacht."', widget=widgets.RadioSelectHorizontal)
     individualism_1 = models.IntegerField(choices=[-3, -2, -1, 0, 1, 2, 3], widget=widgets.RadioSelect, blank=False)
     individualism_2 = models.IntegerField(choices=[-3, -2, -1, 0, 1, 2, 3], widget=widgets.RadioSelect, blank=False)
     individualism_3 = models.IntegerField(choices=[-3, -2, -1, 0, 1, 2, 3], widget=widgets.RadioSelect, blank=False)
@@ -310,10 +312,12 @@ class Player(BasePlayer):
     creativity_15 = models.StringField(blank=True)
     number_pairs_after = models.IntegerField()
     circle_overlap = models.FloatField(label="Overlap Percentage",blank=True)
-    satisfaction = models.StringField(choices=[[-2, 'überhaupt nicht zufrieden'], [-1, 'nicht zufrieden'], [0, 'neutral'], [1, 'zufrieden'], [2, 'voll und ganz zufrieden']], label='<b>Wie zufrieden sind Sie mit dem Entscheidungsprozess in Ihrer Gruppe?</b>', widget=widgets.RadioSelectHorizontal, blank = False)
-    confidence = models.StringField(choices=[[-2, 'überhaupt nicht überzeugt'], [-1, 'nicht überzeugt'], [0, 'neutral'], [1, 'überzeugt'], [2, 'voll und ganz überzeugt']], label='<b>Wie überzeugt sind Sie von der finalen Auswahl Ihrer Gruppe?</b>', widget=widgets.RadioSelectHorizontal, blank = False)
+    satisfaction = models.IntegerField(choices=[[-2, 'überhaupt nicht zufrieden'], [-1, 'nicht zufrieden'], [0, 'neutral'], [1, 'zufrieden'], [2, 'voll und ganz zufrieden']], label='<b>Wie zufrieden sind Sie mit dem Entscheidungsprozess in Ihrer Gruppe?</b>', widget=widgets.RadioSelectHorizontal, blank = False)
+    confidence = models.IntegerField(choices=[[-2, 'überhaupt nicht überzeugt'], [-1, 'nicht überzeugt'], [0, 'neutral'], [1, 'überzeugt'], [2, 'voll und ganz überzeugt']], label='<b>Wie überzeugt sind Sie von der finalen Auswahl Ihrer Gruppe?</b>', widget=widgets.RadioSelectHorizontal, blank = False)
     explanation = models.LongStringField(label='Bitte erklären Sie, wie Ihre Gruppe zu dieser Entscheidung gekommen ist.', blank=True, max_length=500)
     explanation_2 = models.LongStringField(label='Bitte erklären Sie, warum sich Ihre Gruppe final für dieses Hinweispaar entschieden hat.', blank=True, max_length=500)
+    subjective_originality = models.IntegerField(choices=[0, 1, 2, 3 ,4, 5, 6, 7, 8, 9, 10],label = 'Bitte bewerten Sie ihr finales Hinweispaar auf einer Skala von 0 bis 10, wie <b>originell</b> sie es finden. <br> (0 = überhaupt nicht originell, 10 = sehr originell)', widget=widgets.RadioSelectHorizontal, blank= False)
+    subjective_quality = models.IntegerField(choices=[0, 1, 2, 3 ,4, 5, 6, 7, 8, 9, 10,],label = 'Bitte bewerten Sie ihr finales Hinweispaar auf einer Skala von 0 bis 10, wie <b>nützlich</b> es zur Erratung des geheimen Wortes ist. <br> (0 = überhaupt nicht nützlich, 10 = sehr nützlich)', widget=widgets.RadioSelectHorizontal, blank= False)
     rat1 = models.StringField(label= '', initial='', blank=True, max_length=18)
     rat2 = models.StringField(label= '', initial='', blank=True, max_length=18)
     rat3 = models.StringField(label= '', initial='', blank=True, max_length=18)
@@ -336,6 +340,7 @@ class Player(BasePlayer):
     creative_self9 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=False, label = '<b> 9. </b>Ich bin gut darin, originelle Lösungen für Probleme zu finden.')
     creative_self10 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=False, label = '<b> 10. </b>Kreativität ist ein wichtiger Teil von mir.')
     creative_self11 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=False, label = '<b> 11. </b>Einfallsreichtum ist eine Eigenschaft, die mir wichtig ist.')
+    trust_game = models.IntegerField(max=10, min=0, blank=False, label= '<b>Wie viel von den 10 EUR würden Sie senden?</b>')
 
 class Model:
     def __init__(player, model="vectors_german.txt.gz", dictionary="vocab_german.txt", pattern="^[a-z][a-z-]*[a-z]$"):
@@ -396,11 +401,24 @@ def creating_session(subsession: Subsession):
     subsession.set_group_matrix(matrix)
 
     treatment = session.config['treatment']
+    ingroup_count = 0
+    outgroup_count = 0
     for player in players:
         participant = player.participant
         participant.vars['treatment'] = treatment
         player.incentive = treatment
         player.player_role = 'Hinweisgebende' if player in [p for group in hintgiver_groups for p in group] else 'Ratender'
+        if player.player_role == 'Hinweisgebende':
+            if ingroup_count < (num_players - (num_players // 4)) // 2:
+                player.player_role2 = 'ingroup'
+                ingroup_count += 1
+            elif outgroup_count < (num_players - (num_players // 4)) // 2:
+                player.player_role2 = 'outgroup'
+                outgroup_count += 1
+            else: 
+                player.player_role2 = random.choice(['outgroup', 'ingroup'])
+        else: 
+            player.player_role2 = None
 
 def validate_ideas(player, ideas):
     stem_words = C.STEM_WORDS[player.round_number - 1]     
@@ -860,7 +878,7 @@ class DecisionConfidence(Page):
     def is_displayed(player):
         return player.player_role == 'Hinweisgebende'
     form_model = 'player'
-    form_fields = ['satisfaction', 'explanation', 'confidence', 'explanation_2']
+    form_fields = ['satisfaction', 'explanation', 'confidence', 'subjective_originality', 'subjective_quality', 'explanation_2']
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         taboo_words = C.TABOO_WORDS[player.round_number - 1]
@@ -1197,7 +1215,7 @@ class TestQuestions(Page):
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
     form_model = 'player'
-    form_fields = ['known', 'understanding', 'comments', 'comments_2', 'strategy', 'strategy_2', 'strategy_3', 'strategy_4', 'strategy_5', 'group_individual', 'strategy_6', 'strategy_7']
+    form_fields = ['known', 'understanding', 'comments', 'comments_2', 'strategy', 'strategy_2', 'strategy_3', 'strategy_4', 'strategy_5', 'group_individual', 'strategy_6', 'strategy_7', 'motivation']
 
 class IndividualismQuestions(Page):
     template_name = 'experiment/IndividualismQuestions.html'
@@ -1260,6 +1278,12 @@ class RAT(Page):
         return player.player_role == 'Ratender' and player.round_number == C.NUM_ROUNDS
     form_model = 'player'
     form_fields = ['rat1', 'rat2', 'rat3', 'rat4', 'rat5', 'rat6', 'rat7', 'rat8', 'rat9', 'rat10']
+    
+class TrustGame(Page):
+    def is_displayed(player):
+        return player.round_number == 1 and player.player_role == 'Hinweisgebende' 
+    form_model = 'player'
+    form_fields = ['trust_game']
 
 class FinalPage(Page):
     def is_displayed(player):
@@ -1312,4 +1336,4 @@ class ResultsWaitPage(WaitPage):
     body_text = "Bitte warten Sie, bis alle Gruppen ihre Hinweispaare und Tipps abgegeben haben."
     wait_for_all_groups = True
 
-page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, PairCheck, Originality_Calculation, DecisionConfidence, ResultsWaitPage, Results, Usefulness, Originality, Overall_Creativity, Score, Score2, Score3, TestQuestions, IndividualismQuestions, CreativeActivities, Personality, Identification, DAT, RAT_Instructions, RAT, FinalPage]
+page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, PairCheck, Originality_Calculation, DecisionConfidence, ResultsWaitPage, Results, Usefulness, Originality, Overall_Creativity, Score, Score2, Score3, TrustGame, TestQuestions, IndividualismQuestions, CreativeActivities, Personality, Identification, DAT, RAT_Instructions, RAT, FinalPage]

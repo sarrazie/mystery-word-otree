@@ -1,0 +1,33 @@
+{{ block title }}
+    Entscheidung
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 20) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+</br>
+<p><b>Stellen Sie sich folgende Entscheidungssituation mit 2 Personen vor:</b></p>
+<p>Zu Beginn erhält Teilnehmender A 10 EUR. Teilnehmende B erhält nichts.</p>
+<p>A kann von seinen 10 EUR nichts, einen Teil oder alles an B schicken.</p>
+<p>Bevor B diesen Betrag erhält, wird er verdreifacht.</p>
+<p>Nachdem B den verdreifachten Betrag erhält, kann sie nichts, einen Teil oder den gesamten Betrag an A zurückzuschicken.</p>
+</br>
+<p><b> Stellen Sie sich nun vor, dass sie Teilnehmender A sind {{ if player.player_role2 == 'ingroup' }}und Teilnehmende B jemand aus Ihrer Gruppe ist. {{ else }}und Teilnehmende B jemand aus einer anderen Gruppe ist. {{ endif }} </b></p>
+<p> {{ formfields }}</p>
+</br>
+<button class= "otree-btn btn btn-info">Weiter</button>
+
+{{ endblock }}
