@@ -41,9 +41,9 @@ class Subsession(BaseSubsession):
     pass
 
 class Group(BaseGroup):
-    payoff = models.IntegerField(initial=1000)
-    quantity = models.IntegerField(initial=1000)
-    originality = models.FloatField(initial=1000)
+    payoff = models.IntegerField(initial=0)
+    quantity = models.IntegerField(initial=0)
+    originality = models.FloatField(initial=0)
 
 class Player(BasePlayer):        
     guess1 = models.StringField(label="Ihre Vermutung:", initial='', max_length=18)
@@ -341,6 +341,8 @@ class Player(BasePlayer):
     creative_self10 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=False, label = '<b> 10. </b>Kreativität ist ein wichtiger Teil von mir.')
     creative_self11 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=False, label = '<b> 11. </b>Einfallsreichtum ist eine Eigenschaft, die mir wichtig ist.')
     trust_game = models.IntegerField(max=10, min=0, blank=False, label= '<b>Wie viel von den 10 EUR würden Sie senden?</b>')
+    AUT = models.LongStringField(label='Geben Sie jeweils eine alternative Verwendungsmöglichkeit <b>pro Zeile</b> an.', blank=True, max_length=800)
+    AUT2 = models.LongStringField(label='Geben Sie jeweils eine alternative Verwendungsmöglichkeit <b>pro Zeile</b> an.', blank=True, max_length=800)
 
 class Model:
     def __init__(player, model="vectors_german.txt.gz", dictionary="vocab_german.txt", pattern="^[a-z][a-z-]*[a-z]$"):
@@ -387,7 +389,7 @@ def creating_session(subsession: Subsession):
     players = subsession.get_players()
     num_players = len(players)
     num_hintgiver_groups = num_players // 4
-    hintgiver_groups = []
+    hintgiver_groups = [] 
     ratender_group = []
 
     for i in range(num_hintgiver_groups):
@@ -588,40 +590,6 @@ class Discussion(Page):
             for i in range(player.number_pairs):
                 feedback = [player.other_pairs.split(', ')[i], getattr(player, f'rating_before{i + 1}'), getattr(player, f'replace_word{i + 1}'), getattr(player, f'discussion{i + 1}')]
                 setattr(player, f'pair_feedback{i + 1}', str(feedback))
-
-def rating_before_error_message(player, value, threshold):
-    if value == None and player.number_pairs > threshold:
-        return 'Bitte wählen Sie eine Antwort aus!'
-
-def rating_before1_error_message(player, value):
-    return rating_before_error_message(player, value, 0)
-
-def rating_before2_error_message(player, value):
-    return rating_before_error_message(player, value, 1)
-
-def rating_before3_error_message(player, value):
-    return rating_before_error_message(player, value, 2)
-
-def rating_before4_error_message(player, value):
-    return rating_before_error_message(player, value, 3)
-
-def rating_before5_error_message(player, value):
-    return rating_before_error_message(player, value, 4)
-
-def rating_before6_error_message(player, value):
-    return rating_before_error_message(player, value, 5)
-
-def rating_before7_error_message(player, value):
-    return rating_before_error_message(player, value, 6)
-
-def rating_before8_error_message(player, value):
-    return rating_before_error_message(player, value, 7)
-
-def rating_before9_error_message(player, value):
-    return rating_before_error_message(player, value, 8)
-
-def rating_before10_error_message(player, value):
-    return rating_before_error_message(player, value, 9)
     
 class Clue_Page(Page):
     timeout_seconds = 130
@@ -895,11 +863,13 @@ class Results(Page):
         rater = next((p for p in player.subsession.get_players() if p.player_role == 'Ratender' and p.group_number_check == player.group.id_in_subsession), None)
 
         def calculate_result(player, guesses, mystery_word):
-            if mystery_word == guesses[0]:
+            mystery_word_lower = mystery_word.lower()
+            guesses_lower = [guess.lower() for guess in guesses]
+            if mystery_word_lower == guesses_lower[0]:
                 return 'richtig', 3
-            elif mystery_word == guesses[1]:
+            elif mystery_word_lower == guesses_lower[1]:
                 return 'richtig', 2
-            elif mystery_word == guesses[2]:
+            elif mystery_word_lower == guesses_lower[2]:
                 return 'richtig', 1
             else:
                 return 'falsch', 0
@@ -938,9 +908,6 @@ class Results(Page):
             player.score =  int(player.participant.payoff)
             player.group.payoff =  player.score 
             player.group.quantity = player.quantity        
-            if player.participant.treatment == 1:
-                player.group.quantity = 1000
-                player.group.payoff = 1000
             return dict (mystery_word = mystery_word, taboo_words = taboo_words, vote_group = player.vote_group, payoff = player.payoff, guess1 = guesses[0], guess2 = guesses[1], guess3 = guesses[2], result = player.result, player_role = player.player_role, missing = missing, invalid = invalid, number_ideas = player.quantity)
         else:
             player.guess_missing = False
@@ -951,18 +918,16 @@ class Results(Page):
                 guess_missing = 'Achtung! Sie haben keinen Tipp abgegeben.'
             player.result, player.payoff = calculate_result(player, guesses, mystery_word)
             player.score =  int(player.participant.payoff)
-            player.group.payoff =  player.score 
-            if player.participant.treatment == 1:
-                player.group.payoff = 1000
+            player.payoff =  player.score 
             return dict (mystery_word = mystery_word, taboo_words = taboo_words, vote_group = player.vote_group, payoff = player.payoff, guess1 = guesses[0], guess2 = guesses[1], guess3 = guesses[2], result = player.result, player_role = player.player_role, guess_missing = guess_missing)
 
 def get_sorted_scores(groups, attribute):
-    scores = [getattr(group, attribute) for group in groups if getattr(group, attribute) != 1000]
+    scores = [getattr(group, attribute) for group in groups]
     return sorted(scores, reverse=True)
 
 def get_overall_scores(group, attribute):
     subsession = group.subsession
-    groups = subsession.get_groups()
+    groups = [g for g in subsession.get_groups() if g.get_players()[0].player_role == 'Hinweisgebende']
     return get_sorted_scores(groups, attribute)
 
 def calculate_rank(score, sorted_scores):
@@ -1190,7 +1155,7 @@ class Score(Page):
 class Score2(Page):
     timeout_seconds = 30
     def is_displayed(player):
-        return player.player_role == 'Hinweisgebende' and player.participant.treatment == 2 and player.round_number	== C.NUM_ROUNDS
+        return player.player_role == 'Hinweisgebende' and player.participant.treatment == 2 #and player.round_number	== C.NUM_ROUNDS
     def vars_for_template(player):
         player.quantity = player.group.quantity
         overall_quantity = get_overall_scores(player.group, 'quantity')
@@ -1201,7 +1166,7 @@ class Score2(Page):
 class Score3(Page): 
     timeout_seconds = 30
     def is_displayed(player):
-        return player.player_role == 'Hinweisgebende' and player.participant.treatment == 4 and player.round_number	== C.NUM_ROUNDS
+        return player.player_role == 'Hinweisgebende' and player.participant.treatment == 4 #and player.round_number	== C.NUM_ROUNDS
     def vars_for_template(player):
         player.originality = player.group.originality
         overall_originality = get_overall_scores(player.group, 'originality')
@@ -1252,6 +1217,13 @@ class Identification(Page):
  
     def js_vars(player: Player):
         return {}
+    
+class AUT(Page):    
+    timeout_seconds = 240
+    def is_displayed(player):
+        return player.round_number == C.NUM_ROUNDS and player.player_role == 'Hinweisgebende' 
+    form_model = 'player'
+    form_fields = ['AUT', 'AUT2']
 
 class DAT(Page):
     timeout_seconds = 270
@@ -1337,4 +1309,4 @@ class ResultsWaitPage(WaitPage):
     body_text = "Bitte warten Sie, bis alle Gruppen ihre Hinweispaare und Tipps abgegeben haben."
     wait_for_all_groups = True
 
-page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, PairCheck, Originality_Calculation, DecisionConfidence, ResultsWaitPage, Results, Usefulness, Originality, Overall_Creativity, Score, Score2, Score3, TrustGame, TestQuestions, IndividualismQuestions, CreativeActivities, Personality, Identification, DAT, RAT_Instructions, RAT, FinalPage]
+page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, PairCheck, Originality_Calculation, DecisionConfidence, ResultsWaitPage, Results, Usefulness, Originality, Overall_Creativity, Score, Score2, Score3, TrustGame, TestQuestions, IndividualismQuestions, CreativeActivities, Personality, Identification, AUT, DAT, RAT_Instructions, RAT, FinalPage]

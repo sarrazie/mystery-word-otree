@@ -16,10 +16,10 @@ SESSION_CONFIGS = [
     dict(name='eriks_game_12', display_name= "New Mystery Word Game deutsch Originality", app_sequence=['justone_welcome_deutsch', 'new_justone_deutsch'], num_demo_participants=8, treatment=4,),
     dict(name='eriks_game_13', display_name= "New Mystery Word Game deutsch ohne Regel Pre-Test ", app_sequence=['justone_welcome_deutsch', 'new_justone_deutsch_oR'], num_demo_participants=8, treatment=1, ),
     dict(name='eriks_game_14', display_name= "New Mystery Word Game english mit Regel", app_sequence=['justone_welcome_deutsch', 'new_justone'], num_demo_participants=8, treatment=1,),
-    dict(name='eriks_game_15', display_name= "Experiment Control", app_sequence=['justone_welcome_deutsch', 'experiment'], num_demo_participants=12, treatment=1,),
-    dict(name='eriks_game_16', display_name= "Experiment Quantity", app_sequence=['justone_welcome_deutsch', 'experiment'], num_demo_participants=24, treatment=2,),
-    dict(name='eriks_game_17', display_name= "Experiment Quality", app_sequence=['justone_welcome_deutsch', 'experiment'], num_demo_participants=24, treatment=3,),
-    dict(name='eriks_game_18', display_name= "Experiment Originality", app_sequence=['justone_welcome_deutsch', 'experiment'], num_demo_participants=24, treatment=4,),
+    dict(name='eriks_game_15', display_name= "Experiment Control", app_sequence=['justone_welcome_deutsch', 'experiment'], num_demo_participants=8, treatment=1,),
+    dict(name='eriks_game_16', display_name= "Experiment Quantity", app_sequence=['justone_welcome_deutsch', 'experiment'], num_demo_participants=8, treatment=2,),
+    dict(name='eriks_game_17', display_name= "Experiment Quality", app_sequence=['justone_welcome_deutsch', 'experiment'], num_demo_participants=8, treatment=3,),
+    dict(name='eriks_game_18', display_name= "Experiment Originality", app_sequence=['justone_welcome_deutsch', 'experiment'], num_demo_participants=8, treatment=4,),
 ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs

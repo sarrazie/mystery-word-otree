@@ -1,0 +1,28 @@
+{{ block title }}
+    Aufgabe
+{{ endblock }}
+
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: yes;
+    }
+    .emoji {
+        font-size: 2em;
+    }
+</style>
+
+</br>
+<p> Sie haben nun insgesamt vier Minuten Zeit, um sich so viele <b>alternative Verwendungsmöglichkeiten</b> wie möglich für zwei Gegenstände auszudenken. 
+<p> Der erste Gegenstand ist ein <b>Vorhängeschloss.</b> </p>
+<span class="emoji">&#128274;</span>
+{{ formfield 'AUT'}}
+</br>
+<p> Der zweite Gegenstand ist ein <b>Hammer.</b> </p>
+<span class="emoji">&#128296;</span>
+{{ formfield 'AUT2'}}
+</br>
+<button class= "otree-btn btn btn-info">Weiter</button>
+
+{{ endblock }}
