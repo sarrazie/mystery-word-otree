@@ -692,6 +692,7 @@ class VotingResultPage(Page):
     def is_displayed(player):
         return player.player_role == 'Hinweisgebende'
     def vars_for_template(player):
+        pairs = player.pairsafter.split(', ')
         votes = [player.vote] + [p.vote for p in player.get_others_in_group()]
         while '' in votes:
             votes.remove('')
@@ -699,7 +700,7 @@ class VotingResultPage(Page):
         duplicates = [v for v in set(votes) if votes.count(v) >= 2]
         number_duplicates = len(duplicates)
         votes = sorted(votes)
-        number_votes = len(votes)
+        empty_pairs = 1 if pairs == [''] else 0
         if len(duplicates) > 0:
             vote_group = duplicates[0]
         else:
@@ -709,9 +710,13 @@ class VotingResultPage(Page):
                 i = random.randint(0, len(votes) - 1) 
                 vote_group = votes[i]
             else:
-                vote_group = 'Kein gültiges Hinweispaar'   
+                if pairs != ['']:
+                    i = random.randint(0, len(pairs) - 1)
+                    vote_group = pairs[i]  
+                else:
+                    vote_group = 'Kein gültiges Hinweispaar'
         player.vote_group = vote_group
-        return dict(vote_group=vote_group, duplicates=number_duplicates, number_votes=number_votes)
+        return dict(vote_group=vote_group, duplicates=number_duplicates, empty_pairs=empty_pairs)
     
 class Guess_Page1(Page):
     timeout_seconds = 5000

@@ -19,7 +19,7 @@
     });
 </script>
 </br>
-<p> {{ if duplicates > 0 }} Ihre Gruppe hat <b>mehrheitlich</b> für das Hinweispaar <b> {{ vote_group }} </b> gestimmt. {{ else }} Leider hat sich <b>keine Mehrheit</b> für ein Hinweispaar gefunden. {{ if number_votes >= 1 }} Per Zufall wurde folgendes Hinweispaar ausgewählt: <b>{{ vote_group }}.</b> {{ else }} Ihr Gruppe konnte sich für kein gültiges Hinweispaar entscheiden. {{ endif }} {{ endif }} </p>
+<p> {{ if duplicates > 0 }} Ihre Gruppe hat <b>mehrheitlich</b> für das Hinweispaar <b> {{ vote_group }} </b> gestimmt. {{ else }} Leider hat sich <b>keine Mehrheit</b> für ein Hinweispaar gefunden. {{ if empty_pairs == 0 }} Per Zufall wurde folgendes Hinweispaar ausgewählt: <b>{{ vote_group }}.</b> {{ else }} Ihr Gruppe konnte sich für kein gültiges Hinweispaar entscheiden. {{ endif }} {{ endif }} </p>
 </br>
 <button class= "otree-btn btn btn-info">Weiter</button>
 </br>
