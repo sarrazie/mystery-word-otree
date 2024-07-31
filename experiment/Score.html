@@ -1,5 +1,5 @@
 {{ block title }}
-    Punktestand
+    Endergebnis
 {{ endblock }}
 
 {{ block content }}
@@ -18,14 +18,14 @@
         });
     });
 </script>
-<p> Der Punktestand Ihrer Gruppe: <b> {{ score }} Punkt(e) </b> </p>
-<p> Die aktuellen Punktestände aller Gruppen: </p>
-
+<p> Die Summe aller erspielten Punkte mit den Hinweispaaren Ihrer Gruppe: <b> {{ score }} Punkt(e) </b></p>
+<p> Die finalen Punktestände aller Gruppen: </p>
 <ul>
     {{ for item in overall_score}}
        <li><b>{{ item }} Punkt(e) </b></li>
     {{ endfor }}   
 </ul>
-<p> Ihre Gruppe belegt Platz <b> {{ rank }} </b> von {{ number_groups }} Gruppen. </p>
+<p> Ihre Gruppe belegt damit Platz <b> {{ rank }} </b> von {{ number_groups }} Gruppen. </p>
+<p> Ihre gesamte Auszahlung beträgt somit<b>{{ if rank == 1 }} 20 EUR. {{ elif rank == 2}} 15 EUR. {{ elif rank == 3}} 12 EUR. {{ elif rank == 4 }} 10 EUR. {{ else }} 8 EUR. {{ endif }}</b></p>
 <button class= "otree-btn btn btn-info">Weiter</button>
 {{ endblock }}

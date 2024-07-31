@@ -6,6 +6,7 @@ import random
 import numpy as np
 import scipy.spatial.distance
 from concurrent.futures import ThreadPoolExecutor
+from functools import lru_cache
 
 from settings import PARTICIPANT_FIELDS
 
@@ -15,7 +16,7 @@ Ihre App-Beschreibung
 
 class C(BaseConstants):
     NAME_IN_URL = 'mabella_experiment'
-    NUM_ROUNDS = 6
+    NUM_ROUNDS = 3
     MYSTERY_WORDS = ['Raum','Taube', 'Golf', 'Elektrizitaet', 'Ende', 'Sombrero']
     LANGUAGE_CODE = 'de'
     PLAYERS_PER_GROUP = None
@@ -41,7 +42,7 @@ class Subsession(BaseSubsession):
     pass
 
 class Group(BaseGroup):
-    payoff = models.IntegerField(initial=0)
+    quality = models.IntegerField(initial=0)
     quantity = models.IntegerField(initial=0)
     originality = models.FloatField(initial=0)
 
@@ -343,6 +344,7 @@ class Player(BasePlayer):
     trust_game = models.IntegerField(max=10, min=0, blank=False, label= '<b>Wie viel von den 10 EUR würden Sie senden?</b>')
     AUT = models.LongStringField(label='Geben Sie jeweils eine alternative Verwendungsmöglichkeit <b>pro Zeile</b> an.', blank=True, max_length=800)
     AUT2 = models.LongStringField(label='Geben Sie jeweils eine alternative Verwendungsmöglichkeit <b>pro Zeile</b> an.', blank=True, max_length=800)
+    quality_score = models.IntegerField(initial=0)
 
 class Model:
     def __init__(player, model="vectors_german.txt.gz", dictionary="vocab_german.txt", pattern="^[a-z][a-z-]*[a-z]$"):
@@ -424,26 +426,29 @@ def creating_session(subsession: Subsession):
 
 def validate_ideas(player, ideas):
     stem_words = C.STEM_WORDS[player.round_number - 1]     
-    with open("wordlist-german.txt", 'r') as file:
-        wordlist = set(file.read().split())
+    wordlist = set()
+    with open("vocab_german.txt", 'r', encoding = 'utf-8') as file:
+        for line in file:
+            words = line.strip().split()
+            wordlist.update(words)
     special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}                    
     occurrences = {}
     if len(ideas) > 0:
+        ideas_low = [idea.translate(special_char_map).lower() for idea in ideas]
         for i in range(len(ideas)): 
             if ideas[i] != '':
-                ideas[i] = ideas[i].translate(special_char_map).lower()
                 if ' ' in ideas[i] and re.search(r'\b\w+\s+\w+\b', ideas[i]):
                     ideas[i] = 'false'
                 if ' ' in ideas[i]:
                     ideas[i] = ideas[i].replace(' ', '')
                 for j in range(len(stem_words)):
-                    if stem_words[j] == ideas[i]:
+                    if stem_words[j] in ideas_low[i]:
                         ideas[i] = 'false'
-                if re.search(r"[^a-zA-Z0-9\s]", ideas[i]):
-                    ideas[i] = 'false'  
-                if ideas[i] not in wordlist:
-                    ideas[i] = 'false'
+                if re.search(r"[^a-zA-Z0-9\s]", ideas_low[i]):
+                    ideas[i] = 'false'                 
                 if bool(re.search(r'\d',ideas[i])):
+                    ideas[i] = 'false'
+                if ideas[i].lower() not in wordlist:
                     ideas[i] = 'false'
                 if ideas[i] != 'false':
                     if ideas[i] in occurrences:
@@ -492,13 +497,6 @@ class Round(Page):
     def vars_for_template(player):
         round_number = player.round_number 
         remaining_rounds = C.NUM_ROUNDS - round_number 
-        group = player.group
-        # get payoff from last round
-        if round_number > 1:
-            last_round = group.in_round(round_number - 1)
-            group.payoff = last_round.payoff
-            group.quantity = last_round.quantity
-            group.originality = last_round.originality
         return dict(round_number = round_number, remaining_rounds = remaining_rounds) 
     
 class Generation_Page(Page):
@@ -724,13 +722,12 @@ class Guess_Page1(Page):
         return player.player_role == 'Ratender'
     
     def vars_for_template(player):  
-        mystery_word = C.MYSTERY_WORDS[player.round_number - 1].lower()
         hint_groups = [g for g in player.subsession.get_groups() if g.get_players()[0].player_role == 'Hinweisgebende']
         index = (player.id_in_group - 1 + player.round_number - 1) % len(hint_groups)
         vote_group = hint_groups[index].get_players()[0].vote_group
         player.vote_group = vote_group
         player.group_number_guess = hint_groups[index].id_in_subsession
-        return dict(vote_group=vote_group, mystery_word = mystery_word)
+        return dict(vote_group=vote_group)
     
     form_model = 'player'
     form_fields = ['guess1'] 
@@ -741,8 +738,9 @@ class Guess_Page1(Page):
             player.correct_guess1 = False
         else:
             special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
-            player.guess1 = player.guess1.lower().translate(special_char_map) 
-            if player.guess1 == C.MYSTERY_WORDS[player.round_number - 1].lower():
+            if ' ' in player.guess1:
+                player.guess1 = player.guess1.replace(' ', '')
+            if player.guess1.lower().translate(special_char_map)  == C.MYSTERY_WORDS[player.round_number - 1].lower():
                 player.correct_guess1 = True
             else:
                 player.correct_guess1 = False
@@ -754,8 +752,7 @@ class Guess_Page2(Page):
     
     def vars_for_template(player):  
         vote_group = player.vote_group
-        mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
-        return dict(vote_group=vote_group, mystery_word = mystery_word)
+        return dict(vote_group=vote_group)
     
     form_model = 'player'
     form_fields = ['guess2'] 
@@ -766,8 +763,9 @@ class Guess_Page2(Page):
             player.correct_guess2 = False
         else:
             special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
-            player.guess2 = player.guess2.lower().translate(special_char_map) 
-            if player.guess2 == C.MYSTERY_WORDS[player.round_number - 1].lower():
+            if ' ' in player.guess2:
+                player.guess2 = player.guess2.replace(' ', '')
+            if player.guess2.lower().translate(special_char_map)  == C.MYSTERY_WORDS[player.round_number - 1].lower():
                 player.correct_guess2 = True
             else:
                 player.correct_guess2 = False
@@ -779,8 +777,7 @@ class Guess_Page3(Page):
     
     def vars_for_template(player):  
         vote_group = player.vote_group
-        mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
-        return dict(vote_group=vote_group, mystery_word = mystery_word)
+        return dict(vote_group=vote_group)
     
     form_model = 'player'
     form_fields = ['guess3'] 
@@ -791,8 +788,9 @@ class Guess_Page3(Page):
             player.correct_guess3 = False
         else:
             special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
-            player.guess3 = player.guess3.lower().translate(special_char_map) 
-            if player.guess3 == C.MYSTERY_WORDS[player.round_number - 1].lower():
+            if ' ' in player.guess3:
+                player.guess3 = player.guess3.replace(' ', '')
+            if player.guess3.lower().translate(special_char_map)  == C.MYSTERY_WORDS[player.round_number - 1].lower():
                 player.correct_guess3 = True
             else:
                 player.correct_guess3 = False
@@ -826,25 +824,24 @@ class Originality_Calculation(Page):
     def is_displayed(player):
         return player.player_role == 'Hinweisgebende' and player.participant.treatment == 4
     def vars_for_template(player):
-        vote_group = player.vote_group
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1].lower()
-        if vote_group != 'Kein gültiges Hinweispaar':
-            with Model() as model:
-                originality_measures = []
-                with ThreadPoolExecutor() as executor:
-                    future = executor.submit(model.calculate_originality, vote_group, mystery_word)
-                    originality_measures.append(future)
-
-                for idx, originality in enumerate(originality_measures, start=1):
-                    originality = future.result()
-                    if originality is not None:
-                        originality = round(originality, 2)
-                    else: 
-                        originality = 0
+        if player.vote_group != 'Kein gültiges Hinweispaar':        
+            vote_group = player.vote_group.lower()
+            for p in player.get_others_in_group():
+                if p.field_maybe_none('originality') is not None:
+                    originality = p.originality
+                else:
+                    with Model() as model:
+                        with ThreadPoolExecutor() as executor:
+                            future = executor.submit(model.calculate_originality, vote_group, mystery_word)
+                            originality = future.result()
+                        if originality is None:
+                            originality = 0
         else:
             originality = 0
-        player.group.originality = originality
-        return dict(vote_group = vote_group, originality = originality)
+        originality = round(originality, 2)
+        player.originality = float(originality) 
+        return dict(vote_group = player.vote_group, originality = originality)
     
 class DecisionConfidence(Page):
     timeout_seconds = 5000
@@ -905,15 +902,25 @@ class Results(Page):
             missing = ''
             while '' in check_invalid:
                 check_invalid.remove('')
+            while '' in pairs:
+                pairs.remove('')
             player.quantity = len(pairs) - len(check_invalid)
-            player.result, player.payoff = calculate_result(player, guesses, mystery_word)
+            player.result, player.score = calculate_result(player, guesses, mystery_word)
             if player.quantity == 0:
                 player.missing = True
-                missing = 'Achtung! Sie haben kein gültiges Hinweispaar abgegeben.'        
-            player.score =  int(player.participant.payoff)
-            player.group.payoff =  player.score 
-            player.group.quantity = player.quantity        
-            return dict (mystery_word = mystery_word, taboo_words = taboo_words, vote_group = player.vote_group, payoff = player.payoff, guess1 = guesses[0], guess2 = guesses[1], guess3 = guesses[2], result = player.result, player_role = player.player_role, missing = missing, invalid = invalid, number_ideas = player.quantity)
+                missing = 'Achtung! Sie haben kein gültiges Hinweispaar abgegeben.'  
+            quality_scores = []
+            originality_scores = []
+            quantity_scores = []
+            for i in range(player.round_number):
+                quality_scores.append(player.in_round(player.round_number - i).score)
+                player.group.quality =  sum(quality_scores)  
+                quantity_scores.append(player.in_round(player.round_number - i).quantity)
+                player.group.quantity = sum(quantity_scores)  
+                if player.participant.treatment == 4: 
+                    originality_scores.append(float(player.in_round(player.round_number - i).originality))
+                    player.group.originality = sum(originality_scores) / player.round_number 
+            return dict (mystery_word = mystery_word, taboo_words = taboo_words, vote_group = player.vote_group, guess1 = guesses[0], guess2 = guesses[1], guess3 = guesses[2], result = player.result, player_role = player.player_role, missing = missing, invalid = invalid, number_ideas = player.quantity)
         else:
             player.guess_missing = False
             guess_missing = ''
@@ -921,10 +928,12 @@ class Results(Page):
             if player.guess1 == 'Kein Tipp gegeben':
                 player.guess_missing = True
                 guess_missing = 'Achtung! Sie haben keinen Tipp abgegeben.'
-            player.result, player.payoff = calculate_result(player, guesses, mystery_word)
-            player.score =  int(player.participant.payoff)
-            player.payoff =  player.score 
-            return dict (mystery_word = mystery_word, taboo_words = taboo_words, vote_group = player.vote_group, payoff = player.payoff, guess1 = guesses[0], guess2 = guesses[1], guess3 = guesses[2], result = player.result, player_role = player.player_role, guess_missing = guess_missing)
+            player.result, player.score = calculate_result(player, guesses, mystery_word)
+            guesser_scores = []
+            for i in range(player.round_number):
+                guesser_scores.append(player.in_round(player.round_number - i).score)
+                player.quality_score= sum(guesser_scores)
+            return dict (mystery_word = mystery_word, taboo_words = taboo_words, vote_group = player.vote_group, guess1 = guesses[0], guess2 = guesses[1], guess3 = guesses[2], result = player.result, player_role = player.player_role, guess_missing = guess_missing)
 
 def get_sorted_scores(groups, attribute):
     scores = [getattr(group, attribute) for group in groups]
@@ -934,6 +943,14 @@ def get_overall_scores(group, attribute):
     subsession = group.subsession
     groups = [g for g in subsession.get_groups() if g.get_players()[0].player_role == 'Hinweisgebende']
     return get_sorted_scores(groups, attribute)
+
+def get_overall_scores2(player, attribute):
+    players = [player] + player.get_others_in_group() 
+    return get_sorted_scores2(players, attribute)
+
+def get_sorted_scores2(players, attribute):
+    scores = [getattr(player, attribute) for player in players]
+    return sorted(scores, reverse=True)
 
 def calculate_rank(score, sorted_scores):
     rank = 0
@@ -1147,37 +1164,46 @@ def creativity_15_error_message(player, value):
     return dimension_error_message(player, value, 14)
     
 class Score(Page):
-    timeout_seconds = 30
+    timeout_seconds = 2000
     def is_displayed(player):
         return player.player_role == 'Hinweisgebende' and player.participant.treatment == 3 and player.round_number	== C.NUM_ROUNDS
     def vars_for_template(player):
-        player.score =  int(player.participant.payoff)
-        overall_score = get_overall_scores(player.group, 'payoff')
-        rank = calculate_rank(player.score, overall_score)
+        overall_score = get_overall_scores(player.group, 'quality')
+        rank = calculate_rank(player.group.quality, overall_score)
         number_groups = len(overall_score)
-        return dict(overall_score = overall_score, score = player.score, rank = rank, number_groups = number_groups)
+        return dict(overall_score = overall_score, score = player.group.quality, rank = rank, number_groups = number_groups)
     
 class Score2(Page):
-    timeout_seconds = 30
+    timeout_seconds = 2000
     def is_displayed(player):
-        return player.player_role == 'Hinweisgebende' and player.participant.treatment == 2 #and player.round_number	== C.NUM_ROUNDS
+        return player.player_role == 'Hinweisgebende' and player.participant.treatment == 2 and player.round_number	== C.NUM_ROUNDS
     def vars_for_template(player):
-        player.quantity = player.group.quantity
         overall_quantity = get_overall_scores(player.group, 'quantity')
-        rank = calculate_rank(player.quantity, overall_quantity)
+        rank = calculate_rank(player.group.quantity, overall_quantity)
         number_groups = len(overall_quantity)
-        return dict(overall_quantity = overall_quantity, quantity = player.quantity, rank = rank, number_groups = number_groups)
+        return dict(overall_quantity = overall_quantity, quantity = player.group.quantity, rank = rank, number_groups = number_groups)
     
 class Score3(Page): 
-    timeout_seconds = 30
+    timeout_seconds = 2000
     def is_displayed(player):
-        return player.player_role == 'Hinweisgebende' and player.participant.treatment == 4 #and player.round_number	== C.NUM_ROUNDS
+        return player.player_role == 'Hinweisgebende' and player.participant.treatment == 4 and player.round_number	== C.NUM_ROUNDS
     def vars_for_template(player):
-        player.originality = player.group.originality
+        originality = round(player.group.originality, 2)
         overall_originality = get_overall_scores(player.group, 'originality')
-        rank = calculate_rank(player.originality, overall_originality)
+        rank = calculate_rank(player.group.originality, overall_originality)
         number_groups = len(overall_originality)
-        return dict(overall_originality = overall_originality, originality = player.originality, rank = rank, number_groups = number_groups)
+        overall_originality = [round(score, 2) for score in overall_originality]
+        return dict(overall_originality = overall_originality, originality = originality, rank = rank, number_groups = number_groups)
+    
+class Score4(Page):
+    timeout_seconds = 2000
+    def is_displayed(player):
+        return player.player_role == 'Ratender' and player.round_number	== C.NUM_ROUNDS
+    def vars_for_template(player):
+        overall_score = get_overall_scores2(player, 'quality_score')
+        rank = calculate_rank(player.quality_score, overall_score)
+        number_groups = len(overall_score)
+        return dict(overall_score = overall_score, score = player.quality_score, rank = rank, number_groups = number_groups)
 
 class TestQuestions(Page):
     template_name = 'experiment/TestQuestions.html'
@@ -1314,4 +1340,4 @@ class ResultsWaitPage(WaitPage):
     body_text = "Bitte warten Sie, bis alle Gruppen ihre Hinweispaare und Tipps abgegeben haben."
     wait_for_all_groups = True
 
-page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, PairCheck, Originality_Calculation, DecisionConfidence, ResultsWaitPage, Results, Usefulness, Originality, Overall_Creativity, Score, Score2, Score3, TrustGame, TestQuestions, IndividualismQuestions, CreativeActivities, Personality, Identification, AUT, DAT, RAT_Instructions, RAT, FinalPage]
+page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, PairCheck, Originality_Calculation, DecisionConfidence, ResultsWaitPage, Results, Usefulness, Originality, Overall_Creativity, Score, Score2, Score3, Score4, TrustGame, TestQuestions, IndividualismQuestions, CreativeActivities, Personality, Identification, AUT, DAT, RAT_Instructions, RAT, FinalPage]

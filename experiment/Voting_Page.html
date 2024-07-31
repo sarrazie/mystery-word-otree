@@ -11,6 +11,7 @@
 <p>Folgende gültige <b>Hinweispaare</b> wurden von Ihnen und Ihren Mitspielenden geschrieben.</p>
 <p>Sie haben nun <b>90 Sekunden</b> Zeit, um sich für ein Hinweispaar zu entscheiden. Wenn eine <b>Mehrheit (mindestens 2 Spielende)</b> für ein Hinweispaar entsteht, wird dieses an den Ratenden übergeben. Andernfalls wird ein Hinweispaar per Zufall ausgewählt.</p>
 <p>Über den <b>Chat</b> könnt Sie sich innerhalb Ihrer Gruppe koordinieren.</p>
+{{ if number_pairs > 0}}
 <table class="table table-striped">
     <tr>
         <th>Auswahl</th>
@@ -25,19 +26,14 @@
     </tr>
     {{ endfor }}
 </table>
-
+{{ else }}
+</br>
+<p><b>Es wurden keine gültigen Hinweispaare von Ihnen und Ihren Mitspielenden geschrieben.</b></p>
+<p>Sie können also nicht über das finale Hinweispaar abstimmen. Bitte warten Sie, bis die anderen Gruppen über ihre Hinweispaare abgestimmt haben.</p>
+</br>
+{{ endif }}
 <h4>Chat</h4>
-{{ chat }}
-
-<script>
-    document.addEventListener("DOMContentLoaded", function (event) {
-        $('.otree-timer__time-left').on('update.countdown', function (event) {
-            if (event.offset.totalSeconds === 15) {
-                $('.otree-timer').show();
-            }
-        });
-    });
-</script>
+{{ chat }}</br>
 </br>
 </br>
 <details>
