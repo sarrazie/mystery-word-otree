@@ -6,7 +6,6 @@ import random
 import numpy as np
 import scipy.spatial.distance
 from concurrent.futures import ThreadPoolExecutor
-from functools import lru_cache
 
 from settings import PARTICIPANT_FIELDS
 
