@@ -1,5 +1,5 @@
 {{ block title }}
-    Letzte Fragen 
+    Fragen 
 {{ endblock }}
 {{ block content }}
 
@@ -19,6 +19,11 @@
     });
 </script>
 </br>
+<p><strong>Demografische Informationen:</strong></p>
+<p> {{formfield 'age'}} </p>
+<p> {{formfield 'gender'}} </p>
+<p> {{formfield 'study'}} </p>
+</br>  
 <p> Inwieweit stimmen Sie jeder der folgenden Aussagen zu beziehungsweise nicht zu? </p>
 <p> <b>Bitte wählen Sie für jede Aussage eine Antwort aus.</b> </p>
 <p><b>1. </b>"Ich genieße es, einzigartig zu sein und mich in vielerlei Hinsicht von anderen zu unterscheiden."</p>
@@ -29,7 +34,7 @@
     {{ endfor }}
     &nbsp; Stimme voll zu
 </p>
-<p><b>2. </b>"Ich bleibe in einer Gruppe, wenn sie mich braucht, auch wenn ich mit der Gruppe nicht zufrieden bin."</p>
+<p><b>2. </b>"Ich sehe mich grundsätzlich als eigenständige Person."</p>
 <p>
     Stimme überhaupt nicht zu &nbsp;
     {{ for choice in form.individualism_2 }}
@@ -37,26 +42,10 @@
     {{ endfor }}
     &nbsp; Stimme voll zu
 </p>
-<p><b>3. </b>"Ich sehe mich grundsätzlich als eigenständige Person."</p>
+<p><b>3. </b>"Ich sehe mich grundsätzlich als Teil eines großen Ganzen."</p>
 <p>
     Stimme überhaupt nicht zu &nbsp;
     {{ for choice in form.individualism_3 }}
-        {{ choice }}
-    {{ endfor }}
-    &nbsp; Stimme voll zu
-</p>
-<p><b>4. </b>"Ich sehe mich grundsätzlich als Teil eines großen Ganzen."</p>
-<p>
-    Stimme überhaupt nicht zu &nbsp;
-    {{ for choice in form.individualism_4 }}
-        {{ choice }}
-    {{ endfor }}
-    &nbsp; Stimme voll zu
-</p>
-<p><b>5. </b>"Ich bin jemand, der eine lebhafte Fantasie hat."</p>
-<p>
-    Stimme überhaupt nicht zu &nbsp;
-    {{ for choice in form.individualism_5 }}
         {{ choice }}
     {{ endfor }}
     &nbsp; Stimme voll zu
