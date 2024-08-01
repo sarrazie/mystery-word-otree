@@ -42,7 +42,7 @@ LANGUAGE_CODE = 'de'
 
 # e.g. EUR, GBP, CNY, JPY
 REAL_WORLD_CURRENCY_CODE = 'EUR'
-USE_POINTS = True
+USE_POINTS = False
 
 ROOMS = [
     dict(name='Players_Room1', display_name='Players Room1', participant_label_file='participant_labels.txt'),

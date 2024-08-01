@@ -26,6 +26,6 @@
     {{ endfor }}   
 </ul>
 <p> Sie belegen damit Platz <b> {{ rank }} </b> von {{ number_groups }} Ratenden. </p>
-<p> Ihre gesamte Auszahlung beträgt somit<b>{{ if rank == 1 }} 20 EUR. {{ elif rank == 2}} 15 EUR. {{ elif rank == 3}} 12 EUR. {{ elif rank == 4 }} 10 EUR. {{ else }} 8 EUR. {{ endif }}</b></p>
+<p> Ihre gesamte Auszahlung beträgt somit <b>{{ payoff }}.</b></p>
 <button class= "otree-btn btn btn-info">Weiter</button>
 {{ endblock }}

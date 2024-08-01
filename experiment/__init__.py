@@ -15,7 +15,7 @@ Ihre App-Beschreibung
 
 class C(BaseConstants):
     NAME_IN_URL = 'mabella_experiment'
-    NUM_ROUNDS = 3
+    NUM_ROUNDS = 2
     MYSTERY_WORDS = ['Raum','Taube', 'Golf', 'Elektrizitaet', 'Ende', 'Sombrero']
     LANGUAGE_CODE = 'de'
     PLAYERS_PER_GROUP = None
@@ -399,10 +399,9 @@ def creating_session(subsession: Subsession):
         hintgiver_groups.append(players[start_index:end_index])
 
     ratender_group = players[num_hintgiver_groups * 3:]
-
     matrix = hintgiver_groups + [ratender_group]
     subsession.set_group_matrix(matrix)
-
+    
     treatment = session.config['treatment']
     ingroup_count = 0
     outgroup_count = 0
@@ -934,37 +933,6 @@ class Results(Page):
                 player.quality_score= sum(guesser_scores)
             return dict (mystery_word = mystery_word, taboo_words = taboo_words, vote_group = player.vote_group, guess1 = guesses[0], guess2 = guesses[1], guess3 = guesses[2], result = player.result, player_role = player.player_role, guess_missing = guess_missing)
 
-def get_sorted_scores(groups, attribute):
-    scores = [getattr(group, attribute) for group in groups]
-    return sorted(scores, reverse=True)
-
-def get_overall_scores(group, attribute):
-    subsession = group.subsession
-    groups = [g for g in subsession.get_groups() if g.get_players()[0].player_role == 'Hinweisgebende']
-    return get_sorted_scores(groups, attribute)
-
-def get_overall_scores2(player, attribute):
-    players = [player] + player.get_others_in_group() 
-    return get_sorted_scores2(players, attribute)
-
-def get_sorted_scores2(players, attribute):
-    scores = [getattr(player, attribute) for player in players]
-    return sorted(scores, reverse=True)
-
-def calculate_rank(score, sorted_scores):
-    rank = 0
-    if score == sorted_scores[0]:
-        rank = 1
-    elif score == sorted_scores[1] and score != sorted_scores[0]:
-        rank = 2
-    elif len(sorted_scores) > 2 and score == sorted_scores[2] and score not in sorted_scores[:2]:
-        rank = 3
-    elif len(sorted_scores) > 3 and score == sorted_scores[3] and score not in sorted_scores[:3]:
-        rank = 4
-    elif len(sorted_scores) > 4 and score == sorted_scores[4] and score not in sorted_scores[:4]:
-        rank = 5
-    return rank
-
 class Usefulness(Page):
     timeout_seconds = 5000
     def is_displayed(player):
@@ -1161,16 +1129,54 @@ def creativity_14_error_message(player, value):
     
 def creativity_15_error_message(player, value):
     return dimension_error_message(player, value, 14)
-    
+
+def get_sorted_scores(groups, attribute):
+    scores = [getattr(group, attribute) for group in groups]
+    return sorted(scores, reverse=True)
+
+def get_overall_scores(group, attribute):
+    subsession = group.subsession
+    groups = [g for g in subsession.get_groups() if g.get_players()[0].player_role == 'Hinweisgebende']
+    return get_sorted_scores(groups, attribute)
+
+def get_overall_scores2(player, attribute):
+    players = [player] + player.get_others_in_group() 
+    return get_sorted_scores2(players, attribute)
+
+def get_sorted_scores2(players, attribute):
+    scores = [getattr(player, attribute) for player in players]
+    return sorted(scores, reverse=True)
+
+def calculate_rank(score, sorted_scores):
+    rank = 1
+    ranks = []
+    for i in range(len(sorted_scores)):
+        if i > 0 and sorted_scores[i] != sorted_scores[i - 1]:
+            rank = len(ranks) + 1
+        ranks.append(rank)
+    return ranks[sorted_scores.index(score)], ranks
+
+def calculate_payoff(rank, ranks):
+    payoffs = {1: 20, 2: 15, 3: 12, 4: 10}
+    rank_count = ranks.count(rank)
+    if rank_count > 1:
+        total_payoff = 0
+        for r in range(rank, rank + rank_count):
+            total_payoff += payoffs.get(r, 8) 
+        return total_payoff / rank_count
+    else:
+        return payoffs.get(rank, 8)
+
 class Score(Page):
     timeout_seconds = 2000
     def is_displayed(player):
         return player.player_role == 'Hinweisgebende' and player.participant.treatment == 3 and player.round_number	== C.NUM_ROUNDS
     def vars_for_template(player):
         overall_score = get_overall_scores(player.group, 'quality')
-        rank = calculate_rank(player.group.quality, overall_score)
+        rank, ranks = calculate_rank(player.group.quality, overall_score)
+        player.payoff = round(calculate_payoff(rank, ranks), 0)
         number_groups = len(overall_score)
-        return dict(overall_score = overall_score, score = player.group.quality, rank = rank, number_groups = number_groups)
+        return dict(overall_score = overall_score, score = player.group.quality, payoff = player.payoff, rank = rank, number_groups = number_groups)
     
 class Score2(Page):
     timeout_seconds = 2000
@@ -1178,9 +1184,10 @@ class Score2(Page):
         return player.player_role == 'Hinweisgebende' and player.participant.treatment == 2 and player.round_number	== C.NUM_ROUNDS
     def vars_for_template(player):
         overall_quantity = get_overall_scores(player.group, 'quantity')
-        rank = calculate_rank(player.group.quantity, overall_quantity)
+        rank, ranks = calculate_rank(player.group.quantity, overall_quantity)
+        player.payoff = round(calculate_payoff(rank, ranks), 0)
         number_groups = len(overall_quantity)
-        return dict(overall_quantity = overall_quantity, quantity = player.group.quantity, rank = rank, number_groups = number_groups)
+        return dict(overall_quantity = overall_quantity, quantity = player.group.quantity, payoff = player.payoff, rank = rank, number_groups = number_groups)
     
 class Score3(Page): 
     timeout_seconds = 2000
@@ -1189,10 +1196,11 @@ class Score3(Page):
     def vars_for_template(player):
         originality = round(player.group.originality, 2)
         overall_originality = get_overall_scores(player.group, 'originality')
-        rank = calculate_rank(player.group.originality, overall_originality)
+        rank, ranks = calculate_rank(player.group.originality, overall_originality)
+        player.payoff = round(calculate_payoff(rank, ranks), 0)
         number_groups = len(overall_originality)
         overall_originality = [round(score, 2) for score in overall_originality]
-        return dict(overall_originality = overall_originality, originality = originality, rank = rank, number_groups = number_groups)
+        return dict(overall_originality = overall_originality, originality = originality, payoff = player.payoff, rank = rank, number_groups = number_groups)
     
 class Score4(Page):
     timeout_seconds = 2000
@@ -1200,9 +1208,10 @@ class Score4(Page):
         return player.player_role == 'Ratender' and player.round_number	== C.NUM_ROUNDS
     def vars_for_template(player):
         overall_score = get_overall_scores2(player, 'quality_score')
-        rank = calculate_rank(player.quality_score, overall_score)
+        rank, ranks = calculate_rank(player.quality_score, overall_score)
+        player.payoff = round(calculate_payoff(rank, ranks), 0)
         number_groups = len(overall_score)
-        return dict(overall_score = overall_score, score = player.quality_score, rank = rank, number_groups = number_groups)
+        return dict(overall_score = overall_score, score = player.quality_score, payoff = player.payoff, rank = rank, number_groups = number_groups)
 
 class TestQuestions(Page):
     template_name = 'experiment/TestQuestions.html'
@@ -1291,7 +1300,10 @@ class TrustGame(Page):
 class FinalPage(Page):
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
-    
+    def vars_for_template(player):
+        if player.player_role == 'Hinweisgebende' and player.participant.treatment == 1:
+            player.payoff = 13
+            
 # WAIT PAGES
 
 class GroupWaitPage(WaitPage):
