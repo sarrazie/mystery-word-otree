@@ -24,33 +24,6 @@
 <p> {{formfield 'gender'}} </p>
 <p> {{formfield 'study'}} </p>
 </br>  
-<p> Inwieweit stimmen Sie jeder der folgenden Aussagen zu beziehungsweise nicht zu? </p>
-<p> <b>Bitte wählen Sie für jede Aussage eine Antwort aus.</b> </p>
-<p><b>1. </b>"Ich genieße es, einzigartig zu sein und mich in vielerlei Hinsicht von anderen zu unterscheiden."</p>
-<p>
-    Stimme überhaupt nicht zu &nbsp;
-    {{ for choice in form.individualism_1 }}
-        {{ choice }}
-    {{ endfor }}
-    &nbsp; Stimme voll zu
-</p>
-<p><b>2. </b>"Ich sehe mich grundsätzlich als eigenständige Person."</p>
-<p>
-    Stimme überhaupt nicht zu &nbsp;
-    {{ for choice in form.individualism_2 }}
-        {{ choice }}
-    {{ endfor }}
-    &nbsp; Stimme voll zu
-</p>
-<p><b>3. </b>"Ich sehe mich grundsätzlich als Teil eines großen Ganzen."</p>
-<p>
-    Stimme überhaupt nicht zu &nbsp;
-    {{ for choice in form.individualism_3 }}
-        {{ choice }}
-    {{ endfor }}
-    &nbsp; Stimme voll zu
-</p>
-</br>
 <p><b>Wählen Sie alle Bereiche aus, bei denen Sie das Gefühl haben, mehr Talent, Begabung oder Training als eine durchschnittliche Person zu haben.</b></p>
 {{ for field in C.ACHIEVEMENTS }}
 <label>
