@@ -1,0 +1,60 @@
+{{ block title }}
+    Fragen 
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 20) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+</br>
+ <p> <b>Vielen Dank,</b> dass Sie am Experiment teilgenommen haben! Jetzt werden Ihnen einige Fragen zum gerade gespielten Experiment gestellt. </p>
+ <p> Bitte beantworten Sie die folgenden <b>Fragen</b> oder geben Sie Ihr <b>Zustimmungsniveau</b> zu den folgenden Aussagen an. </p>
+{{ if player.player_role == 'Hinweisgebende'}}
+{{ formfield 'ideagen1'}}
+{{ formfield 'ideagen2'}}
+{{ formfield 'ideagen3'}}
+{{ formfield 'ideagen4'}}
+{{ formfield 'ideagen5'}}
+{{ formfield 'feedback1'}}
+{{ formfield 'feedback2'}}
+{{ formfield 'feedback3'}}
+{{ formfield 'feedback4'}}
+{{ formfield 'feedback5'}}
+{{ formfield 'feedback6'}}
+{{ formfield 'group1'}}
+{{ formfield 'group2'}}
+{{ formfield 'group3'}}
+{{ formfield 'group4'}}
+{{ formfield 'group5'}}
+{{ formfield 'group6'}}
+{{ formfield 'group7'}}
+{{ formfield 'group8'}}
+{{ formfield 'motivation1'}}
+{{ formfield 'motivation2'}}
+{{ formfield 'motivation3'}}
+{{ formfield 'motivation4'}}
+{{ else }}
+{{ formfield 'guesser1'}}
+{{ formfield 'guesser2'}}
+{{ formfield 'guesser3'}}
+{{ formfield 'guesser4'}}
+{{ formfield 'guesser5'}}
+{{ formfield 'guesser6'}}
+{{ formfield 'guesser7'}}
+{{ endif}}
+</br>
+<button class= "otree-btn btn btn-info">Weiter</button>
+
+{{ endblock }}

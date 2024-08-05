@@ -1,0 +1,66 @@
+{{ block title }}
+    Fragen 
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 20) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+</br>
+<p> Bitte beantworten Sie die folgenden <b>Fragen</b> oder geben Sie Ihr <b>Zustimmungsniveau</b> zu den folgenden Aussagen an. </p>
+{{ formfield 'age' }} 
+{{ formfield 'gender' }} 
+{{ formfield 'study' }} 
+{{ formfield 'german'}}
+</br>
+<p>Stellen Sie sich vor, Sie haben 100 Euro zur Verfügung und können einen beliebigen Teil dieses Betrags in eine Anlage mit einer <b>Erfolgschance von 50%</b> investieren, die im Erfolgsfall das 2,5-fache des investierten Betrags auszahlt; den nicht investierten Betrag können Sie behalten. </p>
+{{ formfield 'risk' }}
+<p>Stellen Sie sich vor, Sie haben 100 Euro zur Verfügung und können einen beliebigen Teil dieses Betrags in eine Anlage mit <b>unbekannter Erfolgschance</b> investieren, die im Erfolgsfall das 2,5-fache des investierten Betrags auszahlt; den nicht investierten Betrag können Sie behalten. </p>
+{{ formfield 'ambiguity' }}
+</br>
+{{ formfield 'creative_self1' }}
+{{ formfield 'creative_self2' }}
+{{ formfield 'creative_self3' }}
+{{ formfield 'creative_self4' }}
+{{ formfield 'creative_self5' }}
+{{ formfield 'cognitive1' }}
+{{ formfield 'cognitive2' }}
+{{ formfield 'cognitive3' }}
+{{ formfield 'cognitive4' }}
+{{ formfield 'cognitive5' }}
+{{ if player.player_role == 'Hinweisgebende'}}
+{{ formfield 'group9' }}
+{{ formfield 'group10' }}
+{{ endif }}
+</br>  
+<p><b>Wählen Sie alle Bereiche aus, bei denen Sie das Gefühl haben, mehr Talent, Begabung oder Training als eine durchschnittliche Person zu haben.</b></p>
+{{ for field in C.ACHIEVEMENTS }}
+<label>
+    <input type="checkbox" name="{{ field }}" value="1">
+    {% if field == "Bildende_Kunst" %}
+        <label> Bildende Kunst</label>
+    {% elif field == "Wissenschaftliche_Entdeckungen" %}
+        <label> Wissenschaftliche Entdeckungen</label>
+    {% elif field == "Theater_und_Film" %}
+        <label> Theater und Film</label>
+    {% else %}
+        <label> {{ field }}</label>
+    {% endif %}
+    <br>
+{{ endfor }} 
+</br>
+<button class= "otree-btn btn btn-info">Weiter</button>
+
+{{ endblock }}
