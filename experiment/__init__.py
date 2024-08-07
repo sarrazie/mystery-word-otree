@@ -57,9 +57,9 @@ class Player(BasePlayer):
     player_role = models.StringField()
     player_role2 = models.StringField()
     incentive = models.IntegerField()
-    understand_1 = models.StringField(choices=[['false', 'Unbegrenzt viele Versuche'],['false', 'Zwei Versuche'],['false', 'Drei Versuche'],['true', 'Nur einen Versuch']], label='<b>Frage 1:</b> Wie viele Versuche hat der Ratende, um das geheime Wort zu erraten?', widget=widgets.RadioSelect)
-    understand_2 = models.StringField(choices=[['false,','Zwei'],['false', 'Drei'],['true', 'Vier'],['false', 'Fünf']], label='<b>Frage 2:</b> Wie viele Spielerinnen und Spieler bilden zusammen eine Gruppe?', widget=widgets.RadioSelect)
-    understand_3= models.StringField(choices=[['true', '10 Euro fix für die Teilnahme an allen Runden'],['false', '5 Euro fix plus 5 Euro Bonus für die meisten generierten Ideen'],['false', '5 Euro fix plus 5 Euro Bonus für die meisten erratenen geheimen Wörter'],['false','5 Euro fix plus 5 Euro Bonus für die originellsten Hinweispaare, die zur richtigen Erratung des Wortes führen']], label='<b>Frage 3:</b> Wie viel Geld können Sie maximal in diesem Experiment verdienen?', widget=widgets.RadioSelect)
+    understand_1 = models.StringField(choices=[['false', 'Unbegrenzt viele Versuche'],['false', 'Zwei Versuche'],['true', 'Drei Versuche'],['false', 'Nur einen Versuch']], label='<b>Frage 1:</b> Wie viele Versuche hat die ratende Person, um das geheime Wort zu erraten?', widget=widgets.RadioSelect)
+    understand_2 = models.StringField(choices=[['false,','Zwei'],['true', 'Drei'],['false', 'Vier'],['false', 'Fünf']], label='<b>Frage 2:</b> Wie viele Spielerinnen und Spieler bilden zusammen eine Gruppe?', widget=widgets.RadioSelect)
+    understand_3= models.StringField(choices=[['true', '13 Euro fix für die Teilnahme an allen Runden'],['false', '5 Euro fix plus bis zu 15 Euro Bonus für die meisten generierten Ideen'],['false', '5 Euro fix plus bis zu 15 Euro Bonus für die meisten erratenen geheimen Wörter'],['false','5 Euro fix plus bis zu 15 Euro Bonus für die originellsten Hinweispaare.']], label='<b>Frage 3:</b> Wie viel Geld können Sie maximal in diesem Experiment verdienen?', widget=widgets.RadioSelect)
     understand_4 = models.StringField(choices=[['false', 'Time'], ['false', 'Zeitpunkt'],['false', 'ist Geld'],['false', 'Zeeeit'],['true', 'keiner der oben genannten Hinweise']], label='<b>Frage 4:</b> Welcher der folgenden Hinweise wäre ein gültiger Hinweis in einem Hinweispaar für das geheime Wort "Zeit"?', widget=widgets.RadioSelect)
     Bildende_Kunst = models.BooleanField(blank=True, initial=False)
     Musik = models.BooleanField(blank=True, initial=False)
@@ -474,14 +474,14 @@ def validate_ideas(player, ideas):
 # PAGES
 
 class Intro(Page):
-    timeout_seconds = 120
+    timeout_seconds = 1000
     def is_displayed(player):
         return player.round_number == 1
 
 class Intro2(Page):
     timeout_seconds = 120
     def is_displayed(player):
-        return player.round_number == 1
+        return player.round_number == 1 and player.player_role == 'Hinweisgebende'
     
 class Rules(Page):
     timeout_seconds = 70
@@ -491,11 +491,11 @@ class Rules(Page):
 class Instructions(Page):
     timeout_seconds = 120
     def is_displayed(player):
-        return player.round_number == 1
+        return player.round_number == 1 and player.player_role == 'Hinweisgebende'
     
 class UnderstandPage(Page):
     template_name = 'experiment/UnderstandPage.html'
-    timeout_seconds = 100
+    timeout_seconds = 1000
     def is_displayed(player):
         return player.round_number == 1
     form_model = 'player'

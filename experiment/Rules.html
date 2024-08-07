@@ -21,20 +21,22 @@
 </br>
 
 <div class="info active">
-<p> Hier finden Sie ein <b>Beispiel</b> für eine gelungene Runde: </b> </p>  
+<p> Hier finden Sie ein <b>Beispiel</b> für eine perfekte Runde: </b> </p>  
 </div>
 <div class="info">
-<p> <b>Geheimwort:</b> <i>Zeit</i> </p>
+<p> <b>Geheimes Wort:</b> <i>Zeit</i> </p>
 </div>
+{{ if player.player_role == "Hinweisgebende" }}
 <div class="info">
 <p> Fünf Tabuwörter, die <b>nicht</b> Bestandteil des Hinweispaars sein dürfen: </p>
 <p><i>Gegenwart, Vergangenheit, Augenblick, Ewigkeit, Stunde</i></p> 
 </div>
+{{ endif }}
 <div class="info">
-<p> Gültiges <b>Hinweispaar</b> der Gruppe: <i>Uhr + Minute</i> </p> 
+<p> Gültiges <b>Hinweispaar</b> einer Gruppe: <i>Uhr + Minute</i> </p> 
 </div>
 <div class="info">
-<p> <b>Vermutung</b> des Ratenden: <i>Zeit</i> </p>
+<p> <b>Erster Rateversuch</b>: <i>Zeit</i> </p>
 </div>
 <div class="info">
 <p> <b><font color="#04B404">Richtige Antwort!</font></b> </p>

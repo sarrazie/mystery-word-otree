@@ -21,24 +21,133 @@
 </br>
 
 <div class="info active">
-<p> Sie wurden <b>zu dritt</b> in Gruppen eingeteilt. Zusammen in Ihrer Gruppe spielen Sie insgesamt <b>6 Runden.</b> </p>  
+{{ if player.player_role == 'Hinweisgebende'}}
+<p>Sie wurden <b>zu dritt</b> in Gruppen eingeteilt.</p>
 </div>
 <div class="info">
-<p> <b><u>Ziel:</u></b> Einer der Spielenden – <i>der Ratende</i> – muss ein geheimes Wort anhand eines Hinweispaars der anderen Spielenden erraten. </p>
-<p> Ein Hinweispaar besteht aus zwei <b>einzelnen Wörtern.</b> </p>
+<p><b><u>Aufgabe:</u></b> Zusammen in Ihrer Gruppe viele originelle Hinweispaare generieren, anhand derer eine Person ein geheimes Wort erraten kann. </p>
+<p>Ein Hinweispaar besteht aus <b>zwei einzelnen Wörtern.</b> Sie spielen insgesamt <b>8 verschiedene geheime Wörter.</b> </p> 
+</div> 
+{{ else }}
+<div class="info active">
+<p> <b><u>1. Aufgabe:</u></b> Anhand eines gegebenen Hinweispaars in maximal <b>drei Versuchen</b> ein geheimes Wort erraten. </p>
+<p>Ein Hinweispaar besteht aus zwei <b>einzelnen Wörtern.</b> Insgesamt spielen Sie <b>8 verschiedene geheime Wörter.</b> </p>  
 </div>
 <div class="info">
-<p> <b>Fünf Tabuwörter</b> werden zu Beginn gezeigt. Diese Wörter dürfen <b>nicht</b> Bestandteil des Hinweispaars sein. </p>
+<p> <b><u>2. Aufgabe:</u></b> Hinweispaare zu jedem geheimen Wort auf ihre Gültigkeit überprüfen und ihre Kreativität bewerten.</p>
+<p> Die Hinweispaare werden <b>von Gruppen in dieser Sitzung erstellt.</b> Sie erhalten in jeder neuen Runde die Hinweispaare einer anderen Gruppe zum Erraten sowie zum Bewerten und Überprüfen. </p>
+</div>
+{{ endif }}
+
+{{ if player.player_role == 'Hinweisgebende'}}
+<div class="info">
+<p> <b>Fünf Tabuwörter</b> werden zu Beginn gezeigt. Diese Wörter dürfen <b>nicht</b> Bestandteil der Hinweispaare sein. </p>
 </div>
 <div class="info">
-<p> {{ if player.participant.treatment != 1}} Ihre Auszahlung besteht aus einer Teilnahmegebühr von <b>3,50€</b> und einem Bonus von <b>bis zu 8€,</b> abhängig von Ihrer Leistung. {{ else }} Sie erhalten <b>10€,</b> wenn Sie an allen 6 Runden teilnehmen. {{ endif }} </p>
-<p> {{ if player.participant.treatment == 3}} Sie können den <b>Bonus</b> erhalten, wenn Ihre Gruppe die <b>beste Punktzahl aller Gruppen</b> in dieser Sitzung erreicht. {{ else }} {{ endif }} </p>
-<p> {{ if player.participant.treatment == 2}} Sie können den <b>Bonus</b> erhalten, wenn Ihre Gruppe die <b>meisten Ideen für Hinweispaare</b> in dieser Sitzung entwickelt. {{ else }} {{ endif }} </p>
-<p> {{ if player.participant.treatment == 4}} Sie können den <b>Bonus</b> erhalten, wenn Ihre Gruppe die <b>exklusivsten und einzigartigsten Hinweispaare</b> in dieser Sitzung gibt. {{ else }} {{ endif }} </p>
-{{ formfields }}
-<button class= "otree-btn btn btn-info">Weiter</button>
+<p> Nach jeder Runde erhält eine Person außerhalb der Gruppe ein von der Gruppe ausgewähltes Hinweispaar und hat maximal <b>3 Versuche</b>, um das geheime Wort zu erraten.</p>
+</div>
+<div class="info">
+<p> Darüber hinaus prüft eine weitere Person, ob alle generierten Hinweispaare <b>gültig</b> sind, d.h. in irgendeiner Form mit dem geheimen Wort in Verbindung stehen. Falls nicht, werden diese <b>entfernt.</b> Die Prüfer und Ratenden variieren in jeder Runde. </p>
+</div>
+<div class="info">
+
+<p> <b><u>Auszahlung:</u></b> {{ if player.participant.treatment != 1}} Ihre Auszahlung besteht aus einer Teilnahmegebühr in Höhe von <b>5 EUR</b> und einem Bonus von <b>bis zu 15 EUR,</b> abhängig von der Leistung Ihrer Gruppe <b>im Vergleich zu den 4 anderen Gruppen</b> in dieser Sitzung.  
+    {{ else }} Sie erhalten eine fixe Auszahlung in Höhe von <b>13€,</b> wenn Sie das ganze Experiment abschließen. 
+</br>
+</br>
+    <button class= "otree-btn btn btn-info">Weiter</button>
+</br>
+</br>
+    {{ endif }} </p>
 </div>
 
+{{ if player.participant.treatment == 3}} 
+<div class="info">
+    <p> Erraten des geheimen Worts im 1. Versuch: <b>3 Punkte.</b></p>
+    <p> Erraten des geheimen Worts im 2. Versuch: <b>2 Punkte.</b></p>
+    <p> Erraten des geheimen Worts im 3. Versuch: <b>1 Punkt.</b> </p>
+    <p> Wenn ein geheimes Wort nicht erraten wird, erhalten Sie leider <b>keine Punkte.</b> </p>
+</div>
+<div class="info">
+    <p> Am Ende der Sitzung werden alle Punkte zusammengerechnet und der Bonus danach ausgezahlt, welche Gruppe <b>die meisten Punkte</b> erzielt hat:</p>
+        <p><b>1. Platz</b> von 5 Gruppen in dieser Sitzung &#8594; Bonus: 15 EUR, Auszahlung insgesamt: <b>20 EUR</b></p>
+        <p><b>2. Platz</b> von 5 Gruppen in dieser Sitzung &#8594; Bonus: 10 EUR, Auszahlung insgesamt: <b>15 EUR</b></p>
+        <p><b>3. Platz</b> von 5 Gruppen in dieser Sitzung &#8594; Bonus: 7 EUR, Auszahlung insgesamt: <b>12 EUR</b></p>
+        <p><b>4. Platz</b> von 5 Gruppen in dieser Sitzung &#8594; Bonus: 5 EUR, Auszahlung insgesamt: <b>10 EUR</b></p>
+        <p><b>5. Platz</b> von 5 Gruppen in dieser Sitzung &#8594; Bonus: 3 EUR, Auszahlung insgesamt: <b>8 EUR</b></p>
+    </br>
+        <button class= "otree-btn btn btn-info">Weiter</button>
+    </br>
+    </br>
+    <p><small>Sie erhalten die Auszahlung nur, wenn Sie das ganze Experiment abschließen. Für den unwahrscheinlichen Fall einer Punktegleichheit nach 8 geheimen Wörtern, wird der Mittelwert zwischen den Boni der beiden punktgleichen Teilnehmenden ausgezahlt.</small></p>
+    </div>
+{{ endif }} 
+
+{{ if player.participant.treatment == 2}} 
+<div class="info">
+<p> In jeder Runde erhält Ihre Gruppe einen Punkt für jedes von Ihnen und Ihren Mitspielenden erstellte und gültige Hinweispaar. </p>
+<p> Am Ende der Sitzung werden alle Punkte zusammengerechnet und der Bonus danach ausgezahlt, welche Gruppe die <b>meisten gültigen Hinweispaare</b> über alle Runden hinweg generiert hat:</p>
+</div>
+<div class="info">
+        <p><b>1. Platz</b> von 5 Gruppen in dieser Sitzung &#8594; Bonus: 15 EUR, Auszahlung insgesamt: <b>20 EUR</b></p>
+        <p><b>2. Platz</b> von 5 Gruppen in dieser Sitzung &#8594; Bonus: 10 EUR, Auszahlung insgesamt: <b>15 EUR</b></p>
+        <p><b>3. Platz</b> von 5 Gruppen in dieser Sitzung &#8594; Bonus: 7 EUR, Auszahlung insgesamt: <b>12 EUR</b></p>
+        <p><b>4. Platz</b> von 5 Gruppen in dieser Sitzung &#8594; Bonus: 5 EUR, Auszahlung insgesamt: <b>10 EUR</b></p>
+        <p><b>5. Platz</b> von 5 Gruppen in dieser Sitzung &#8594; Bonus: 3 EUR, Auszahlung insgesamt: <b>8 EUR</b></p>
+    </br>
+        <button class= "otree-btn btn btn-info">Weiter</button>
+    </br>
+    </br>
+    <p><small>Sie erhalten die Auszahlung nur, wenn Sie das ganze Experiment abschließen. Für den unwahrscheinlichen Fall einer Punktegleichheit nach 8 geheimen Wörtern, wird der Mittelwert zwischen den Boni der beiden punktgleichen Teilnehmenden ausgezahlt.</small></p>
+    </div>
+{{ endif }} 
+
+{{ if player.participant.treatment == 4}}
+<div class="info">
+<p> In jeder Runde erhält das von der Gruppe gemeinsam ausgewählte Hinweispaar eine <b>Originalitätsbewertung von einem Algorithmus</b>, der die semantische Distanz berechnet, d.h. wie weit das Hinweispaar in allen Bedeutungen und Verwendungen vom geheimen Wort entfernt ist.</p>
+<p> Am Ende der Sitzung werden die durchschnittlichen Originalitätsbewertungen aller Gruppen berechnet und der Bonus danach ausgezahlt, welche Gruppe die <b>originellsten Hinweispaare</b> abgegeben hat:</p>
+</div>
+<div class="info">
+        <p><b>1. Platz</b> von 5 Gruppen in dieser Sitzung &#8594; Bonus: 15 EUR, Auszahlung insgesamt: <b>20 EUR</b></p>
+        <p><b>2. Platz</b> von 5 Gruppen in dieser Sitzung &#8594; Bonus: 10 EUR, Auszahlung insgesamt: <b>15 EUR</b></p>
+        <p><b>3. Platz</b> von 5 Gruppen in dieser Sitzung &#8594; Bonus: 7 EUR, Auszahlung insgesamt: <b>12 EUR</b></p>
+        <p><b>4. Platz</b> von 5 Gruppen in dieser Sitzung &#8594; Bonus: 5 EUR, Auszahlung insgesamt: <b>10 EUR</b></p>
+        <p><b>5. Platz</b> von 5 Gruppen in dieser Sitzung &#8594; Bonus: 3 EUR, Auszahlung insgesamt: <b>8 EUR</b></p>
+    </br>
+        <button class= "otree-btn btn btn-info">Weiter</button>
+    </br>
+    </br>
+    <p><small>Sie erhalten die Auszahlung nur, wenn Sie das ganze Experiment abschließen. Für den unwahrscheinlichen Fall einer Punktegleichheit nach 8 geheimen Wörtern, wird der Mittelwert zwischen den Boni der beiden punktgleichen Teilnehmenden ausgezahlt.</small></p>
+    </div>
+{{ endif }} 
+{{ else }}
+<div class="info">
+<p> Erraten des geheimen Worts im 1. Versuch: <b>3 Punkte.</b></p>
+<p> Erraten des geheimen Worts im 2. Versuch: <b>2 Punkte.</b></p>
+<p> Erraten des geheimen Worts im 3. Versuch: <b>1 Punkt.</b> </p>
+<p> Wenn Sie ein geheimes Wort nicht erraten, erhalten Sie leider <b>keine Punkte.</b> </p>
+<p> Es muss jeweils exakt das <i>eine</i> geheime Wort sein, zu dem die Gruppen die Hinweispaare generiert haben.</p>
+</div>
+<div class="info">
+<p> <b><u>Auszahlung:</u></b> </p>
+<p> Ihre Auszahlung besteht aus einer Teilnahmegebühr in Höhe von <b>5 EUR</b> und einem Bonus von <b>bis zu 15 EUR,</b> abhängig von Ihrer Leistung in der 1. Aufgabe <b>im Vergleich zu den 4 anderen Ratenden</b> in dieser Sitzung.</p>
+</div>
+<div class="info">
+<p> Am Ende der Sitzung werden alle Punkte zusammengerechnet und der Bonus danach ausgezahlt, wer die meisten Punkte erzielt hat:</p>
+    <p><b>1. Platz</b> von 5 Ratenden in dieser Sitzung &#8594; Bonus: 15 EUR, Auszahlung insgesamt: <b>20 EUR</b></p>
+    <p><b>2. Platz</b> von 5 Ratenden in dieser Sitzung &#8594; Bonus: 10 EUR, Auszahlung insgesamt: <b>15 EUR</b></p>
+    <p><b>3. Platz</b> von 5 Ratenden in dieser Sitzung &#8594; Bonus: 7 EUR, Auszahlung insgesamt: <b>12 EUR</b></p>
+    <p><b>4. Platz</b> von 5 Ratenden in dieser Sitzung &#8594; Bonus: 5 EUR, Auszahlung insgesamt: <b>10 EUR</b></p>
+    <p><b>5. Platz</b> von 5 Ratenden in dieser Sitzung &#8594; Bonus: 3 EUR, Auszahlung insgesamt: <b>8 EUR</b></p>
+</br>
+    <button class= "otree-btn btn btn-info">Weiter</button>
+</br>
+</br>
+<p><small>Sie erhalten die Auszahlung nur, wenn Sie das ganze Experiment abschließen. Für den unwahrscheinlichen Fall einer Punktegleichheit nach 8 geheimen Wörtern, wird der Mittelwert zwischen den Boni der beiden punktgleichen Teilnehmenden ausgezahlt.</small></p>
+</div>
+{{ endif }}
+</p>
+</br>
 <p style="text-align: left">
     <button class="otree-btn btn btn-info" type="button" id="next">Weiter</button>
 </p>
