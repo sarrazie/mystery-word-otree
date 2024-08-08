@@ -32,16 +32,16 @@
     <li> <b>{{ word }}</b></li>
 </ul>
 {{ endfor }}
-<p> Das abgegebene Hinweispaar Ihrer Gruppe: </p>
+<p> Finales Hinweispaar: </p>
 <p><b>{{ vote_group }}</b></p>
 
 {{ if guess1 != '' }}
-<p> Die erste Vermutung des Ratenden: <b>{{ guess1 }}</b> </p> {{ endif }}
+<p> 1. Rateversuch: <b>{{ guess1 }}</b> </p> {{ endif }}
 {{ if guess2 != '' and guess2 != 'Kein Tipp gegeben' }} 
-<p> Die zweite Vermutung des Ratenden: <b>{{ guess2 }}</b> </p> {{ endif }}
+<p> 2. Rateversuch: <b>{{ guess2 }}</b> </p> {{ endif }}
 {{ if guess3 != '' and guess3 != 'Kein Tipp gegeben' }}
-<p> Die dritte Vermutung des Ratenden: <b>{{ guess3 }}</b> </p> {{ endif }}
-{{ if result == 'falsch' }} <p>Diese Vermutung war <b><font color="#FF0000">{{ result }}.</font></b></p> {{ else }}<p>Diese Vermutung war <font color="#04B404"><b>{{ result }}.</b></font></p> {{ endif }}
+<p> 3. Rateversuch: <b>{{ guess3 }}</b> </p> {{ endif }}
+{{ if result == 'falsch' }} <p>Der Rateversuch war <b><font color="#FF0000">{{ result }}.</font></b></p> {{ else }}<p>Der Rateversuch war <font color="#04B404"><b>{{ result }}.</b></font></p> {{ endif }}
 
 <button class= "otree-btn btn btn-info">Weiter</button>
 {{ endblock }}

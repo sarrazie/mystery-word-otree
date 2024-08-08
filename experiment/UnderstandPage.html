@@ -20,7 +20,25 @@
 </script>
 </br>
  <p> Bitte beantworten Sie die folgenden <b>Fragen</b>. </p>
-{{formfields}}
+{{ if player.player_role == 'Hinweisgebende'}}
+{{ formfield 'understandHin_1' }}
+{{ formfield 'understandHin_2' }}
+{{ formfield 'understandHin_3' }}
+{{ if player.participant.treatment == 1 }}
+{{ formfield 'understandHin_4Control' }}
+{{ elif player.participant.treatment == 2 }}
+{{ formfield 'understandHin_4Quantity' }}
+{{ elif player.participant.treatment == 3 }}
+{{ formfield 'understandHin_4Quality' }}
+{{ else}}
+{{ formfield 'understandHin_4Originality'}}
+{{ endif }}
+{{ else }}
+{{ formfield 'understandRat_1' }}
+{{ formfield 'understandRat_2' }}
+{{ formfield 'understandRat_3' }}
+{{ endif }}
+
 </br>
 <button class= "otree-btn btn btn-info">Weiter</button>
 </br>
@@ -44,4 +62,6 @@
         <li> <b>2. Aufgabe:</b> Hinweispaare zu jedem geheimen Wort auf ihre Gültigkeit überprüfen und ihre Kreativität bewerten.</li>
         <li>Es muss jeweils exakt das <i>eine</i> geheime Wort sein, zu dem die Gruppen die Hinweispaare generiert haben.</li> 
     </ul>
+</details>
+{{ endif }}
 {{ endblock }}
