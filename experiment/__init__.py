@@ -355,16 +355,18 @@ class Player(BasePlayer):
     group7 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>18. </b>Alle Gruppenmitglieder haben sich angestrengt.', widget=widgets.RadioSelectHorizontal, blank=True)
     group8 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>19. </b>Alle Gruppenmitglieder haben gleich viel beigetragen.', widget=widgets.RadioSelectHorizontal, blank=True)
     motivation1 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>20. </b>Mir hat die Arbeit an der Aufgabe Spaß gemacht.', widget=widgets.RadioSelectHorizontal, blank=True)
-    motivation2 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>21. </b>Ich war sehr gestresst.', widget=widgets.RadioSelectHorizontal, blank=True)
+    motivation2 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>21. </b>Ich war sehr gestresst bei der Aufgabe.', widget=widgets.RadioSelectHorizontal, blank=True)
     motivation3 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>22. </b>Der Wettkampf mit den anderen Gruppen hat mich sehr motiviert.', widget=widgets.RadioSelectHorizontal, blank=True)
     motivation4 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>23. </b>Die Bonuszahlung hat mich sehr motiviert.', widget=widgets.RadioSelectHorizontal, blank=True)    
     guesser1 = models.LongStringField(label='<b>1. </b>Welche Strategie haben Sie beim Raten verfolgt?', initial = '', max_length=500, blank=True)
     guesser2 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>2. </b>Es fiel mir schwer, Antworten auf Basis der Hinweispaare zu entwickeln.', widget=widgets.RadioSelectHorizontal, blank=True)
     guesser3 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>3. </b>Ich habe intensiv über meine Antworten nachgedacht.', widget=widgets.RadioSelectHorizontal, blank=True)
-    guesser4 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>4. </b>Mir hat die Aufgabe Spaß gemacht.', widget=widgets.RadioSelectHorizontal, blank=True)
-    guesser5 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>5. </b>Beim Raten war ich sehr gestresst.', widget=widgets.RadioSelectHorizontal, blank=True)
-    guesser6 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>6. </b>Der Wettkampf mit den anderen Ratenden hat mich sehr motiviert.', widget=widgets.RadioSelectHorizontal, blank=True)
-    guesser7 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>7. </b>Die Bonuszahlung hat mich sehr motiviert.', widget=widgets.RadioSelectHorizontal, blank=True)
+    guesser4 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>4. </b>Mir fiel die finale Entscheidung für eine Antwort sehr schwer.', widget=widgets.RadioSelectHorizontal, blank=True)
+    guesser5 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>5. </b>Ich habe oft das erste Wort geantwortet, das mir in den Sinn gekommen ist.', widget=widgets.RadioSelectHorizontal, blank=True)
+    guesser6 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>6. </b>Mir hat die Aufgabe Spaß gemacht.', widget=widgets.RadioSelectHorizontal, blank=True)
+    guesser7 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>7. </b>Beim Raten war ich sehr gestresst.', widget=widgets.RadioSelectHorizontal, blank=True)
+    guesser8 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>8. </b>Der Wettkampf mit den anderen Ratenden hat mich sehr motiviert.', widget=widgets.RadioSelectHorizontal, blank=True)
+    guesser9 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>9. </b>Die Bonuszahlung hat mich sehr motiviert.', widget=widgets.RadioSelectHorizontal, blank=True)
 
 class Model:
     def __init__(player, model="vectors_german.txt.gz", dictionary="vocab_german.txt", pattern="^[a-z][a-z-]*[a-z]$"):
@@ -1253,7 +1255,7 @@ class Questions1(Page):
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
     form_model = 'player'
-    form_fields = ['ideagen1', 'ideagen2', 'ideagen3', 'ideagen4', 'ideagen5', 'feedback1', 'feedback2', 'feedback3', 'feedback4', 'feedback5', 'feedback6', 'group1', 'group2', 'group3', 'group4', 'group5', 'group6', 'group7', 'group8', 'motivation1', 'motivation2', 'motivation3', 'motivation4', 'guesser1', 'guesser2', 'guesser3', 'guesser4', 'guesser5', 'guesser6', 'guesser7']
+    form_fields = ['ideagen1', 'ideagen2', 'ideagen3', 'ideagen4', 'ideagen5', 'feedback1', 'feedback2', 'feedback3', 'feedback4', 'feedback5', 'feedback6', 'group1', 'group2', 'group3', 'group4', 'group5', 'group6', 'group7', 'group8', 'motivation1', 'motivation2', 'motivation3', 'motivation4', 'guesser1', 'guesser2', 'guesser3', 'guesser4', 'guesser5', 'guesser6', 'guesser7', 'guesser8', 'guesser9']
     def error_message(player, values):
         if player.player_role == 'Hinweisgebende':            
             for i in range(1,5):
@@ -1269,7 +1271,7 @@ class Questions1(Page):
                 if values[f'motivation{i}'] == None:
                     return f'Bitte beantworten Sie Frage {i+19}!'
         else:
-            for i in range(2, 8):
+            for i in range(2, 10):
                 if values[f'guesser{i}'] == None:
                     return f'Bitte beantworten Sie Frage {i}!'
 
