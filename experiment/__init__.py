@@ -869,12 +869,13 @@ class Originality_Calculation(Page):
                         with ThreadPoolExecutor() as executor:
                             future = executor.submit(model.calculate_originality, vote_group, mystery_word)
                             originality = future.result()
-                        if originality is None:
-                            originality = 0
         else:
             originality = 0
-        originality = round(originality, 2)
-        player.originality = float(originality) 
+        if originality is not None:
+            originality = round(originality, 2)
+            player.originality = float(originality) 
+        else:
+            player.originality = None
         return dict(vote_group = player.vote_group, originality = originality)
     
 class DecisionConfidence(Page):
@@ -952,8 +953,9 @@ class Results(Page):
                 quantity_scores.append(player.in_round(player.round_number - i).quantity)
                 player.group.quantity = sum(quantity_scores)  
                 if player.participant.treatment == 4: 
-                    originality_scores.append(float(player.in_round(player.round_number - i).originality))
-                    player.group.originality = sum(originality_scores) / player.round_number 
+                    if player.in_round(player.round_number - i).originality is not None:
+                        originality_scores.append(float(player.in_round(player.round_number - i).originality))
+                        player.group.originality = sum(originality_scores) / len(originality_scores) 
             return dict (mystery_word = mystery_word, taboo_words = taboo_words, vote_group = player.vote_group, guess1 = guesses[0], guess2 = guesses[1], guess3 = guesses[2], result = player.result, player_role = player.player_role, missing = missing, invalid = invalid, number_ideas = player.quantity)
         else:
             player.guess_missing = False
