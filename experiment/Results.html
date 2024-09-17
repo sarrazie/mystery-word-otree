@@ -25,7 +25,8 @@
 {{ else}}
 <p> <b><font color="#FF0000">{{ guess_missing }}</font></b> </p>
 {{ endif }}
-<p> {{ if player.participant.treatment == 2 }} {{ if player.player_role == 'Hinweisgebende' }} Sie haben {{ number_ideas }} <b>gültige</b> Hinweispaare eingereicht. {{ else }} {{ endif }} {{ else }} {{ endif }}</p>
+<p> {{ if player.participant.treatment == 2 }} {{ if player.player_role == 'Hinweisgebende' }} Ihre Gruppe hat in dieser Runde <b>{{ number_ideas }}</b> gültige Hinweispaare eingereicht. {{ else }} {{ endif }} {{ else }} {{ endif }}</p>
+<p> {{ if player.participant.treatment == 3 }} {{ if player.player_role == 'Hinweisgebende' }} Ihre Gruppe hat in dieser Runde <b>{{ player.score }}</b> Punkte gesammelt. {{ else }} {{ endif }} {{ else }} {{ endif }}</p>
 <p> Geheimes Wort: <b>{{ mystery_word }}</b> </p>
 <p> Tabuwörter: {{ for word in taboo_words }} </p>
 <ul>
@@ -41,7 +42,6 @@
 <p> 2. Rateversuch: <b>{{ guess2 }}</b> </p> {{ endif }}
 {{ if guess3 != '' and guess3 != 'Kein Tipp gegeben' }}
 <p> 3. Rateversuch: <b>{{ guess3 }}</b> </p> {{ endif }}
-{{ if result == 'falsch' }} <p>Der Rateversuch war <b><font color="#FF0000">{{ result }}.</font></b></p> {{ else }}<p>Der Rateversuch war <font color="#04B404"><b>{{ result }}.</b></font></p> {{ endif }}
-
+{{ if result == 'falsch' or result == 'ungültig' }} <p>Der Rateversuch war <b><font color="#FF0000">{{ result }}.</font></b></p> {{ else }}<p>Der Rateversuch war <font color="#04B404"><b>{{ result }}.</b></font></p> {{ endif }}
 <button class= "otree-btn btn btn-info">Weiter</button>
 {{ endblock }}

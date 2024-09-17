@@ -857,27 +857,44 @@ class Originality_Calculation(Page):
     timeout_seconds = 5000
     def is_displayed(player):
         return player.player_role == 'Hinweisgebende' and player.participant.treatment == 4
-    def vars_for_template(player):
-        mystery_word = C.MYSTERY_WORDS[player.round_number - 1].lower()
-        if player.vote_group != 'Kein gültiges Hinweispaar':        
+
+    @staticmethod
+    def live_method(player, data):
+        if data.get('action') == 'get_vote_group':
+            vote_group = player.vote_group.lower() if player.vote_group else 'kein gültiges hinweispaar'
+            rater = next((p for p in player.subsession.get_players() if p.player_role == 'Ratender' and p.group_number_check == player.group.id_in_subsession), None)
+            pairs = player.pairsafter.split(', ')
+            check_invalid = []
+            if rater is not None:
+                for i in range(len(pairs)):
+                    attr_name = f"check_invalid_{i+1}"  
+                    attr_value = getattr(rater, attr_name, None)  
+                    if attr_value is not None:
+                        check_invalid.append(attr_value)
+            if vote_group in check_invalid:
+                vote_group = 'kein gültiges hinweispaar'
+                player.vote_group = 'Kein gültiges Hinweispaar'
+            return {player.id_in_group: {'vote_group': vote_group}}
+
+        elif data.get('action') == 'calculate_originality':
+            mystery_word = C.MYSTERY_WORDS[player.round_number - 1].lower()
             vote_group = player.vote_group.lower()
-            for p in player.get_others_in_group():
-                if p.field_maybe_none('originality') is not None:
-                    originality = p.originality
-                else:
-                    with Model() as model:
-                        with ThreadPoolExecutor() as executor:
-                            future = executor.submit(model.calculate_originality, vote_group, mystery_word)
-                            originality = future.result()
-        else:
-            originality = 0
-        if originality is not None:
-            originality = round(originality, 2)
-            player.originality = float(originality) 
-        else:
-            player.originality = None
-        return dict(vote_group = player.vote_group, originality = originality)
-    
+
+            if vote_group != 'kein gültiges hinweispaar':
+                with Model() as model:
+                    with ThreadPoolExecutor() as executor:
+                        future = executor.submit(model.calculate_originality, vote_group, mystery_word)
+                        originality = future.result()
+                        originality = float(originality)
+                        player.originality = originality 
+                        originality = round(originality, 2) 
+                        return {player.id_in_group: {'originality': originality}}
+            else:
+                originality = 0.0
+                player.originality = float(originality)
+                return {player.id_in_group: {'originality': originality}}
+        return {}
+
 class DecisionConfidence(Page):
     timeout_seconds = 5000
     def is_displayed(player):
@@ -910,17 +927,11 @@ class Results(Page):
                 return 'richtig', 1
             else:
                 return 'falsch', 0
-        
+            
         if player.player_role == 'Hinweisgebende':
             vote_group = [p.vote_group for p in player.get_others_in_group()]
             while '' in vote_group:
                 vote_group.remove('')
-            invalid = ''              
-            player.invalid = False
-            vote_group = vote_group[0]
-            if vote_group == 'Kein gültiges Hinweispaar':
-                player.invalid = True
-                invalid = 'Achtung! Das Hinweispaar Ihrer Gruppe war ungültig.'
             pairs = player.pairsafter.split(', ')
             check_invalid = []
             if guesser is not None:
@@ -940,7 +951,17 @@ class Results(Page):
             while '' in pairs:
                 pairs.remove('')
             player.quantity = len(pairs) - len(check_invalid)
+            vote_group = vote_group[0]
+            if vote_group in check_invalid:
+                vote_group = 'Kein gültiges Hinweispaar'
+            invalid = ''              
+            player.invalid = False
             player.result, player.score = calculate_result(player, guesses, mystery_word)
+            if vote_group == 'Kein gültiges Hinweispaar':
+                player.invalid = True
+                invalid = 'Achtung! Das Hinweispaar Ihrer Gruppe war ungültig.'
+                player.result = 'ungültig'
+                player.score = 0
             if player.quantity == 0:
                 player.missing = True
                 missing = 'Achtung! Sie haben kein gültiges Hinweispaar abgegeben.'  
@@ -953,7 +974,7 @@ class Results(Page):
                 quantity_scores.append(player.in_round(player.round_number - i).quantity)
                 player.group.quantity = sum(quantity_scores)  
                 if player.participant.treatment == 4: 
-                    if player.in_round(player.round_number - i).originality is not None:
+                    if player.in_round(player.round_number - i).field_maybe_none('originality') is not None:
                         originality_scores.append(float(player.in_round(player.round_number - i).originality))
                         player.group.originality = sum(originality_scores) / len(originality_scores) 
             return dict (mystery_word = mystery_word, taboo_words = taboo_words, vote_group = player.vote_group, guess1 = guesses[0], guess2 = guesses[1], guess3 = guesses[2], result = player.result, player_role = player.player_role, missing = missing, invalid = invalid, number_ideas = player.quantity)
@@ -1397,7 +1418,7 @@ class GuesserWaitPage(WaitPage):
     title_text = "Sie können bald das geheime Wort erraten!"
     body_text = "Bitte warten Sie, bis die Gruppen ihre Hinweispaare generiert haben. Dies kann einige Minuten dauern."
     def is_displayed(player): 
-        return player.player_role == 'Ratender'
+        return player.player_role == 'Ratender'   
     wait_for_all_groups = True    
    
 class ResultsWaitPage(WaitPage):
@@ -1405,4 +1426,4 @@ class ResultsWaitPage(WaitPage):
     body_text = "Bitte warten Sie, bis alle Gruppen und alle ratenden Personen die Runde abgeschlossen haben."
     wait_for_all_groups = True
 
-page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, PairCheck, Originality_Calculation, DecisionConfidence, ResultsWaitPage, Results, Usefulness, Originality, Overall_Creativity, Score, Score2, Score3, Score4, TrustGame, Questions1, Identification, Questions2, CreativeActivities, AUT, DAT, RAT_Instructions, RAT, FinalPage]
+page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, DecisionConfidence, PairCheck, ResultsWaitPage, Originality_Calculation, Results, Usefulness, Originality, Overall_Creativity, Score, Score2, Score3, Score4, TrustGame, Questions1, Identification, Questions2, CreativeActivities, AUT, DAT, RAT_Instructions, RAT, FinalPage]
