@@ -311,7 +311,7 @@ class Player(BasePlayer):
     number_pairs_after = models.IntegerField()
     circle_overlap = models.FloatField(label="Overlap Percentage",blank=True)
     explanation = models.LongStringField(label='<b>6. </b>Bitte beschreiben Sie, warum sich Ihre Gruppe final für dieses Hinweispaar entschieden hat. (optional)', blank=True, max_length=500)
-    subjective_originality = models.IntegerField(choices=[0, 1, 2, 3 ,4, 5, 6, 7, 8, 9, 10],label = '<b>4. </b>Bitte bewerten Sie ihr finales Hinweispaar auf einer Skala von 0 bis 10, wie <b>originell</b> Sie es finden. <br> (0 = überhaupt nicht originell, 10 = sehr originell)', widget=widgets.RadioSelectHorizontal, blank= False)
+    subjective_originality = models.IntegerField(choices=[0, 1, 2, 3 ,4, 5, 6, 7, 8, 9, 10],label = '<b>4. </b>Bitte bewerten Sie ihr finales Hinweispaar auf einer Skala von 0 bis 10, wie <b>originell und neu</b> Sie es finden. <br> (0 = überhaupt nicht originell, 10 = sehr originell)', widget=widgets.RadioSelectHorizontal, blank= False)
     subjective_quality = models.IntegerField(choices=[0, 1, 2, 3 ,4, 5, 6, 7, 8, 9, 10,],label = '<b>5. </b>Bitte bewerten Sie ihr finales Hinweispaar auf einer Skala von 0 bis 10, wie <b>nützlich</b> es zur Erratung des geheimen Wortes ist. <br> (0 = überhaupt nicht nützlich, 10 = sehr nützlich)', widget=widgets.RadioSelectHorizontal, blank= False)
     rat1 = models.StringField(label= '', initial='', blank=True, max_length=18)
     rat2 = models.StringField(label= '', initial='', blank=True, max_length=18)
