@@ -436,7 +436,7 @@ class Model:
     def __enter__(player):
         return player
 
-    def __exit__(self, exc_type, exc_value, traceback):
+    def __exit__(player, exc_type, exc_value, traceback):
         pass
 
 def creating_session(subsession: Subsession):
