@@ -1,7 +1,7 @@
 from otree.api import *
 import re
 import ast
-import gzip
+#import gzip
 import random
 import numpy as np
 import scipy.spatial.distance
@@ -410,11 +410,19 @@ class Player(BasePlayer):
 #         pass
 
 class Model:
+    _instance = None
+    
+    def __new__(cls, *args, **kwargs):
+        if cls._instance is None:
+            cls._instance = super(Model, cls).__new__(cls)
+        return cls._instance
+ 
     def __init__(player, model='cc.de.300.bin'):
-        player.model_file = model
-        print(f'Loading FastText model from {player.model_file}...')
-        player.model = fasttext.load_model(player.model_file)
-        print('Model loaded successfully.')
+        if not hasattr(player, 'model'):  # Lade das Modell nur, wenn es noch nicht geladen wurde
+            player.model_file = model
+            print(f'Loading FastText model from {player.model_file}...')
+            player.model = fasttext.load_model(player.model_file)
+            print('Model loaded successfully.')
 
     def get_vector(player, word):
         return player.model.get_word_vector(word)
@@ -433,11 +441,7 @@ class Model:
             return (dist_1 + dist_2) / 2
         return None
 
-    def __enter__(player):
-        return player
-
-    def __exit__(player, exc_type, exc_value, traceback):
-        pass
+model_instance = Model()  
 
 def creating_session(subsession: Subsession):
     session = subsession.session
@@ -912,14 +916,14 @@ class Originality_Calculation(Page):
             vote_group = player.vote_group.lower()
 
             if vote_group != 'kein gültiges hinweispaar':
-                with Model() as model:
-                    with ThreadPoolExecutor() as executor:
-                        future = executor.submit(model.calculate_originality, vote_group, mystery_word)
-                        originality = future.result()
-                        originality = float(originality)
-                        player.originality = originality 
-                        originality = round(originality, 2) 
-                        return {player.id_in_group: {'originality': originality}}
+                model = model_instance                          # with Model() as model:
+                with ThreadPoolExecutor() as executor:
+                    future = executor.submit(model.calculate_originality, vote_group, mystery_word)
+                    originality = future.result()
+                    originality = float(originality)
+                    player.originality = originality 
+                    originality = round(originality, 2) 
+                    return {player.id_in_group: {'originality': originality}}
             else:
                 originality = 0.0
                 player.originality = float(originality)
@@ -1457,4 +1461,4 @@ class ResultsWaitPage(WaitPage):
     body_text = "Bitte warten Sie, bis alle Gruppen und alle ratenden Personen die Runde abgeschlossen haben."
     wait_for_all_groups = True
 
-page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, DecisionConfidence, PairCheck, ResultsWaitPage, Originality_Calculation, Results, Usefulness, Originality, Overall_Creativity, Score, Score2, Score3, Score4, TrustGame, Questions1, Identification, Questions2, CreativeActivities, AUT, DAT, RAT_Instructions, RAT, FinalPage]
+page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, DecisionConfidence, PairCheck, Originality_Calculation, ResultsWaitPage, Results, Usefulness, Originality, Overall_Creativity, Score, Score2, Score3, Score4, TrustGame, Questions1, Identification, Questions2, CreativeActivities, AUT, DAT, RAT_Instructions, RAT, FinalPage]
