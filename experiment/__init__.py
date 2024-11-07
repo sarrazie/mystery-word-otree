@@ -483,29 +483,40 @@ def creating_session(subsession: Subsession):
 def validate_ideas(player, ideas):
     stem_words = C.STEM_WORDS[player.round_number - 1]     
     wordlist = set()
-    with open("vocab_german.txt", 'r', encoding = 'utf-8') as file:
+    with open("fasttext_words_de.txt", 'r', encoding = 'utf-8') as file:
         for line in file:
-            words = line.strip().split()
-            wordlist.update(words)
-    special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}                    
+            words = line.strip().split()      
+            wordlist.update(words)                                  
     occurrences = {}
     if len(ideas) > 0:
-        ideas_low = [idea.translate(special_char_map).lower() for idea in ideas]
+        ideas_low = [idea.lower() for idea in ideas]
         for i in range(len(ideas)): 
             if ideas[i] != '':
-                if ' ' in ideas[i] and re.search(r'\b\w+\s+\w+\b', ideas[i]):
-                    ideas[i] = 'false'
-                if ' ' in ideas[i]:
-                    ideas[i] = ideas[i].replace(' ', '')
+                # Check if the idea is a taboo word or a modification of the mystery word
                 for j in range(len(stem_words)):
                     if stem_words[j] in ideas_low[i]:
                         ideas[i] = 'false'
-                if re.search(r"[^a-zA-Z0-9\s]", ideas_low[i]):
-                    ideas[i] = 'false'                 
-                if bool(re.search(r'\d',ideas[i])):
+                    continue
+                # Check if there's a space-separated word
+                if ' ' in ideas[i] and re.search(r'\b\w+\s+\w+\b', ideas[i]):
                     ideas[i] = 'false'
+                    continue
+                 # Remove spaces from individual words (single words shouldn't contain spaces)
+                if ' ' in ideas[i]:
+                    ideas[i] = ideas[i].replace(' ', '')
+                # Check for special characters
+                if re.search(r"[^a-zA-Z0-9äöüÄÖÜß\s]", ideas_low[i]):
+                    ideas[i] = 'false'
+                    continue
+                # Check for numbers
+                if bool(re.search(r'\d', ideas[i])):
+                    ideas[i] = 'false'
+                    continue
+                # Check if the word is not in the word list
                 if ideas[i].lower() not in wordlist:
                     ideas[i] = 'false'
+                    continue
+                # Check for duplicate occurrences
                 if ideas[i] != 'false':
                     if ideas[i] in occurrences:
                         occurrences[ideas[i]] += 1
@@ -896,7 +907,7 @@ class Originality_Calculation(Page):
     @staticmethod
     def live_method(player, data):
         if data.get('action') == 'get_vote_group':
-            vote_group = player.vote_group.lower() if player.vote_group else 'kein gültiges hinweispaar'
+            vote_group = player.vote_group if player.vote_group else 'kein gültiges hinweispaar'
             rater = next((p for p in player.subsession.get_players() if p.player_role == 'Ratender' and p.group_number_check == player.group.id_in_subsession), None)
             pairs = player.pairsafter.split(', ')
             check_invalid = []
@@ -1461,4 +1472,4 @@ class ResultsWaitPage(WaitPage):
     body_text = "Bitte warten Sie, bis alle Gruppen und alle ratenden Personen die Runde abgeschlossen haben."
     wait_for_all_groups = True
 
-page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, DecisionConfidence, PairCheck, Originality_Calculation, ResultsWaitPage, Results, Usefulness, Originality, Overall_Creativity, Score, Score2, Score3, Score4, TrustGame, Questions1, Identification, Questions2, CreativeActivities, AUT, DAT, RAT_Instructions, RAT, FinalPage]
+page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, DecisionConfidence, PairCheck, ResultsWaitPage, Originality_Calculation, Results, Usefulness, Originality, Overall_Creativity, Score, Score2, Score3, Score4, TrustGame, Questions1, Identification, Questions2, CreativeActivities, AUT, DAT, RAT_Instructions, RAT, FinalPage]
