@@ -329,7 +329,7 @@ class Player(BasePlayer):
     creative_self3 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=False, label = '<b> 9. </b>Es ist mir wichtig, eine kreative Person zu sein.')
     creative_self4 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=False, label = '<b> 10. </b>Ich weiß, dass ich auch komplizierte Probleme effizient lösen kann.')
     creative_self5 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=False, label = '<b> 11. </b>Ich bin gut darin, kreative Lösungen für Probleme zu finden.')
-    trust_game = models.IntegerField(max=10, min=0, blank=False, label= '<b>Wie viel von den 10 EUR würden Sie senden?</b>')
+    dictator_game = models.CurrencyField(max=10, min=0, blank=False, label= '<b>Wie viel von Ihren 10 € möchten Sie an den Empfänger überweisen?</b>')
     AUT = models.LongStringField(label='Geben Sie jeweils eine alternative Verwendungsmöglichkeit <b>pro Zeile</b> an.', blank=True, max_length=800)
     AUT2 = models.LongStringField(label='Geben Sie jeweils eine alternative Verwendungsmöglichkeit <b>pro Zeile</b> an.', blank=True, max_length=800)
     quality_score = models.IntegerField(initial=0)
@@ -368,6 +368,9 @@ class Player(BasePlayer):
     guesser7 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>7. </b>Beim Raten war ich sehr gestresst.', widget=widgets.RadioSelectHorizontal, blank=True)
     guesser8 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>8. </b>Der Wettkampf mit den anderen Ratenden hat mich sehr motiviert.', widget=widgets.RadioSelectHorizontal, blank=True)
     guesser9 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>9. </b>Die Bonuszahlung hat mich sehr motiviert.', widget=widgets.RadioSelectHorizontal, blank=True)
+    payment_allocator = models.BooleanField(initial=False)
+    payment_receiver = models.BooleanField(initial=False)
+    payoff_calculated = models.BooleanField(initial=False)
 
 # class Model:
 #     def __init__(player, model="vectors_german.txt.gz", dictionary="vocab_german.txt", pattern="^[a-z][a-z-]*[a-z]$"):
@@ -479,6 +482,24 @@ def creating_session(subsession: Subsession):
                 player.player_role2 = random.choice(['outgroup', 'ingroup'])
         else: 
             player.player_role2 = None
+    hintgiver_players = [player for player in players if player.player_role == 'Hinweisgebende']
+    selected_allocator = random.sample(hintgiver_players, 1)
+    selected_receiver = []
+    for player in players:
+        if player in selected_allocator:
+            player.payment_allocator = True
+        if player.payment_allocator == True: 
+            if player.player_role2 == 'ingroup':
+                ingroup_players = player.get_others_in_group()
+                if ingroup_players:
+                    selected_receiver = random.sample(ingroup_players, 1)  
+            else:
+                outgroup_players = [p for p in hintgiver_players if p.group != player.group]
+                if outgroup_players:
+                    selected_receiver = random.sample(outgroup_players, 1)
+    for player in players:
+        if player in selected_receiver: 
+            player.payment_receiver = True
 
 def validate_ideas(player, ideas):
     stem_words = C.STEM_WORDS[player.round_number - 1]     
@@ -1411,12 +1432,12 @@ class RAT(Page):
     form_model = 'player'
     form_fields = ['rat1', 'rat2', 'rat3', 'rat4', 'rat5', 'rat6', 'rat7', 'rat8', 'rat9', 'rat10']
     
-class TrustGame(Page):
-    timeout_seconds = 60
+class DictatorGame(Page):
+    timeout_seconds = 60000
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS and player.player_role == 'Hinweisgebende' 
     form_model = 'player'
-    form_fields = ['trust_game']
+    form_fields = ['dictator_game']
 
 class FinalPage(Page):
     def is_displayed(player):
@@ -1424,6 +1445,20 @@ class FinalPage(Page):
     def vars_for_template(player):
         if player.player_role == 'Hinweisgebende' and player.participant.treatment == 1:
             player.payoff = 13
+        if player.payment_allocator == 1:
+            allocator_payoff = 10 - player.dictator_game
+        else:
+            allocator_payoff = 0
+        if player.payment_receiver == 1:
+            for p in player.subsession.get_players():
+                if p.payment_allocator == 1:
+                    receiver_payoff = p.dictator_game
+        else:
+            receiver_payoff = 0
+        if player.payoff_calculated == False:
+            player.payoff = player.payoff + receiver_payoff + allocator_payoff
+            player.payoff_calculated = True
+        return dict(allocator_payoff = allocator_payoff, receiver_payoff = receiver_payoff, payoff = player.payoff)
 
 # WAIT PAGES
 
@@ -1472,4 +1507,4 @@ class ResultsWaitPage(WaitPage):
     body_text = "Bitte warten Sie, bis alle Gruppen und alle ratenden Personen die Runde abgeschlossen haben."
     wait_for_all_groups = True
 
-page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, DecisionConfidence, PairCheck, ResultsWaitPage, Originality_Calculation, Results, Usefulness, Originality, Overall_Creativity, Score, Score2, Score3, Score4, TrustGame, Questions1, Identification, Questions2, CreativeActivities, AUT, DAT, RAT_Instructions, RAT, FinalPage]
+page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, DecisionConfidence, PairCheck, ResultsWaitPage, Originality_Calculation, Results, Usefulness, Originality, Overall_Creativity, Score, Score2, Score3, Score4, DictatorGame, Questions1, Identification, Questions2, CreativeActivities, AUT, DAT, RAT_Instructions, RAT, FinalPage]
