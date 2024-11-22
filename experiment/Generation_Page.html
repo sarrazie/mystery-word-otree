@@ -21,13 +21,13 @@
 </br>
 <p> Das <b>Geheimwort</b> in dieser Runde ist: </p>
 <p> <b>{{ mystery_word }}</b> </p>  
-<p> Die fünf Tabuwörter sind: {{ for word in taboo_words }} </p>
+<p> Die drei Tabuwörter sind: {{ for word in taboo_words }} </p>
 <ul>
     <li> <b>{{ word }}</b></li>
 </ul>
 {{ endfor }}
 </br>
-<p> Bitte geben Sie <b>alle</b> Hinweispaare ein, die Ihnen zu diesem Wort einfallen <font color="#FF0000"><b>(ein Hinweis pro Textfeld)</b></font>: </p>
+<p> Bitte geben Sie Hinweispaare ein, die Ihnen zu diesem Wort einfallen <font color="#FF0000"><b>(ein Hinweis pro Textfeld)</b></font>: </p>
 <div style="display: flex; align-items: center;">
     {{ formfield 'Idea1' }} &nbsp; &nbsp; <b> + </b> &nbsp; &nbsp; {{ formfield 'Idea2' }}
 </div>
@@ -64,8 +64,8 @@
     <summary> Zusammenfassung der Regeln </summary>
 </br>
     <ul>    
-        <li> <b><u>Aufgabe:</u></b> Zusammen in Ihrer Gruppe viele originelle Hinweispaare generieren, anhand derer eine Person ein geheimes Wort erraten kann.</li>
-        <li> <b>Ungültige Hinweispaare</b> enthalten Hinweise, die denselben Wortstamm wie das Geheimwort oder wie eins der fünf Tabuwörter haben, eine Übersetzung des Geheimworts sind oder frei erfunden.</li>
+        <li> <b><u>Aufgabe:</u></b> Zusammen in Ihrer Gruppe viele originelle und nützliche Hinweispaare zu einem Begriff generieren.</li>
+        <li> <b>Ungültige Hinweispaare</b> enthalten Hinweise, die denselben Wortstamm wie der Begriff oder wie eins der drei Tabuwörter haben, eine Übersetzung des Begriffs sind oder frei erfunden.</li>
     </ul>  
 </details>
 

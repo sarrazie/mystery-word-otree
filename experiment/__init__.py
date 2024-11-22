@@ -21,12 +21,12 @@ class C(BaseConstants):
     LANGUAGE_CODE = 'de'
     PLAYERS_PER_GROUP = None
     TABOO_WORDS = [
-        ['Hotel', 'Wohnen', 'Zimmer', 'Wand', 'Kueche'],
-        ['Vogel', 'Gurren', 'Fliegen', 'Bote', 'Frieden'],
-        ['Volkswagen', 'Schlaeger', 'Par', 'Birdie', 'Mini'],
-        ['Strom', 'Tesla', 'Edison', 'Spannung', 'Statisch'],
-        ['Finale', 'Schluss', 'Stopp', 'Tot', 'Anfang'],
-        ['Hut', 'Mexiko', 'Kopfbedeckung', 'Mariachi', 'Krempe']
+        ['Hotel', 'Wohnen', 'Zimmer'],
+        ['Vogel', 'Gurren', 'Fliegen'],
+        ['Volkswagen', 'Schlaeger', 'Par'],
+        ['Strom', 'Tesla','Spannung'],
+        ['Finale', 'Schluss','Anfang'],
+        ['Hut', 'Mexiko', 'Kopfbedeckung']
     ]
     STEM_WORDS = [
         ['raum', 'raeum', 'zimmer', 'hotel', 'wohn', 'wand', 'waend', 'kuech', 'koch'], 
@@ -923,7 +923,7 @@ class PairCheck(Page):
 class Originality_Calculation(Page):
     timeout_seconds = 5000
     def is_displayed(player):
-        return player.player_role == 'Hinweisgebende' and player.participant.treatment == 4
+        return player.player_role == 'Hinweisgebende' 
 
     @staticmethod
     def live_method(player, data):
@@ -985,16 +985,16 @@ class Results(Page):
 
         def calculate_result(player, guesses, mystery_word):
             mystery_word_lower = mystery_word.lower()
-            guesses_lower = [guess.lower() for guess in guesses]
+            guesses_lower = [guess.lower() for guess in guesses if guess] 
             if mystery_word_lower == guesses_lower[0]:
                 return 'richtig', 3
-            elif mystery_word_lower == guesses_lower[1]:
+            elif len(guesses_lower) > 1 and mystery_word_lower == guesses_lower[1]:
                 return 'richtig', 2
-            elif mystery_word_lower == guesses_lower[2]:
+            elif len(guesses_lower) > 2 and mystery_word_lower == guesses_lower[2]:
                 return 'richtig', 1
             else:
                 return 'falsch', 0
-            
+
         if player.player_role == 'Hinweisgebende':
             vote_group = [p.vote_group for p in player.get_others_in_group()]
             while '' in vote_group:
@@ -1007,8 +1007,8 @@ class Results(Page):
                 guesses = [None, None, None]
             if rater is not None:
                 for i in range(len(pairs)):
-                    attr_name = f"check_invalid_{i+1}"  
-                    attr_value = getattr(rater, attr_name, None)  
+                    attr_name = f"check_invalid_{i+1}"
+                    attr_value = getattr(rater, attr_name, None)
                     if attr_value is not None:
                         check_invalid.append(attr_value)
             player.missing = False
@@ -1018,10 +1018,11 @@ class Results(Page):
             while '' in pairs:
                 pairs.remove('')
             player.quantity = len(pairs) - len(check_invalid)
-            vote_group = vote_group[0]
+            vote_group = vote_group[0] if vote_group else 'Kein gültiges Hinweispaar'
             if vote_group in check_invalid:
                 vote_group = 'Kein gültiges Hinweispaar'
-            invalid = ''              
+                player.vote_group = 'Kein gültiges Hinweispaar'
+            invalid = ''
             player.invalid = False
             player.result, player.score = calculate_result(player, guesses, mystery_word)
             if vote_group == 'Kein gültiges Hinweispaar':
@@ -1031,20 +1032,38 @@ class Results(Page):
                 player.score = 0
             if player.quantity == 0:
                 player.missing = True
-                missing = 'Achtung! Sie haben kein gültiges Hinweispaar abgegeben.'  
+                missing = 'Achtung! Sie haben kein gültiges Hinweispaar abgegeben.'
+
+            # Berechnung der Originalität
+            originality = 0.0
+            if vote_group != 'Kein gültiges Hinweispaar':
+                mystery_word_lower = mystery_word.lower()
+                vote_group_lower = vote_group.lower()
+                model = model_instance  # with Model() as model:
+                with ThreadPoolExecutor() as executor:
+                    future = executor.submit(model.calculate_originality, vote_group_lower, mystery_word_lower)
+                    originality = future.result()
+                    originality = float(originality)
+                    player.originality = originality
+                originality = round(originality, 2)
+            else:
+                player.originality = originality
+
+            # Scores berechnen
             quality_scores = []
             originality_scores = []
             quantity_scores = []
+
             for i in range(player.round_number):
                 quality_scores.append(player.in_round(player.round_number - i).score)
-                player.group.quality =  sum(quality_scores)  
+                player.group.quality = sum(quality_scores)
                 quantity_scores.append(player.in_round(player.round_number - i).quantity)
-                player.group.quantity = sum(quantity_scores)  
-                if player.participant.treatment == 4: 
-                    if player.in_round(player.round_number - i).field_maybe_none('originality') is not None:
+                player.group.quantity = sum(quantity_scores)
+                if player.in_round(player.round_number - i).field_maybe_none('originality') is not None:
                         originality_scores.append(float(player.in_round(player.round_number - i).originality))
-                        player.group.originality = sum(originality_scores) / len(originality_scores) 
-            return dict (mystery_word = mystery_word, taboo_words = taboo_words, vote_group = player.vote_group, guess1 = guesses[0], guess2 = guesses[1], guess3 = guesses[2], result = player.result, player_role = player.player_role, missing = missing, invalid = invalid, number_ideas = player.quantity)
+                        player.group.originality = sum(originality_scores) / len(originality_scores)
+
+            return dict(mystery_word=mystery_word, taboo_words=taboo_words, vote_group=player.vote_group, missing=missing, invalid=invalid, originality=originality)
         else:
             player.guess_missing = False
             guess_missing = ''
@@ -1056,8 +1075,9 @@ class Results(Page):
             guesser_scores = []
             for i in range(player.round_number):
                 guesser_scores.append(player.in_round(player.round_number - i).score)
-                player.quality_score= sum(guesser_scores)
-            return dict (mystery_word = mystery_word, taboo_words = taboo_words, vote_group = player.vote_group, guess1 = guesses[0], guess2 = guesses[1], guess3 = guesses[2], result = player.result, player_role = player.player_role, guess_missing = guess_missing)
+                player.quality_score = sum(guesser_scores)
+
+            return dict(mystery_word=mystery_word, taboo_words=taboo_words, vote_group=player.vote_group, guess_missing=guess_missing)
 
 class Usefulness(Page):
     timeout_seconds = 5000
@@ -1507,4 +1527,4 @@ class ResultsWaitPage(WaitPage):
     body_text = "Bitte warten Sie, bis alle Gruppen und alle ratenden Personen die Runde abgeschlossen haben."
     wait_for_all_groups = True
 
-page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, DecisionConfidence, PairCheck, ResultsWaitPage, Originality_Calculation, Results, Usefulness, Originality, Overall_Creativity, Score, Score2, Score3, Score4, DictatorGame, Questions1, Identification, Questions2, CreativeActivities, AUT, DAT, RAT_Instructions, RAT, FinalPage]
+page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, DecisionConfidence, PairCheck, ResultsWaitPage, Results, Usefulness, Originality, Overall_Creativity, Score, Score2, Score3, Score4, DictatorGame, Questions1, Identification, Questions2, CreativeActivities, AUT, DAT, RAT_Instructions, RAT, FinalPage]

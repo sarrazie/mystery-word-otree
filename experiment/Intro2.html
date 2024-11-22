@@ -36,24 +36,18 @@
         <p><b>4.</b> Nach Erhalt des Feedbacks hat jedes Gruppenmitglied nochmals Zeit, die eigenen Hinweispaare zu <b>überarbeiten.</b> </p>
 </div>
 <div class="info">
-        <p><b>5.</b> Nun bestimmt die Gruppe gemeinsam, welches <b>eine finale Hinweispaar</b> sie favorisieren und an eine ratende Person weitergeben.</p>
+        <p><b>5.</b> Nun bestimmt die Gruppe gemeinsam, welches <b>eine finale Hinweispaar</b> sie favorisieren für die Nützlichkeits- und Originalitätsbewertung.</p>
         {{ if player.participant.treatment == 1 }}    
         </br>
         <button class= "otree-btn btn btn-info">Weiter</button>
         {{ endif }}
 </div>
-{{ if player.participant.treatment != 1}}
+
 <div class="info">   
-        {{ if player.participant.treatment == 2 }} <p>Der Gruppe wird nach der Runde <b>die Anzahl der gültigen Hinweispaare</b> mitgeteilt.</p>
-        {{ endif }}
-        {{ if player.participant.treatment == 4 }} <p>Der Gruppe wird nach der Runde <b>die Originalität ihres finalen Hinweispaars</b> mitgeteilt.</p>
-        {{ endif }}
-        {{ if player.participant.treatment == 3 }} <p>Der Gruppe wird nach der Runde mitgeteilt, ob und in welchem Versuch die ratende Person <b>das geheime Wort erraten hat</b>.</p>
-        {{ endif }}        
-    </br>
+      <p>Nach der Runde wird Ihnen die Quantitäts-, Originalitäts- und Qualitätsbewertung der abgelaufenen Runde mitgeteilt.</p>       
+</br>
         <button class= "otree-btn btn btn-info">Weiter</button>
 </br>
-{{ endif }}
 </div>
 </br>
 <p style="text-align: left">

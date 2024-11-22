@@ -19,29 +19,24 @@
     });
 </script>
 </br>
-{{ if player_role == 'Hinweisgebende' }}
+{{ if player.player_role == 'Hinweisgebende' }}
 <p> <b><font color="#FF0000">{{ invalid }} </font></b></p>
 <p> <b><font color="#FF0000">{{ missing }}</b></font> </p>
 {{ else}}
 <p> <b><font color="#FF0000">{{ guess_missing }}</font></b> </p>
 {{ endif }}
-<p> {{ if player.participant.treatment == 2 }} {{ if player.player_role == 'Hinweisgebende' }} Ihre Gruppe hat in dieser Runde <b>{{ number_ideas }}</b> gültige Hinweispaare eingereicht. {{ else }} {{ endif }} {{ else }} {{ endif }}</p>
-<p> {{ if player.participant.treatment == 3 }} {{ if player.player_role == 'Hinweisgebende' }} Ihre Gruppe hat in dieser Runde <b>{{ player.score }}</b> Punkte gesammelt. {{ else }} {{ endif }} {{ else }} {{ endif }}</p>
 <p> Geheimes Wort: <b>{{ mystery_word }}</b> </p>
 <p> Tabuwörter: {{ for word in taboo_words }} </p>
 <ul>
     <li> <b>{{ word }}</b></li>
 </ul>
 {{ endfor }}
-<p> Finales Hinweispaar: </p>
-<p><b>{{ vote_group }}</b></p>
-
-{{ if guess1 != '' }}
-<p> 1. Rateversuch: <b>{{ guess1 }}</b> </p> {{ endif }}
-{{ if guess2 != '' and guess2 != 'Kein Tipp gegeben' }} 
-<p> 2. Rateversuch: <b>{{ guess2 }}</b> </p> {{ endif }}
-{{ if guess3 != '' and guess3 != 'Kein Tipp gegeben' }}
-<p> 3. Rateversuch: <b>{{ guess3 }}</b> </p> {{ endif }}
-{{ if result == 'falsch' or result == 'ungültig' }} <p>Der Rateversuch war <b><font color="#FF0000">{{ result }}.</font></b></p> {{ else }}<p>Der Rateversuch war <font color="#04B404"><b>{{ result }}.</b></font></p> {{ endif }}
+<p> Finales Hinweispaar: <b>{{ vote_group }}</b>
+</br>
+<p><b>Bewertung:</b></p>
+<p> {{ if player.player_role == 'Hinweisgebende' }} Ihre Gruppe hat in dieser Runde <b>{{ player.quantity }}</b> gültige(s) Hinweispaar(e) eingereicht. {{ else }} {{ endif }}</p>
+<p> {{ if player.player_role == 'Hinweisgebende' }} Ihre Gruppe hat in dieser Runde inpuncto Nützlichkeit <b>{{ player.score }}</b> Punkt(e) gesammelt . {{ else }} {{ endif }}</p>
+<p> {{ if player.player_role == 'Hinweisgebende' }} Ihre Gruppe hat in dieser Runde auf der Originalitätsskala den Wert <b>{{ originality }}</b> erreicht. {{ else }} {{ endif }}</p>
+</br>
 <button class= "otree-btn btn btn-info">Weiter</button>
 {{ endblock }}
