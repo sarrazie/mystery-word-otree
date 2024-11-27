@@ -7,6 +7,13 @@
     .otree-timer {
         display: none;
     }
+    label {
+    display: block; /* oder inline-block, je nach Design */
+    margin-bottom: 0.5rem; /* Abstand zu den Antwortmöglichkeiten */
+    }
+    div {
+    margin-bottom: 1rem; /* Optional: Abstand zwischen den Blöcken */
+    }
 </style>
 
 <script>
@@ -18,6 +25,7 @@
         });
     });
 </script>
+
 </br>
  <p> <b>Vielen Dank,</b> dass Sie am Experiment teilgenommen haben! Jetzt werden Ihnen einige Fragen zum gerade gespielten Experiment gestellt. </p>
  <p> Bitte beantworten Sie die folgenden <b>Fragen</b> oder geben Sie Ihr <b>Zustimmungsniveau</b> zu den folgenden Aussagen an. </p>
@@ -29,6 +37,7 @@
 {{ formfield 'feedback1'}}
 {{ formfield 'feedback2'}}
 {{ formfield 'feedback3'}}
+{{ formfield 'feedback4'}}
 {{ formfield 'group1'}}
 {{ formfield 'group2'}}
 {{ formfield 'group3'}}
@@ -39,7 +48,24 @@
 {{ formfield 'group8'}}
 {{ formfield 'motivation1'}}
 {{ formfield 'motivation2'}}
+{{ if player.participant.treatment != 1 }}
 {{ formfield 'motivation3'}}
+{{ formfield 'motivation4'}}
+{{ formfield 'group9'}}
+{{ formfield 'group10'}}
+<label>{{ incentives1_label|safe }}</label>
+<div>
+    {{ form.incentives1 }}
+</div>
+<label>{{ incentives2_label|safe }}</label>
+<div>
+    {{ form.incentives2 }}
+</div>
+<label>{{ incentives3_label|safe }}</label>
+<div>
+    {{ form.incentives3 }}
+</div>
+{{ endif }}
 {{ else }}
 {{ formfield 'guesser1'}}
 {{ formfield 'guesser2'}}
@@ -48,6 +74,11 @@
 {{ formfield 'guesser5'}}
 {{ formfield 'guesser6'}}
 {{ formfield 'guesser7'}}
+{{ formfield 'guesser8'}}
+{{ formfield 'guesser9'}}
+{{ formfield 'guesser10'}}
+{{ formfield 'guesser11'}}
+{{ formfield 'guesser12'}}
 {{ endif}}
 </br>
 <button class= "otree-btn btn btn-info">Weiter</button>
