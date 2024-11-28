@@ -19,7 +19,6 @@
     });
 </script>
 </br>
-
 <div class="info active">
 <p> Hier finden Sie ein <b>Beispiel</b> für eine perfekte Runde: </b> </p>  
 </div>
@@ -39,16 +38,22 @@
 <p> <b>Finales Hinweispaar</b> einer Gruppe: <i>Uhr + Minute</i></p> 
 </div>
 <div class="info">
+{{ if player.player_role == "Hinweisgebende"}}
 <p><b> Bewertung: </b></p>
 <p> Nützlichkeit: im 1. Versuch erraten </p>
 <p> Originalität: Semantische Distanz = 90 </p>
 <p> Quantität: 3 gültige Hinweispaare</p>
+{{ else}}
+<p> <b>1. Rateversuch:</b> Zeit </p>
+<p> <b><span style="color: green;">Richtig!</span></b></p>
+{{ endif }}
 </br>
-<button class= "otree-btn btn btn-info">Weiter</button>
+<button class= "otree-btn btn btn-info" style="background-color: rgb(0, 174, 255); color: black; border: 2px solid rgb(0, 174, 255);">Weiter</button>
+</br>
 </div>
-</br>
+
 <p style="text-align: left">
-    <button class="otree-btn btn btn-info" type="button" id="next">Weiter</button>
+    <button class="otree-btn btn btn-info" type="button" id="next">Nächste Info</button>
 </p>
 
 {{ endblock }}

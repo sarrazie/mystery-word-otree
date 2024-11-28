@@ -1,0 +1,56 @@
+{% include '_static/global/next_button.html' %}
+{{ block title }}
+    <b><span style="color: red;">Wortaufgabe 1</span></b>
+{{ endblock }}
+{{ block content }}
+
+<style>
+    .otree-timer {
+        display: none;
+    }
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds === 20) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+</br>
+
+<div class="info active">
+    <p> Jede Runde ist in <b>fünf Phasen</b> unterteilt:</p>
+</div>
+<div class="info">
+        <p><b>1.</b> Allen in Ihrer Gruppe wird mitgeteilt, für welches geheime Wort sie Hinweispaare generieren können.</p>
+</div>
+<div class="info">
+        <p><b>2.</b> Ohne miteinander zu kommunizieren, <b>generiert</b> zunächst jedes Gruppenmitglied für sich alleine Hinweispaare.</p>
+</div>
+<div class="info">
+        <p><b>3.</b> Danach <b>bewerten und kommentieren</b> die Gruppenmitglieder gegenseitig ihre bisher geschriebenen Hinweispaare. </p>
+</div>
+<div class="info">
+        <p><b>4.</b> Nach Erhalt des Feedbacks hat jedes Gruppenmitglied nochmals Zeit, die eigenen Hinweispaare zu <b>überarbeiten.</b> </p>
+</div>
+<div class="info">
+        <p><b>5.</b> Nun bestimmt die Gruppe gemeinsam, welches <b>eine finale Hinweispaar</b> sie favorisieren für die Qualitäts- und Originalitätsbewertung.</p>
+        {{ if player.participant.treatment == 1 }}    
+        </br>
+        <button class= "otree-btn btn btn-info">Weiter</button>
+        {{ endif }}
+</div>
+
+<div class="info">   
+      <p>Nach jeder Runde wird Ihnen die Quantitäts-, Originalitäts- und Qualitätsbewertung der abgelaufenen Runde mitgeteilt.</p>       
+</br>
+        <button class= "otree-btn btn btn-info">Weiter</button>
+</br>
+</div>
+</br>
+<p style="text-align: left">
+    <button class="otree-btn btn btn-info" type="button" id="next">Weiter</button>
+</p>
+    {{ endblock }}

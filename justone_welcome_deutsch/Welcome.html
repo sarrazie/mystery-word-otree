@@ -1,6 +1,6 @@
 {% include '_static/global/next_button.html' %}
 {{ block title }}
-    Willkommen im MABELLA!
+    Herzlich willkommen!
 {{ endblock }}
 {{ block content }}
 
@@ -10,11 +10,30 @@
     }
 </style>
 </br>
-<p>Vielen Dank, dass Sie heute hier sind und an diesem <b>Experiment</b> teilnehmen.</p>
-<p>Bitte lesen Sie sich die nachfolgenden <b>Instruktionen</b> gründlich durch.</p>
-<p>Kommunikation mit anderen Teilnehmenden ist während des Experiments verboten.</p>
-<p>Bitte schalten Sie Ihr <b>Smartphone</b> aus und entfernen es vom Tisch.</p>
+<div class="info active">
+<p>Vielen Dank für Ihre Teilnahme an dieser <b>Studie</b>.</p>
+</div>
+<div class="info">
+<p>Sie können während dieser Studie Geld verdienen - wie viel, hängt von Ihren Entscheidungen ab.</p> 
+<p>Es ist daher sehr wichtig, dass Sie die nachfolgenden <b>Instruktionen</b> sorgfältig lesen.</p>
+</div> 
+<div class="info">
+<ul>
+  <li>Während der Studie dürfen Sie <b>nicht</b> mit anderen Teilnehmenden sprechen.</li>
+  <li>Bitte schalten Sie Ihr <b>Smartphone</b> aus und entfernen es vom Tisch.</li>
+  <li>In dieser Studie werden Sie - und alle anderen - die Rolle von anonymen Teilnehmenden übernehmen.</li>
+  <li>Wir bitten Sie daher, den anderen Teilnehmenden keine Informationen mitzuteilen, die zu Ihrer Identifizierung führen könnten.</li>
+  <li>Bedienen Sie bitte nur die <b>Funktionen am Computer</b>, die für die Studie vorgesehen sind.</li>
+</ul>
+</div>
+<div class="info">
+<p>Die Nichteinhaltung dieser Regeln führt zum <b>Ausschluss von der Studie und allen Zahlungen.</b></p>
 </br>
-
-<button class= "otree-btn btn btn-info">Weiter</button>
+<button class= "otree-btn btn btn-info" style="background-color: rgb(0, 174, 255); color: black; border: 2px solid rgb(0, 174, 255);">Weiter</button>
+</br>
+</div>
+</br>
+<p style="text-align: left">
+    <button class="otree-btn btn btn-info" type="button" id="next"> Nächste Info </button>
+</p>
 {{ endblock }}

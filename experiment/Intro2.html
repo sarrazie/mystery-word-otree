@@ -1,6 +1,6 @@
 {% include '_static/global/next_button.html' %}
 {{ block title }}
-    Worträtsel
+    <b><span style="color: red;">Wortaufgabe 1</span></b>
 {{ endblock }}
 {{ block content }}
 
@@ -21,36 +21,21 @@
 </br>
 
 <div class="info active">
-    <p> Jede Runde ist in <b>fünf Phasen</b> unterteilt:</p>
+<p> Eine zufällig ausgewählte Person prüft, ob alle generierten Hinweispaare <b>gültig</b> sind, d.h. in irgendeiner Form mit dem geheimen Wort in Verbindung stehen. Falls nicht, werden diese <b>entfernt</b> und gehen nicht in die Bewertung ein. Die prüfende Person variiert in jeder Runde. </p>
 </div>
 <div class="info">
-        <p><b>1.</b> Allen in Ihrer Gruppe wird mitgeteilt, für welches geheime Wort sie Hinweispaare generieren können.</p>
-</div>
-<div class="info">
-        <p><b>2.</b> Ohne miteinander zu kommunizieren, <b>generiert</b> zunächst jedes Gruppenmitglied für sich alleine Hinweispaare.</p>
-</div>
-<div class="info">
-        <p><b>3.</b> Danach <b>bewerten und kommentieren</b> die Gruppenmitglieder gegenseitig ihre bisher geschriebenen Hinweispaare. </p>
-</div>
-<div class="info">
-        <p><b>4.</b> Nach Erhalt des Feedbacks hat jedes Gruppenmitglied nochmals Zeit, die eigenen Hinweispaare zu <b>überarbeiten.</b> </p>
-</div>
-<div class="info">
-        <p><b>5.</b> Nun bestimmt die Gruppe gemeinsam, welches <b>eine finale Hinweispaar</b> sie favorisieren für die Qualitäts- und Originalitätsbewertung.</p>
-        {{ if player.participant.treatment == 1 }}    
-        </br>
-        <button class= "otree-btn btn btn-info">Weiter</button>
-        {{ endif }}
-</div>
-
-<div class="info">   
-      <p>Nach der Runde wird Ihnen die Quantitäts-, Originalitäts- und Qualitätsbewertung der abgelaufenen Runde mitgeteilt.</p>       
-</br>
-        <button class= "otree-btn btn btn-info">Weiter</button>
-</br>
-</div>
+    <p> Eine Bewertung der Hinweispaare findet nach folgenden Kriterien statt:</p>
+    <ul>
+        <li><b>Quantität:</b> Anzahl der generierten Hinweispaare</li>
+        <li><b>Qualität:</b> Nützlichkeit eines finalen Hinweispaars, gemessen daran, ob und wie schnell eine zufällig ausgewählte Person anhand dessen das geheime Wort erraten kann. Die ratende Person variiert in jeder Runde.</li>
+        <li><b>Originalität:</b> Neuartigkeit eines finalen Hinweispaars, gemessen durch einen Algorithmus, der die semantische Distanz berechnet, d.h. wie weit die beiden Worte im Hinweispaar jeweils entfernt sind vom geheimen Wort.</li>
+    </ul>
+    </br>
+    <button class= "otree-btn btn btn-info" style="background-color: rgb(0, 174, 255); color: black; border: 2px solid rgb(0, 174, 255);">Weiter</button>
+    </br>
+</div> 
 </br>
 <p style="text-align: left">
-    <button class="otree-btn btn btn-info" type="button" id="next">Weiter</button>
+    <button class="otree-btn btn btn-info" type="button" id="next"> Nächste Info </button>
 </p>
     {{ endblock }}

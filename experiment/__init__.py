@@ -555,6 +555,10 @@ def validate_ideas(player, ideas):
 
 # PAGES
 
+class Overview(Page):
+    def is_displayed(player):
+        return player.round_number == 1
+
 class Intro(Page):
     timeout_seconds = 1000
     def is_displayed(player):
@@ -562,6 +566,11 @@ class Intro(Page):
 
 class Intro2(Page):
     timeout_seconds = 120
+    def is_displayed(player):
+        return player.round_number == 1 and player.player_role == 'Hinweisgebende'
+    
+class Procedure(Page):
+    timeout_seconds = 1000
     def is_displayed(player):
         return player.round_number == 1 and player.player_role == 'Hinweisgebende'
     
@@ -574,6 +583,11 @@ class Instructions(Page):
     timeout_seconds = 120
     def is_displayed(player):
         return player.round_number == 1 and player.player_role == 'Hinweisgebende'
+    
+class Payment(Page):
+    timeout_seconds = 1000
+    def is_displayed(player):
+        return player.round_number == 1
     
 class UnderstandPage(Page):
     template_name = 'experiment/UnderstandPage.html'
@@ -1506,6 +1520,7 @@ class FinalPage(Page):
         if player.payoff_calculated == False:
             player.payoff = player.payoff + receiver_payoff + allocator_payoff
             player.payoff_calculated = True
+        player.payoff = round(player.payoff)
         return dict(allocator_payoff = allocator_payoff, receiver_payoff = receiver_payoff, payoff = player.payoff)
 
 # WAIT PAGES
@@ -1555,4 +1570,4 @@ class ResultsWaitPage(WaitPage):
     body_text = "Bitte warten Sie, bis alle Gruppen und alle ratenden Personen die Runde abgeschlossen haben."
     wait_for_all_groups = True
 
-page_sequence = [GroupWaitPage, Intro, Intro2, Rules, Instructions, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, DecisionConfidence, PairCheck, ResultsWaitPage, Results, Usefulness, Originality, Overall_Creativity, Score, Score2, Score3, Score4, DictatorGame, Questions1, Identification, Questions2, CreativeActivities, AUT, DAT, RAT_Instructions, RAT, FinalPage]
+page_sequence = [GroupWaitPage, Overview, Intro, Intro2, Procedure, Rules, Instructions, Payment, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, DecisionConfidence, PairCheck, ResultsWaitPage, Results, Usefulness, Originality, Overall_Creativity, Score, Score2, Score3, Score4, DictatorGame, Questions1, Identification, Questions2, CreativeActivities, AUT, DAT, RAT_Instructions, RAT, FinalPage]

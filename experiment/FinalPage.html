@@ -7,7 +7,7 @@
 </br>
 <p> Vielen Dank für Ihre Teilnahme an diesem Experiment. Bitte warten Sie, bis die anderen Teilnehmenden fertig sind.</p>  
 <p> {{ if player.payment_allocator == 1}} <b>Ihre Entscheidung als Zuteiler wurde per Zufall ausgewählt!</b> Sie haben <b>{{ allocator_payoff }}</b> für sich behalten.{{ endif }} {{ if player.payment_receiver == 1 }} <b>Sie wurden per Zufall als Empfänger einer Entscheidung ausgewählt!</b> Sie erhalten von einem Zuteiler zusätzlich <b> {{ receiver_payoff }}</b>. {{ endif}} {{ if player.payment_receiver == 0 and player.payment_allocator == 0}} <b>Ihre Entscheidung wurde nicht ausgewählt!</b> {{ endif }} </p>
-<p> Ihre gesamte Auszahlung beträgt somit <b>{{ payoff }}.</b></p>
+<p> Ihre gesamte Auszahlung (gerundet auf einen vollen Betrag) beträgt somit <b>{{ payoff }}.</b></p>
 <p> Füllen Sie die vor Ihnen liegende Quittung aus, um den Betrag nach Verlassen des Raumes von uns zu erhalten.</p>
 <p> Um Ihre Wartezeit zu verkürzen, können Sie den <b>DW News Livestream</b> ansehen. </p>
 </br>
