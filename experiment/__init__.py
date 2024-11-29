@@ -58,16 +58,23 @@ class Player(BasePlayer):
     player_role = models.StringField()
     player_role2 = models.StringField()
     incentive = models.IntegerField()
-    understandHin_1 = models.StringField(choices=[['false', 'Unbegrenzt viele Versuche'],['false', 'Zwei Versuche'],['true', 'Drei Versuche'],['false', 'Nur einen Versuch']], label='<b>Frage 1:</b> Wie viele Versuche hat die ratende Person, um das geheime Wort zu erraten?', widget=widgets.RadioSelect, blank=True)
-    understandHin_2 = models.StringField(choices=[['false','Zwei'],['true', 'Drei'],['false', 'Vier'],['false', 'Fünf']], label='<b>Frage 2:</b> Wie viele Spielerinnen und Spieler bilden zusammen eine Gruppe?', widget=widgets.RadioSelect, blank=True)
-    understandHin_3 = models.StringField(choices=[['false', 'Time'], ['false', 'Zeitpunkt'],['false', 'ist Geld'],['false', 'Zeeeit'],['true', 'keiner der oben genannten Hinweise']], label='<b>Frage 3:</b> Welcher der folgenden Hinweise wäre ein gültiger Hinweis in einem Hinweispaar für das geheime Wort "Zeit"?', widget=widgets.RadioSelect, blank=True)
-    understandHin_4Quantity =  models.StringField(choices=[['false', '13 Euro fix für die Teilnahme an allen Runden'],['true', '5 Euro fix plus bis zu 15 Euro Bonus für die meisten generierten Ideen'],['false', '5 Euro fix plus bis zu 15 Euro Bonus für die meisten erratenen geheimen Wörter'],['false','5 Euro fix plus bis zu 15 Euro Bonus für die originellsten Hinweispaare']], label='<b>Frage 4:</b> Wie viel Geld können Sie maximal in diesem Experiment verdienen?', widget=widgets.RadioSelect, blank=True)
-    understandHin_4Quality = models.StringField(choices=[['false', '13 Euro fix für die Teilnahme an allen Runden'],['false', '5 Euro fix plus bis zu 15 Euro Bonus für die meisten generierten Ideen'],['true', '5 Euro fix plus bis zu 15 Euro Bonus für die meisten erratenen geheimen Wörter'],['false','5 Euro fix plus bis zu 15 Euro Bonus für die originellsten Hinweispaare']], label='<b>Frage 4:</b> Wie viel Geld können Sie maximal in diesem Experiment verdienen?', widget=widgets.RadioSelect, blank=True)
-    understandHin_4Originality = models.StringField(choices=[['false', '13 Euro fix für die Teilnahme an allen Runden'],['false', '5 Euro fix plus bis zu 15 Euro Bonus für die meisten generierten Ideen'],['false', '5 Euro fix plus bis zu 15 Euro Bonus für die meisten erratenen geheimen Wörter'],['true','5 Euro fix plus bis zu 15 Euro Bonus für die originellsten Hinweispaare']], label='<b>Frage 4:</b> Wie viel Geld können Sie maximal in diesem Experiment verdienen?', widget=widgets.RadioSelect, blank=True)
-    understandHin_4Control = models.StringField(choices=[['true', '13 Euro fix für die Teilnahme an allen Runden'],['false', '5 Euro fix plus bis zu 15 Euro Bonus für die meisten generierten Ideen'],['false', '5 Euro fix plus bis zu 15 Euro Bonus für die meisten erratenen geheimen Wörter'],['false','5 Euro fix plus bis zu 15 Euro Bonus für die originellsten Hinweispaare']], label='<b>Frage 4:</b> Wie viel Geld können Sie maximal in diesem Experiment verdienen?', widget=widgets.RadioSelect, blank=True)
-    understandRat_1 = models.StringField(choices=[['false', 'Unbegrenzt viele Versuche'],['false', 'Zwei Versuche'],['true', 'Drei Versuche'],['false', 'Nur einen Versuch']], label='<b>Frage 1:</b> Wie viele Versuche haben Sie, um das geheime Wort zu erraten?', widget=widgets.RadioSelect, blank=True)
-    understandRat_2 = models.StringField(choices=[['false', '0'],['false', '1'],['false', '2'],['true', '3']], label='<b>Frage 2:</b> Wie viele Punkte erhalten Sie, wenn das geheime Wort direkt im 1. Versuch erraten?', widget=widgets.RadioSelect, blank=True)
-    understandRat_3 = models.StringField(choices=[['true', '20 Euro'], ['false', '15 Euro'],['false', '10 Euro'],['false', '18 Euro']], label='<b>Frage 3:</b> Wie viel Geld können Sie maximal in diesem Experiment verdienen?', widget=widgets.RadioSelect, blank=True)
+    understandHin_1 = models.StringField(choices=[['false', 'Länge, Relevanz, Originalität'],['false', 'Geschwindigkeit, Anzahl, Vielfalt'],['true', 'Quantität, Qualität, Originalität']], label='<b>Frage 1:</b> Welche drei Kriterien werden zur Bewertung der Hinweispaare herangezogen?', widget=widgets.RadioSelect, blank=True)
+    understandHin_2 = models.StringField(choices=[['false','Zwei'],['true', 'Drei'],['false', 'Fünf']], label='<b>Frage 2:</b> Wie viele Spielerinnen und Spieler bilden zusammen eine Gruppe?', widget=widgets.RadioSelect, blank=True)
+    understandHin_3 = models.StringField(choices=[['false', 'Time'], ['false', 'Zeitpunkt'],['false', 'Zeeeit'],['true', 'keiner der oben genannten Hinweise']], label='<b>Frage 3:</b> Welcher Hinweis wäre gültig in einem Hinweispaar für das geheime Wort "Zeit"?', widget=widgets.RadioSelect, blank=True)
+    understandHin_4 = models.StringField(choices=[['false', 'Es wird für die Bewertung berücksichtigt'], ['true', 'Es wird entfernt und nicht gewertet'],['false', 'Es wird für die nächste Runde gespeichert']], label='<b>Frage 4:</b> Was passiert, wenn ein Hinweispaar eines Gruppenmitglieds ein Tabuwort enthält?', widget=widgets.RadioSelect, blank=True)
+    understandHin_6_Quality = models.StringField(choices=[['false', 'Anhand der Anzahl der generierten Paare'], ['false', 'Anhand eines Algorithmus, der die semantische Distanz bewertet'],['true', 'Anhand der Anzahl der Versuche, die eine zufällig ausgewählte Person benötigt, um das geheime Wort zu erraten']], label='<b>Frage 6: </b>Wie wird die Qualität eines finalen Hinweispaars gemessen?', widget=widgets.RadioSelect, blank=True)
+    understandHin_6_Quantity = models.StringField(choices=[['true', 'Anhand der Anzahl der generierten Paare'], ['false', 'Anhand eines Algorithmus, der die semantische Distanz bewertet'],['false', 'Anhand der Anzahl der Versuche, die eine zufällig ausgewählte Person benötigt, um das geheime Wort zu erraten']], label='<b>Frage 6: </b>Wie wird die Quantität der Hinweispaare gemessen?', widget=widgets.RadioSelect, blank=True)
+    understandHin_6_Originality= models.StringField(choices=[['false', 'Anhand der Anzahl der generierten Paare'], ['true', 'Anhand eines Algorithmus, der die semantische Distanz bewertet'],['false', 'Anhand der Anzahl der Versuche, die eine zufällig ausgewählte Person benötigt, um das geheime Wort zu erraten']], label='<b>Frage 6: </b>Wie wird die Originalität eines finalen Hinweispaars gemessen?', widget=widgets.RadioSelect, blank=True)
+    understandHin_7_Quality = models.StringField(choices=[['false', 'Keine Punkte'], ['true', '3 Punkte'],['false', '1 Punkt']], label='<b>Frage 7:</b> Was passiert, wenn das geheime Wort im 1. Versuch anhand Ihres finalen Hinweispaars erraten wird?', widget=widgets.RadioSelect, blank=True)
+    understandHin_5_Quantity =  models.StringField(choices=[['false', '13 Euro fix für die Teilnahme an allen Runden'],['true', '5 Euro fix plus bis zu 15 Euro Bonus für die meisten generierten Hinweispaare'],['false', '5 Euro fix plus bis zu 15 Euro Bonus für die qualitativ hochwertigsten Hinweispaare'],['false','5 Euro fix plus bis zu 15 Euro Bonus für die originellsten Hinweispaare']], label='<b>Frage 5:</b> Wie viel Geld können Sie maximal in diesem Experiment verdienen?', widget=widgets.RadioSelect, blank=True)
+    understandHin_5_Quality = models.StringField(choices=[['false', '13 Euro fix für die Teilnahme an allen Runden'],['false', '5 Euro fix plus bis zu 15 Euro Bonus für die meisten generierten Hinweispaare'],['true', '5 Euro fix plus bis zu 15 Euro Bonus für die qualitativ hochwertigsten Hinweispaare'],['false','5 Euro fix plus bis zu 15 Euro Bonus für die originellsten Hinweispaare']], label='<b>Frage 5:</b> Wie viel Geld können Sie maximal in diesem Experiment verdienen?', widget=widgets.RadioSelect, blank=True)
+    understandHin_5_Originality = models.StringField(choices=[['false', '13 Euro fix für die Teilnahme an allen Runden'],['false', '5 Euro fix plus bis zu 15 Euro Bonus für die meisten generierten Hinweispaare'],['false', '5 Euro fix plus bis zu 15 Euro Bonus für die qualitativ hochwertigsten Hinweispaare'],['true','5 Euro fix plus bis zu 15 Euro Bonus für die originellsten Hinweispaare']], label='<b>Frage 5:</b> Wie viel Geld können Sie maximal in diesem Experiment verdienen?', widget=widgets.RadioSelect, blank=True)
+    understandHin_5_Control = models.StringField(choices=[['true', '13 Euro fix für die Teilnahme an allen Runden'],['false', '5 Euro fix plus bis zu 15 Euro Bonus für die meisten generierten Hinweispaare'],['false', '5 Euro fix plus bis zu 15 Euro Bonus für die qualitativ hochwertigsten Hinweispaare'],['false','5 Euro fix plus bis zu 15 Euro Bonus für die originellsten Hinweispaare']], label='<b>Frage 5:</b> Wie viel Geld können Sie maximal in diesem Experiment verdienen?', widget=widgets.RadioSelect, blank=True)
+    understandRat_1 = models.StringField(choices=[['false', 'Unbegrenzt viele Versuche'],['true', 'Drei Versuche'],['false', 'Nur einen Versuch']], label='<b>Frage 1:</b> Wie viele Versuche haben Sie, um ein geheimes Wort zu erraten?', widget=widgets.RadioSelect, blank=True)
+    understandRat_2 = models.StringField(choices=[['false', '1 Punkt'],['false', '2 Punkte'],['true', '3 Punkte']], label='<b>Frage 2:</b> Wie viele Punkte erhalten Sie, wenn das geheime Wort direkt im 1. Versuch erraten?', widget=widgets.RadioSelect, blank=True)
+    understandRat_3 = models.StringField(choices=[['true', '20 Euro'], ['false', '15 Euro'],['false', '10 Euro']], label='<b>Frage 3:</b> Wie viel Geld können Sie maximal in diesem Experiment verdienen?', widget=widgets.RadioSelect, blank=True)
+    understandRat_4 = models.StringField(choices=[['false', '5 Wörter'],['true', '8 Wörter'],['false', '10 Wörter']], label='<b>Frage 4:</b> Wie viele geheime Wörter müssen insgesamt erraten werden?', widget=widgets.RadioSelect, blank=True)
+    understandRat_5 = models.StringField(choices=[['true', 'Vom Vergleich Ihrer erreichten Punkte mit den anderen Ratenden'],['false', 'Von der Anzahl der Hinweispaare, die Sie erstellt haben'],['false', 'Von der Qualität Ihrer Bewertung der Hinweispaare']], label='<b>Frage 5:</b> Wovon hängt die Höhe des Bonus ab?', widget=widgets.RadioSelect, blank=True)
     Bildende_Kunst = models.BooleanField(blank=True, initial=False)
     Musik = models.BooleanField(blank=True, initial=False)
     Tanz = models.BooleanField(blank=True, initial=False)
@@ -322,11 +329,6 @@ class Player(BasePlayer):
     rat3 = models.StringField(label= '', initial='', blank=True, max_length=18)
     rat4 = models.StringField(label= '', initial='', blank=True, max_length=18)
     rat5 = models.StringField(label= '', initial='', blank=True, max_length=18)
-    rat6 = models.StringField(label= '', initial='', blank=True, max_length=18)
-    rat7 = models.StringField(label= '', initial='', blank=True, max_length=18)
-    rat8 = models.StringField(label= '', initial='', blank=True, max_length=18)
-    rat9 = models.StringField(label= '', initial='', blank=True, max_length=18)
-    rat10 = models.StringField(label= '', initial='', blank=True, max_length=18) 
     creative_self1 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=False, label = '<b> 7. </b>Ich denke, dass ich eine kreative Person bin.')
     creative_self2 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=False, label = '<b> 8. </b>Meine Vorstellungskraft und mein Einfallsreichtum unterscheiden mich von meinen Freunden.')
     creative_self3 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=False, label = '<b> 9. </b>Es ist mir wichtig, eine kreative Person zu sein.')
@@ -595,22 +597,30 @@ class UnderstandPage(Page):
     def is_displayed(player):
         return player.round_number == 1
     form_model = 'player'
-    form_fields = ['understandHin_1', 'understandHin_2', 'understandHin_3', 'understandHin_4Control', 'understandHin_4Quantity', 'understandHin_4Quality', 'understandHin_4Originality', 'understandRat_1', 'understandRat_2', 'understandRat_3']
+    form_fields = ['understandHin_1', 'understandHin_2', 'understandHin_3', 'understandHin_4', 'understandHin_5_Control', 'understandHin_5_Quantity', 'understandHin_5_Quality', 'understandHin_5_Originality', 'understandHin_6_Quantity', 'understandHin_6_Quality', 'understandHin_6_Originality', 'understandHin_7_Quality', 'understandRat_1', 'understandRat_2', 'understandRat_3', 'understandRat_4', 'understandRat_5']
     def error_message(player, values):
         if player.player_role == 'Hinweisgebende':
-            for i in range(1, 4):
+            for i in range(1, 5):
                 if values[f'understandHin_{i}'] == 'false' or values[f'understandHin_{i}'] == None:
                     return f'Falsche Antwort bei Frage {i}! Versuchen Sie es noch einmal.'         
-            if (values['understandHin_4Control'] == 'false' or values[f'understandHin_4Control'] == None) and player.participant.treatment == 1:
-                return 'Falsche Antwort bei Frage 4! Versuchen Sie es noch einmal.'
-            if (values['understandHin_4Quantity'] == 'false' or values[f'understandHin_4Quantity'] == None) and player.participant.treatment == 2:
-                return 'Falsche Antwort bei Frage 4! Versuchen Sie es noch einmal.'
-            if (values['understandHin_4Quality'] == 'false' or values[f'understandHin_4Quality'] == None) and player.participant.treatment == 3:
-                return 'Falsche Antwort bei Frage 4! Versuchen Sie es noch einmal.'
-            if (values['understandHin_4Originality'] == 'false' or values[f'understandHin_4Originality'] == None) and player.participant.treatment == 4:
-                return 'Falsche Antwort bei Frage 4! Versuchen Sie es noch einmal.'
+            if (values['understandHin_5_Control'] == 'false' or values[f'understandHin_5_Control'] == None) and player.participant.treatment == 1:
+                return 'Falsche Antwort bei Frage 5! Versuchen Sie es noch einmal.'
+            if (values['understandHin_5_Quantity'] == 'false' or values[f'understandHin_5_Quantity'] == None) and player.participant.treatment == 2:
+                return 'Falsche Antwort bei Frage 5! Versuchen Sie es noch einmal.'
+            if (values['understandHin_5_Quality'] == 'false' or values[f'understandHin_5_Quality'] == None) and player.participant.treatment == 3:
+                return 'Falsche Antwort bei Frage 5! Versuchen Sie es noch einmal.'
+            if (values['understandHin_5_Originality'] == 'false' or values[f'understandHin_5_Originality'] == None) and player.participant.treatment == 4:
+                return 'Falsche Antwort bei Frage 5! Versuchen Sie es noch einmal.'
+            if (values['understandHin_6_Quantity'] == 'false' or values[f'understandHin_6_Quantity'] == None) and player.participant.treatment == 2:
+                return 'Falsche Antwort bei Frage 6! Versuchen Sie es noch einmal.'
+            if (values['understandHin_6_Quality'] == 'false' or values[f'understandHin_6_Quality'] == None) and player.participant.treatment == 3:
+                return 'Falsche Antwort bei Frage 6! Versuchen Sie es noch einmal.'
+            if (values['understandHin_6_Originality'] == 'false' or values[f'understandHin_6_Originality'] == None) and player.participant.treatment == 4:
+                return 'Falsche Antwort bei Frage 6! Versuchen Sie es noch einmal.'
+            if (values['understandHin_7_Quality'] == 'false' or values[f'understandHin_7_Quality'] == None) and player.participant.treatment == 3:
+                return 'Falsche Antwort bei Frage 7! Versuchen Sie es noch einmal.'
         else:
-             for i in range(1, 4):  
+             for i in range(1, 6):  
                 if values[f'understandRat_{i}'] == 'false' or values[f'understandRat_{i}'] == None:
                     return f'Falsche Antwort bei Frage {i}! Versuchen Sie es noch einmal.'
 
@@ -940,48 +950,6 @@ class PairCheck(Page):
         pairs = hint_groups[index].get_players()[0].pairsafter.split(', ')
         form_fields = ['check_invalid_' + str(i+1) for i in range(len(pairs))]
         return form_fields
-    
-class Originality_Calculation(Page):
-    timeout_seconds = 5000
-    def is_displayed(player):
-        return player.player_role == 'Hinweisgebende' 
-
-    @staticmethod
-    def live_method(player, data):
-        if data.get('action') == 'get_vote_group':
-            vote_group = player.vote_group if player.vote_group else 'kein gültiges hinweispaar'
-            rater = next((p for p in player.subsession.get_players() if p.player_role == 'Ratender' and p.group_number_check == player.group.id_in_subsession), None)
-            pairs = player.pairsafter.split(', ')
-            check_invalid = []
-            if rater is not None:
-                for i in range(len(pairs)):
-                    attr_name = f"check_invalid_{i+1}"  
-                    attr_value = getattr(rater, attr_name, None)  
-                    if attr_value is not None:
-                        check_invalid.append(attr_value)
-            if vote_group in check_invalid:
-                vote_group = 'kein gültiges hinweispaar'
-                player.vote_group = 'Kein gültiges Hinweispaar'
-            return {player.id_in_group: {'vote_group': vote_group}}
-
-        elif data.get('action') == 'calculate_originality':
-            mystery_word = C.MYSTERY_WORDS[player.round_number - 1].lower()
-            vote_group = player.vote_group.lower()
-
-            if vote_group != 'kein gültiges hinweispaar':
-                model = model_instance                          # with Model() as model:
-                with ThreadPoolExecutor() as executor:
-                    future = executor.submit(model.calculate_originality, vote_group, mystery_word)
-                    originality = future.result()
-                    originality = float(originality)
-                    player.originality = originality 
-                    originality = round(originality, 2) 
-                    return {player.id_in_group: {'originality': originality}}
-            else:
-                originality = 0.0
-                player.originality = float(originality)
-                return {player.id_in_group: {'originality': originality}}
-        return {}
 
 class DecisionConfidence(Page):
     timeout_seconds = 5000
@@ -1471,7 +1439,7 @@ class AUT(Page):
 class DAT(Page):
     timeout_seconds = 270
     def is_displayed(player):
-        return player.player_role == 'Hinweisgebende' and player.round_number == C.NUM_ROUNDS
+        return player.round_number == C.NUM_ROUNDS
     form_model = 'player'
     form_fields = ['word1', 'word2', 'word3', 'word4', 'word5', 'word6', 'word7', 'word8', 'word9', 'word10']
     def before_next_page(player, timeout_happened):
@@ -1488,11 +1456,11 @@ class RAT_Instructions(Page):
         return player.player_role == 'Ratender' and player.round_number == C.NUM_ROUNDS
 
 class RAT(Page):
-    timeout_seconds = 600
+    timeout_seconds = 300
     def is_displayed(player):
         return player.player_role == 'Ratender' and player.round_number == C.NUM_ROUNDS
     form_model = 'player'
-    form_fields = ['rat1', 'rat2', 'rat3', 'rat4', 'rat5', 'rat6', 'rat7', 'rat8', 'rat9', 'rat10']
+    form_fields = ['rat1', 'rat2', 'rat3', 'rat4', 'rat5']
     
 class DictatorGame(Page):
     timeout_seconds = 60000
@@ -1570,4 +1538,4 @@ class ResultsWaitPage(WaitPage):
     body_text = "Bitte warten Sie, bis alle Gruppen und alle ratenden Personen die Runde abgeschlossen haben."
     wait_for_all_groups = True
 
-page_sequence = [GroupWaitPage, Overview, Intro, Intro2, Procedure, Rules, Instructions, Payment, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, DecisionConfidence, PairCheck, ResultsWaitPage, Results, Usefulness, Originality, Overall_Creativity, Score, Score2, Score3, Score4, DictatorGame, Questions1, Identification, Questions2, CreativeActivities, AUT, DAT, RAT_Instructions, RAT, FinalPage]
+page_sequence = [GroupWaitPage, Overview, Intro, Intro2, Procedure, Rules, Instructions, Payment, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, VotingResultPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, DecisionConfidence, PairCheck, ResultsWaitPage, Results, Usefulness, Originality, Overall_Creativity, Score, Score2, Score3, Score4, DictatorGame, Questions1, Identification, Questions2, CreativeActivities, AUT, RAT_Instructions, RAT, DAT, FinalPage]

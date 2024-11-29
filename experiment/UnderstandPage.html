@@ -24,23 +24,30 @@
 {{ formfield 'understandHin_1' }}
 {{ formfield 'understandHin_2' }}
 {{ formfield 'understandHin_3' }}
+{{ formfield 'understandHin_4' }}
 {{ if player.participant.treatment == 1 }}
-{{ formfield 'understandHin_4Control' }}
+{{ formfield 'understandHin_5_Control' }}
 {{ elif player.participant.treatment == 2 }}
-{{ formfield 'understandHin_4Quantity' }}
+{{ formfield 'understandHin_5_Quantity' }}
+{{ formfield 'understandHin_6_Quantity' }}
 {{ elif player.participant.treatment == 3 }}
-{{ formfield 'understandHin_4Quality' }}
+{{ formfield 'understandHin_5_Quality' }}
+{{ formfield 'understandHin_6_Quality' }}
+{{ formfield 'understandHin_7_Quality' }}
 {{ else}}
-{{ formfield 'understandHin_4Originality'}}
+{{ formfield 'understandHin_5_Originality'}}
+{{ formfield 'understandHin_6_Originality'}}
 {{ endif }}
 {{ else }}
 {{ formfield 'understandRat_1' }}
 {{ formfield 'understandRat_2' }}
 {{ formfield 'understandRat_3' }}
+{{ formfield 'understandRat_4' }}
+{{ formfield 'understandRat_5' }}
 {{ endif }}
 
 </br>
-<button class= "otree-btn btn btn-info">Weiter</button>
+<button class= "otree-btn btn btn-info" style="background-color: rgb(0, 174, 255); color: black; border: 2px solid rgb(0, 174, 255);">Weiter</button>
 </br>
 </br>
 
@@ -49,18 +56,19 @@
     <summary> Zusammenfassung der Regeln </summary>
 </br>
     <ul>    
-        <li> <b><u>Aufgabe:</u></b> Zusammen in Ihrer Gruppe viele originelle Hinweispaare generieren, anhand derer eine Person ein geheimes Wort erraten kann.</li>
-        <li> <b>Ungültige Hinweispaare</b> enthalten Hinweise, die denselben Wortstamm wie das Geheimwort oder wie eins der fünf Tabuwörter haben, eine Übersetzung des Geheimworts sind oder frei erfunden.</li>
+        <li> <b><span style="color: red;">Wortaufgabe 1</span></b>: Zusammen in Ihrer Gruppe viele originelle Hinweispaare generieren, anhand derer eine Person ein geheimes Wort erraten kann.</li>
+        <li> <b>Ungültige Hinweispaare</b> enthalten Hinweise, die denselben Wortstamm wie das Geheimwort oder wie eins der drei Tabuwörter haben, eine Übersetzung des Geheimworts sind oder frei erfunden.</li>
+        <li>{{ if player.participant.treatment == 1 }}Sie erhalten eine Auszahlung von 13 Euro, wenn Sie die Studie abschließen. {{ elif player.participant.treatment == 2 }}Sie erhalten eine Auszahlung von bis zu 20 Euro in Abhängigkeit von ihrer relativen Leistung inpuncto <b>Quantität.</b> {{ elif player.participant.treatment == 3 }}Sie erhalten eine Auszahlung von bis zu 20 Euro in Abhängigkeit von ihrer relativen Leistung inpuncto <b>Qualität.</b> {{ else}}Sie erhalten eine Auszahlung von bis zu 20 Euro in Abhängigkeit von ihrer relativen Leistung im inpuncto <b>Originalität.</b> {{ endif }}</li>
     </ul>  
 </details>
 {{ else }}
 <details>
-    <summary> Zusammenfassung der Aufgaben</summary>
+    <summary> Zusammenfassung der Regeln</summary>
 </br>
     <ul>
-        <li> <b>1. Aufgabe:</b> Anhand eines gegebenen Hinweispaars in maximal <b>drei Versuchen</b> ein geheimes Wort erraten. </li>
-        <li> <b>2. Aufgabe:</b> Hinweispaare zu jedem geheimen Wort auf ihre Gültigkeit überprüfen und ihre Kreativität bewerten.</li>
+        <li> <b><span style="color: red;">Wortaufgabe 1</span></b>: Anhand eines gegebenen Hinweispaars in maximal <b>drei Versuchen</b> ein geheimes Wort erraten. </li>
         <li>Es muss jeweils exakt das <i>eine</i> geheime Wort sein, zu dem die Gruppen die Hinweispaare generiert haben.</li> 
+        <li> <b><span style="color: blue;">Bewertung</span></b>: Hinweispaare zu jedem geheimen Wort auf ihre Gültigkeit überprüfen und ihre Kreativität bewerten.</li>
     </ul>
 </details>
 {{ endif }}

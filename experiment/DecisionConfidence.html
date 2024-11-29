@@ -32,15 +32,16 @@ Sie haben für folgendes Hinweispaar abgestimmt: <b>{{ own_vote }}</b> </p>
 </br>
 {{ formfields }}
 </br>
-<button class= "otree-btn btn btn-info">Weiter</button>
+<button class= "otree-btn btn btn-info" style="background-color: rgb(0, 174, 255); color: black; border: 2px solid rgb(0, 174, 255);">Weiter</button>
 </br>
 </br>
 <details>
     <summary> Zusammenfassung der Regeln </summary>
 </br>
     <ul>    
-        <li> <b><u>Aufgabe:</u></b> Zusammen in Ihrer Gruppe viele originelle Hinweispaare generieren, anhand derer eine Person ein geheimes Wort erraten kann.</li>
-        <li> <b>Ungültige Hinweispaare</b> enthalten Hinweise, die denselben Wortstamm wie das Geheimwort oder wie eins der fünf Tabuwörter haben, eine Übersetzung des Geheimworts sind oder frei erfunden.</li>
+        <li> <b><span style="color: red;">Wortaufgabe 1</span></b>: Zusammen in Ihrer Gruppe viele originelle Hinweispaare generieren, anhand derer eine Person ein geheimes Wort erraten kann.</li>
+        <li> <b>Ungültige Hinweispaare</b> enthalten Hinweise, die denselben Wortstamm wie das Geheimwort oder wie eins der drei Tabuwörter haben, eine Übersetzung des Geheimworts sind oder frei erfunden.</li>
+        <li>{{ if player.participant.treatment == 1 }}Sie erhalten eine Auszahlung von 13 Euro, wenn Sie die Studie abschließen. {{ elif player.participant.treatment == 2 }}Sie erhalten eine Auszahlung von bis zu 20 Euro in Abhängigkeit von ihrer relativen Leistung inpuncto <b>Quantität.</b> {{ elif player.participant.treatment == 3 }}Sie erhalten eine Auszahlung von bis zu 20 Euro in Abhängigkeit von ihrer relativen Leistung inpuncto <b>Qualität.</b> {{ else}}Sie erhalten eine Auszahlung von bis zu 20 Euro in Abhängigkeit von ihrer relativen Leistung im inpuncto <b>Originalität.</b> {{ endif }}</li>
     </ul>  
 </details>
 

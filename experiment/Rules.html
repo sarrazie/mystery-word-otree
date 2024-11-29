@@ -1,6 +1,6 @@
 {% include '_static/global/next_button.html' %}
 {{ block title }}
-    Beispiel
+  Beispielrunde <b><span style="color: red;">Wortaufgabe 1</span></b> {{ if player.player_role == "Ratender" }} und <b><span style="color: blue;">Bewertung</span></b> {{ endif }}
 {{ endblock }}
 {{ block content }}
 
@@ -20,7 +20,7 @@
 </script>
 </br>
 <div class="info active">
-<p> Hier finden Sie ein <b>Beispiel</b> für eine perfekte Runde: </b> </p>  
+<p> Hier finden Sie ein <b>Beispiel</b> für eine Runde: </b> </p>  
 </div>
 <div class="info">
 <p> <b>Geheimes Wort:</b> <i>Zeit</i> </p>
@@ -30,28 +30,48 @@
 <p> Drei Tabuwörter, die <b>nicht</b> Bestandteil des Hinweispaars sein dürfen: </p>
 <p><i>Gegenwart, Vergangenheit, Stunde</i></p> 
 </div>
-{{ endif }}
 <div class="info">
-<p> <b>Gültige Hinweispaare</b> einer Gruppe: <i>Uhr + Minute, Moment + vergänglich, unendlich + Zeiger</i></p> 
+<p> <b>Gültige Hinweispaare</b> Ihrer Gruppe: <i>Uhr + Minute, Moment + vergänglich, unendlich + Zeiger</i></p> 
 </div>
 <div class="info">
-<p> <b>Finales Hinweispaar</b> einer Gruppe: <i>Uhr + Minute</i></p> 
+<p> <b>Finales Hinweispaar</b> Ihrer Gruppe: <i>Uhr + Minute</i></p> 
 </div>
 <div class="info">
-{{ if player.player_role == "Hinweisgebende"}}
 <p><b> Bewertung: </b></p>
 <p> Nützlichkeit: im 1. Versuch erraten </p>
 <p> Originalität: Semantische Distanz = 90 </p>
 <p> Quantität: 3 gültige Hinweispaare</p>
-{{ else}}
-<p> <b>1. Rateversuch:</b> Zeit </p>
-<p> <b><span style="color: green;">Richtig!</span></b></p>
-{{ endif }}
 </br>
 <button class= "otree-btn btn btn-info" style="background-color: rgb(0, 174, 255); color: black; border: 2px solid rgb(0, 174, 255);">Weiter</button>
 </br>
 </div>
-
+{{ else}}
+<div class="info">
+    <p><b><span style="color: red;">Wortaufgabe 1</span></b></p>
+    <p><b>Hinweispaar</b> einer zufällig ausgewählten Gruppe: <i>Uhr + Minute</i></p> 
+</div>
+<div class="info">
+<p> <b>1. Rateversuch:</b> Zeiger </p>
+<p> <b><span style="color: red;">Falsch!</span></b></p>
+<p> <b>2. Rateversuch:</b> Zeit</p>
+<p> <b><span style="color: green;">Richtig!</span></b></p>
+<p> <b>2 Punkte </b>gesammelt! </p>
+</div>
+<div class="info">
+<p> <b><span style="color: blue;">Bewertung Gültigkeit</span></b></p>
+<p> <b>Hinweispaare einer anderen zufällig ausgewählten Gruppe:</b> <i>Uhr + Minute, Moment + vergänglich, unendlich + Zeiger, der + die </i> </p>
+<p> <i>der + die</i> als <b>ungültig</b> markieren, weil keinerlei Zusammenhang zu Zeit erkennbar ist.</p>
+</div>
+<div class="info">
+<p> <b><span style="color: blue;">Bewertung Kreativität</span></b></p>
+<p> <b>Hinweispaare einer anderen zufällig ausgewählten Gruppe:</b> <i>Uhr + Minute, Moment + vergänglich, unendlich + Zeiger, der + die </i> </p>
+<p> Einzelne Hinweispaare auf einer Skala von 1-10 nach ihrer Nützlichkeit, Originalität und Gesamtkreativität bewerten.</p>
+</br>
+<button class= "otree-btn btn btn-info" style="background-color: rgb(0, 174, 255); color: black; border: 2px solid rgb(0, 174, 255);">Weiter</button>
+</br>
+</div>
+{{ endif }}
+</br>
 <p style="text-align: left">
     <button class="otree-btn btn btn-info" type="button" id="next">Nächste Info</button>
 </p>
