@@ -1,7 +1,6 @@
 from otree.api import *
 import re
 import ast
-#import gzip
 import random
 import numpy as np
 import scipy.spatial.distance
@@ -29,7 +28,7 @@ class C(BaseConstants):
         ['Hut', 'Mexiko', 'Kopfbedeckung']
     ]
     STEM_WORDS = [
-        ['raum', 'raeum', 'zimmer', 'hotel', 'wohn', 'wand', 'waend', 'kuech', 'koch'], 
+        ['raum', 'raeum', 'zimmer', 'hotel', 'wohn'], 
         ['taub', 'taeub', 'gurr', 'flieg', 'flug', 'fluege', 'vogel', 'voegel', 'bot', 'fried'],
         ['golf', 'vw', 'wagen', 'volk', 'voelk', 'schlaeg', 'schlag', 'par', 'birdie', 'mini'],
         ['elektr', 'strom', 'tesla', 'edison', 'spann', 'stati'],  
@@ -165,6 +164,16 @@ class Player(BasePlayer):
     Idea8 = models.StringField(label= '', initial='', blank=True, max_length=18)
     Idea9 = models.StringField(label= '', initial='', blank=True, max_length=18)
     Idea10 = models.StringField(label= '', initial='', blank=True, max_length=18)
+    Idea11 = models.StringField(label= '', initial='', blank=True, max_length=18)
+    Idea12 = models.StringField(label= '', initial='', blank=True, max_length=18)
+    Idea13 = models.StringField(label= '', initial='', blank=True, max_length=18)
+    Idea14 = models.StringField(label= '', initial='', blank=True, max_length=18)
+    Idea15 = models.StringField(label= '', initial='', blank=True, max_length=18)
+    Idea16 = models.StringField(label= '', initial='', blank=True, max_length=18)
+    Idea17 = models.StringField(label= '', initial='', blank=True, max_length=18)
+    Idea18 = models.StringField(label= '', initial='', blank=True, max_length=18)
+    Idea19 = models.StringField(label= '', initial='', blank=True, max_length=18)
+    Idea20 = models.StringField(label= '', initial='', blank=True, max_length=18)
     word1 = models.StringField(label= '', initial='', blank=False)
     word2 = models.StringField(label= '', initial='', blank=False)
     word3 = models.StringField(label= '', initial='', blank=False)
@@ -202,11 +211,21 @@ class Player(BasePlayer):
     pair3 = models.StringField(initial='')
     pair4 = models.StringField(initial='')
     pair5 = models.StringField(initial='')
+    pair6 = models.StringField(initial='')
+    pair7 = models.StringField(initial='')
+    pair8 = models.StringField(initial='')
+    pair9 = models.StringField(initial='')
+    pair10 = models.StringField(initial='')
     pair1after = models.StringField(initial='')
     pair2after = models.StringField(initial='')
     pair3after = models.StringField(initial='')
     pair4after = models.StringField(initial='')
     pair5after = models.StringField(initial='')
+    pair6after = models.StringField(initial='')
+    pair7after = models.StringField(initial='')
+    pair8after = models.StringField(initial='')
+    pair9after = models.StringField(initial='')
+    pair10after = models.StringField(initial='')
     rating_before1 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=[['&#128077;', '&#128077;'],['&#128078;', '&#128078;'],], label='', blank=True, initial='')
     rating_before2 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=[['&#128077;', '&#128077;'],['&#128078;', '&#128078;'],], label='', blank=True, initial='')
     rating_before3 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=[['&#128077;', '&#128077;'],['&#128078;', '&#128078;'],], label='', blank=True, initial='')
@@ -217,6 +236,16 @@ class Player(BasePlayer):
     rating_before8 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=[['&#128077;', '&#128077;'],['&#128078;', '&#128078;'],], label='', blank=True, initial='')
     rating_before9 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=[['&#128077;', '&#128077;'],['&#128078;', '&#128078;'],], label='', blank=True, initial='')
     rating_before10 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=[['&#128077;', '&#128077;'],['&#128078;', '&#128078;'],], label='', blank=True, initial='')
+    rating_before11 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=[['&#128077;', '&#128077;'],['&#128078;', '&#128078;'],], label='', blank=True, initial='')
+    rating_before12 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=[['&#128077;', '&#128077;'],['&#128078;', '&#128078;'],], label='', blank=True, initial='')
+    rating_before13 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=[['&#128077;', '&#128077;'],['&#128078;', '&#128078;'],], label='', blank=True, initial='')
+    rating_before14 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=[['&#128077;', '&#128077;'],['&#128078;', '&#128078;'],], label='', blank=True, initial='')
+    rating_before15 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=[['&#128077;', '&#128077;'],['&#128078;', '&#128078;'],], label='', blank=True, initial='')
+    rating_before16 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=[['&#128077;', '&#128077;'],['&#128078;', '&#128078;'],], label='', blank=True, initial='')
+    rating_before17 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=[['&#128077;', '&#128077;'],['&#128078;', '&#128078;'],], label='', blank=True, initial='')
+    rating_before18 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=[['&#128077;', '&#128077;'],['&#128078;', '&#128078;'],], label='', blank=True, initial='')
+    rating_before19 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=[['&#128077;', '&#128077;'],['&#128078;', '&#128078;'],], label='', blank=True, initial='')
+    rating_before20 = models.StringField(widget=widgets.RadioSelectHorizontal, choices=[['&#128077;', '&#128077;'],['&#128078;', '&#128078;'],], label='', blank=True, initial='')
     discussion1 = models.StringField(label= '', initial='', blank=True, max_length=18)
     discussion2 = models.StringField(label= '', initial='', blank=True, max_length=18)
     discussion3 = models.StringField(label= '', initial='', blank=True, max_length=18)
@@ -227,6 +256,16 @@ class Player(BasePlayer):
     discussion8 = models.StringField(label= '', initial='', blank=True, max_length=18)
     discussion9 = models.StringField(label= '', initial='', blank=True, max_length=18)
     discussion10 = models.StringField(label= '', initial='', blank=True, max_length=18)
+    discussion11 = models.StringField(label= '', initial='', blank=True, max_length=18)
+    discussion12 = models.StringField(label= '', initial='', blank=True, max_length=18)
+    discussion13 = models.StringField(label= '', initial='', blank=True, max_length=18)
+    discussion14 = models.StringField(label= '', initial='', blank=True, max_length=18)
+    discussion15 = models.StringField(label= '', initial='', blank=True, max_length=18)
+    discussion16 = models.StringField(label= '', initial='', blank=True, max_length=18)
+    discussion17 = models.StringField(label= '', initial='', blank=True, max_length=18)
+    discussion18 = models.StringField(label= '', initial='', blank=True, max_length=18)
+    discussion19 = models.StringField(label= '', initial='', blank=True, max_length=18)
+    discussion20 = models.StringField(label= '', initial='', blank=True, max_length=18)
     other_pairs = models.StringField(label= '', initial='', blank=True)
     replace_word1 = models.StringField(widget = widgets.RadioSelectHorizontal, choices=[['erste', 'erste Wort durch:'],['zweite', 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
     replace_word2 = models.StringField(widget = widgets.RadioSelectHorizontal, choices=[['erste', 'erste Wort durch:'],['zweite', 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
@@ -238,6 +277,16 @@ class Player(BasePlayer):
     replace_word8 = models.StringField(widget = widgets.RadioSelectHorizontal, choices=[['erste', 'erste Wort durch:'],['zweite', 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
     replace_word9 = models.StringField(widget = widgets.RadioSelectHorizontal, choices=[['erste', 'erste Wort durch:'],['zweite', 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
     replace_word10 = models.StringField(widget = widgets.RadioSelectHorizontal, choices=[['erste', 'erste Wort durch:'],['zweite', 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
+    replace_word11 = models.StringField(widget = widgets.RadioSelectHorizontal, choices=[['erste', 'erste Wort durch:'],['zweite', 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
+    replace_word12 = models.StringField(widget = widgets.RadioSelectHorizontal, choices=[['erste', 'erste Wort durch:'],['zweite', 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
+    replace_word13 = models.StringField(widget = widgets.RadioSelectHorizontal, choices=[['erste', 'erste Wort durch:'],['zweite', 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
+    replace_word14 = models.StringField(widget = widgets.RadioSelectHorizontal, choices=[['erste', 'erste Wort durch:'],['zweite', 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
+    replace_word15 = models.StringField(widget = widgets.RadioSelectHorizontal, choices=[['erste', 'erste Wort durch:'],['zweite', 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
+    replace_word16 = models.StringField(widget = widgets.RadioSelectHorizontal, choices=[['erste', 'erste Wort durch:'],['zweite', 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
+    replace_word17 = models.StringField(widget = widgets.RadioSelectHorizontal, choices=[['erste', 'erste Wort durch:'],['zweite', 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
+    replace_word18 = models.StringField(widget = widgets.RadioSelectHorizontal, choices=[['erste', 'erste Wort durch:'],['zweite', 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
+    replace_word19 = models.StringField(widget = widgets.RadioSelectHorizontal, choices=[['erste', 'erste Wort durch:'],['zweite', 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
+    replace_word20 = models.StringField(widget = widgets.RadioSelectHorizontal, choices=[['erste', 'erste Wort durch:'],['zweite', 'zweite Wort durch:'],], label='Ersetze das', blank=True, initial='')
     pair_feedback1 = models.StringField(label= '', initial='', blank=True)
     pair_feedback2 = models.StringField(label= '', initial='', blank=True)
     pair_feedback3 = models.StringField(label= '', initial='', blank=True)
@@ -248,6 +297,16 @@ class Player(BasePlayer):
     pair_feedback8 = models.StringField(label= '', initial='', blank=True)
     pair_feedback9 = models.StringField(label= '', initial='', blank=True)
     pair_feedback10 = models.StringField(label= '', initial='', blank=True)
+    pair_feedback11 = models.StringField(label= '', initial='', blank=True)
+    pair_feedback12 = models.StringField(label= '', initial='', blank=True)
+    pair_feedback13 = models.StringField(label= '', initial='', blank=True)
+    pair_feedback14 = models.StringField(label= '', initial='', blank=True)
+    pair_feedback15 = models.StringField(label= '', initial='', blank=True)
+    pair_feedback16 = models.StringField(label= '', initial='', blank=True)
+    pair_feedback17 = models.StringField(label= '', initial='', blank=True)
+    pair_feedback18 = models.StringField(label= '', initial='', blank=True)
+    pair_feedback19 = models.StringField(label= '', initial='', blank=True)
+    pair_feedback20 = models.StringField(label= '', initial='', blank=True)
     vote = models.StringField(initial='')
     vote_group = models.StringField(initial='')
     pairsafter = models.StringField(label= '', initial='', blank=True)
@@ -271,6 +330,21 @@ class Player(BasePlayer):
     check_invalid_13 = models.StringField(blank=True)
     check_invalid_14 = models.StringField(blank=True)
     check_invalid_15 = models.StringField(blank=True)
+    check_invalid_16 = models.StringField(blank=True)
+    check_invalid_17 = models.StringField(blank=True)
+    check_invalid_18 = models.StringField(blank=True)
+    check_invalid_19 = models.StringField(blank=True)
+    check_invalid_20 = models.StringField(blank=True)
+    check_invalid_21 = models.StringField(blank=True)
+    check_invalid_22 = models.StringField(blank=True)
+    check_invalid_23 = models.StringField(blank=True)
+    check_invalid_24 = models.StringField(blank=True)
+    check_invalid_25 = models.StringField(blank=True)
+    check_invalid_26 = models.StringField(blank=True)
+    check_invalid_27 = models.StringField(blank=True)
+    check_invalid_28 = models.StringField(blank=True)
+    check_invalid_29 = models.StringField(blank=True)
+    check_invalid_30 = models.StringField(blank=True)
     group_number_check = models.IntegerField()
     group_number_guess = models.IntegerField()
     group_number_rating = models.IntegerField()
@@ -289,6 +363,21 @@ class Player(BasePlayer):
     usefulness_13 = models.StringField(blank=True)
     usefulness_14 = models.StringField(blank=True)
     usefulness_15 = models.StringField(blank=True)
+    usefulness_16 = models.StringField(blank=True)
+    usefulness_17 = models.StringField(blank=True)
+    usefulness_18 = models.StringField(blank=True)
+    usefulness_19 = models.StringField(blank=True)
+    usefulness_20 = models.StringField(blank=True)
+    usefulness_21 = models.StringField(blank=True)
+    usefulness_22 = models.StringField(blank=True)
+    usefulness_23 = models.StringField(blank=True)
+    usefulness_24 = models.StringField(blank=True)
+    usefulness_25 = models.StringField(blank=True)
+    usefulness_26 = models.StringField(blank=True)
+    usefulness_27 = models.StringField(blank=True)
+    usefulness_28 = models.StringField(blank=True)
+    usefulness_29 = models.StringField(blank=True)
+    usefulness_30 = models.StringField(blank=True)
     originality_1 = models.StringField(blank=True)
     originality_2 = models.StringField(blank=True)
     originality_3 = models.StringField(blank=True)
@@ -304,6 +393,21 @@ class Player(BasePlayer):
     originality_13 = models.StringField(blank=True)
     originality_14 = models.StringField(blank=True)
     originality_15 = models.StringField(blank=True)
+    originality_16 = models.StringField(blank=True)
+    originality_17 = models.StringField(blank=True)
+    originality_18 = models.StringField(blank=True)
+    originality_19 = models.StringField(blank=True)
+    originality_20 = models.StringField(blank=True)
+    originality_21 = models.StringField(blank=True)
+    originality_22 = models.StringField(blank=True)
+    originality_23 = models.StringField(blank=True)
+    originality_24 = models.StringField(blank=True)
+    originality_25 = models.StringField(blank=True)
+    originality_26 = models.StringField(blank=True)
+    originality_27 = models.StringField(blank=True)
+    originality_28 = models.StringField(blank=True)
+    originality_29 = models.StringField(blank=True)
+    originality_30 = models.StringField(blank=True)
     creativity_1 = models.StringField(blank=True)
     creativity_2 = models.StringField(blank=True)
     creativity_3 = models.StringField(blank=True)
@@ -319,6 +423,21 @@ class Player(BasePlayer):
     creativity_13 = models.StringField(blank=True)
     creativity_14 = models.StringField(blank=True)
     creativity_15 = models.StringField(blank=True)
+    creativity_16 = models.StringField(blank=True)
+    creativity_17 = models.StringField(blank=True)
+    creativity_18 = models.StringField(blank=True)
+    creativity_19 = models.StringField(blank=True)
+    creativity_20 = models.StringField(blank=True)
+    creativity_21 = models.StringField(blank=True)
+    creativity_22 = models.StringField(blank=True)
+    creativity_23 = models.StringField(blank=True)
+    creativity_24 = models.StringField(blank=True)
+    creativity_25 = models.StringField(blank=True)
+    creativity_26 = models.StringField(blank=True)
+    creativity_27 = models.StringField(blank=True)
+    creativity_28 = models.StringField(blank=True)
+    creativity_29 = models.StringField(blank=True)
+    creativity_30 = models.StringField(blank=True)
     number_pairs_after = models.IntegerField()
     circle_overlap = models.FloatField(label="Overlap Percentage",blank=True)
     explanation = models.LongStringField(label='<b>5. </b>Bitte beschreiben Sie in Stichpunkten, warum sich Ihre Gruppe final für dieses Hinweispaar entschieden hat. (optional)', blank=True, max_length=500)
@@ -381,78 +500,33 @@ class Player(BasePlayer):
     payment_receiver = models.BooleanField(initial=False)
     payoff_calculated = models.BooleanField(initial=False)
 
-# class Model:
-#     def __init__(player, model="vectors_german.txt.gz", dictionary="vocab_german.txt", pattern="^[a-z][a-z-]*[a-z]$"):
-#         player.model_file = model
-#         player.dictionary_file = dictionary
-#         player.pattern = re.compile(pattern)
-#         player.words = set()
-
-#     def load_words(player):
-#         with open(player.dictionary_file, "r", encoding="utf-8") as f:
-#             player.words.update(line.strip() for line in f if player.pattern.match(line))
-
-#     def get_vector(player, word):
-#         with gzip.open(player.model_file, "rt", encoding="utf-8") as f:
-#             for line in f:
-#                 tokens = line.split(" ")
-#                 if tokens[0] == word:
-#                     return np.array(tokens[1:], dtype=np.float32)
-#         return None
-
-#     def distance(player, word1, word2):
-#         vector1 = player.get_vector(word1)
-#         vector2 = player.get_vector(word2)
-#         if vector1 is not None and vector2 is not None:
-#             return scipy.spatial.distance.cosine(vector1, vector2) * 100
-#         return None
-    
-#     def calculate_originality(player, word_pair, mystery_word):
-#         dist_1 = player.distance(word_pair.split(" + ")[0], mystery_word)
-#         dist_2 = player.distance(word_pair.split(" + ")[1], mystery_word)
-#         if dist_1 is not None and dist_2 is not None:
-#             return (dist_1 + dist_2) / 2
-#         return None
-    
-#     def __enter__(player):
-#         player.load_words()
-#         return player
-
-#     def __exit__(player, exc_type, exc_value, traceback):
-#         pass
-
 class Model:
     _instance = None
-    
     def __new__(cls, *args, **kwargs):
         if cls._instance is None:
             cls._instance = super(Model, cls).__new__(cls)
         return cls._instance
- 
     def __init__(player, model='cc.de.300.bin'):
         if not hasattr(player, 'model'):  # Lade das Modell nur, wenn es noch nicht geladen wurde
             player.model_file = model
             print(f'Loading FastText model from {player.model_file}...')
             player.model = fasttext.load_model(player.model_file)
             print('Model loaded successfully.')
-
     def get_vector(player, word):
         return player.model.get_word_vector(word)
-    
     def distance(player, word1: str, word2: str):
         vector1 = player.get_vector(word1)
         vector2 = player.get_vector(word2)
         if vector1 is not None and vector2 is not None:
             return scipy.spatial.distance.cosine(vector1, vector2) * 100
         return None
-    
     def calculate_originality(player, word_pair, mystery_word):
         dist_1 = player.distance(word_pair.split(" + ")[0], mystery_word)
         dist_2 = player.distance(word_pair.split(" + ")[1], mystery_word)
         if dist_1 is not None and dist_2 is not None:
             return (dist_1 + dist_2) / 2
         return None
-
+        
 model_instance = Model()  
 
 def creating_session(subsession: Subsession):
@@ -636,7 +710,7 @@ class Generation_Page(Page):
     def is_displayed(player):
         return player.player_role == 'Hinweisgebende'   
     form_model = 'player'
-    form_fields = ['Idea1', 'Idea2', 'Idea3', 'Idea4', 'Idea5', 'Idea6', 'Idea7', 'Idea8', 'Idea9', 'Idea10']
+    form_fields = ['Idea1', 'Idea2', 'Idea3', 'Idea4', 'Idea5', 'Idea6', 'Idea7', 'Idea8', 'Idea9', 'Idea10','Idea11', 'Idea12', 'Idea13', 'Idea14', 'Idea15', 'Idea16', 'Idea17', 'Idea18', 'Idea19', 'Idea20']
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         taboo_words = C.TABOO_WORDS[player.round_number - 1]
@@ -644,7 +718,7 @@ class Generation_Page(Page):
 
     def before_next_page(player, timeout_happened):
         if timeout_happened:        
-            ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10]
+            ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12, player.Idea13, player.Idea14, player.Idea15, player.Idea16, player.Idea17, player.Idea18, player.Idea19, player.Idea20]
             ideas = validate_ideas(player, ideas)
             player.before_missing = False
             player.before_invalid = 0
@@ -656,7 +730,7 @@ class Generation_Page(Page):
                     setattr(player, f'pair{(i // 2) + 1}', f"{ideas[i]} + {ideas[i + 1]}")
                 else:
                     setattr(player, f'pair{(i // 2) + 1}', 'empty') 
-            pairs = [player.pair1] + [player.pair2] + [player.pair3] + [player.pair4] + [player.pair5] 
+            pairs = [player.pair1] + [player.pair2] + [player.pair3] + [player.pair4] + [player.pair5] + [player.pair6] + [player.pair7] + [player.pair8] + [player.pair9] + [player.pair10]
             while 'empty' in pairs:
                 pairs.remove('empty')
             player.before_quantity = len(pairs)        
@@ -665,7 +739,7 @@ class Generation_Page(Page):
         else:
             player.before_invalid = 0
             player.before_missing = False
-            ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10]
+            ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12, player.Idea13, player.Idea14, player.Idea15, player.Idea16, player.Idea17, player.Idea18, player.Idea19, player.Idea20]
             ideas = validate_ideas(player, ideas)
             for i in range(len(ideas)):
                 if ideas[i] == 'false':  
@@ -675,7 +749,7 @@ class Generation_Page(Page):
                     setattr(player, f'pair{(i // 2) + 1}', f"{ideas[i]} + {ideas[i + 1]}")
                 else:
                     setattr(player, f'pair{(i // 2) + 1}', 'empty')
-            pairs = [player.pair1] + [player.pair2] + [player.pair3] + [player.pair4] + [player.pair5] 
+            pairs = [player.pair1] + [player.pair2] + [player.pair3] + [player.pair4] + [player.pair5] + [player.pair6] + [player.pair7] + [player.pair8] + [player.pair9] + [player.pair10]
             while 'empty' in pairs:
                 pairs.remove('empty')
             player.before_quantity = len(pairs)
@@ -687,23 +761,23 @@ class Discussion(Page):
     def is_displayed(player):
         return player.player_role == 'Hinweisgebende'
     form_model = 'player'   
-    form_fields = ['rating_before1', 'rating_before2', 'rating_before3', 'rating_before4', 'rating_before5', 'rating_before6', 'rating_before7', 'rating_before8', 'rating_before9', 'rating_before10', 'replace_word1', 'replace_word2', 'replace_word3', 'replace_word4', 'replace_word5', 'replace_word6', 'replace_word7', 'replace_word8', 'replace_word9', 'replace_word10', 'discussion1','discussion2', 'discussion3', 'discussion4', 'discussion5', 'discussion6', 'discussion7', 'discussion8', 'discussion9', 'discussion10']
+    form_fields = ['rating_before1', 'rating_before2', 'rating_before3', 'rating_before4', 'rating_before5', 'rating_before6', 'rating_before7', 'rating_before8', 'rating_before9', 'rating_before10', 'rating_before11', 'rating_before12', 'rating_before13', 'rating_before14', 'rating_before15', 'rating_before16', 'rating_before17', 'rating_before18', 'rating_before19', 'rating_before20', 'replace_word1', 'replace_word2', 'replace_word3', 'replace_word4', 'replace_word5', 'replace_word6', 'replace_word7', 'replace_word8', 'replace_word9', 'replace_word10', 'replace_word11', 'replace_word12', 'replace_word13', 'replace_word14', 'replace_word15', 'replace_word16', 'replace_word17', 'replace_word18', 'replace_word19', 'replace_word20', 'discussion1','discussion2', 'discussion3', 'discussion4', 'discussion5', 'discussion6', 'discussion7', 'discussion8', 'discussion9', 'discussion10', 'discussion11', 'discussion12', 'discussion13', 'discussion14', 'discussion15', 'discussion16', 'discussion17', 'discussion18', 'discussion19', 'discussion20']
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         taboo_words = C.TABOO_WORDS[player.round_number - 1]
-        pairs = [player.pair1 for player in player.get_others_in_group()] + [player.pair2 for player in player.get_others_in_group()] + [player.pair3 for player in player.get_others_in_group()] + [player.pair4 for player in player.get_others_in_group()] + [player.pair5 for player in player.get_others_in_group()] 
+        pairs = [player.pair1 for player in player.get_others_in_group()] + [player.pair2 for player in player.get_others_in_group()] + [player.pair3 for player in player.get_others_in_group()] + [player.pair4 for player in player.get_others_in_group()] + [player.pair5 for player in player.get_others_in_group()] + [player.pair6 for player in player.get_others_in_group()] + [player.pair7 for player in player.get_others_in_group()] + [player.pair8 for player in player.get_others_in_group()] + [player.pair9 for player in player.get_others_in_group()] + [player.pair10 for player in player.get_others_in_group()]
         while 'empty' in pairs:
             pairs.remove('empty')
         while '' in pairs:
             pairs.remove('')
         player.other_pairs = ', '.join(pairs)
         player.number_pairs = len(pairs)
-        pairs_output = [pairs[i] if i < player.number_pairs else 'empty'for i in range(10)]
-        return dict(mystery_word = mystery_word, taboo_words = taboo_words, number_pairs = player.number_pairs, Pair1 = pairs_output[0], Pair2 = pairs_output[1], Pair3 = pairs_output[2], Pair4 = pairs_output[3], Pair5 = pairs_output[4], Pair6 = pairs_output[5], Pair7 = pairs_output[6], Pair8 = pairs_output[7], Pair9 = pairs_output[8], Pair10 = pairs_output[9])   
+        pairs_output = [pairs[i] if i < player.number_pairs else 'empty'for i in range(20)]
+        return dict(mystery_word = mystery_word, taboo_words = taboo_words, number_pairs = player.number_pairs, Pair1 = pairs_output[0], Pair2 = pairs_output[1], Pair3 = pairs_output[2], Pair4 = pairs_output[3], Pair5 = pairs_output[4], Pair6 = pairs_output[5], Pair7 = pairs_output[6], Pair8 = pairs_output[7], Pair9 = pairs_output[8], Pair10 = pairs_output[9], Pair11 = pairs_output[10], Pair12 = pairs_output[11], Pair13 = pairs_output[12], Pair14 = pairs_output[13], Pair15 = pairs_output[14], Pair16 = pairs_output[15], Pair17 = pairs_output[16], Pair18 = pairs_output[17], Pair19 = pairs_output[18], Pair20 = pairs_output[19])  
     
     def before_next_page(player, timeout_happened):
         if timeout_happened:
-            pairs = [player.pair1 for player in player.get_others_in_group()] + [player.pair2 for player in player.get_others_in_group()] + [player.pair3 for player in player.get_others_in_group()] + [player.pair4 for player in player.get_others_in_group()] + [player.pair5 for player in player.get_others_in_group()]  
+            pairs = [player.pair1 for player in player.get_others_in_group()] + [player.pair2 for player in player.get_others_in_group()] + [player.pair3 for player in player.get_others_in_group()] + [player.pair4 for player in player.get_others_in_group()] + [player.pair5 for player in player.get_others_in_group()] + [player.pair6 for player in player.get_others_in_group()] + [player.pair7 for player in player.get_others_in_group()] + [player.pair8 for player in player.get_others_in_group()] + [player.pair9 for player in player.get_others_in_group()] + [player.pair10 for player in player.get_others_in_group()]
             while 'empty' in pairs:
                 pairs.remove('empty')
             while '' in pairs:
@@ -712,7 +786,7 @@ class Discussion(Page):
                 feedback = [player.other_pairs.split(', ')[i], getattr(player, f'rating_before{i + 1}'), getattr(player, f'replace_word{i + 1}'), getattr(player, f'discussion{i + 1}')]
                 setattr(player, f'pair_feedback{i + 1}', str(feedback))
         else:
-            pairs = [player.pair1 for player in player.get_others_in_group()] + [player.pair2 for player in player.get_others_in_group()] + [player.pair3 for player in player.get_others_in_group()] + [player.pair4 for player in player.get_others_in_group()] + [player.pair5 for player in player.get_others_in_group()]  
+            pairs = [player.pair1 for player in player.get_others_in_group()] + [player.pair2 for player in player.get_others_in_group()] + [player.pair3 for player in player.get_others_in_group()] + [player.pair4 for player in player.get_others_in_group()] + [player.pair5 for player in player.get_others_in_group()] + [player.pair6 for player in player.get_others_in_group()] + [player.pair7 for player in player.get_others_in_group()] + [player.pair8 for player in player.get_others_in_group()] + [player.pair9 for player in player.get_others_in_group()] + [player.pair10 for player in player.get_others_in_group()]
             while 'empty' in pairs:
                 pairs.remove('empty')
             while '' in pairs:
@@ -726,7 +800,7 @@ class Clue_Page(Page):
     def is_displayed(player):
         return player.player_role == 'Hinweisgebende'   
     form_model = 'player'
-    form_fields = ['Idea1', 'Idea2', 'Idea3', 'Idea4', 'Idea5', 'Idea6', 'Idea7', 'Idea8', 'Idea9', 'Idea10']
+    form_fields = ['Idea1', 'Idea2', 'Idea3', 'Idea4', 'Idea5', 'Idea6', 'Idea7', 'Idea8', 'Idea9', 'Idea10', 'Idea11', 'Idea12', 'Idea13', 'Idea14', 'Idea15', 'Idea16', 'Idea17', 'Idea18', 'Idea19', 'Idea20']
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         taboo_words = C.TABOO_WORDS[player.round_number - 1]
@@ -741,17 +815,27 @@ class Clue_Page(Page):
             [p.pair_feedback8 for p in player.get_others_in_group()],
             [p.pair_feedback9 for p in player.get_others_in_group()],
             [p.pair_feedback10 for p in player.get_others_in_group()],
+            [p.pair_feedback11 for p in player.get_others_in_group()],
+            [p.pair_feedback12 for p in player.get_others_in_group()],
+            [p.pair_feedback13 for p in player.get_others_in_group()],
+            [p.pair_feedback14 for p in player.get_others_in_group()],
+            [p.pair_feedback15 for p in player.get_others_in_group()],
+            [p.pair_feedback16 for p in player.get_others_in_group()],
+            [p.pair_feedback17 for p in player.get_others_in_group()],
+            [p.pair_feedback18 for p in player.get_others_in_group()],
+            [p.pair_feedback19 for p in player.get_others_in_group()],
+            [p.pair_feedback20 for p in player.get_others_in_group()]
             ]
         filtered_feedback_groups = [list(filter(bool, group)) for group in feedback_groups]
-        feedback1_group, feedback2_group, feedback3_group, feedback4_group, feedback5_group, feedback6_group, feedback7_group, feedback8_group, feedback9_group, feedback10_group = filtered_feedback_groups
+        feedback1_group, feedback2_group, feedback3_group, feedback4_group, feedback5_group, feedback6_group, feedback7_group, feedback8_group, feedback9_group, feedback10_group, feedback11_group, feedback12_group, feedback13_group, feedback14_group, feedback15_group, feedback16_group, feedback17_group, feedback18_group, feedback19_group, feedback20_group = filtered_feedback_groups
         all_feedback_groups = []
         for group in filtered_feedback_groups:
             if group:
                 all_feedback_groups.extend(group)
-        ratings = [[] for _ in range(5)]
-        replaces = [[] for _ in range(5)]
-        r_words = [[] for _ in range(5)]
-        pairs = [player.pair1, player.pair2, player.pair3, player.pair4, player.pair5]
+        ratings = [[] for _ in range(10)]
+        replaces = [[] for _ in range(10)]
+        r_words = [[] for _ in range(10)]
+        pairs = [player.pair1, player.pair2, player.pair3, player.pair4, player.pair5, player.pair6, player.pair7, player.pair8, player.pair9, player.pair10]
         for element in all_feedback_groups:
             element_list = ast.literal_eval(element)
             for i, pair in enumerate(pairs):
@@ -759,15 +843,15 @@ class Clue_Page(Page):
                     ratings[i].append(element_list[1])
                     replaces[i].append(element_list[2])
                     r_words[i].append(element_list[3])
-        rating_1, rating_2, rating_3, rating_4, rating_5 = ratings
-        replace_1, replace_2, replace_3, replace_4, replace_5 = replaces
-        r_word_1, r_word_2, r_word_3, r_word_4, r_word_5 = r_words
-        return dict(mystery_word = mystery_word, taboo_words = taboo_words, Rating_1 = rating_1, Replace_1 = replace_1, R_word_1 = r_word_1, Rating_2 = rating_2, Replace_2 = replace_2, R_word_2 = r_word_2, Rating_3 = rating_3, Replace_3 = replace_3, R_word_3 = r_word_3, Rating_4 = rating_4, Replace_4 = replace_4, R_word_4 = r_word_4, Rating_5 = rating_5, Replace_5 = replace_5, R_word_5 = r_word_5, Feedback1 = feedback1_group, Feedback2 = feedback2_group, Feedback3 = feedback3_group, Feedback4 = feedback4_group, Feedback5 = feedback5_group, Feedback6 = feedback6_group, Feedback7 = feedback7_group, Feedback8 = feedback8_group, Feedback9 = feedback9_group, Feedback10 = feedback10_group)
+        rating_1, rating_2, rating_3, rating_4, rating_5, rating_6, rating_7, rating_8, rating_9, rating_10 = ratings
+        replace_1, replace_2, replace_3, replace_4, replace_5, replace_6, replace_7, replace_8, replace_9, replace_10 = replaces
+        r_word_1, r_word_2, r_word_3, r_word_4, r_word_5, r_word_6, r_word_7, r_word_8, r_word_9, r_word_10 = r_words
+        return dict(mystery_word = mystery_word, taboo_words = taboo_words, Rating_1 = rating_1, Replace_1 = replace_1, R_word_1 = r_word_1, Rating_2 = rating_2, Replace_2 = replace_2, R_word_2 = r_word_2, Rating_3 = rating_3, Replace_3 = replace_3, R_word_3 = r_word_3, Rating_4 = rating_4, Replace_4 = replace_4, R_word_4 = r_word_4, Rating_5 = rating_5, Replace_5 = replace_5, R_word_5 = r_word_5, Rating_6 = rating_6, Replace_6 = replace_6, R_word_6 = r_word_6, Rating_7 = rating_7, Replace_7 = replace_7, R_word_7 = r_word_7, Rating_8 = rating_8, Replace_8 = replace_8, R_word_8 = r_word_8, Rating_9 = rating_9, Replace_9 = replace_9, R_word_9 = r_word_9, Rating_10 = rating_10, Replace_10 = replace_10, R_word_10 = r_word_10, Feedback1 = feedback1_group, Feedback2 = feedback2_group, Feedback3 = feedback3_group, Feedback4 = feedback4_group, Feedback5 = feedback5_group, Feedback6 = feedback6_group, Feedback7 = feedback7_group, Feedback8 = feedback8_group, Feedback9 = feedback9_group, Feedback10 = feedback10_group)
     
     def before_next_page(player, timeout_happened):
         if timeout_happened:        
             player.after_invalid = 0
-            ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10]
+            ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12, player.Idea13, player.Idea14, player.Idea15, player.Idea16, player.Idea17, player.Idea18, player.Idea19, player.Idea20]
             ideas = validate_ideas(player, ideas)
             for i in range(len(ideas)):
                 if ideas[i] == 'false':
@@ -779,7 +863,7 @@ class Clue_Page(Page):
                     setattr(player, f'pair{(i // 2) + 1}after', 'empty')
         else:
             player.after_invalid = 0
-            ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10]
+            ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12, player.Idea13, player.Idea14, player.Idea15, player.Idea16, player.Idea17, player.Idea18, player.Idea19, player.Idea20]
             ideas = validate_ideas(player, ideas)
             for i in range(len(ideas)):
                 if ideas[i] == 'false':  
@@ -799,7 +883,7 @@ class Voting_Page(Page):
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
         taboo_words = C.TABOO_WORDS[player.round_number - 1]
-        pairs = [player.pair1after] + [player.pair1after for player in player.get_others_in_group()] + [player.pair2after] + [player.pair2after for player in player.get_others_in_group()] + [player.pair3after] + [player.pair3after for player in player.get_others_in_group()] + [player.pair4after] + [player.pair4after for player in player.get_others_in_group()] + [player.pair5after] + [player.pair5after for player in player.get_others_in_group()] 
+        pairs = [player.pair1after] + [player.pair1after for player in player.get_others_in_group()] + [player.pair2after] + [player.pair2after for player in player.get_others_in_group()] + [player.pair3after] + [player.pair3after for player in player.get_others_in_group()] + [player.pair4after] + [player.pair4after for player in player.get_others_in_group()] + [player.pair5after] + [player.pair5after for player in player.get_others_in_group()] + [player.pair6after] + [player.pair6after for player in player.get_others_in_group()] + [player.pair7after] + [player.pair7after for player in player.get_others_in_group()] + [player.pair8after] + [player.pair8after for player in player.get_others_in_group()] + [player.pair9after] + [player.pair9after for player in player.get_others_in_group()] + [player.pair10after] + [player.pair10after for player in player.get_others_in_group()]
         while 'empty' in pairs:
             pairs.remove('empty')
         while '' in pairs:
@@ -813,9 +897,9 @@ class Voting_Page(Page):
         pairsafter = sorted(pairsafter)
         player.pairsafter = ', '.join(pairsafter)
         number_pairs = len(pairsafter)
-        pairs_dict = {f'Pair{i+1}': pairsafter[i] if i < number_pairs else '' for i in range(15)}
-        Pair1, Pair2, Pair3, Pair4, Pair5, Pair6, Pair7, Pair8, Pair9, Pair10, Pair11, Pair12, Pair13, Pair14, Pair15 = pairs_dict.values()
-        return dict(mystery_word = mystery_word, taboo_words= taboo_words, number_pairs = number_pairs, Pair1 = Pair1, Pair2 = Pair2, Pair3 = Pair3, Pair4 = Pair4, Pair5 = Pair5, Pair6 = Pair6, Pair7 = Pair7, Pair8 = Pair8, Pair9 = Pair9, Pair10 = Pair10, Pair11 = Pair11, Pair12 = Pair12, Pair13 = Pair13, Pair14 = Pair14, Pair15 = Pair15, pairs = pairsafter)
+        pairs_dict = {f'Pair{i+1}': pairsafter[i] if i < number_pairs else '' for i in range(30)}
+        Pair1, Pair2, Pair3, Pair4, Pair5, Pair6, Pair7, Pair8, Pair9, Pair10, Pair11, Pair12, Pair13, Pair14, Pair15, Pair16, Pair17, Pair18, Pair19, Pair20, Pair21, Pair22, Pair23, Pair24, Pair25, Pair26, Pair27, Pair28, Pair29, Pair30 = pairs_dict.values()
+        return dict(mystery_word = mystery_word, taboo_words= taboo_words, number_pairs = number_pairs, Pair1 = Pair1, Pair2 = Pair2, Pair3 = Pair3, Pair4 = Pair4, Pair5 = Pair5, Pair6 = Pair6, Pair7 = Pair7, Pair8 = Pair8, Pair9 = Pair9, Pair10 = Pair10, Pair11 = Pair11, Pair12 = Pair12, Pair13 = Pair13, Pair14 = Pair14, Pair15 = Pair15, Pair16 = Pair16, Pair17 = Pair17, Pair18 = Pair18, Pair19 = Pair19, Pair20 = Pair20, Pair21 = Pair21, Pair22 = Pair22, Pair23 = Pair23, Pair24 = Pair24, Pair25 = Pair25, Pair26 = Pair26, Pair27 = Pair27, Pair28 = Pair28, Pair29 = Pair29, Pair30 = Pair30, pairs = pairsafter) 
   
 class VotingResultPage(Page):
     timeout_seconds = 5000
@@ -1086,7 +1170,7 @@ class Usefulness(Page):
         return dict(mystery_word=mystery_word, pairs=pairs, choices = choices, number_pairs = player.number_pairs_after)
     
     form_model = 'player'
-    form_fields = ['usefulness_1', 'usefulness_2', 'usefulness_3', 'usefulness_4', 'usefulness_5', 'usefulness_6', 'usefulness_7', 'usefulness_8', 'usefulness_9', 'usefulness_10', 'usefulness_11', 'usefulness_12', 'usefulness_13', 'usefulness_14', 'usefulness_15']
+    form_fields = ['usefulness_1', 'usefulness_2', 'usefulness_3', 'usefulness_4', 'usefulness_5', 'usefulness_6', 'usefulness_7', 'usefulness_8', 'usefulness_9', 'usefulness_10', 'usefulness_11', 'usefulness_12', 'usefulness_13', 'usefulness_14', 'usefulness_15', 'usefulness_16', 'usefulness_17', 'usefulness_18', 'usefulness_19', 'usefulness_20', 'usefulness_21', 'usefulness_22', 'usefulness_23', 'usefulness_24', 'usefulness_25', 'usefulness_26', 'usefulness_27', 'usefulness_28', 'usefulness_29', 'usefulness_30']
 
 def dimension_error_message(player, value, threshold):
     if value == '' and player.number_pairs_after > threshold:
@@ -1136,6 +1220,51 @@ def usefulness_14_error_message(player, value):
 
 def usefulness_15_error_message(player, value):
     return dimension_error_message(player, value, 14)
+
+def usefulness_16_error_message(player, value):
+    return dimension_error_message(player, value, 15)
+
+def usefulness_17_error_message(player, value):
+    return dimension_error_message(player, value, 16)
+
+def usefulness_18_error_message(player, value):
+    return dimension_error_message(player, value, 17)
+
+def usefulness_19_error_message(player, value):
+    return dimension_error_message(player, value, 18)
+
+def usefulness_20_error_message(player, value):
+    return dimension_error_message(player, value, 19)
+
+def usefulness_21_error_message(player, value):
+    return dimension_error_message(player, value, 20)
+
+def usefulness_22_error_message(player, value):
+    return dimension_error_message(player, value, 21)
+
+def usefulness_23_error_message(player, value):
+    return dimension_error_message(player, value, 22)
+
+def usefulness_24_error_message(player, value):
+    return dimension_error_message(player, value, 23)
+
+def usefulness_25_error_message(player, value):
+    return dimension_error_message(player, value, 24)
+
+def usefulness_26_error_message(player, value):
+    return dimension_error_message(player, value, 25)
+
+def usefulness_27_error_message(player, value):
+    return dimension_error_message(player, value, 26)
+
+def usefulness_28_error_message(player, value):
+    return dimension_error_message(player, value, 27)
+
+def usefulness_29_error_message(player, value):
+    return dimension_error_message(player, value, 28)
+
+def usefulness_30_error_message(player, value):
+    return dimension_error_message(player, value, 29)
    
 class Originality(Page):
     timeout_seconds = 5000
@@ -1154,7 +1283,7 @@ class Originality(Page):
         return dict(mystery_word=mystery_word, pairs=pairs, choices = choices, number_pairs = player.number_pairs_after)
     
     form_model = 'player'
-    form_fields = ['originality_1', 'originality_2', 'originality_3', 'originality_4', 'originality_5', 'originality_6', 'originality_7', 'originality_8', 'originality_9', 'originality_10', 'originality_11', 'originality_12', 'originality_13', 'originality_14', 'originality_15']
+    form_fields = ['originality_1', 'originality_2', 'originality_3', 'originality_4', 'originality_5', 'originality_6', 'originality_7', 'originality_8', 'originality_9', 'originality_10', 'originality_11', 'originality_12', 'originality_13', 'originality_14', 'originality_15', 'originality_16', 'originality_17', 'originality_18', 'originality_19', 'originality_20', 'originality_21', 'originality_22', 'originality_23', 'originality_24', 'originality_25', 'originality_26', 'originality_27', 'originality_28', 'originality_29', 'originality_30']
 
 def originality_1_error_message(player, value):
     return dimension_error_message(player, value, 0)
@@ -1201,6 +1330,51 @@ def originality_14_error_message(player, value):
 def originality_15_error_message(player, value):
     return dimension_error_message(player, value, 14)
 
+def originality_16_error_message(player, value):
+    return dimension_error_message(player, value, 15)
+
+def originality_17_error_message(player, value):
+    return dimension_error_message(player, value, 16)
+
+def originality_18_error_message(player, value):
+    return dimension_error_message(player, value, 17)
+
+def originality_19_error_message(player, value):
+    return dimension_error_message(player, value, 18)
+
+def originality_20_error_message(player, value):
+    return dimension_error_message(player, value, 19)
+
+def originality_21_error_message(player, value):
+    return dimension_error_message(player, value, 20)
+
+def originality_22_error_message(player, value):
+    return dimension_error_message(player, value, 21)
+
+def originality_23_error_message(player, value):
+    return dimension_error_message(player, value, 22)
+
+def originality_24_error_message(player, value):
+    return dimension_error_message(player, value, 23)
+
+def originality_25_error_message(player, value):
+    return dimension_error_message(player, value, 24)
+
+def originality_26_error_message(player, value):
+    return dimension_error_message(player, value, 25)
+
+def originality_27_error_message(player, value):
+    return dimension_error_message(player, value, 26)
+
+def originality_28_error_message(player, value):
+    return dimension_error_message(player, value, 27)
+
+def originality_29_error_message(player, value):
+    return dimension_error_message(player, value, 28)
+
+def originality_30_error_message(player, value):
+    return dimension_error_message(player, value, 29)
+
 class Overall_Creativity(Page):
     timeout_seconds = 5000
     def is_displayed(player):
@@ -1218,7 +1392,7 @@ class Overall_Creativity(Page):
         return dict(mystery_word=mystery_word, pairs=pairs, choices = choices, number_pairs = player.number_pairs_after)
     
     form_model = 'player'
-    form_fields = ['creativity_1', 'creativity_2', 'creativity_3', 'creativity_4', 'creativity_5', 'creativity_6', 'creativity_7', 'creativity_8', 'creativity_9', 'creativity_10', 'creativity_11', 'creativity_12', 'creativity_13', 'creativity_14', 'creativity_15']
+    form_fields = ['creativity_1', 'creativity_2', 'creativity_3', 'creativity_4', 'creativity_5', 'creativity_6', 'creativity_7', 'creativity_8', 'creativity_9', 'creativity_10', 'creativity_11', 'creativity_12', 'creativity_13', 'creativity_14', 'creativity_15', 'creativity_16', 'creativity_17', 'creativity_18', 'creativity_19', 'creativity_20', 'creativity_21', 'creativity_22', 'creativity_23', 'creativity_24', 'creativity_25', 'creativity_26', 'creativity_27', 'creativity_28', 'creativity_29', 'creativity_30']
     
 def creativity_1_error_message(player, value):
     return dimension_error_message(player, value, 0)
@@ -1264,6 +1438,51 @@ def creativity_14_error_message(player, value):
     
 def creativity_15_error_message(player, value):
     return dimension_error_message(player, value, 14)
+
+def creativity_16_error_message(player, value):
+    return dimension_error_message(player, value, 15)
+
+def creativity_17_error_message(player, value):
+    return dimension_error_message(player, value, 16)
+
+def creativity_18_error_message(player, value):
+    return dimension_error_message(player, value, 17)
+
+def creativity_19_error_message(player, value):
+    return dimension_error_message(player, value, 18)
+
+def creativity_20_error_message(player, value):
+    return dimension_error_message(player, value, 19)
+
+def creativity_21_error_message(player, value):
+    return dimension_error_message(player, value, 20)
+
+def creativity_22_error_message(player, value):
+    return dimension_error_message(player, value, 21)
+
+def creativity_23_error_message(player, value):
+    return dimension_error_message(player, value, 22)
+
+def creativity_24_error_message(player, value):
+    return dimension_error_message(player, value, 23)
+
+def creativity_25_error_message(player, value):
+    return dimension_error_message(player, value, 24)
+
+def creativity_26_error_message(player, value):
+    return dimension_error_message(player, value, 25)
+
+def creativity_27_error_message(player, value):
+    return dimension_error_message(player, value, 26)
+
+def creativity_28_error_message(player, value):
+    return dimension_error_message(player, value, 27)
+
+def creativity_29_error_message(player, value):
+    return dimension_error_message(player, value, 28)
+
+def creativity_30_error_message(player, value):
+    return dimension_error_message(player, value, 29)
 
 def get_sorted_scores(groups, attribute):
     scores = [getattr(group, attribute) for group in groups]

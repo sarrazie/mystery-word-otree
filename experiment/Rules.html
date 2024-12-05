@@ -20,52 +20,54 @@
 </script>
 </br>
 <div class="info active">
-<p> Hier finden Sie ein <b>Beispiel</b> für eine Runde: </b> </p>  
-</div>
-<div class="info">
 <p> <b>Geheimes Wort:</b> <i>Zeit</i> </p>
 </div>
 {{ if player.player_role == "Hinweisgebende" }}
 <div class="info">
-<p> Drei Tabuwörter, die <b>nicht</b> Bestandteil des Hinweispaars sein dürfen: </p>
+<p> Tabuwörter, die <b>nicht</b> Bestandteil der Hinweispaare sein dürfen: </p>
 <p><i>Gegenwart, Vergangenheit, Stunde</i></p> 
 </div>
 <div class="info">
-<p> <b>Gültige Hinweispaare</b> Ihrer Gruppe: <i>Uhr + Minute, Moment + vergänglich, unendlich + Zeiger</i></p> 
+<p> <b>Hinweispaare</b> Ihrer Gruppe: <i>Uhr + Minute, Moment + vergänglich, unendlich + Zeiger</i></p> 
 </div>
 <div class="info">
 <p> <b>Finales Hinweispaar</b> Ihrer Gruppe: <i>Uhr + Minute</i></p> 
 </div>
 <div class="info">
-<p><b> Bewertung: </b></p>
-<p> Nützlichkeit: im 1. Versuch erraten </p>
-<p> Originalität: Semantische Distanz = 90 </p>
-<p> Quantität: 3 gültige Hinweispaare</p>
+<p><b> Bewertung der Runde: </b></p>
+<p> Nützlichkeit: Das geheime Wort wurde im <b>1. Versuch</b> erraten. </p>
+<p> Originalität: Semantische Distanz = <b>90</b> (je höher die Distanz, desto origineller das Hinweispaar)</p>
+<p> Quantität: <b>3</b> gültige Hinweispaare wurden erstellt. </p>
 </br>
 <button class= "otree-btn btn btn-info" style="background-color: rgb(0, 174, 255); color: black; border: 2px solid rgb(0, 174, 255);">Weiter</button>
 </br>
 </div>
 {{ else}}
 <div class="info">
-    <p><b><span style="color: red;">Wortaufgabe 1</span></b></p>
+    </br>
+    <p><b><span style="color: red;"><u>Wortaufgabe 1:</u></span></b></p>
     <p><b>Hinweispaar</b> einer zufällig ausgewählten Gruppe: <i>Uhr + Minute</i></p> 
 </div>
 <div class="info">
 <p> <b>1. Rateversuch:</b> Zeiger </p>
 <p> <b><span style="color: red;">Falsch!</span></b></p>
+</div>
+<div class="info">
 <p> <b>2. Rateversuch:</b> Zeit</p>
 <p> <b><span style="color: green;">Richtig!</span></b></p>
 <p> <b>2 Punkte </b>gesammelt! </p>
 </div>
 <div class="info">
-<p> <b><span style="color: blue;">Bewertung Gültigkeit</span></b></p>
-<p> <b>Hinweispaare einer anderen zufällig ausgewählten Gruppe:</b> <i>Uhr + Minute, Moment + vergänglich, unendlich + Zeiger, der + die </i> </p>
-<p> <i>der + die</i> als <b>ungültig</b> markieren, weil keinerlei Zusammenhang zu Zeit erkennbar ist.</p>
+</br>
+<p> <b><span style="color: blue;"><u>Bewertung Gültigkeit:</u></span></b></p>
+<p> <b>Hinweispaare einer anderen Gruppe:</b> <i>Uhr + Minute, Moment + vergänglich, unendlich + Zeiger, der + die </i> </p>
+<p> <i>der + die</i> wird als <b>ungültig</b> markiert, weil kein Zusammenhang zu <i>Zeit</i> erkennbar ist.</p>
 </div>
 <div class="info">
-<p> <b><span style="color: blue;">Bewertung Kreativität</span></b></p>
-<p> <b>Hinweispaare einer anderen zufällig ausgewählten Gruppe:</b> <i>Uhr + Minute, Moment + vergänglich, unendlich + Zeiger, der + die </i> </p>
-<p> Einzelne Hinweispaare auf einer Skala von 1-10 nach ihrer Nützlichkeit, Originalität und Gesamtkreativität bewerten.</p>
+</br>
+<p> <b><span style="color: blue;"><u>Bewertung Kreativität:</u></span></b></p>
+<p> <b>Hinweispaare:</b> <i>Uhr + Minute, Moment + vergänglich, unendlich + Zeiger</i> </p>
+<p> Jedes gültige Hinweispaar wird einzeln auf einer Skala von 1-10 nach Nützlichkeit, Originalität und Gesamtkreativität bewertet.</p>
 </br>
 <button class= "otree-btn btn btn-info" style="background-color: rgb(0, 174, 255); color: black; border: 2px solid rgb(0, 174, 255);">Weiter</button>
 </br>

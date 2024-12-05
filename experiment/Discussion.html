@@ -132,6 +132,116 @@
 </br>
 {{ else }} {{ endif }}
 
+{{ if number_pairs > 10}}
+<b>11. {{ Pair11 }}</b>
+{{ formfield 'rating_before11' }}
+<details>
+    <summary> Hinweis ersetzen </summary>
+        {{ formfield 'replace_word11' }}
+        {{ formfield 'discussion11' }}
+</details>
+</br>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 11 }}
+<b>12. {{ Pair12 }}</b>
+{{ formfield 'rating_before12' }}
+<details>
+    <summary> Hinweis ersetzen </summary>
+        {{ formfield 'replace_word12' }}
+        {{ formfield 'discussion12' }}
+</details>
+</br>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 12 }}
+<b>13. {{ Pair13 }}</b>
+{{ formfield 'rating_before13' }}
+<details>
+    <summary> Hinweis ersetzen </summary>
+        {{ formfield 'replace_word13' }}
+        {{ formfield 'discussion13' }}
+</details>
+</br>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 13 }}
+<b>14. {{ Pair14 }}</b>
+{{ formfield 'rating_before14' }}
+<details>
+    <summary> Hinweis ersetzen </summary>
+        {{ formfield 'replace_word14' }}
+        {{ formfield 'discussion14' }}
+</details>
+</br>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 14 }}
+<b>15. {{ Pair15 }}</b>
+{{ formfield 'rating_before15' }}
+<details>
+    <summary> Hinweis ersetzen </summary>
+        {{ formfield 'replace_word15' }}
+        {{ formfield 'discussion15' }}
+</details>
+</br>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 15 }}
+<b>16. {{ Pair16 }}</b>
+{{ formfield 'rating_before16' }}
+<details>
+    <summary> Hinweis ersetzen </summary>
+        {{ formfield 'replace_word16' }}
+        {{ formfield 'discussion16' }}
+</details>
+</br>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 16 }}
+<b>17. {{ Pair17 }}</b>
+{{ formfield 'rating_before17' }}
+<details>
+    <summary> Hinweis ersetzen </summary>
+        {{ formfield 'replace_word17' }}
+        {{ formfield 'discussion17' }}
+</details>
+</br>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 17 }}
+<b>18. {{ Pair18 }}</b>
+{{ formfield 'rating_before18' }}
+<details>
+    <summary> Hinweis ersetzen </summary>
+        {{ formfield 'replace_word18' }}
+        {{ formfield 'discussion18' }}
+</details>
+</br>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 18 }}
+<b>19. {{ Pair19 }}</b>
+{{ formfield 'rating_before19' }}
+<details>
+    <summary> Hinweis ersetzen </summary>
+        {{ formfield 'replace_word19' }}
+        {{ formfield 'discussion19' }}
+</details>
+</br>
+{{ else }} {{ endif }}
+
+{{ if number_pairs > 19 }}
+<b>20. {{ Pair20 }}</b>
+{{ formfield 'rating_before20' }}
+<details>
+    <summary> Hinweis ersetzen </summary>
+        {{ formfield 'replace_word20' }}
+        {{ formfield 'discussion20' }}
+</details>
+</br>
+{{ else }} {{ endif }}
+
 <button class= "otree-btn btn btn-info" style="background-color: rgb(0, 174, 255); color: black; border: 2px solid rgb(0, 174, 255);">Weiter</button>
 </br>
 </br>
@@ -140,8 +250,8 @@
 </br>
     <ul>    
         <li> <b><span style="color: red;">Wortaufgabe 1</span></b>: Zusammen in Ihrer Gruppe viele originelle Hinweispaare generieren, anhand derer eine Person ein geheimes Wort erraten kann.</li>
-        <li> <b>Ungültige Hinweispaare</b> enthalten Hinweise, die denselben Wortstamm wie das Geheimwort oder wie eins der drei Tabuwörter haben, eine Übersetzung des Geheimworts sind oder frei erfunden.</li>
-        <li>{{ if player.participant.treatment == 1 }}Sie erhalten eine Auszahlung von 13 Euro, wenn Sie die Studie abschließen. {{ elif player.participant.treatment == 2 }}Sie erhalten eine Auszahlung von bis zu 20 Euro in Abhängigkeit von ihrer relativen Leistung inpuncto <b>Quantität.</b> {{ elif player.participant.treatment == 3 }}Sie erhalten eine Auszahlung von bis zu 20 Euro in Abhängigkeit von ihrer relativen Leistung inpuncto <b>Qualität.</b> {{ else}}Sie erhalten eine Auszahlung von bis zu 20 Euro in Abhängigkeit von ihrer relativen Leistung im inpuncto <b>Originalität.</b> {{ endif }}</li>
+        <li> <b>Ungültige Hinweispaare</b> enthalten Hinweise, die denselben Wortstamm wie das geheime Wort oder wie eins der drei Tabuwörter haben, eine Übersetzung des geheimen Worts sind oder frei erfunden.</li>
+        <li>{{ if player.participant.treatment == 1 }}Sie erhalten eine Auszahlung von 13 Euro, wenn Sie die Studie abschließen. {{ elif player.participant.treatment == 2 }}Sie erhalten eine Auszahlung von bis zu 20 Euro in Abhängigkeit von ihrer relativen Leistung in der Dimension <b>Quantität.</b> {{ elif player.participant.treatment == 3 }}Sie erhalten eine Auszahlung von bis zu 20 Euro in Abhängigkeit von ihrer relativen Leistung in der Dimension <b>Qualität.</b> {{ else}}Sie erhalten eine Auszahlung von bis zu 20 Euro in Abhängigkeit von ihrer relativen Leistung in der Dimension <b>Originalität.</b> {{ endif }}</li>
     </ul>  
 </details>
 

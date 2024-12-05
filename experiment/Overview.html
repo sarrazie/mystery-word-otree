@@ -22,10 +22,10 @@
 
 <div class="info active">
 {{ if player.player_role == 'Hinweisgebende'}}
-<p>Sie wurden nach dem Zufallsprinzip einer <b>Gruppe von drei Teilnehmenden</b> zugeteilt. Sie und zwei andere Teilnehmende bleiben während der gesamten Studie zusammen in einer Gruppe.</p>
+<p>Sie wurden zufällig einer <b>Gruppe mit drei Teilnehmenden</b> zugewiesen. Sie und zwei andere Teilnehmende bleiben während der gesamten Studie zusammen in einer Gruppe.</p>
 </div>
 <div class="info">
-    <p>In dieser Studie gibt es vier Aufgaben: 
+    <p>Die Studie besteht aus vier Aufgaben: 
         <b><span style="color: red;">Wortaufgabe 1</span>, 
         <span style="color: blue;">Entscheidung</span>, 
         <span style="color: green;">Wortaufgabe 2</span>, 
@@ -33,13 +33,13 @@
     </p>
 </div>
 <div class="info">
-   <p><b><span style="color: red;">Wortaufgabe 1</span></b> nimmt dabei den Großteil der Studie ein und wird 8 Runden lang gespielt.</p> 
+   <p><b><span style="color: red;">Wortaufgabe 1</span></b> ist der Hauptbestandteil der Studie und umfasst 8 Runden.</p> 
    <p>Die anderen Aufgaben dauern jeweils maximal 5 Minuten.</p>
-   <p>Zusätzlich zu den vier Aufgaben werden Ihnen noch zwei kurze Fragebögen präsentiert.</p> 
+   <p>Zusätzlich bearbeiten Sie zwei kurze Fragebögen.</p> 
 </div>
 <div class="info">
     {{ if player.participant.treatment != 1}}
-    <p>Relevant für die Höhe der Auszahlung ist nur Ihre Leistung in <b><span style="color: red;">Wortaufgabe 1</span></b> und ihre <b><span style="color: blue;">Entscheidung</span></b>.</p> 
+    <p>Die Höhe Ihrer Auszahlung hängt ausschließlich von Ihrer Leistung in <b><span style="color: red;">Wortaufgabe 1</span></b> und Ihrer <b><span style="color: blue;">Entscheidung</span></b> ab.</p> 
     {{ endif }}
     <p>Sie erhalten die Auszahlung nur, wenn Sie die ganze Studie abschließen.</p>
 </br>
@@ -51,25 +51,26 @@
 </p>
 {{ else }}
 <div class="info active">
-<p> <p>In dieser Studie gibt es vier Aufgaben: 
-    <b><span style="color: red;">Wortaufgabe 1</span>, 
-    <span style="color: blue;">Bewertung</span>, 
-    <span style="color: green;">Wortaufgabe 2</span>, 
-    <span style="color: orange;">Wortaufgabe 3</span></b>
-</p>
+    <p>Die Studie besteht aus vier Aufgaben: 
+        <b><span style="color: red;">Wortaufgabe 1</span>, 
+        <span style="color: blue;">Bewertung</span>, 
+        <span style="color: green;">Wortaufgabe 2</span>, 
+        <span style="color: orange;">Wortaufgabe 3</span></b>
+    </p>
 </div>
 <div class="info">
-    <p><b><span style="color: red;">Wortaufgabe 1</span></b> und <b><span style="color: blue;">Bewertung</span></b> nehmen dabei den Großteil der Studie ein und finden jeweils 8 mal statt.</p> 
-    <p>Die anderen beiden Aufgaben dauern jeweils maximal 5 Minuten.</p>
-    <p>Zusätzlich zu den vier Aufgaben werden Ihnen noch zwei kurze Fragebögen präsentiert.</p> 
+    <p><b><span style="color: red;">Wortaufgabe 1</span></b> und <b><span style="color: blue;">Bewertung</span></b> sind die Hauptbestandteile der Studie und umfassen 8 Runden.</p> 
+    <p>Die anderen Aufgaben dauern jeweils maximal 5 Minuten.</p>
+    <p>Zusätzlich bearbeiten Sie zwei kurze Fragebögen.</p> 
 </div>
 <div class="info">
-    <p>Relevant für die Höhe der Auszahlung ist nur Ihre Leistung in <b><span style="color: red;">Wortaufgabe 1</span></b>.</p> 
-    <p>Sie erhalten die Auszahlung jedoch nur, wenn Sie die ganze Studie abschließen.</p>
+    <p>Die Höhe Ihrer Auszahlung hängt ausschließlich von Ihrer Leistung in <b><span style="color: red;">Wortaufgabe 1</span></b> ab.</p> 
+    <p>Sie erhalten die Auszahlung nur, wenn Sie die ganze Studie abschließen.</p>
 </br>
 <button class= "otree-btn btn btn-info" style="background-color: rgb(0, 174, 255); color: black; border: 2px solid rgb(0, 174, 255);">Weiter</button>
 </br>
 </div>
+
 </br>
 <p style="text-align: left">
     <button class="otree-btn btn btn-info" type="button" id="next">Nächste Info</button>
