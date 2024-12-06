@@ -26,6 +26,7 @@
 <p> <b><font color="#FF0000">{{ guess_missing }}</font></b> </p>
 {{ endif }}
 <p> Geheimes Wort: <b>{{ mystery_word }}</b> </p>
+{{ if player.player_role == 'Hinweisgebende' }}
 <p> Tabuwörter: {{ for word in taboo_words }} </p>
 <ul>
     <li> <b>{{ word }}</b></li>
@@ -33,10 +34,27 @@
 {{ endfor }}
 <p> Finales Hinweispaar: <b>{{ vote_group }}</b>
 </br>
-<p><b>Bewertung:</b></p>
-<p> {{ if player.player_role == 'Hinweisgebende' }} Ihre Gruppe hat in dieser Runde <b>{{ player.quantity }}</b> gültige(s) Hinweispaar(e) eingereicht. {{ else }} {{ endif }}</p>
-<p> {{ if player.player_role == 'Hinweisgebende' }} Ihre Gruppe hat in dieser Runde inpuncto Nützlichkeit <b>{{ player.score }}</b> Punkt(e) gesammelt . {{ else }} {{ endif }}</p>
-<p> {{ if player.player_role == 'Hinweisgebende' }} Ihre Gruppe hat in dieser Runde auf der Originalitätsskala den Wert <b>{{ originality }}</b> erreicht. {{ else }} {{ endif }}</p>
+<p><u>Bewertung:</u></p>
+<p> <b>Quantität:</b> Ihre Gruppe hat in dieser Runde <b>{{ player.quantity }}</b> gültige(s) Hinweispaar(e) eingereicht. </p>
+<p> <b>Qualität:</b> Ihre Gruppe hat in dieser Runde <b>{{ player.score }}</b> Punkt(e) gesammelt. </p>
+<p> <b>Originalität:</b> Ihre Gruppe hat in dieser Runde auf der Originalitätsskala den Wert <b>{{ originality }}</b> erreicht. </p>
 </br>
+{{ else}}
+<p>Hinweispaar: <b>{{ vote_group }}</b></p>
+{{ if guess_1 }}
+</br>
+<p> Erste Vermutung: <b>{{ guess_1 }}</b> </p>
+{{ endif }}
+{{ if guess_2 }}
+<p> Zweite Vermutung: <b>{{ guess_2 }}</b> </p>
+{{ endif }}
+{{ if guess_3 }}
+<p> Dritte Vermutung: <b>{{ guess_3 }}</b> </p>
+{{ endif }}
+</br>
+<p> Sie haben in dieser Runde <b>{{ player.score }} Punkte</b> gesammelt.</p>
+</br>
+{{ endif }}
+
 <button class= "otree-btn btn btn-info" style="background-color: rgb(0, 174, 255); color: black; border: 2px solid rgb(0, 174, 255);">Weiter</button>
 {{ endblock }}

@@ -7,7 +7,7 @@
 </br>
 <p> Vielen Dank für Ihre Teilnahme an diesem Experiment. Bitte warten Sie, bis die anderen Teilnehmenden fertig sind.</p>  
 {{ if player.player_role == "Hinweisgebende" }}
-<p> {{ if player.payment_allocator == 1}} <b>Ihre Entscheidung als Zuteiler wurde per Zufall ausgewählt!</b> Sie haben <b>{{ allocator_payoff }}</b> für sich behalten.{{ endif }} {{ if player.payment_receiver == 1 }} <b>Sie wurden per Zufall als Empfänger einer Entscheidung ausgewählt!</b> Sie erhalten von einem Zuteiler zusätzlich <b> {{ receiver_payoff }}</b>. {{ endif}} {{ if player.payment_receiver == 0 and player.payment_allocator == 0}} <b>Ihre Entscheidung wurde nicht zur Auszahlung ausgewählt!</b> {{ endif }} </p>
+<p> {{ if player.payment_allocator == 1}} Ihre <b><span style="color: blue;">Entscheidung</span></b> als Zuteiler wurde per Zufall ausgewählt! Sie haben <b>{{ allocator_payoff }}</b> für sich behalten.{{ endif }} {{ if player.payment_receiver == 1 }} Sie wurden per Zufall als Empfänger einer <b><span style="color: blue;">Entscheidung</span></b> ausgewählt! Sie erhalten von einem Zuteiler zusätzlich <b> {{ receiver_payoff }}</b>. {{ endif}} {{ if player.payment_receiver == 0 and player.payment_allocator == 0}} Ihre <b><span style="color: blue;">Entscheidung</span></b> wurde nicht zur Auszahlung ausgewählt! {{ endif }} </p>
 <p> Ihre gesamte Auszahlung (gerundet auf einen vollen Betrag) beträgt somit <b>{{ payoff }}.</b></p>
 {{ else }}
 <p> Ihre gesamte Auszahlung beträgt <b>{{ payoff }}.</b></p>
