@@ -1097,7 +1097,6 @@ class Results(Page):
             if player.quantity == 0:
                 player.missing = True
                 missing = 'Achtung! Sie haben kein gültiges Hinweispaar abgegeben.'
-
             # Berechnung der Originalität
             originality = 0.0
             if vote_group != 'Kein gültiges Hinweispaar':
@@ -1112,12 +1111,10 @@ class Results(Page):
                 originality = round(originality, 2)
             else:
                 player.originality = originality
-
             # Scores berechnen
             quality_scores = []
             originality_scores = []
             quantity_scores = []
-
             for i in range(player.round_number):
                 quality_scores.append(player.in_round(player.round_number - i).score)
                 player.group.quality = sum(quality_scores)
@@ -1126,7 +1123,6 @@ class Results(Page):
                 if player.in_round(player.round_number - i).field_maybe_none('originality') is not None:
                         originality_scores.append(float(player.in_round(player.round_number - i).originality))
                         player.group.originality = sum(originality_scores) / len(originality_scores)
-
             return dict(mystery_word=mystery_word, taboo_words=taboo_words, vote_group=player.vote_group, missing=missing, invalid=invalid, originality=originality)
         else:
             player.guess_missing = False
@@ -1140,7 +1136,6 @@ class Results(Page):
             for i in range(player.round_number):
                 guesser_scores.append(player.in_round(player.round_number - i).score)
                 player.quality_score = sum(guesser_scores)
-
             return dict(mystery_word=mystery_word, taboo_words=taboo_words, vote_group=player.vote_group, guess_missing=guess_missing, guess_1 = player.guess1 , guess_2 = player.guess2, guess_3 = player.guess3)
 
 class Usefulness(Page):
