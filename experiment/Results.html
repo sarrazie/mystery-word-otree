@@ -35,9 +35,9 @@
 <p> Finales Hinweispaar: <b>{{ vote_group }}</b>
 </br>
 <p><u>Bewertung:</u></p>
-<p> <b>Quantität:</b> Ihre Gruppe hat in dieser Runde <b>{{ player.quantity }}</b> gültige(s) Hinweispaar(e) eingereicht. </p>
-<p> <b>Qualität:</b> Ihre Gruppe hat in dieser Runde <b>{{ player.score }}</b> Punkt(e) gesammelt. </p>
-<p> <b>Originalität:</b> Ihre Gruppe hat in dieser Runde auf der Originalitätsskala den Wert <b>{{ originality }}</b> erreicht. </p>
+<p> {{ if player.participant.treatment == 2 }} <b><font color="#FF0000">Quantität:</font></b> {{ else }} <b>Quantität:</b>{{ endif }} Ihre Gruppe hat in dieser Runde <b>{{ player.quantity }}</b> gültige(s) Hinweispaar(e) eingereicht. </p>
+<p> {{ if player.participant.treatment == 3 }} <b><font color="#FF0000">Qualität:</font></b> {{ else }} <b>Qualität:</b>{{ endif }} Ihre Gruppe hat in dieser Runde <b>{{ player.score }}</b> Punkt(e) gesammelt. </p>
+<p> {{ if player.participant.treatment == 4 }} <b><font color="#FF0000">Originalität:</font></b> {{ else }} <b>Originalität:</b>{{ endif }} Ihre Gruppe hat in dieser Runde auf der Originalitätsskala den Wert <b>{{ originality }}</b> erreicht. </p>
 </br>
 {{ else}}
 <p>Hinweispaar: <b>{{ vote_group }}</b></p>

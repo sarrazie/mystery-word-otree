@@ -1,5 +1,5 @@
 {{ block title }}
-    Rateversuch
+    1. Rateversuch
 {{ endblock }}
 {{ block content }}
 
@@ -19,13 +19,17 @@
     });
 </script>
 </br>
-<p> Dies ist das <b>Hinweispaar</b>, das Sie von einer der Gruppen erhalten haben: </p> 
-<ul>
-
-<p><b>{{ vote_group }}</b></p>
-
-</ul>
+{{ if vote_group != "Kein gültiges Hinweispaar" }}
+    <p> Dies ist das <b>Hinweispaar</b>, das Sie von einer der Gruppen erhalten haben: </p> 
+    <ul>
+        <p><b>{{ vote_group }}</b></p>
+    </ul>
 <p> Bitte geben Sie Ihre erste <b>Vermutung</b> für das geheime Wort ein. {{ formfield 'guess1' }} </p>
+{{ else }}
+<p>Leider hat die für diese Runde zufällig ausgewählte Gruppe ein <b>ungültiges Hinweispaar</b> abgegeben.</p>
+<p>Dieses wurde automatisch entfernt, und daher können Sie in dieser Runde <b>nicht raten</b>.</p>  
+<p>Bitte klicken Sie auf "Weiter", um fortzufahren. </p>
+{{ endif }}
 </br>
 <button class= "otree-btn btn btn-info" style="background-color: rgb(0, 174, 255); color: black; border: 2px solid rgb(0, 174, 255);">Weiter</button>
 </br>
@@ -39,5 +43,6 @@
         <li> <b><span style="color: blue;">Bewertung</span></b>: Hinweispaare zu jedem geheimen Wort auf ihre Gültigkeit überprüfen und ihre Kreativität bewerten.</li>
     </ul>
 </details>
+{{ formfield_errors 'guess1' }}
 
 {{ endblock }}
