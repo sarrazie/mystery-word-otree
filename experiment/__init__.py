@@ -951,6 +951,11 @@ class Guess_Page1(Page):
     
     form_model = 'player'
     form_fields = ['guess1'] 
+
+    def error_message(player, values):
+        if player.vote_group != "Kein gültiges Hinweispaar":            
+            if values[f'guess1'] == '':
+                    return f'Bitte geben Sie eine Vermutung ab!'
     
     def before_next_page(player, timeout_happened):
         if timeout_happened:
