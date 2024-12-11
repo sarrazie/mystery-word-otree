@@ -959,7 +959,7 @@ class Guess_Page1(Page):
     
     def before_next_page(player, timeout_happened):
         if timeout_happened:
-            player.guess1 = 'Kein Tipp gegeben'
+            player.guess1 = 'Zeit abgelaufen'
             player.correct_guess1 = False
         else:
             special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
@@ -984,7 +984,7 @@ class Guess_Page2(Page):
     
     def before_next_page(player, timeout_happened):
         if timeout_happened:
-            player.guess2 = 'Kein Tipp gegeben'
+            player.guess2 = 'Zeit abgelaufen'
             player.correct_guess2 = False
         else:
             special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
@@ -1009,7 +1009,7 @@ class Guess_Page3(Page):
     
     def before_next_page(player, timeout_happened):
         if timeout_happened:
-            player.guess3 = 'Kein Tipp gegeben'
+            player.guess3 = 'Zeit abgelaufen'
             player.correct_guess3 = False
         else:
             special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
@@ -1055,7 +1055,7 @@ class Results(Page):
         def calculate_result(player, guesses, mystery_word):
             mystery_word_lower = mystery_word.lower()
             guesses_lower = [guess.lower() for guess in guesses if guess] 
-            if mystery_word_lower == guesses_lower[0]:
+            if len(guesses_lower) > 0 and mystery_word_lower == guesses_lower[0]:
                 return 'richtig', 3
             elif len(guesses_lower) > 1 and mystery_word_lower == guesses_lower[1]:
                 return 'richtig', 2
@@ -1133,9 +1133,9 @@ class Results(Page):
             player.guess_missing = False
             guess_missing = ''
             guesses = [player.guess1, player.guess2, player.guess3]
-            if player.guess1 == 'Kein Tipp gegeben':
+            if (player.guess1 == 'Zeit abgelaufen' or player.guess1 == '') and (player.guess2 == 'Zeit abgelaufen' or player.guess2 == '') and (player.guess3 == 'Zeit abgelaufen' or player.guess3 == ''):
                 player.guess_missing = True
-                guess_missing = 'Achtung! Sie haben keinen Tipp abgegeben.'
+                guess_missing = 'Achtung! Sie haben keine Vermutung abgegeben.'
             player.result, player.score = calculate_result(player, guesses, mystery_word)
             guesser_scores = []
             for i in range(player.round_number):
