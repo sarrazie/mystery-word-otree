@@ -16,7 +16,7 @@ Ihre App-Beschreibung
 class C(BaseConstants):
     NAME_IN_URL = 'mabella_experiment'
     NUM_ROUNDS = 1
-    MYSTERY_WORDS = ['Raum','Taube', 'Golf', 'Elektrizitaet', 'Ende', 'Sombrero']
+    MYSTERY_WORDS = ['Raum','Taube', 'Golf', 'Elektrizität', 'Ende', 'Sombrero']
     LANGUAGE_CODE = 'de'
     PLAYERS_PER_GROUP = None
     TABOO_WORDS = [
@@ -28,12 +28,12 @@ class C(BaseConstants):
         ['Hut', 'Mexiko', 'Kopfbedeckung']
     ]
     STEM_WORDS = [
-        ['raum', 'raeum', 'zimmer', 'hotel', 'wohn'], 
-        ['taub', 'taeub', 'gurr', 'flieg', 'flug', 'fluege', 'vogel', 'voegel', 'bot', 'fried'],
-        ['golf', 'vw', 'wagen', 'volk', 'voelk', 'schlaeg', 'schlag', 'par', 'birdie', 'mini'],
+        ['raum', 'räum', 'zimmer', 'hotel', 'wohn'], 
+        ['taub', 'täub', 'gurr', 'flieg', 'flug', 'flüge', 'vogel', 'vögel', 'bot', 'fried'],
+        ['golf', 'vw', 'wagen', 'volk', 'völk', 'schläg', 'schlag', 'par', 'birdie', 'mini'],
         ['elektr', 'strom', 'tesla', 'edison', 'spann', 'stati'],  
-        ['end', 'final', 'schluss', 'stopp', 'tot', 'tod', 'an', 'fang', 'schluess', 'faeng'],
-        ['sombrero', 'hut', 'huet', 'mexik', 'mexic', 'kopf', 'koepf', 'bedeck', 'mariach', 'kremp']
+        ['end', 'final', 'schluss', 'stopp', 'tot', 'tod', 'an', 'fang', 'schlüss', 'fäng'],
+        ['sombrero', 'hut', 'hüt', 'mexik', 'mexic', 'kopf', 'köpf', 'bedeck', 'mariach', 'kremp']
     ]
     ACHIEVEMENTS= ['Bildende_Kunst', 'Musik', 'Tanz', 'Architektur', 'Literatur', 'Humor', 'Erfindungen', 'Wissenschaftliche_Entdeckungen', 'Theater_und_Film', 'Kochen']
 
@@ -441,7 +441,7 @@ class Player(BasePlayer):
     number_pairs_after = models.IntegerField()
     circle_overlap = models.FloatField(label="Overlap Percentage",blank=True)
     explanation = models.LongStringField(label='<b>5. </b>Bitte beschreiben Sie in Stichpunkten, warum sich Ihre Gruppe final für dieses Hinweispaar entschieden hat. (optional)', blank=True, max_length=500)
-    subjective_originality = models.IntegerField(choices=[0, 1, 2, 3 ,4, 5, 6, 7, 8, 9, 10],label = '<b>3. </b>Bitte bewerten Sie ihr finales Hinweispaar auf einer Skala von 0 bis 10, wie <b>originell und neu</b> Sie es finden. <br> (0 = überhaupt nicht originell, 10 = sehr originell)', widget=widgets.RadioSelectHorizontal, blank= False)
+    subjective_originality = models.IntegerField(choices=[0, 1, 2, 3 ,4, 5, 6, 7, 8, 9, 10],label = '<b>3. </b>Bitte bewerten Sie ihr finales Hinweispaar auf einer Skala von 0 bis 10, wie <b>originell</b> Sie es finden. <br> (0 = überhaupt nicht originell, 10 = sehr originell)', widget=widgets.RadioSelectHorizontal, blank= False)
     subjective_quality = models.IntegerField(choices=[0, 1, 2, 3 ,4, 5, 6, 7, 8, 9, 10,],label = '<b>4. </b>Bitte bewerten Sie ihr finales Hinweispaar auf einer Skala von 0 bis 10, wie <b>nützlich</b> es zur Erratung des geheimen Wortes ist. <br> (0 = überhaupt nicht nützlich, 10 = sehr nützlich)', widget=widgets.RadioSelectHorizontal, blank= False)
     rat1 = models.StringField(label= '', initial='', blank=True, max_length=18)
     rat2 = models.StringField(label= '', initial='', blank=True, max_length=18)
@@ -462,7 +462,7 @@ class Player(BasePlayer):
     ideagen1 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>1. </b>Es fiel mir schwer, nützliche Hinweispaare zu generieren.', widget=widgets.RadioSelectHorizontal, blank=True)
     ideagen2 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>2. </b>Es fiel mir schwer, originelle Hinweispaare zu generieren.', widget=widgets.RadioSelectHorizontal, blank=True)
     ideagen3 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>3. </b>Es fiel mir schwer, viele Hinweispaare zu generieren.', widget=widgets.RadioSelectHorizontal, blank=True)
-    ideagen4 = models.LongStringField(label='<b>4. </b>Welche Strategie haben Sie bei der Ideengenerierung verfolgt?', initial = '', max_length=500, blank=True)
+    ideagen4 = models.LongStringField(label='<b>4. </b>Welche Strategie haben Sie bei der Ideengenerierung verfolgt? (in Stichpunkten, optional)', initial = '', max_length=500, blank=True)
     feedback1 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>5. </b>Ich schätze mein gegebenes Feedback als hilfreich ein.', widget=widgets.RadioSelectHorizontal, blank=True)
     feedback2 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>6. </b>Das empfangene Feedback hat mir geholfen.', widget=widgets.RadioSelectHorizontal, blank=True)
     feedback3 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>7. </b>Die Bereitschaft meiner Gruppenmitglieder, Feedback anzunehmen, war groß.', widget=widgets.RadioSelectHorizontal, blank=True)
@@ -484,7 +484,7 @@ class Player(BasePlayer):
     incentives1 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=True)
     incentives2 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=True)
     incentives3 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=True)
-    guesser1 = models.LongStringField(label='<b>1. </b>Welche Strategie haben Sie beim Raten verfolgt?', initial = '', max_length=500, blank=True)
+    guesser1 = models.LongStringField(label='<b>1. </b>Welche Strategie haben Sie beim Raten verfolgt? (in Stichpunkten, optional)', initial = '', max_length=500, blank=True)
     guesser2 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>2. </b>Ich habe die beiden Hinweiswörter zunächst einzeln betrachtet, bevor ich nach einer Verbindung zwischen ihnen gesucht habe.', widget=widgets.RadioSelectHorizontal, blank=True)
     guesser3 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>3. </b>Ich habe intuitiv Assoziationen zu den Hinweispaaren gesucht.', widget=widgets.RadioSelectHorizontal, blank=True)
     guesser4 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>4. </b>Ich habe versucht, ein übergeordnetes Konzept oder Thema zu finden, das beide Hinweiswörter vereint.', widget=widgets.RadioSelectHorizontal, blank=True)
@@ -499,6 +499,8 @@ class Player(BasePlayer):
     payment_allocator = models.BooleanField(initial=False)
     payment_receiver = models.BooleanField(initial=False)
     payoff_calculated = models.BooleanField(initial=False)
+    ideas_before = models.StringField(blank=True)
+    ideas_after = models.StringField(blank=True)
 
 class Model:
     _instance = None
@@ -596,35 +598,35 @@ def validate_ideas(player, ideas):
         ideas_low = [idea.lower() for idea in ideas]
         for i in range(len(ideas)): 
             if ideas[i] != '':
-                # Check if the idea is a taboo word or a modification of the mystery word
-                for j in range(len(stem_words)):
-                    if stem_words[j] in ideas_low[i]:
-                        ideas[i] = 'false'
-                    continue
                 # Check if there's a space-separated word
                 if ' ' in ideas[i] and re.search(r'\b\w+\s+\w+\b', ideas[i]):
-                    ideas[i] = 'false'
+                    ideas[i] = 'false: contains space-separated words'
                     continue
-                 # Remove spaces from individual words (single words shouldn't contain spaces)
+                # Remove spaces from individual words (single words shouldn't contain spaces)
                 if ' ' in ideas[i]:
                     ideas[i] = ideas[i].replace(' ', '')
+                # Check if the idea is a taboo word or a modification of the mystery word
+                for j in range(len(stem_words)):
+                    if stem_words[j] in ideas_low[i] and 'false' not in ideas[i]:
+                        ideas[i] = 'false: contains taboo or mystery word'
+                    continue
                 # Check for special characters
-                if re.search(r"[^a-zA-Z0-9äöüÄÖÜß\s]", ideas_low[i]):
-                    ideas[i] = 'false'
+                if re.search(r"[^a-zA-Z0-9äöüÄÖÜß\s]", ideas_low[i]) and 'false' not in ideas[i]:
+                    ideas[i] = 'false: contains special characters'
                     continue
                 # Check for numbers
-                if bool(re.search(r'\d', ideas[i])):
-                    ideas[i] = 'false'
+                if bool(re.search(r'\d', ideas[i])) and 'false' not in ideas[i]:
+                    ideas[i] = 'false: contains numbers'
                     continue
                 # Check if the word is not in the word list
-                if ideas[i].lower() not in wordlist:
-                    ideas[i] = 'false'
+                if ideas[i].lower() not in wordlist and 'false' not in ideas[i]:
+                    ideas[i] = 'false: not in dictionary'
                     continue
                 # Check for duplicate occurrences
-                if ideas[i] != 'false':
+                if 'false' not in ideas[i]:
                     if ideas[i] in occurrences:
                         occurrences[ideas[i]] += 1
-                        ideas[i] = 'false'
+                        ideas[i] = 'false: duplicate occurence'
                     else:
                         occurrences[ideas[i]] = 1
         return ideas    
@@ -720,13 +722,14 @@ class Generation_Page(Page):
         if timeout_happened:        
             ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12, player.Idea13, player.Idea14, player.Idea15, player.Idea16, player.Idea17, player.Idea18, player.Idea19, player.Idea20]
             ideas = validate_ideas(player, ideas)
+            player.ideas_before = str(ideas)
             player.before_missing = False
             player.before_invalid = 0
             for i in range(len(ideas)):
-                if ideas[i] == 'false':
+                if 'false' in ideas[i]:
                     player.before_invalid = player.before_invalid + 1
             for i in range(0, len(ideas), 2):
-                if (ideas[i] != '' and ideas[i] != 'false') and (ideas[i + 1] != '' and ideas[i + 1] != 'false'):
+                if (ideas[i] != '' and 'false' not in ideas[i]) and (ideas[i + 1] != '' and 'false' not in ideas[i + 1]):
                     setattr(player, f'pair{(i // 2) + 1}', f"{ideas[i]} + {ideas[i + 1]}")
                 else:
                     setattr(player, f'pair{(i // 2) + 1}', 'empty') 
@@ -741,14 +744,15 @@ class Generation_Page(Page):
             player.before_missing = False
             ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12, player.Idea13, player.Idea14, player.Idea15, player.Idea16, player.Idea17, player.Idea18, player.Idea19, player.Idea20]
             ideas = validate_ideas(player, ideas)
+            player.ideas_before = str(ideas)
             for i in range(len(ideas)):
-                if ideas[i] == 'false':  
+                if 'false' in ideas[i]:
                     player.before_invalid = player.before_invalid + 1
             for i in range(0, len(ideas), 2):
-                if (ideas[i] != '' and ideas[i] != 'false') and (ideas[i + 1] != '' and ideas[i + 1] != 'false'):
+                if (ideas[i] != '' and 'false' not in ideas[i]) and (ideas[i + 1] != '' and 'false' not in ideas[i + 1]):
                     setattr(player, f'pair{(i // 2) + 1}', f"{ideas[i]} + {ideas[i + 1]}")
                 else:
-                    setattr(player, f'pair{(i // 2) + 1}', 'empty')
+                    setattr(player, f'pair{(i // 2) + 1}', 'empty') 
             pairs = [player.pair1] + [player.pair2] + [player.pair3] + [player.pair4] + [player.pair5] + [player.pair6] + [player.pair7] + [player.pair8] + [player.pair9] + [player.pair10]
             while 'empty' in pairs:
                 pairs.remove('empty')
@@ -853,26 +857,28 @@ class Clue_Page(Page):
             player.after_invalid = 0
             ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12, player.Idea13, player.Idea14, player.Idea15, player.Idea16, player.Idea17, player.Idea18, player.Idea19, player.Idea20]
             ideas = validate_ideas(player, ideas)
+            player.ideas_after = str(ideas)
             for i in range(len(ideas)):
-                if ideas[i] == 'false':
+                if 'false' in ideas[i]:
                     player.after_invalid = player.after_invalid + 1
             for i in range(0, len(ideas), 2):
-                if (ideas[i] != '' and ideas[i] != 'false') and (ideas[i + 1] != '' and ideas[i + 1] != 'false'):
-                    setattr(player, f'pair{(i // 2) + 1}after', f"{ideas[i]} + {ideas[i + 1]}")
+                if (ideas[i] != '' and 'false' not in ideas[i]) and (ideas[i + 1] != '' and 'false' not in ideas[i + 1]):
+                    setattr(player, f'pair{(i // 2) + 1}', f"{ideas[i]} + {ideas[i + 1]}")
                 else:
-                    setattr(player, f'pair{(i // 2) + 1}after', 'empty')
+                    setattr(player, f'pair{(i // 2) + 1}', 'empty') 
         else:
             player.after_invalid = 0
             ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12, player.Idea13, player.Idea14, player.Idea15, player.Idea16, player.Idea17, player.Idea18, player.Idea19, player.Idea20]
             ideas = validate_ideas(player, ideas)
+            player.ideas_after = str(ideas)
             for i in range(len(ideas)):
-                if ideas[i] == 'false':  
+                if 'false' in ideas[i]:
                     player.after_invalid = player.after_invalid + 1
             for i in range(0, len(ideas), 2):
-                if (ideas[i] != '' and ideas[i] != 'false') and (ideas[i + 1] != '' and ideas[i + 1] != 'false'):
-                    setattr(player, f'pair{(i // 2) + 1}after', f"{ideas[i]} + {ideas[i + 1]}")
+                if (ideas[i] != '' and 'false' not in ideas[i]) and (ideas[i + 1] != '' and 'false' not in ideas[i + 1]):
+                    setattr(player, f'pair{(i // 2) + 1}', f"{ideas[i]} + {ideas[i + 1]}")
                 else:
-                    setattr(player, f'pair{(i // 2) + 1}after', 'empty')
+                    setattr(player, f'pair{(i // 2) + 1}', 'empty') 
 
 class Voting_Page(Page):
     timeout_seconds = 90
@@ -1048,7 +1054,6 @@ class Results(Page):
     timeout_seconds = 50000
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
-        taboo_words = C.TABOO_WORDS[player.round_number - 1]
         guesser = next((p for p in player.subsession.get_players() if p.player_role == 'Ratender' and p.group_number_guess == player.group.id_in_subsession), None)
         rater = next((p for p in player.subsession.get_players() if p.player_role == 'Ratender' and p.group_number_check == player.group.id_in_subsession), None)
 
@@ -1107,7 +1112,7 @@ class Results(Page):
             if vote_group != 'Kein gültiges Hinweispaar':
                 mystery_word_lower = mystery_word.lower()
                 vote_group_lower = vote_group.lower()
-                model = model_instance  # with Model() as model:
+                model = model_instance  
                 with ThreadPoolExecutor() as executor:
                     future = executor.submit(model.calculate_originality, vote_group_lower, mystery_word_lower)
                     originality = future.result()
@@ -1128,7 +1133,7 @@ class Results(Page):
                 if player.in_round(player.round_number - i).field_maybe_none('originality') is not None:
                         originality_scores.append(float(player.in_round(player.round_number - i).originality))
                         player.group.originality = sum(originality_scores) / len(originality_scores)
-            return dict(mystery_word=mystery_word, taboo_words=taboo_words, vote_group=player.vote_group, missing=missing, invalid=invalid, originality=originality)
+            return dict(mystery_word=mystery_word, vote_group=player.vote_group, missing=missing, invalid=invalid, originality=originality)
         else:
             player.guess_missing = False
             guess_missing = ''
@@ -1141,7 +1146,7 @@ class Results(Page):
             for i in range(player.round_number):
                 guesser_scores.append(player.in_round(player.round_number - i).score)
                 player.quality_score = sum(guesser_scores)
-            return dict(mystery_word=mystery_word, taboo_words=taboo_words, vote_group=player.vote_group, guess_missing=guess_missing, guess_1 = player.guess1 , guess_2 = player.guess2, guess_3 = player.guess3)
+            return dict(mystery_word=mystery_word, vote_group=player.vote_group, guess_missing=guess_missing, guess_1 = player.guess1 , guess_2 = player.guess2, guess_3 = player.guess3)
 
 class Usefulness(Page):
     timeout_seconds = 5000
@@ -1758,4 +1763,4 @@ class ResultsWaitPage(WaitPage):
     body_text = "Bitte warten Sie, bis alle Teilnehmenden die Runde abgeschlossen haben. Dies kann einige Minuten dauern."
     wait_for_all_groups = True
 
-page_sequence = [GroupWaitPage, Overview, Intro, Intro2, Procedure, Rules, Instructions, Payment, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, PairCheck, VotingResultPage, ResultsWaitPage, Results, Usefulness, Originality, Overall_Creativity, Score, Score2, Score3, Score4, DictatorGame, Questions1, Identification, Questions2, CreativeActivities, AUT, RAT_Instructions, RAT, DAT, FinalPage]
+page_sequence = [GroupWaitPage, Overview, Intro,  Procedure, Intro2, Rules, Instructions, Payment, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, PairCheck, VotingResultPage, ResultsWaitPage, Results, Usefulness, Originality, Overall_Creativity, Score, Score2, Score3, Score4, DictatorGame, Questions1, Identification, Questions2, CreativeActivities, AUT, RAT_Instructions, RAT, DAT, FinalPage]

@@ -22,10 +22,10 @@
 
 {{ if player.player_role == 'Hinweisgebende'}}
 <div class = "info active"> 
-{{ if player.participant.treatment != 1}} <p> Ihre Auszahlung für <b><span style="color: red;">Wortaufgabe 1</span></b> setzt sich aus zwei Komponenten zusammen: </p>
+{{ if player.participant.treatment != 1}} <p> Jedes Gruppenmitglied erhält für <b><span style="color: red;">Wortaufgabe 1</span></b>: </p>
 <ul>
     <li> <b>Teilnahmegebühr:</b> 5€ </li>
-    <li> <b>Bonus:</b> bis zu 15€, basierend auf der Leistung Ihrer Gruppe in der Dimension <b>{{ if player.participant.treatment == 3}}Qualität {{elif player.participant.treatment == 2}}Quantität {{else}}Originalität {{endif}}</b>im Vergleich zu den 4 anderen Gruppen in dieser Sitzung. </li>
+    <li> <b>Bonus:</b> bis zu 15€, basierend auf der Leistung der eigenen Gruppe in der Dimension <b>{{ if player.participant.treatment == 3}}Qualität {{elif player.participant.treatment == 2}}Quantität {{else}}Originalität {{endif}}</b>im Vergleich zu den 4 anderen Gruppen in dieser Session. </li>
 {{ else }} <p>Sie erhalten für Ihre Teilnahme an <b><span style="color: red;">Wortaufgabe 1</span></b> eine fixe Auszahlung in Höhe von <b>13€.</b>
             <p> Alle Auszahlungen werden nur vorgenommen, wenn Sie die ganze Studie abschließen. </p>
 </br>
@@ -36,7 +36,7 @@
 
 {{ if player.participant.treatment == 2}} 
 <div class="info">
-<p> In jeder Runde erhält Ihre Gruppe <b>einen Punkt pro gültigem Hinweispaar</b>, das von Ihnen und Ihren Mitspielenden erstellt wurde. Am Ende der Sitzung werden die Punkte aus allen Runden zusammengerechnet.
+<p> In jeder Runde erhält Ihre Gruppe <b>einen Punkt pro gültigem Hinweispaar</b>, das von Ihnen und Ihren Mitspielenden erstellt wurde. Nach 8 Runden werden die Punkte aus allen Runden zusammengerechnet.
 </div>
 {{ endif }} 
 
@@ -48,14 +48,14 @@
         <li>Erraten im 2. Versuch: <b>2 Punkte</b></li>
         <li>Erraten im 3. Versuch: <b>1 Punkt</b></li>
     </ul>
-    <p> Wird das geheime Wort innerhalb von drei Versuchen nicht erraten, erhält Ihre Gruppe <b>keine Punkte</b>. Am Ende der Sitzung werden die Punkte aus allen Runden zusammengerechnet.</p>
+    <p> Wird das geheime Wort innerhalb von drei Versuchen nicht erraten, erhält Ihre Gruppe <b>keine Punkte</b>. Nach 8 Runden werden die Punkte aus allen Runden zusammengerechnet.</p>
 </div>
 {{ endif }} 
 
 {{ if player.participant.treatment == 4}}
 <div class="info">
 <p> In jeder Runde erhält das von Ihrer Gruppe ausgewählte <b>finale Hinweispaar</b> eine <b>Originalitätsbewertung</b> von einem Algorithmus, der die semantische Distanz berechnet.
-<p> Die <b>semantische Distanz</b> misst, wie weit die beiden Wörter im Hinweispaar in Bedeutung und Verwendung vom geheimen Wort entfernt sind. Je höher die Distanz, desto origineller das Paar. Am Ende der Sitzung werden die durchschnittlichen Originalitätsbewertungen aller Gruppen berechnet.</p>
+<p> Die <b>semantische Distanz</b> misst, wie weit die beiden Wörter im Hinweispaar in Bedeutung und Verwendung vom geheimen Wort entfernt sind. Je höher die Distanz, desto origineller das Paar. Nach 8 Runden werden die durchschnittlichen Originalitätsbewertungen aller Gruppen berechnet.</p>
 </div>
 <div class="info">
     <p> Der Bonus wird basierend auf der durchschnittlichen Originalitätsbewertung Ihrer Gruppe im Vergleich zu den anderen Gruppen vergeben:</p>
@@ -70,7 +70,7 @@
         <button class= "otree-btn btn btn-info" style="background-color: rgb(0, 174, 255); color: black; border: 2px solid rgb(0, 174, 255);">Weiter</button>
     </br>
     </br>
-    <p><small>Alle Auszahlungen werden nur vorgenommen, wenn Sie die ganze Studie abschließen. Für den unwahrscheinlichen Fall einer Punktegleichheit nach 8 Runden, wird der Mittelwert der Boni der beiden punktgleichen Gruppen ausgezahlt.</small></p>
+    <p><small>Alle Auszahlungen werden nur vorgenommen, wenn Sie die ganze Studie abschließen. Bei Punktegleichheit nach 8 Runden wird der Gesamtgewinn geteilt.</small></p>
 </div>
 {{ endif }} 
 
@@ -88,7 +88,7 @@
         <button class= "otree-btn btn btn-info" style="background-color: rgb(0, 174, 255); color: black; border: 2px solid rgb(0, 174, 255);">Weiter</button>
     </br>
     </br>
-    <p><small>Alle Auszahlungen werden nur vorgenommen, wenn Sie die ganze Studie abschließen. Für den unwahrscheinlichen Fall einer Punktegleichheit nach 8 Runden, wird der Mittelwert der Boni der beiden punktgleichen Gruppen ausgezahlt.</small></p>
+    <p><small>Alle Auszahlungen werden nur vorgenommen, wenn Sie die ganze Studie abschließen. Bei Punktegleichheit nach 8 Runden wird der Gesamtgewinn geteilt.</small></p>
 </div>
 {{ endif }}
 
@@ -97,7 +97,7 @@
 <p> Ihre Auszahlung setzt sich aus zwei Komponenten zusammen: </p>
 <ul>
     <li> <b>Teilnahmegebühr:</b> 5€</li>
-    <li> <b>Bonus:</b> bis zu 15€, basierend auf der Ihrer Leistung im Vergleich zu den 4 anderen ratenden Personen in dieser Sitzung.</li>
+    <li> <b>Bonus:</b> bis zu 15€, basierend auf der Ihrer Leistung im Vergleich zu den 4 anderen ratenden Personen in dieser Session.</li>
 </ul>
 </div>
 <div class="info">
@@ -108,7 +108,7 @@
         <li>Erraten im 3. Versuch: <b>1 Punkt</b></li>
     </ul>
     <p> Wenn Sie das geheime Wort nicht innerhalb von 3 Versuchen erraten, erhalten Sie <b>keine Punkte</b>. Es muss jeweils exakt das <i>eine</i> geheime Wort sein, zu dem die Gruppen die Hinweispaare generiert haben.</p>
-    <p> Am Ende der Sitzung werden die Punkte aus allen Runden zusammengerechnet.</p>
+    <p> Nach 8 Runden werden die Punkte aus allen Runden zusammengerechnet.</p>
 </div>
 
 <div class="info">
@@ -124,7 +124,7 @@
         <button class= "otree-btn btn btn-info" style="background-color: rgb(0, 174, 255); color: black; border: 2px solid rgb(0, 174, 255);">Weiter</button>
     </br>
     </br>
-    <p><small>Alle Auszahlungen werden nur vorgenommen, wenn Sie die ganze Studie abschließen. Für den unwahrscheinlichen Fall einer Punktegleichheit nach 8 Runden, wird der Mittelwert der Boni der beiden punktgleichen Teilnehmenden ausgezahlt.</small></p>
+    <p><small>Alle Auszahlungen werden nur vorgenommen, wenn Sie die ganze Studie abschließen. Bei Punktegleichheit nach 8 Runden wird der Gesamtgewinn geteilt.</small></p>
 </div>
 {{ endif }}
 </p>

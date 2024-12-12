@@ -22,7 +22,7 @@
 
 <div class="info active">
 {{ if player.player_role == 'Hinweisgebende'}}
-<p>Sie wurden zufällig einer <b>Gruppe mit drei Teilnehmenden</b> zugewiesen. Sie und zwei andere Teilnehmende bleiben während der gesamten Studie zusammen in einer Gruppe.</p>
+<p>Sie wurden zufällig einer <b>Gruppe mit zwei weiteren Teilnehmenden</b> zugewiesen, die während der gesamten Studie unverändert bleibt.</p>
 </div>
 <div class="info">
     <p>Die Studie besteht aus vier Aufgaben: 
@@ -39,8 +39,8 @@
 </div>
 <div class="info">
     {{ if player.participant.treatment != 1}}
-    <p>Die Höhe Ihrer Auszahlung hängt ausschließlich von Ihrer Leistung in <b><span style="color: red;">Wortaufgabe 1</span></b> und Ihrer <b><span style="color: blue;">Entscheidung</span></b> ab.</p> 
-    {{ else }} <p>Die Höhe Ihrer Auszahlung hängt ausschließlich von Ihrer Teilnahme an <b><span style="color: red;">Wortaufgabe 1</span></b> und Ihrer <b><span style="color: blue;">Entscheidung</span></b> ab.</p> 
+    <p>Die Höhe Ihrer Auszahlung hängt von Ihrer Leistung und Ihren Entscheidungen ab.</p> 
+    {{ else }} <p>Die Höhe Ihrer Auszahlung hängt von Ihren Entscheidungen ab.</p> 
     {{ endif }}
     <p>Sie erhalten die Auszahlung nur, wenn Sie die ganze Studie abschließen.</p>
 </br>
@@ -65,7 +65,7 @@
     <p>Zusätzlich bearbeiten Sie zwei kurze Fragebögen.</p> 
 </div>
 <div class="info">
-    <p>Die Höhe Ihrer Auszahlung hängt ausschließlich von Ihrer Leistung in <b><span style="color: red;">Wortaufgabe 1</span></b> ab.</p> 
+    <p>Die Höhe Ihrer Auszahlung hängt von Ihrer Leistung und Ihren Entscheidungen ab.</p> 
     <p>Sie erhalten die Auszahlung nur, wenn Sie die ganze Studie abschließen.</p>
 </br>
 <button class= "otree-btn btn btn-info" style="background-color: rgb(0, 174, 255); color: black; border: 2px solid rgb(0, 174, 255);">Weiter</button>
