@@ -1,5 +1,5 @@
 {{ block title }}
-    Endergebnis
+    Endergebnis <b><span style="color: red;">Wortaufgabe 1</span></b>
 {{ endblock }}
 
 {{ block content }}
@@ -18,14 +18,68 @@
         });
     });
 </script>
-<p> Die Summe aller gültigen Hinweispaare Ihrer Gruppe: <b> {{ quantity }} Punkt(e) </b> </p>
+<p> Die Summe aller von Ihrer Gruppe erspielten Punkte: <b> {{ quantity }} Punkt(e) </b> </p>
 <p> Die finalen Punktestände aller Gruppen: </p>
-<ul>
-    {{ for item in overall_quantity}}
-       <li><b>{{ item }} Punkt(e) </b></li>
-    {{ endfor }}   
-</ul>
-<p> Ihre Gruppe belegt damit Platz <b> {{ rank }} </b> von {{ number_groups }} Gruppen. </p>
-<p> Ihre Auszahlung beträgt somit <b>{{ payoff }}.</b></p>
+<table style="border-collapse:collapse;border-spacing:0;table-layout: fixed; width: 415px" class="tg">
+    <colgroup>
+      <col style="width: 138px">
+      <col style="width: 138px">
+      <col style="width: 139px">
+      <col style="width: 139px">
+    </colgroup>
+    <thead>
+      <tr>
+        <th style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Platz</th>
+        <th style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Punkte</th>
+        <th style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Bonus</th>
+        <th style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Gesamtauszahlung</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{ if number_groups > 0 }}
+      <tr>
+        <td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>{{ ranks.0 }}.</b></td>
+        <td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>{{ overall_quantity.0 }} Punkt(e)</b></td>
+        <td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>15€</b></td>
+        <td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>20€</b></td>
+      </tr>
+      {{ endif }}
+      {{ if number_groups > 1 }}
+      <tr>
+        <td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>{{ ranks.1 }}.</b></td>
+        <td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>{{ overall_quantity.1 }} Punkt(e)</b></td>
+        <td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>{{ if ranks.1 == 1 }} 15€ {{elif ranks.1 == 2 }} 10€ {{endif}}</b></td>
+        <td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>{{ if ranks.1 == 1 }} 20€ {{elif ranks.1 == 2 }} 15€ {{endif}}</b></td>
+      </tr>
+      {{ endif }}
+      {{ if number_groups > 2 }}
+      <tr>
+        <td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>{{ ranks.2 }}.</b></td>
+        <td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>{{ overall_quantity.2 }} Punkt(e)</b></td>
+        <td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>{{ if ranks.2 == 1 }} 15€ {{ elif ranks.2 == 2 }} 10€ {{ elif ranks.2 == 3 }} 7€ {{endif}}</b></td>
+        <td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>{{ if ranks.2 == 1 }} 20€ {{ elif ranks.2 == 2 }} 15€ {{ elif ranks.2 == 3 }} 12€ {{endif}}</b></td>
+      </tr>
+      {{ endif }}
+      {{ if number_groups > 3 }}
+      <tr>
+        <td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>{{ ranks.3 }}.</b></td>
+        <td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>{{ overall_quantity.3 }} Punkt(e)</b></td>
+        <td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>{{ if ranks.3 == 1 }} 15€ {{ elif ranks.3 == 2 }} 10€ {{ elif ranks.3 == 3 }} 7€ {{ elif ranks.3 == 4 }} 5€ {{endif}}</b></td>
+        <td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>{{ if ranks.3 == 1 }} 20€ {{ elif ranks.3 == 2 }} 15€ {{ elif ranks.3 == 3 }} 12€ {{ elif ranks.3 == 4 }} 10€ {{endif}}</b></td>
+      </tr>
+      {{ endif }}
+      {{ if number_groups > 4 }}
+      <tr>
+        <td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>{{ ranks.4 }}.</b></td>
+        <td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>{{ overall_quantity.4 }} Punkt(e)</b></td>
+        <td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>{{ if ranks.4 == 1 }} 15€ {{ elif ranks.4 == 2 }} 10€ {{ elif ranks.4 == 3 }} 7€ {{ elif ranks.4 == 4 }} 5€ {{ elif ranks.4 == 5 }} 3€ {{endif}}</b></td>
+        <td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>{{ if ranks.4 == 1 }} 20€ {{ elif ranks.4 == 2 }} 15€ {{ elif ranks.4 == 3 }} 12€ {{ elif ranks.4 == 4 }} 10€ {{ elif ranks.4 == 5 }} 8€ {{endif}}</b></td>
+      </tr>
+      {{ endif }}
+    </tbody>
+  </table>
+  <br>
+<p> Ihre Gruppe belegt damit Platz <b> {{ rank }}.</b></p>
+<p> Bei Punktegleichheit wird der Gesamtgewinn geteilt. Ihre finale Auszahlung für <b><span style="color: red;">Wortaufgabe 1</span></b> beträgt somit <b>{{ payoff }}.</b></p>
 <button class= "otree-btn btn btn-info" style="background-color: rgb(0, 174, 255); color: black; border: 2px solid rgb(0, 174, 255);">Weiter</button>
 {{ endblock }}

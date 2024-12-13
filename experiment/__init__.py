@@ -863,9 +863,9 @@ class Clue_Page(Page):
                     player.after_invalid = player.after_invalid + 1
             for i in range(0, len(ideas), 2):
                 if (ideas[i] != '' and 'false' not in ideas[i]) and (ideas[i + 1] != '' and 'false' not in ideas[i + 1]):
-                    setattr(player, f'pair{(i // 2) + 1}', f"{ideas[i]} + {ideas[i + 1]}")
+                    setattr(player, f'pair{(i // 2) + 1}after', f"{ideas[i]} + {ideas[i + 1]}")
                 else:
-                    setattr(player, f'pair{(i // 2) + 1}', 'empty') 
+                    setattr(player, f'pair{(i // 2) + 1}after', 'empty') 
         else:
             player.after_invalid = 0
             ideas = [player.Idea1, player.Idea2, player.Idea3, player.Idea4, player.Idea5, player.Idea6, player.Idea7, player.Idea8, player.Idea9, player.Idea10, player.Idea11, player.Idea12, player.Idea13, player.Idea14, player.Idea15, player.Idea16, player.Idea17, player.Idea18, player.Idea19, player.Idea20]
@@ -876,9 +876,9 @@ class Clue_Page(Page):
                     player.after_invalid = player.after_invalid + 1
             for i in range(0, len(ideas), 2):
                 if (ideas[i] != '' and 'false' not in ideas[i]) and (ideas[i + 1] != '' and 'false' not in ideas[i + 1]):
-                    setattr(player, f'pair{(i // 2) + 1}', f"{ideas[i]} + {ideas[i + 1]}")
+                    setattr(player, f'pair{(i // 2) + 1}after', f"{ideas[i]} + {ideas[i + 1]}")
                 else:
-                    setattr(player, f'pair{(i // 2) + 1}', 'empty') 
+                    setattr(player, f'pair{(i // 2) + 1}after', 'empty') 
 
 class Voting_Page(Page):
     timeout_seconds = 90
@@ -1054,6 +1054,7 @@ class Results(Page):
     timeout_seconds = 50000
     def vars_for_template(player):
         mystery_word = C.MYSTERY_WORDS[player.round_number - 1]
+        taboo_words = C.TABOO_WORDS[player.round_number - 1]
         guesser = next((p for p in player.subsession.get_players() if p.player_role == 'Ratender' and p.group_number_guess == player.group.id_in_subsession), None)
         rater = next((p for p in player.subsession.get_players() if p.player_role == 'Ratender' and p.group_number_check == player.group.id_in_subsession), None)
 
@@ -1097,6 +1098,12 @@ class Results(Page):
                 vote_group = 'Kein gültiges Hinweispaar'
                 player.vote_group = 'Kein gültiges Hinweispaar'
             invalid = ''
+            invalid1 = ''
+            invalid2 = ''
+            invalid3 = ''
+            invalid4 = ''
+            invalid5 = ''
+            invalid6 = ''
             player.invalid = False
             player.result, player.score = calculate_result(player, guesses, mystery_word)
             if vote_group == 'Kein gültiges Hinweispaar':
@@ -1107,6 +1114,18 @@ class Results(Page):
             if player.quantity == 0:
                 player.missing = True
                 missing = 'Achtung! Sie haben kein gültiges Hinweispaar abgegeben.'
+            if "false: contains taboo or mystery word" in player.ideas_after or "false: contains taboo or mystery word" in player.ideas_before:
+                invalid1 = 'Achtung! Hinweise wurden entfernt, weil sie ein Wort mit demselben Wortstamm wie das geheime Wort oder eins der drei Tabuwörter enthielten.'
+            if "false: contains space-separated words" in player.ideas_after or "false: contains space-separated words" in player.ideas_before:
+                invalid2 = 'Achtung! Hinweise wurden entfernt, weil sie mehr als ein einzelnes Wort enthielten.'
+            if "false: contains special characters" in player.ideas_after or "false: contains special characters" in player.ideas_before:
+                invalid3 = 'Achtung! Hinweise wurden entfernt, weil sie Sonderzeichen enthielten.'
+            if "false: contains numbers" in player.ideas_after or "false: contains numbers" in player.ideas_before:
+                invalid4 = 'Achtung! Hinweise wurden entfernt, weil sie Zahlen enthielten.'
+            if "false: not in dictionary" in player.ideas_after or "false: not in dictionary" in player.ideas_before:
+                invalid5 = 'Achtung! Hinweise wurden entfernt, weil sie nicht im Wörterbuch enthalten waren.'
+            if "false: duplicate occurence" in player.ideas_after or "false: duplicate occurence" in player.ideas_before:
+                invalid6 = 'Achtung! Hinweise wurden entfernt, weil sie doppelt vorkamen.'
             # Berechnung der Originalität
             originality = 0.0
             if vote_group != 'Kein gültiges Hinweispaar':
@@ -1133,7 +1152,7 @@ class Results(Page):
                 if player.in_round(player.round_number - i).field_maybe_none('originality') is not None:
                         originality_scores.append(float(player.in_round(player.round_number - i).originality))
                         player.group.originality = sum(originality_scores) / len(originality_scores)
-            return dict(mystery_word=mystery_word, vote_group=player.vote_group, missing=missing, invalid=invalid, originality=originality)
+            return dict(taboo_words = taboo_words, mystery_word=mystery_word, vote_group=player.vote_group, missing=missing, invalid=invalid, originality=originality, invalid1 = invalid1, invalid2 = invalid2, invalid3 = invalid3, invalid4 = invalid4, invalid5 = invalid5, invalid6 = invalid6)
         else:
             player.guess_missing = False
             guess_missing = ''
@@ -1526,7 +1545,7 @@ class Score(Page):
         rank, ranks = calculate_rank(player.group.quality, overall_score)
         player.payoff = round(calculate_payoff(rank, ranks), 0)
         number_groups = len(overall_score)
-        return dict(overall_score = overall_score, score = player.group.quality, payoff = player.payoff, rank = rank, number_groups = number_groups)
+        return dict(overall_score = overall_score, score = player.group.quality, payoff = player.payoff, ranks= ranks, rank = rank, number_groups = number_groups)
     
 class Score2(Page):
     timeout_seconds = 2000
@@ -1537,7 +1556,7 @@ class Score2(Page):
         rank, ranks = calculate_rank(player.group.quantity, overall_quantity)
         player.payoff = round(calculate_payoff(rank, ranks), 0)
         number_groups = len(overall_quantity)
-        return dict(overall_quantity = overall_quantity, quantity = player.group.quantity, payoff = player.payoff, rank = rank, number_groups = number_groups)
+        return dict(overall_quantity = overall_quantity, quantity = player.group.quantity, payoff = player.payoff, ranks = ranks, rank = rank, number_groups = number_groups)
     
 class Score3(Page): 
     timeout_seconds = 2000
@@ -1550,7 +1569,7 @@ class Score3(Page):
         player.payoff = round(calculate_payoff(rank, ranks), 0)
         number_groups = len(overall_originality)
         overall_originality = [round(score, 2) for score in overall_originality]
-        return dict(overall_originality = overall_originality, originality = originality, payoff = player.payoff, rank = rank, number_groups = number_groups)
+        return dict(overall_originality = overall_originality, originality = originality, payoff = player.payoff, ranks = ranks, rank = rank, number_groups = number_groups)
     
 class Score4(Page):
     timeout_seconds = 2000
@@ -1561,7 +1580,7 @@ class Score4(Page):
         rank, ranks = calculate_rank(player.quality_score, overall_score)
         player.payoff = round(calculate_payoff(rank, ranks), 0)
         number_groups = len(overall_score)
-        return dict(overall_score = overall_score, score = player.quality_score, payoff = player.payoff, rank = rank, number_groups = number_groups)
+        return dict(overall_score = overall_score, score = player.quality_score, payoff = player.payoff, rank = rank, ranks=ranks, number_groups = number_groups)
 
 class Questions1(Page):
     template_name = 'experiment/Questions1.html'
@@ -1763,4 +1782,4 @@ class ResultsWaitPage(WaitPage):
     body_text = "Bitte warten Sie, bis alle Teilnehmenden die Runde abgeschlossen haben. Dies kann einige Minuten dauern."
     wait_for_all_groups = True
 
-page_sequence = [GroupWaitPage, Overview, Intro,  Procedure, Intro2, Rules, Instructions, Payment, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, PairCheck, VotingResultPage, ResultsWaitPage, Results, Usefulness, Originality, Overall_Creativity, Score, Score2, Score3, Score4, DictatorGame, Questions1, Identification, Questions2, CreativeActivities, AUT, RAT_Instructions, RAT, DAT, FinalPage]
+page_sequence = [GroupWaitPage, Overview, Intro,  Procedure, Intro2, Rules, Instructions, Payment, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, PairCheck, VotingResultPage, ResultsWaitPage, Results, Usefulness, Originality, Overall_Creativity, DictatorGame, Questions1, Identification, Questions2, CreativeActivities, AUT, RAT_Instructions, RAT, DAT, Score, Score2, Score3, Score4, FinalPage]
