@@ -27,7 +27,7 @@
 </script>
 
 </br>
- <p> Vielen Dank, dass Sie an <b><span style="color: red;">Wortaufgabe 1</span></b> {{ if player.player_role == 'Hinweisgebende' }}und der <b><span style="color: blue;">Entscheidung</span></b>{{ endif}} teilgenommen haben! Jetzt werden Ihnen einige Fragen dazu gestellt. </p>
+ <p> Vielen Dank, dass Sie an <b><span style="color: blue">Wortaufgabe 1</span></b> {{ if player.player_role == 'Hinweisgebende' }}und der <b><span style="color: orange">Entscheidung</span></b>{{ endif}} teilgenommen haben! Jetzt werden Ihnen einige Fragen dazu gestellt. </p>
  <p> Bitte beantworten Sie die folgenden <b>Fragen</b> oder geben Sie Ihr <b>Zustimmungsniveau</b> zu den folgenden Aussagen an. </p>
 {{ if player.player_role == 'Hinweisgebende'}}
 {{ formfield 'ideagen1'}}
@@ -48,6 +48,7 @@
 {{ formfield 'group8'}}
 {{ formfield 'motivation1'}}
 {{ formfield 'motivation2'}}
+{{ formfield 'guesser_rating'}}
 {{ if player.participant.treatment != 1 }}
 {{ formfield 'motivation3'}}
 {{ formfield 'motivation4'}}

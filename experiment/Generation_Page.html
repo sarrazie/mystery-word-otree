@@ -19,7 +19,7 @@
     });
 </script>
 </br>
-<p> Das <b>geheime Wort</b> in dieser Runde ist: </p>
+<p> Das <b>Zielwort</b> in dieser Runde ist: </p>
 <p> <b>{{ mystery_word }}</b> </p>  
 <p> Die drei Tabuwörter sind: {{ for word in taboo_words }} </p>
 <ul>
@@ -27,7 +27,7 @@
 </ul>
 {{ endfor }}
 </br>
-<p> Bitte geben Sie Hinweispaare ein, die Ihnen zu diesem Wort einfallen <font color="#FF0000"><b>(ein Hinweis pro Textfeld, keine Mehrfachnennung derselben Hinweise)</b></font>: </p>
+<p> Bitte geben Sie Hinweispaare ein, die Ihnen zu diesem Wort einfallen <font color="#FF0000"><b>(ein Hinweis pro Textfeld, jedes Wort darf nur in einem Hinweispaar vorkommen)</b></font>: </p>
 <div style="display: flex; align-items: center;">
     {{ formfield 'Idea1' }} &nbsp; &nbsp; <b> + </b> &nbsp; &nbsp; {{ formfield 'Idea2' }}
 </div>
@@ -94,8 +94,8 @@
     <summary> Zusammenfassung der Regeln </summary>
 </br>
     <ul>    
-        <li> <b><span style="color: red;">Wortaufgabe 1</span></b>: Zusammen in Ihrer Gruppe viele originelle Hinweispaare generieren, anhand derer eine Person ein geheimes Wort erraten kann.</li>
-        <li> <b>Ungültige Hinweispaare</b> enthalten Hinweise, die denselben Wortstamm wie das geheime Wort oder wie eins der drei Tabuwörter haben, eine Übersetzung des geheimen Worts sind oder frei erfunden.</li>
+        <li> <b><span style="color: blue">Wortaufgabe 1</span></b>: Zusammen in Ihrer Gruppe viele originelle Hinweispaare erstellen, anhand derer eine Person ein Zielwort erraten kann.</li>
+        <li> <b>Ungültige Hinweispaare</b> enthalten Hinweise, die denselben Wortstamm wie das Zielwort oder wie eins der drei Tabuwörter haben, eine Übersetzung des Zielworts sind oder frei erfunden.</li>
         <li>{{ if player.participant.treatment == 1 }}Sie erhalten eine Auszahlung von 13€, wenn Sie die Aufgabe abschließen. {{ elif player.participant.treatment == 2 }}Sie erhalten eine Auszahlung von bis zu 20€ in Abhängigkeit von der relativen Leistung Ihrer Gruppe in der Dimension <b>Quantität.</b> {{ elif player.participant.treatment == 3 }}Sie erhalten eine Auszahlung von bis zu 20€ in Abhängigkeit von der relativen Leistung Ihrer Gruppe in der Dimension <b>Qualität.</b> {{ else}}Sie erhalten eine Auszahlung von bis zu 20€ in Abhängigkeit von der relativen Leistung Ihrer Gruppe in der Dimension <b>Originalität.</b> {{ endif }}</li>
     </ul>  
 </details>

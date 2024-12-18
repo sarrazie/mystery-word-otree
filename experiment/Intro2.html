@@ -1,6 +1,6 @@
 {% include '_static/global/next_button.html' %}
 {{ block title }}
-    <b><span style="color: red;">Wortaufgabe 1</span></b>
+    <b><span style="color: blue">Wortaufgabe 1</span></b>
 {{ endblock }}
 {{ block content }}
 
@@ -23,7 +23,7 @@
 <div class="info active">
     <p><b>Überprüfung der Gültigkeit</b></p>
     <ul>
-        <li> In jeder Runde wird manuell geprüft, ob die von der Gruppe generierten Hinweispaare <b>gültig</b> sind, d.h. in irgendeiner Form mit dem geheimen Wort in Verbindung stehen. </li>
+        <li> In jeder Runde wird manuell geprüft, ob die von der Gruppe erstellten Hinweispaare <b>gültig</b> sind, d.h. in irgendeiner Form mit dem Zielwort in Verbindung stehen. </li>
         <li> Ungültige Hinweispaare werden <b>entfernt</b> und fließen nicht in die Bewertung ein. </li>
     </ul>
 </div>
@@ -35,12 +35,12 @@
 </div>
 <div class="info">
     <ul>
-        <li><b>Qualität:</b> Nützlichkeit des finalen Hinweispaars, gemessen daran, ob und wie schnell eine zufällig ausgewählte Person aus diesem Raum das geheime Wort damit erraten kann. Die ratende Person wechselt in jeder Runde.</li>
+        <li><b>Qualität:</b> Nützlichkeit des finalen Hinweispaars, gemessen daran, ob und wie schnell eine Person aus diesem Raum (die nicht selbst Teil einer Gruppe ist) das Zielwort damit erraten kann. Die ratende Person wechselt in jeder Runde.</li>
     </ul>
 </div>
 <div class="info">  
     <ul>  
-        <li><b>Originalität:</b> Neuartigkeit des finalen Hinweispaars, bewertet durch einen Algorithmus anhand der Entfernung des Hinweispaars vom geheimen Wort in allen Bedeutungen und Verwendungen (semantische Distanz). </li>      
+        <li><b>Originalität:</b> Neuartigkeit des finalen Hinweispaars, bewertet durch einen Algorithmus, der berechnet, wie weit das Hinweispaar vom Zielwort in allen Bedeutungen und Verwendungen entfernt ist (semantische Distanz). </li>      
     </ul>
     </br>
     <button class= "otree-btn btn btn-info" style="background-color: rgb(0, 174, 255); color: black; border: 2px solid rgb(0, 174, 255);">Weiter</button>

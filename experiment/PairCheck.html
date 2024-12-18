@@ -1,5 +1,5 @@
 {{ block title }}
-    <b><span style="color: blue;">Bewertung</span> Gültigkeit</b>
+    <b><span style="color: orange">Bewertung</span> Gültigkeit</b>
 {{ endblock }}
 {{ block content }}
 
@@ -19,9 +19,9 @@
     });
 </script>
 </br>
-<p>Das geheime Wort war <b>{{ mystery_word }}</b>. Danke für Ihre Teilnahme an <b><span style="color: red;">Wortaufgabe 1</span></b>. </p>
-<p><b><span style="color: blue;"><u>Bewertung:</u></span></b> Nun bitten wir Sie, die abgegebenen Hinweispaare einer anderen Gruppe zu überprüfen.</p> 
-<p>Markieren Sie bitte alle Hinweispaare, die <b>gar keinen Zusammenhang</b> mit dem geheimen Wort haben und nicht dazu beitragen, es zu erraten.</p>
+<p>Das Zielwort war <b>{{ mystery_word }}</b>. Danke für Ihre Teilnahme an <b><span style="color: blue;">Wortaufgabe 1</span></b>. </p>
+<p><b><span style="color: orange"><u>Bewertung:</u></span></b> Nun bitten wir Sie, die abgegebenen Hinweispaare einer anderen Gruppe zu überprüfen.</p> 
+<p>Markieren Sie bitte alle Hinweispaare, die <b>gar keinen Zusammenhang</b> mit dem Zielwort haben und nicht dazu beitragen, es zu erraten.</p>
 </br>
 {{ if number_pairs == 0 }}
     <p> <b>Es wurden keine gültigen Hinweispaare von der Gruppe erstellt.</b> </p>
@@ -51,9 +51,9 @@
     <summary> Zusammenfassung der Regeln</summary>
 </br>
     <ul>
-        <li> <b><span style="color: red;">Wortaufgabe 1</span></b>: Anhand eines gegebenen Hinweispaars in maximal <b>drei Versuchen</b> ein geheimes Wort erraten. </li>
-        <li>Es muss jeweils exakt das <i>eine</i> geheime Wort sein, zu dem die Gruppen die Hinweispaare generiert haben.</li> 
-        <li> <b><span style="color: blue;">Bewertung</span></b>: Hinweispaare zu jedem geheimen Wort auf ihre Gültigkeit überprüfen und ihre Kreativität bewerten.</li>
+        <li> <b><span style="color: blue;">Wortaufgabe 1</span></b>: Anhand eines gegebenen Hinweispaars in maximal <b>drei Versuchen</b> ein Zielwort erraten. </li>
+        <li>Es muss jeweils exakt das <i>eine</i> Zielwort sein, zu dem die Gruppen die Hinweispaare erstellt haben.</li> 
+        <li> <b><span style="color: orange;">Bewertung</span></b>: Hinweispaare zu jedem Zielwort auf ihre Gültigkeit überprüfen und ihre Kreativität bewerten.</li>
     </ul>
 </details>
 

@@ -59,101 +59,21 @@ class Player(BasePlayer):
     incentive = models.IntegerField()
     understandHin_1 = models.StringField(choices=[['false', 'Länge, Relevanz, Originalität'],['false', 'Geschwindigkeit, Anzahl, Vielfalt'],['true', 'Quantität, Qualität, Originalität']], label='<b>Frage 1:</b> Welche drei Kriterien werden zur Bewertung der Hinweispaare herangezogen?', widget=widgets.RadioSelect, blank=True)
     understandHin_2 = models.StringField(choices=[['false','Zwei'],['true', 'Drei'],['false', 'Fünf']], label='<b>Frage 2:</b> Wie viele Spielerinnen und Spieler bilden zusammen eine Gruppe?', widget=widgets.RadioSelect, blank=True)
-    understandHin_3 = models.StringField(choices=[['false', 'Time'], ['false', 'Zeitpunkt'],['false', 'Zeeeit'],['true', 'keiner der oben genannten Hinweise']], label='<b>Frage 3:</b> Welcher Hinweis wäre gültig in einem Hinweispaar für das geheime Wort "Zeit"?', widget=widgets.RadioSelect, blank=True)
-    understandHin_4 = models.StringField(choices=[['false', 'Es wird für die Bewertung berücksichtigt'], ['true', 'Es wird entfernt und nicht gewertet'],['false', 'Es wird für die nächste Runde gespeichert']], label='<b>Frage 4:</b> Was passiert, wenn ein Hinweispaar eines Gruppenmitglieds ein Tabuwort enthält?', widget=widgets.RadioSelect, blank=True)
-    understandHin_6_Quality = models.StringField(choices=[['false', 'Anhand der Anzahl der generierten Paare'], ['false', 'Anhand eines Algorithmus, der die semantische Distanz bewertet'],['true', 'Anhand der Anzahl der Versuche, die eine zufällig ausgewählte Person benötigt, um das geheime Wort zu erraten']], label='<b>Frage 6: </b>Wie wird die Qualität eines finalen Hinweispaars gemessen?', widget=widgets.RadioSelect, blank=True)
-    understandHin_6_Quantity = models.StringField(choices=[['true', 'Anhand der Anzahl der generierten Paare'], ['false', 'Anhand eines Algorithmus, der die semantische Distanz bewertet'],['false', 'Anhand der Anzahl der Versuche, die eine zufällig ausgewählte Person benötigt, um das geheime Wort zu erraten']], label='<b>Frage 6: </b>Wie wird die Quantität der Hinweispaare gemessen?', widget=widgets.RadioSelect, blank=True)
-    understandHin_6_Originality= models.StringField(choices=[['false', 'Anhand der Anzahl der generierten Paare'], ['true', 'Anhand eines Algorithmus, der die semantische Distanz bewertet'],['false', 'Anhand der Anzahl der Versuche, die eine zufällig ausgewählte Person benötigt, um das geheime Wort zu erraten']], label='<b>Frage 6: </b>Wie wird die Originalität eines finalen Hinweispaars gemessen?', widget=widgets.RadioSelect, blank=True)
-    understandHin_7_Quality = models.StringField(choices=[['false', 'Keine Punkte'], ['true', '3 Punkte'],['false', '1 Punkt']], label='<b>Frage 7:</b> Was passiert, wenn das geheime Wort im 1. Versuch anhand Ihres finalen Hinweispaars erraten wird?', widget=widgets.RadioSelect, blank=True)
-    understandHin_5_Quantity =  models.StringField(choices=[['false', '13€ fix'],['true', '5€ fix plus bis zu 15€ Bonus für die meisten generierten Hinweispaare'],['false', '5€ fix plus bis zu 15€ Bonus für die qualitativ hochwertigsten Hinweispaare'],['false','5€ fix plus bis zu 15€ Bonus für die originellsten Hinweispaare']], label='<b>Frage 5:</b> Wie viel Geld können Sie maximal bei <b><span style="color: red;">Wortaufgabe 1</span></b> verdienen?', widget=widgets.RadioSelect, blank=True)
-    understandHin_5_Quality = models.StringField(choices=[['false', '13€ fix'],['false', '5€ fix plus bis zu 15€ Bonus für die meisten generierten Hinweispaare'],['true', '5€ fix plus bis zu 15€ Bonus für die qualitativ hochwertigsten Hinweispaare'],['false','5€ fix plus bis zu 15€ Bonus für die originellsten Hinweispaare']], label='<b>Frage 5:</b> Wie viel Geld können Sie maximal bei <b><span style="color: red;">Wortaufgabe 1</span></b> verdienen?', widget=widgets.RadioSelect, blank=True)
-    understandHin_5_Originality = models.StringField(choices=[['false', '13€ fix'],['false', '5€ fix plus bis zu 15€ Bonus für die meisten generierten Hinweispaare'],['false', '5€ fix plus bis zu 15€ Bonus für die qualitativ hochwertigsten Hinweispaare'],['true','5€ fix plus bis zu 15€ Bonus für die originellsten Hinweispaare']], label='<b>Frage 5:</b> Wie viel Geld können Sie maximal bei <b><span style="color: red;">Wortaufgabe 1</span></b> verdienen?', widget=widgets.RadioSelect, blank=True)
-    understandHin_5_Control = models.StringField(choices=[['true', '13€ fix'],['false', '5€ fix plus bis zu 15€ Bonus für die meisten generierten Hinweispaare'],['false', '5€ fix plus bis zu 15€ Bonus für die qualitativ hochwertigsten Hinweispaare'],['false','5€ fix plus bis zu 15€ Bonus für die originellsten Hinweispaare']], label='<b>Frage 5:</b> Wie viel Geld können Sie maximal bei <b><span style="color: red;">Wortaufgabe 1</span></b> verdienen?', widget=widgets.RadioSelect, blank=True)
-    understandRat_1 = models.StringField(choices=[['false', 'Unbegrenzt viele Versuche'],['true', 'Drei Versuche'],['false', 'Nur einen Versuch']], label='<b>Frage 1:</b> Wie viele Versuche haben Sie, um ein geheimes Wort zu erraten?', widget=widgets.RadioSelect, blank=True)
-    understandRat_2 = models.StringField(choices=[['false', '1 Punkt'],['false', '2 Punkte'],['true', '3 Punkte']], label='<b>Frage 2:</b> Wie viele Punkte erhalten Sie, wenn das geheime Wort direkt im 1. Versuch erraten?', widget=widgets.RadioSelect, blank=True)
-    understandRat_3 = models.StringField(choices=[['true', '20€'], ['false', '15€'],['false', '10€']], label='<b>Frage 3:</b> Wie viel Geld können Sie maximal bei <b><span style="color: red;">Wortaufgabe 1</span></b> verdienen?', widget=widgets.RadioSelect, blank=True)
-    understandRat_4 = models.StringField(choices=[['false', '5 Wörter'],['true', '8 Wörter'],['false', '10 Wörter']], label='<b>Frage 4:</b> Wie viele geheime Wörter können Sie insgesamt erraten?', widget=widgets.RadioSelect, blank=True)
+    understandHin_3 = models.StringField(choices=[['false', 'Time'], ['false', 'Zeitpunkt'],['false', 'Zeeeit'],['true', 'keiner der oben genannten Hinweise']], label='<b>Frage 3:</b> Welcher Hinweis wäre gültig in einem Hinweispaar für das Zielwort "Zeit"?', widget=widgets.RadioSelect, blank=True)
+    understandHin_4 = models.StringField(choices=[['false', 'Es wird für die Bewertung berücksichtigt, wenn sich niemand beschwert'], ['true', 'Es wird entfernt und nicht gewertet'],['false', 'Es wird für die nächste Runde gespeichert']], label='<b>Frage 4:</b> Was passiert, wenn ein Hinweispaar eines Gruppenmitglieds ein Tabuwort enthält?', widget=widgets.RadioSelect, blank=True)
+    understandHin_6_Quality = models.StringField(choices=[['false', 'Anhand der Anzahl der erstellten Paare'], ['false', 'Anhand eines Algorithmus, der die semantische Distanz bewertet'],['true', 'Anhand der Anzahl der Versuche, die eine Person benötigt, um das Zielwort zu erraten']], label='<b>Frage 6: </b>Wie wird die Qualität eines finalen Hinweispaars gemessen?', widget=widgets.RadioSelect, blank=True)
+    understandHin_6_Quantity = models.StringField(choices=[['true', 'Anhand der Anzahl der erstellten Paare'], ['false', 'Anhand eines Algorithmus, der die semantische Distanz bewertet'],['false', 'Anhand der Anzahl der Versuche, die eine Person benötigt, um das Zielwort zu erraten']], label='<b>Frage 6: </b>Wie wird die Quantität der Hinweispaare gemessen?', widget=widgets.RadioSelect, blank=True)
+    understandHin_6_Originality= models.StringField(choices=[['false', 'Anhand der Anzahl der erstellten Paare'], ['true', 'Anhand eines Algorithmus, der die semantische Distanz bewertet'],['false', 'Anhand der Anzahl der Versuche, die eine Person benötigt, um das Zielwort zu erraten']], label='<b>Frage 6: </b>Wie wird die Originalität eines finalen Hinweispaars gemessen?', widget=widgets.RadioSelect, blank=True)
+    understandHin_7_Quality = models.StringField(choices=[['false', 'Keine Punkte'], ['true', '3 Punkte'],['false', '1 Punkt']], label='<b>Frage 7:</b> Was passiert, wenn das Zielwort im 1. Versuch anhand Ihres finalen Hinweispaars erraten wird?', widget=widgets.RadioSelect, blank=True)
+    understandHin_5_Quantity =  models.StringField(choices=[['false', '13€ fix'],['true', '5€ fix plus bis zu 15€ Bonus für die meisten erstellten Hinweispaare'],['false', '5€ fix plus bis zu 15€ Bonus für die qualitativ hochwertigsten Hinweispaare'],['false','5€ fix plus bis zu 15€ Bonus für die originellsten Hinweispaare']], label='<b>Frage 5:</b> Wie viel Geld können Sie maximal bei <b><span style="color: blue;">Wortaufgabe 1</span></b> verdienen?', widget=widgets.RadioSelect, blank=True)
+    understandHin_5_Quality = models.StringField(choices=[['false', '13€ fix'],['false', '5€ fix plus bis zu 15€ Bonus für die meisten erstellten Hinweispaare'],['true', '5€ fix plus bis zu 15€ Bonus für die qualitativ hochwertigsten Hinweispaare'],['false','5€ fix plus bis zu 15€ Bonus für die originellsten Hinweispaare']], label='<b>Frage 5:</b> Wie viel Geld können Sie maximal bei <b><span style="color: blue;">Wortaufgabe 1</span></b> verdienen?', widget=widgets.RadioSelect, blank=True)
+    understandHin_5_Originality = models.StringField(choices=[['false', '13€ fix'],['false', '5€ fix plus bis zu 15€ Bonus für die meisten erstellten Hinweispaare'],['false', '5€ fix plus bis zu 15€ Bonus für die qualitativ hochwertigsten Hinweispaare'],['true','5€ fix plus bis zu 15€ Bonus für die originellsten Hinweispaare']], label='<b>Frage 5:</b> Wie viel Geld können Sie maximal bei <b><span style="color: blue;">Wortaufgabe 1</span></b> verdienen?', widget=widgets.RadioSelect, blank=True)
+    understandHin_5_Control = models.StringField(choices=[['true', '13€ fix'],['false', '5€ fix plus bis zu 15€ Bonus für die meisten erstellten Hinweispaare'],['false', '5€ fix plus bis zu 15€ Bonus für die qualitativ hochwertigsten Hinweispaare'],['false','5€ fix plus bis zu 15€ Bonus für die originellsten Hinweispaare']], label='<b>Frage 5:</b> Wie viel Geld können Sie maximal bei <b><span style="color: blue;">Wortaufgabe 1</span></b> verdienen?', widget=widgets.RadioSelect, blank=True)
+    understandRat_1 = models.StringField(choices=[['false', 'Unbegrenzt viele Versuche'],['true', 'Drei Versuche'],['false', 'Nur einen Versuch']], label='<b>Frage 1:</b> Wie viele Versuche haben Sie, um ein Zielwort zu erraten?', widget=widgets.RadioSelect, blank=True)
+    understandRat_2 = models.StringField(choices=[['false', '1 Punkt'],['false', '2 Punkte'],['true', '3 Punkte']], label='<b>Frage 2:</b> Wie viele Punkte erhalten Sie, wenn das Zielwort direkt im 1. Versuch erraten?', widget=widgets.RadioSelect, blank=True)
+    understandRat_3 = models.StringField(choices=[['true', '20€'], ['false', '15€'],['false', '10€']], label='<b>Frage 3:</b> Wie viel Geld können Sie maximal bei <b><span style="color: blue;">Wortaufgabe 1</span></b> verdienen?', widget=widgets.RadioSelect, blank=True)
+    understandRat_4 = models.StringField(choices=[['false', '5 Wörter'],['true', '8 Wörter'],['false', '10 Wörter']], label='<b>Frage 4:</b> Wie viele Zielwörter können Sie insgesamt erraten?', widget=widgets.RadioSelect, blank=True)
     understandRat_5 = models.StringField(choices=[['true', 'Vom Vergleich Ihrer erreichten Punkte mit den anderen Ratenden'],['false', 'Von der Anzahl der Hinweispaare, die Sie erstellt haben'],['false', 'Von der Qualität Ihrer Bewertung der Hinweispaare']], label='<b>Frage 5:</b> Wovon hängt die Höhe des Bonus ab?', widget=widgets.RadioSelect, blank=True)
-    Bildende_Kunst = models.BooleanField(blank=True, initial=False)
-    Musik = models.BooleanField(blank=True, initial=False)
-    Tanz = models.BooleanField(blank=True, initial=False)
-    Architektur = models.BooleanField(blank=True, initial=False)
-    Literatur = models.BooleanField(blank=True, initial=False)
-    Humor = models.BooleanField(blank=True, initial=False)
-    Erfindungen = models.BooleanField(blank=True, initial=False)
-    Wissenschaftliche_Entdeckungen = models.BooleanField(blank=True, initial=False)
-    Theater_und_Film = models.BooleanField(blank=True, initial=False)
-    Kochen = models.BooleanField(blank=True, initial=False)
-    Bildende_Kunst_2_1 = models.IntegerField(blank=True)
-    Bildende_Kunst_2_2 = models.IntegerField(blank=True)
-    Bildende_Kunst_2_3 = models.IntegerField(blank=True)
-    Bildende_Kunst_2_4 = models.IntegerField(blank=True)
-    Bildende_Kunst_2_5 = models.IntegerField(blank=True)
-    Bildende_Kunst_2_6 = models.IntegerField(blank=True)
-    Bildende_Kunst_2_7 = models.IntegerField(blank=True)
-    Musik_2_1 = models.IntegerField(blank=True) 
-    Musik_2_2 = models.IntegerField(blank=True)
-    Musik_2_3 = models.IntegerField(blank=True)
-    Musik_2_4 = models.IntegerField(blank=True)
-    Musik_2_5 = models.IntegerField(blank=True)
-    Musik_2_6 = models.IntegerField(blank=True)
-    Musik_2_7 = models.IntegerField(blank=True) 
-    Tanz_2_1 = models.IntegerField(blank=True)
-    Tanz_2_2 = models.IntegerField(blank=True)
-    Tanz_2_3 = models.IntegerField(blank=True)
-    Tanz_2_4 = models.IntegerField(blank=True)
-    Tanz_2_5 = models.IntegerField(blank=True)
-    Tanz_2_6 = models.IntegerField(blank=True)
-    Tanz_2_7 = models.IntegerField(blank=True)
-    Architektur_2_1 = models.IntegerField(blank=True)
-    Architektur_2_2 = models.IntegerField(blank=True)
-    Architektur_2_3 = models.IntegerField(blank=True)
-    Architektur_2_4 = models.IntegerField(blank=True)
-    Architektur_2_5 = models.IntegerField(blank=True)
-    Architektur_2_6 = models.IntegerField(blank=True)
-    Architektur_2_7 = models.IntegerField(blank=True)
-    Literatur_2_1 = models.IntegerField(blank=True)
-    Literatur_2_2 = models.IntegerField(blank=True)
-    Literatur_2_3 = models.IntegerField(blank=True)
-    Literatur_2_4 = models.IntegerField(blank=True)
-    Literatur_2_5 = models.IntegerField(blank=True)
-    Literatur_2_6 = models.IntegerField(blank=True)
-    Literatur_2_7 = models.IntegerField(blank=True)
-    Humor_2_1 = models.IntegerField(blank=True)
-    Humor_2_2 = models.IntegerField(blank=True)
-    Humor_2_3 = models.IntegerField(blank=True)
-    Humor_2_4 = models.IntegerField(blank=True)
-    Humor_2_5 = models.IntegerField(blank=True)
-    Humor_2_6 = models.IntegerField(blank=True)
-    Humor_2_7 = models.IntegerField(blank=True)
-    Erfindungen_2_1 = models.IntegerField(blank=True)
-    Erfindungen_2_2 = models.IntegerField(blank=True)
-    Erfindungen_2_3 = models.IntegerField(blank=True)
-    Erfindungen_2_4 = models.IntegerField(blank=True)
-    Erfindungen_2_5 = models.IntegerField(blank=True)
-    Erfindungen_2_6 = models.IntegerField(blank=True)
-    Erfindungen_2_7 = models.IntegerField(blank=True)
-    Wissenschaftliche_Entdeckungen_2_1 = models.IntegerField(blank=True)
-    Wissenschaftliche_Entdeckungen_2_2 = models.IntegerField(blank=True)
-    Wissenschaftliche_Entdeckungen_2_3 = models.IntegerField(blank=True)
-    Wissenschaftliche_Entdeckungen_2_4 = models.IntegerField(blank=True)
-    Wissenschaftliche_Entdeckungen_2_5 = models.IntegerField(blank=True)
-    Wissenschaftliche_Entdeckungen_2_6 = models.IntegerField(blank=True)
-    Wissenschaftliche_Entdeckungen_2_7 = models.IntegerField(blank=True)
-    Theater_und_Film_2_1 = models.IntegerField(blank=True)
-    Theater_und_Film_2_2 = models.IntegerField(blank=True)
-    Theater_und_Film_2_3 = models.IntegerField(blank=True)
-    Theater_und_Film_2_4 = models.IntegerField(blank=True)
-    Theater_und_Film_2_5 = models.IntegerField(blank=True)
-    Theater_und_Film_2_6 = models.IntegerField(blank=True)
-    Theater_und_Film_2_7 = models.IntegerField(blank=True)
-    Kochen_2_1 = models.IntegerField(blank=True)
-    Kochen_2_2 = models.IntegerField(blank=True)
-    Kochen_2_3 = models.IntegerField(blank=True)
-    Kochen_2_4 = models.IntegerField(blank=True)
-    Kochen_2_5 = models.IntegerField(blank=True)
-    Kochen_2_6 = models.IntegerField(blank=True)
-    Kochen_2_7 = models.IntegerField(blank=True)
     Idea1 = models.StringField(label= '', initial='', blank=True, max_length=18)
     Idea2 = models.StringField(label= '', initial='', blank=True, max_length=18)
     Idea3 = models.StringField(label= '', initial='', blank=True, max_length=18)
@@ -174,38 +94,25 @@ class Player(BasePlayer):
     Idea18 = models.StringField(label= '', initial='', blank=True, max_length=18)
     Idea19 = models.StringField(label= '', initial='', blank=True, max_length=18)
     Idea20 = models.StringField(label= '', initial='', blank=True, max_length=18)
-    word1 = models.StringField(label= '', initial='', blank=False)
-    word2 = models.StringField(label= '', initial='', blank=False)
-    word3 = models.StringField(label= '', initial='', blank=False)
-    word4 = models.StringField(label= '', initial='', blank=False)
-    word5 = models.StringField(label= '', initial='', blank=False)
-    word6 = models.StringField(label= '', initial='', blank=False)
-    word7 = models.StringField(label= '', initial='', blank=False)
-    word8 = models.StringField(label= '', initial='', blank=False)
-    word9 = models.StringField(label= '', initial='', blank=False)
-    word10 = models.StringField(label= '', initial='', blank=False)
     gender = models.IntegerField(choices=[[1, 'Männlich'],[2, 'Weiblich'],[3, 'Divers'],], label='<b>2. </b>Geschlecht:', widget=widgets.RadioSelectHorizontal, blank=False)
     age = models.IntegerField(min=18, max=100, label='<b>1. </b>Alter:', blank=False)
     study = models.StringField(choices=[['Geisteswissenschaften', 'Geisteswissenschaften'],['Sport', 'Sport'],['Rechts-, Wirtschafts- und Sozialwissenschaften', 'Rechts-, Wirtschafts- und Sozialwissenschaften'],['Mathematik, Naturwissenschaften', 'Mathematik, Naturwissenschaften'],['Humanmedizin, Gesundheitswissenschaften', 'Humanmedizin, Gesundheitswissenschaften'],['Agrar-, Forst- und Ernährungswissenschaften, Veterinärmedizin', 'Agrar-, Forst- und Ernährungswissenschaften, Veterinärmedizin'], ['Ingenieurwissenschaften', 'Ingenieurwissenschaften'],['Kunst, Kunstwissenschaft', 'Kunst, Kunstwissenschaft'],['Sonstiges', 'Sonstiges'],], label='<b>3. </b>Studienbereich:', widget=widgets.RadioSelectHorizontal, blank=False)
     german = models.IntegerField(choices=[[1, 'Muttersprache'],[2, 'Sehr gut'],[3, 'Gut'],[4, 'Es geht'],[5, 'Eher schlecht'],[6, 'Gar nicht'],], label='<b>4. </b>Wie gut können Sie die deutsche Sprache lesen und schreiben?', widget=widgets.RadioSelectHorizontal, blank=False)
-    risk = models.FloatField(min=0, max=100, label='<b>5. </b>Wie viel Euro würden Sie investieren?', blank=False)
-    ambiguity = models.FloatField(min=0, max=100, label='<b>6. </b>Wie viel Euro würden Sie investieren?', blank=False)
-    general_motivation1 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>17. </b>Ich genieße es, mich mit anderen zu messen.', widget=widgets.RadioSelectHorizontal, blank=False)
-    general_motivation2 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>18. </b>Ich erbringe bessere Leistungen, wenn ich gegen andere antrete.', widget=widgets.RadioSelectHorizontal, blank=False)
-    general_group1 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>19. </b>Ich arbeite grundsätzlich lieber in einer Gruppe als alleine.', widget=widgets.RadioSelectHorizontal, blank=True)
-    general_group2 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>20. </b>Menschen in einer Gruppe sind in der Regel produktiver als Menschen, die allein arbeiten.', widget=widgets.RadioSelectHorizontal, blank=True)
-    general_group3 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>21. </b>Menschen in einer Gruppe sollten bereit sein, Opfer zu bringen, um das Wohl der Gruppe zu fördern. ', widget=widgets.RadioSelectHorizontal, blank=True)
-    cognitive1 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>12. </b>Kreatives Arbeiten ist hauptsächlich „Trial and Error“ ohne präzises Ziel und detaillierten Plan.', widget=widgets.RadioSelectHorizontal, blank=False)
-    cognitive2 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>13. </b>Ich finde es langweilig, immer die gleichen alten Gesichter zu sehen.', widget=widgets.RadioSelectHorizontal, blank=False)
-    cognitive3 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>14. </b>Ich arbeite kreativ, um etwas zu produzieren, das einen Zweck erfüllt.', widget=widgets.RadioSelectHorizontal, blank=False)
-    cognitive4 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>15. </b>Meine neueren Ideen unterscheiden sich stark von meinen älteren Ideen.', widget=widgets.RadioSelectHorizontal, blank=False)
-    cognitive5 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>16. </b>Ich erkunde gerne fremde Städte auf eigene Faust, auch auf die Gefahr hin, mich zu verlaufen.', widget=widgets.RadioSelectHorizontal, blank=False)
+    risk = models.IntegerField(choices=[0, 1, 2, 3 ,4, 5, 6, 7, 8, 9, 10], label='<b>5. </b>Wie schätzen Sie sich persönlich ein: Sind Sie im Allgemeinen ein risikobereiter Mensch oder versuchen Sie, Risiken zu vermeiden? (0 = gar nicht risikobereit, 10 = sehr risikobereit)', widget=widgets.RadioSelectHorizontal, blank=False)
+    general_motivation1 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>13. </b>Ich genieße es, mich mit anderen zu messen.', widget=widgets.RadioSelectHorizontal, blank=False)
+    general_motivation2 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>14. </b>Ich erbringe bessere Leistungen, wenn ich gegen andere antrete.', widget=widgets.RadioSelectHorizontal, blank=False)
+    general_group1 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>15. </b>Ich arbeite grundsätzlich lieber in einer Gruppe als alleine.', widget=widgets.RadioSelectHorizontal, blank=True)
+    general_group2 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>16. </b>Menschen in einer Gruppe sind in der Regel produktiver als Menschen, die allein arbeiten.', widget=widgets.RadioSelectHorizontal, blank=True)
+    general_group3 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>17. </b>Menschen in einer Gruppe sollten bereit sein, Opfer zu bringen, um das Wohl der Gruppe zu fördern. ', widget=widgets.RadioSelectHorizontal, blank=True)
+    cognitive1 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>9. </b>Kreatives Arbeiten ist hauptsächlich „Trial and Error“ ohne präzises Ziel und detaillierten Plan.', widget=widgets.RadioSelectHorizontal, blank=False)
+    cognitive2 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>10. </b>Ich finde es langweilig, immer die gleichen alten Gesichter zu sehen.', widget=widgets.RadioSelectHorizontal, blank=False)
+    cognitive3 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>11. </b>Ich arbeite kreativ, um etwas zu produzieren, das einen Zweck erfüllt.', widget=widgets.RadioSelectHorizontal, blank=False)
+    cognitive4 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>12. </b>Ich erkunde gerne fremde Städte auf eigene Faust, auch auf die Gefahr hin, mich zu verlaufen.', widget=widgets.RadioSelectHorizontal, blank=False)
     invalid = models.BooleanField()
     missing = models.BooleanField()
     guess_missing = models.BooleanField()
     quantity = models.IntegerField()
     originality = models.FloatField()
-    invalid_DAT = models.BooleanField()
     pair1 = models.StringField(initial='')
     pair2 = models.StringField(initial='')
     pair3 = models.StringField(initial='')
@@ -439,48 +346,46 @@ class Player(BasePlayer):
     creativity_29 = models.StringField(blank=True)
     creativity_30 = models.StringField(blank=True)
     number_pairs_after = models.IntegerField()
-    circle_overlap = models.FloatField(label="Overlap Percentage",blank=True)
     explanation = models.LongStringField(label='<b>5. </b>Bitte beschreiben Sie in Stichpunkten, warum sich Ihre Gruppe final für dieses Hinweispaar entschieden hat. (optional)', blank=True, max_length=500)
-    subjective_originality = models.IntegerField(choices=[0, 1, 2, 3 ,4, 5, 6, 7, 8, 9, 10],label = '<b>3. </b>Bitte bewerten Sie ihr finales Hinweispaar auf einer Skala von 0 bis 10, wie <b>originell</b> Sie es finden. <br> (0 = überhaupt nicht originell, 10 = sehr originell)', widget=widgets.RadioSelectHorizontal, blank= False)
-    subjective_quality = models.IntegerField(choices=[0, 1, 2, 3 ,4, 5, 6, 7, 8, 9, 10,],label = '<b>4. </b>Bitte bewerten Sie ihr finales Hinweispaar auf einer Skala von 0 bis 10, wie <b>nützlich</b> es zur Erratung des geheimen Wortes ist. <br> (0 = überhaupt nicht nützlich, 10 = sehr nützlich)', widget=widgets.RadioSelectHorizontal, blank= False)
+    subjective_originality = models.IntegerField(choices=[0, 1, 2, 3 ,4, 5, 6, 7, 8, 9, 10],label = '<b>3. </b>Bitte bewerten Sie Ihr finales Hinweispaar auf einer Skala von 0 bis 10, wie <b>originell</b> Sie es finden. <br> (0 = überhaupt nicht originell, 10 = sehr originell)', widget=widgets.RadioSelectHorizontal, blank= False)
+    subjective_quality = models.IntegerField(choices=[0, 1, 2, 3 ,4, 5, 6, 7, 8, 9, 10,],label = '<b>4. </b>Bitte bewerten Sie Ihr finales Hinweispaar auf einer Skala von 0 bis 10, wie <b>nützlich</b> es zur Erratung des Zielworts ist. <br> (0 = überhaupt nicht nützlich, 10 = sehr nützlich)', widget=widgets.RadioSelectHorizontal, blank= False)
     rat1 = models.StringField(label= '', initial='', blank=True, max_length=18)
     rat2 = models.StringField(label= '', initial='', blank=True, max_length=18)
     rat3 = models.StringField(label= '', initial='', blank=True, max_length=18)
     rat4 = models.StringField(label= '', initial='', blank=True, max_length=18)
     rat5 = models.StringField(label= '', initial='', blank=True, max_length=18)
-    creative_self1 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=False, label = '<b> 7. </b>Ich denke, dass ich eine kreative Person bin.')
-    creative_self2 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=False, label = '<b> 8. </b>Meine Vorstellungskraft und mein Einfallsreichtum unterscheiden mich von meinen Freunden.')
-    creative_self3 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=False, label = '<b> 9. </b>Es ist mir wichtig, eine kreative Person zu sein.')
-    creative_self4 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=False, label = '<b> 10. </b>Ich weiß, dass ich auch komplizierte Probleme effizient lösen kann.')
-    creative_self5 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=False, label = '<b> 11. </b>Ich bin gut darin, kreative Lösungen für Probleme zu finden.')
-    dictator_game = models.CurrencyField(max=10, min=0, blank=False, label= 'Wie viel von Ihren 10€ möchten Sie an den Empfänger überweisen?')
+    creative_self1 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=False, label = '<b> 6. </b>Ich denke, dass ich eine überdurchschnittlich kreative Person bin.')
+    creative_self2 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=False, label = '<b> 7. </b>Es ist mir wichtig, eine kreative Person zu sein.')
+    creative_self3 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=False, label = '<b> 8. </b>Ich bin gut darin, kreative Lösungen für Probleme zu finden.')
+    dictator_game = models.CurrencyField(max=10, min=0, blank=False)
     AUT = models.LongStringField(label='Geben Sie jeweils eine alternative Verwendungsmöglichkeit <b>pro Zeile</b> an.', blank=True, max_length=800)
     AUT2 = models.LongStringField(label='Geben Sie jeweils eine alternative Verwendungsmöglichkeit <b>pro Zeile</b> an.', blank=True, max_length=800)
     quality_score = models.IntegerField(initial=0)
     communication = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>1. </b>Die Kommunikation in meiner Gruppe war effektiv.', widget=widgets.RadioSelectHorizontal, blank=False)
     decision = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>2. </b>Wir haben am Ende das beste Hinweispaar ausgewählt.', widget=widgets.RadioSelectHorizontal, blank=False)
-    ideagen1 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>1. </b>Es fiel mir schwer, nützliche Hinweispaare zu generieren.', widget=widgets.RadioSelectHorizontal, blank=True)
-    ideagen2 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>2. </b>Es fiel mir schwer, originelle Hinweispaare zu generieren.', widget=widgets.RadioSelectHorizontal, blank=True)
-    ideagen3 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>3. </b>Es fiel mir schwer, viele Hinweispaare zu generieren.', widget=widgets.RadioSelectHorizontal, blank=True)
-    ideagen4 = models.LongStringField(label='<b>4. </b>Welche Strategie haben Sie bei der Ideengenerierung verfolgt? (in Stichpunkten, optional)', initial = '', max_length=500, blank=True)
+    ideagen1 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>1. </b>Es fiel mir schwer, nützliche Hinweispaare zu erstellen.', widget=widgets.RadioSelectHorizontal, blank=True)
+    ideagen2 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>2. </b>Es fiel mir schwer, originelle Hinweispaare zu erstellen.', widget=widgets.RadioSelectHorizontal, blank=True)
+    ideagen3 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>3. </b>Es fiel mir schwer, viele Hinweispaare zu erstellen.', widget=widgets.RadioSelectHorizontal, blank=True)
+    ideagen4 = models.LongStringField(label='<b>4. </b>Welche Strategie haben Sie bei der Hinweispaarerstellung verfolgt? (in Stichpunkten, optional)', initial = '', max_length=500, blank=True)
     feedback1 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>5. </b>Ich schätze mein gegebenes Feedback als hilfreich ein.', widget=widgets.RadioSelectHorizontal, blank=True)
     feedback2 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>6. </b>Das empfangene Feedback hat mir geholfen.', widget=widgets.RadioSelectHorizontal, blank=True)
     feedback3 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>7. </b>Die Bereitschaft meiner Gruppenmitglieder, Feedback anzunehmen, war groß.', widget=widgets.RadioSelectHorizontal, blank=True)
     feedback4 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>8. </b>Ich habe mich und meine Ideen wertgeschätzt gefühlt.', widget=widgets.RadioSelectHorizontal, blank=True)
     group1 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>9. </b>Unsere Zusammenarbeit in der Gruppe war produktiv.', widget=widgets.RadioSelectHorizontal, blank=True)
-    group2 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>10. </b>Eine Person war  dominant in der Führung der Gruppe.', widget=widgets.RadioSelectHorizontal, blank=True) 
+    group2 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>10. </b>Eine Person war dominant in der Führung der Gruppe.', widget=widgets.RadioSelectHorizontal, blank=True) 
     group3 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>11. </b>Damit eine Gruppe eine gute Entscheidung treffen kann, muss immer jemand die Führung übernehmen.', widget=widgets.RadioSelectHorizontal, blank=True)
     group4 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>12. </b>Meine Gruppe hat einen echten Teamgeist entwickelt.', widget=widgets.RadioSelectHorizontal, blank=True)
     group5 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>13. </b>Unsere individuellen Fähigkeiten und Perspektiven haben sich gut ergänzt.', widget=widgets.RadioSelectHorizontal, blank=True)
     group6 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>14. </b>Alle Gruppenmitglieder haben sich angestrengt.', widget=widgets.RadioSelectHorizontal, blank=True)
     group7 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>15. </b>Alle Gruppenmitglieder haben gleich viel beigetragen.', widget=widgets.RadioSelectHorizontal, blank=True)
     group8 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>16. </b>Im Allgemeinen stimme ich der Mehrheit lieber zu, anstatt Konflikte zu verursachen. ', widget=widgets.RadioSelectHorizontal, blank=True)
-    group9 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>21. </b>Da unsere Bezahlung vom Gruppenerfolg abhing, haben wir uns gegenseitig stark unterstützt.', widget=widgets.RadioSelectHorizontal, blank=True)
-    group10 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>22. </b>Da unsere Bezahlung vom Gruppenerfolg abhing, fühlten wir uns alle verpflichtet, unser Bestes zu geben. ', widget=widgets.RadioSelectHorizontal, blank=True)
-    motivation1 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>17. </b>Mir hat die Arbeit an der Aufgabe Spaß gemacht.', widget=widgets.RadioSelectHorizontal, blank=True)
+    group9 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>22. </b>Da unsere Bezahlung vom Gruppenerfolg abhing, haben wir uns gegenseitig stark unterstützt.', widget=widgets.RadioSelectHorizontal, blank=True)
+    group10 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>23. </b>Da unsere Bezahlung vom Gruppenerfolg abhing, fühlten wir uns alle verpflichtet, unser Bestes zu geben. ', widget=widgets.RadioSelectHorizontal, blank=True)
+    motivation1 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>17. </b>Mir hat die Aufgabe Spaß gemacht.', widget=widgets.RadioSelectHorizontal, blank=True)
     motivation2 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>18. </b>Ich wollte nicht weniger beitragen als die anderen in meiner Gruppe.', widget=widgets.RadioSelectHorizontal, blank=True)
-    motivation3 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>19. </b>Der Wettkampf mit den anderen Gruppen hat mich motiviert.', widget=widgets.RadioSelectHorizontal, blank=True)    
-    motivation4 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>20. </b>Die Bonuszahlung hat mich motiviert.', widget=widgets.RadioSelectHorizontal, blank=True)
+    motivation3 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>20. </b>Der Wettkampf mit den anderen Gruppen hat mich motiviert.', widget=widgets.RadioSelectHorizontal, blank=True)    
+    motivation4 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>21. </b>Die Bonuszahlung hat mich motiviert.', widget=widgets.RadioSelectHorizontal, blank=True)
+    guesser_rating = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>19. </b>Die Leistung der ratenden Personen entsprach meinen Erwartungen.',widget=widgets.RadioSelectHorizontal, blank=True)
     incentives1 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=True)
     incentives2 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=True)
     incentives3 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=True)
@@ -489,11 +394,11 @@ class Player(BasePlayer):
     guesser3 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>3. </b>Ich habe intuitiv Assoziationen zu den Hinweispaaren gesucht.', widget=widgets.RadioSelectHorizontal, blank=True)
     guesser4 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>4. </b>Ich habe versucht, ein übergeordnetes Konzept oder Thema zu finden, das beide Hinweiswörter vereint.', widget=widgets.RadioSelectHorizontal, blank=True)
     guesser5 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>5. </b>Ich habe bewusst versucht, „um die Ecke“ zu denken, um ungewöhnlichere Verbindungen zu entdecken.', widget=widgets.RadioSelectHorizontal, blank=True)
-    guesser6 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>6. </b>Ich habe berücksichtigt, dass offensichtliche Wörter durch Tabuwörter ausgeschlossen sein könnten.', widget=widgets.RadioSelectHorizontal, blank=True)
+    guesser6 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>6. </b>Ich habe berücksichtigt, dass besonders naheliegende Wörter (Tabuwörter) ausgeschlossen sein könnten.', widget=widgets.RadioSelectHorizontal, blank=True)
     guesser7 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>7. </b>Ich habe oft das erste Wort gewählt, das mir eingefallen ist.', widget=widgets.RadioSelectHorizontal, blank=True)
     guesser8 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>8. </b>Es fiel mir schwer, Antworten auf Basis der Hinweispaare zu finden.', widget=widgets.RadioSelectHorizontal, blank=True)
     guesser9 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>9. </b>Mir fiel die Entscheidung für eine finale Antwort schwer.', widget=widgets.RadioSelectHorizontal, blank=True)
-    guesser10 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>10. </b>Mir hat die Aufgabe Spaß gemacht.', widget=widgets.RadioSelectHorizontal, blank=True)
+    guesser10 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>10. </b>Mir hat die Aufgabe gemacht.', widget=widgets.RadioSelectHorizontal, blank=True)
     guesser11 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>11. </b>Der Wettkampf mit den anderen Ratenden hat mich motiviert.', widget=widgets.RadioSelectHorizontal, blank=True)
     guesser12 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>12. </b>Die Bonuszahlung hat mich motiviert.', widget=widgets.RadioSelectHorizontal, blank=True)
     payment_allocator = models.BooleanField(initial=False)
@@ -1115,7 +1020,7 @@ class Results(Page):
                 player.missing = True
                 missing = 'Achtung! Sie haben kein gültiges Hinweispaar abgegeben.'
             if "false: contains taboo or mystery word" in player.ideas_after or "false: contains taboo or mystery word" in player.ideas_before:
-                invalid1 = 'Achtung! Hinweise wurden entfernt, weil sie ein Wort mit demselben Wortstamm wie das geheime Wort oder eins der drei Tabuwörter enthielten.'
+                invalid1 = 'Achtung! Hinweise wurden entfernt, weil sie ein Wort mit demselben Wortstamm wie das Zielwort oder eins der drei Tabuwörter enthielten.'
             if "false: contains space-separated words" in player.ideas_after or "false: contains space-separated words" in player.ideas_before:
                 invalid2 = 'Achtung! Hinweise wurden entfernt, weil sie mehr als ein einzelnes Wort enthielten.'
             if "false: contains special characters" in player.ideas_after or "false: contains special characters" in player.ideas_before:
@@ -1588,7 +1493,7 @@ class Questions1(Page):
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
     form_model = 'player'
-    form_fields = ['ideagen1', 'ideagen2', 'ideagen3', 'ideagen4', 'feedback1', 'feedback2', 'feedback3', 'feedback4', 'group1', 'group2', 'group3', 'group4', 'group5', 'group6', 'group7', 'group8', 'group9', 'group10', 'motivation1', 'motivation2', 'motivation3', 'motivation4', 'incentives1', 'incentives2', 'incentives3', 'guesser1', 'guesser2', 'guesser3', 'guesser4', 'guesser5', 'guesser6', 'guesser7', 'guesser8', 'guesser9', 'guesser10', 'guesser11', 'guesser12']
+    form_fields = ['ideagen1', 'ideagen2', 'ideagen3', 'ideagen4', 'feedback1', 'feedback2', 'feedback3', 'feedback4', 'group1', 'group2', 'group3', 'group4', 'group5', 'group6', 'group7', 'group8', 'group9', 'group10', 'motivation1', 'motivation2', 'motivation3', 'motivation4', 'incentives1', 'incentives2', 'incentives3','guesser_rating', 'guesser1', 'guesser2', 'guesser3', 'guesser4', 'guesser5', 'guesser6', 'guesser7', 'guesser8', 'guesser9', 'guesser10', 'guesser11', 'guesser12']
     def error_message(player, values):
         if player.player_role == 'Hinweisgebende':            
             for i in range(1, 5):
@@ -1604,10 +1509,17 @@ class Questions1(Page):
                 for i in range(1, 3):
                     if values[f'motivation{i}'] == None:
                         return f'Bitte beantworten Sie Frage {i+16}!'
+                if values ['guesser_rating'] == None:
+                    return f'Bitte beantworten Sie Frage 19!'
             else:
-                for i in range(1, 5):
+                for i in range(1, 3):
                     if values[f'motivation{i}'] == None:
                         return f'Bitte beantworten Sie Frage {i+16}!'
+                if values ['guesser_rating'] == None:
+                    return f'Bitte beantworten Sie Frage 19!'
+                for i in range(1, 3):
+                    if values [f'motivation{i+2}'] == None:
+                        return f'Bitte beantworten Sie Frage {i+18}!'
                 for i in range(1, 3):
                     if values[f'group{i+8}'] == None:
                         return f'Bitte beantworten Sie Frage {i+20}!'
@@ -1625,17 +1537,17 @@ class Questions1(Page):
             label2 = ''
             label3 = ''
         if treatment == 2:
-            label1 = '<b>23. </b>Meine Gruppenmitglieder und ich haben uns stark auf die Quantität der Hinweispaare konzentriert.'
-            label2 = '<b>24. </b>Durch die Fokussierung auf Quantität, haben wir Qualität und Originalität vernachlässigt.'
-            label3 = '<b>25. </b>Durch mehr Anstrengung konnte ich meine Ideen in Bezug auf Quantität verbessern.'
+            label1 = '<b>24. </b>Meine Gruppenmitglieder und ich haben uns stark auf die Quantität der Hinweispaare konzentriert.'
+            label2 = '<b>25. </b>Durch die Fokussierung auf Quantität, haben wir Qualität und Originalität vernachlässigt.'
+            label3 = '<b>26. </b>Durch mehr Anstrengung konnte ich meine Ideen in Bezug auf Quantität verbessern.'
         elif treatment == 3:
-            label1 = '<b>23. </b>Meine Gruppenmitglieder und ich haben uns stark auf die Qualität der Hinweispaare konzentriert.'
-            label2 = '<b>24. </b>Durch die Fokussierung auf Qualität, haben wir Quantität und Originalität vernachlässigt.'
-            label3 = '<b>25. </b>Durch mehr Anstrengung konnte ich meine Ideen in Bezug auf Qualität verbessern.'
+            label1 = '<b>24. </b>Meine Gruppenmitglieder und ich haben uns stark auf die Qualität der Hinweispaare konzentriert.'
+            label2 = '<b>25. </b>Durch die Fokussierung auf Qualität, haben wir Quantität und Originalität vernachlässigt.'
+            label3 = '<b>26. </b>Durch mehr Anstrengung konnte ich meine Ideen in Bezug auf Qualität verbessern.'
         elif treatment == 4:
-            label1 = '<b>23. </b>Meine Gruppenmitglieder und ich haben uns stark auf die Originalität der Hinweispaare konzentriert.'
-            label2 = '<b>24. </b>Durch die Fokussierung auf Originalität, haben wir Quantität und Qualität vernachlässigt.'
-            label3 = '<b>25. </b>Durch mehr Anstrengung konnte ich meine Ideen in Bezug auf Originalität verbessern.'
+            label1 = '<b>24. </b>Meine Gruppenmitglieder und ich haben uns stark auf die Originalität der Hinweispaare konzentriert.'
+            label2 = '<b>25. </b>Durch die Fokussierung auf Originalität, haben wir Quantität und Qualität vernachlässigt.'
+            label3 = '<b>26. </b>Durch mehr Anstrengung konnte ich meine Ideen in Bezug auf Originalität verbessern.'
         return {'incentives1_label': label1, 'incentives2_label': label2, 'incentives3_label': label3}
 
 class Questions2(Page):
@@ -1644,54 +1556,19 @@ class Questions2(Page):
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
     form_model = 'player'
-    form_fields = ['age', 'gender', 'study', 'german','risk', 'ambiguity', 'creative_self1', 'creative_self2', 'creative_self3', 'creative_self4', 'creative_self5', 'cognitive1', 'cognitive2', 'cognitive3', 'cognitive4', 'cognitive5', 'general_motivation1', 'general_motivation2', 'general_group1', 'general_group2', 'general_group3', 'Bildende_Kunst', 'Musik', 'Tanz', 'Architektur', 'Literatur', 'Humor', 'Erfindungen', 'Wissenschaftliche_Entdeckungen', 'Theater_und_Film', 'Kochen']
+    form_fields = ['age', 'gender', 'study', 'german','risk', 'creative_self1', 'creative_self2', 'creative_self3', 'cognitive1', 'cognitive2', 'cognitive3', 'cognitive4', 'general_motivation1', 'general_motivation2', 'general_group1', 'general_group2', 'general_group3']
     def error_message(player, values):
         if player.player_role == 'Hinweisgebende':
             for i in range(1, 4):
                 if values[f'general_group{i}'] == None:
-                    return f'Bitte beantworten Sie Frage {i+18}!'
-
-class CreativeActivities(Page):
-    timeout_seconds = 1000
-    def is_displayed(player):
-        return player.round_number == C.NUM_ROUNDS
-    def vars_for_template(player):
-        choices = [1, 2, 3, 4, 5, 6, 7]
-        ratings = [player.Bildende_Kunst, player.Musik, player.Tanz, player.Architektur, player.Literatur, player.Humor, player.Erfindungen, player.Wissenschaftliche_Entdeckungen, player.Theater_und_Film, player.Kochen]
-        return dict(ratings = ratings, choices = choices)
-    form_model = 'player'
-    form_fields = ['Bildende_Kunst_2_1', 'Bildende_Kunst_2_2', 'Bildende_Kunst_2_3', 'Bildende_Kunst_2_4', 'Bildende_Kunst_2_5', 'Bildende_Kunst_2_6', 'Bildende_Kunst_2_7', 'Musik_2_1', 'Musik_2_2', 'Musik_2_3', 'Musik_2_4', 'Musik_2_5', 'Musik_2_6', 'Musik_2_7', 'Tanz_2_1', 'Tanz_2_2', 'Tanz_2_3', 'Tanz_2_4', 'Tanz_2_5', 'Tanz_2_6', 'Tanz_2_7', 'Architektur_2_1', 'Architektur_2_2', 'Architektur_2_3', 'Architektur_2_4', 'Architektur_2_5', 'Architektur_2_6', 'Architektur_2_7', 'Literatur_2_1', 'Literatur_2_2', 'Literatur_2_3', 'Literatur_2_4', 'Literatur_2_5', 'Literatur_2_6', 'Literatur_2_7', 'Humor_2_1', 'Humor_2_2', 'Humor_2_3', 'Humor_2_4', 'Humor_2_5', 'Humor_2_6', 'Humor_2_7', 'Erfindungen_2_1', 'Erfindungen_2_2', 'Erfindungen_2_3', 'Erfindungen_2_4', 'Erfindungen_2_5', 'Erfindungen_2_6', 'Erfindungen_2_7', 'Wissenschaftliche_Entdeckungen_2_1', 'Wissenschaftliche_Entdeckungen_2_2', 'Wissenschaftliche_Entdeckungen_2_3', 'Wissenschaftliche_Entdeckungen_2_4', 'Wissenschaftliche_Entdeckungen_2_5', 'Wissenschaftliche_Entdeckungen_2_6', 'Wissenschaftliche_Entdeckungen_2_7', 'Theater_und_Film_2_1', 'Theater_und_Film_2_2', 'Theater_und_Film_2_3', 'Theater_und_Film_2_4', 'Theater_und_Film_2_5', 'Theater_und_Film_2_6', 'Theater_und_Film_2_7', 'Kochen_2_1', 'Kochen_2_2', 'Kochen_2_3', 'Kochen_2_4', 'Kochen_2_5', 'Kochen_2_6', 'Kochen_2_7']
-
-class Identification(Page):
-    timeout_seconds = 270
-    def is_displayed(player):
-        return player.player_role == 'Hinweisgebende' and player.round_number == C.NUM_ROUNDS
-    form_model = 'player'
-    form_fields = ['circle_overlap']
- 
-    def js_vars(player: Player):
-        return {}
+                    return f'Bitte beantworten Sie Frage {i+14}!'
     
 class AUT(Page):    
-    timeout_seconds = 240
+    timeout_seconds = 300
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS and player.player_role == 'Hinweisgebende' 
     form_model = 'player'
     form_fields = ['AUT', 'AUT2']
-
-class DAT(Page):
-    timeout_seconds = 270
-    def is_displayed(player):
-        return player.round_number == C.NUM_ROUNDS
-    form_model = 'player'
-    form_fields = ['word1', 'word2', 'word3', 'word4', 'word5', 'word6', 'word7', 'word8', 'word9', 'word10']
-    def before_next_page(player, timeout_happened):
-        if timeout_happened:
-            player.invalid_DAT = True
-            return player.invalid_DAT
-        else:
-            player.invalid_DAT = False
-            return player.invalid_DAT
 
 class RAT_Instructions(Page):
     timeout_seconds = 300
@@ -1711,6 +1588,12 @@ class DictatorGame(Page):
         return player.round_number == C.NUM_ROUNDS and player.player_role == 'Hinweisgebende' 
     form_model = 'player'
     form_fields = ['dictator_game']
+    def vars_for_template(player):
+        if player.player_role2 == 'ingroup':
+            label = 'Wie viel von Ihren 10€ möchten Sie an den Empfänger aus Ihrer Gruppe überweisen?'
+        else: 
+            label = 'Wie viel von Ihren 10€ möchten Sie an den Empfänger aus einer anderen Gruppe überweisen?'
+        return {'dictator_game_label': label}
 
 class FinalPage(Page):
     def is_displayed(player):
@@ -1771,8 +1654,8 @@ class VotingResultWaitPage(WaitPage):
         return player.player_role == 'Hinweisgebende'
        
 class GuesserWaitPage(WaitPage):
-    title_text = "Sie können bald das geheime Wort erraten!"
-    body_text = "Bitte warten Sie, bis die Gruppen ihre Hinweispaare generiert haben. Dies kann einige Minuten dauern."
+    title_text = "Sie können bald das Zielwort erraten!"
+    body_text = "Bitte warten Sie, bis die Gruppen ihre Hinweispaare erstellt haben. Dies kann einige Minuten dauern."
     def is_displayed(player): 
         return player.player_role == 'Ratender'   
     wait_for_all_groups = True    
@@ -1782,4 +1665,4 @@ class ResultsWaitPage(WaitPage):
     body_text = "Bitte warten Sie, bis alle Teilnehmenden die Runde abgeschlossen haben. Dies kann einige Minuten dauern."
     wait_for_all_groups = True
 
-page_sequence = [GroupWaitPage, Overview, Intro,  Procedure, Intro2, Rules, Instructions, Payment, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, PairCheck, VotingResultPage, ResultsWaitPage, Results, Usefulness, Originality, Overall_Creativity, DictatorGame, Questions1, Identification, Questions2, CreativeActivities, AUT, RAT_Instructions, RAT, DAT, Score, Score2, Score3, Score4, FinalPage]
+page_sequence = [GroupWaitPage, Overview, Intro,  Procedure, Intro2, Rules, Instructions, Payment, UnderstandPage, Round, Generation_Page, Generation_WaitPage, Discussion, Clue_WaitPage, Clue_Page, VotingWaitPage, Voting_Page, VotingResultWaitPage, GuesserWaitPage, Guess_Page1, Guess_Page2, Guess_Page3, PairCheck, VotingResultPage, ResultsWaitPage, Results, Usefulness, Originality, Overall_Creativity, DictatorGame, Questions1, Questions2, AUT, RAT_Instructions, RAT, Score, Score2, Score3, Score4, FinalPage]

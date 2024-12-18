@@ -1,6 +1,6 @@
 {% include '_static/global/next_button.html' %}
 {{ block title }}
-    <b><span style="color: red;">Wortaufgabe 1</span></b> {{ if player.player_role == "Ratender" }} und <b><span style="color: blue;">Bewertung</span></b> {{ endif }}
+    <b><span style="color: blue;">Wortaufgabe 1</span></b> {{ if player.player_role == "Ratender" }} und <b><span style="color: orange">Bewertung</span></b> {{ endif }}
 {{ endblock }}
 {{ block content }}
 
@@ -22,28 +22,28 @@
 
 <div class="info active">
 {{ if player.player_role == 'Hinweisgebende'}}
-    <p>Das <b>Ziel</b> ist zusammen in Ihrer Gruppe: </p>
+    <p>Das <b>Ziel</b> ist, zusammen in Ihrer Gruppe </p>
     <ul>
-        <li>so viele Hinweispaare wie möglich zu schreiben,</li>
+        <li>so viele Hinweispaare wie möglich zu erstellen,</li>
         <li>die originell sind,</li>
-        <li>und anhand derer andere ein <b>geheimes Wort</b> erraten können.</li>
+        <li>und anhand derer eine Person ein <b>Zielwort</b> erraten kann.</li>
     </ul>
 </div>
 <div class="info">
-<p>Ein Hinweispaar besteht aus <b>zwei einzelnen Wörtern.</b> Sie spielen insgesamt <b>8 Runden.</b> </p> 
-<p><b>Drei Tabuwörter</b> werden zu Beginn jeder Runde gezeigt. Diese Wörter dürfen <b>nicht</b> Teil Ihrer Hinweispaare sein. </p>
+<p>Ein Hinweispaar besteht aus <b>zwei einzelnen Wörtern.</b> Sie spielen insgesamt <b>8 Runden</b>, also 8 verschiedene Zielwörter. </p> 
+<p><b>Drei besonders naheliegende Tabuwörter</b> werden zu Beginn jeder Runde gezeigt. Diese Wörter dürfen <b>nicht</b> Teil Ihrer Hinweispaare sein. </p>
 </br>
 <button class= "otree-btn btn btn-info" style="background-color: rgb(0, 174, 255); color: black; border: 2px solid rgb(0, 174, 255);">Weiter</button>
 </br>
 </div>
 {{ else }}
 <div class="info active">
-<p> <b><span style="color: red;"><u>Wortaufgabe 1:</u></span></b> Das Ziel ist es, anhand eines gegebenen Hinweispaars ein geheimes Wort in maximal <b>drei Versuchen</b> zu erraten. </p>
-<p>Ein Hinweispaar besteht aus <b>zwei einzelnen Wörtern.</b> Insgesamt versuchen Sie <b>8 verschiedene geheime Wörter</b> zu erraten. </p>  
+<p> <b><span style="color: blue;"><u>Wortaufgabe 1:</u></span></b> Das Ziel ist es, anhand eines gegebenen Hinweispaars ein Zielwort in maximal <b>drei Versuchen</b> zu erraten. </p>
+<p>Ein Hinweispaar besteht aus <b>zwei einzelnen Wörtern.</b> Insgesamt versuchen Sie <b>8 verschiedene Zielwörter</b> zu erraten. </p>  
 </div>
 <div class="info">
-<p> <b><span style="color: blue;"><u>Bewertung:</u></span></b> Das Ziel ist, Hinweispaare zu jedem geheimen Wort auf ihre Gültigkeit zu überprüfen und ihre Kreativität zu bewerten.</p>
-<p> Die Hinweispaare werden <b>von Gruppen</b> in dieser Sitzung erstellt. Diese sind konfrontiert mit drei Tabuwörtern, die sie nicht verwenden dürfen.</p>
+<p> <b><span style="color: orange;"><u>Bewertung:</u></span></b> Das Ziel ist, Hinweispaare zu jedem Zielwort auf ihre Gültigkeit zu überprüfen und ihre Kreativität zu bewerten.</p>
+<p> Die Hinweispaare werden <b>von Gruppen</b> in dieser Sitzung erstellt. Diese sind konfrontiert mit drei besonders naheliegenden Tabuwörtern, die sie nicht verwenden dürfen.</p>
 </div>
 <div class="info">
 <p> In jeder neuen Runde erhalten Sie die Hinweispaare einer anderen Gruppe, die Sie <b>erraten, bewerten und überprüfen</b> müssen.</p>

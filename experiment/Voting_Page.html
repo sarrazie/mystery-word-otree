@@ -8,8 +8,8 @@
         display: yes;
     }
 </style>
-<p>Folgende <b>Hinweispaare</b> wurden von Ihnen und Ihren Mitspielenden geschrieben.</p>
-<p>Sie haben nun <b>90 Sekunden</b> Zeit, um sich für ein finales Hinweispaar zu entscheiden. Wenn eine <b>Mehrheit (mindestens 2 Spielende)</b> für ein Hinweispaar entsteht, wird dieses für die Originalitäts- und Nützlichkeitsbewertung verwendet. Andernfalls wird ein Hinweispaar per Zufall ausgewählt.</p>
+<p>Folgende <b>Hinweispaare</b> wurden von Ihnen und Ihren Mitspielenden erstellt.</p>
+<p>Sie haben nun <b>90 Sekunden</b> Zeit, um sich für ein finales Hinweispaar zu entscheiden. Wenn eine <b>Mehrheit (mindestens 2 Spielende)</b> für ein Hinweispaar entsteht, wird dieses für die Originalitäts- und Qualitätsbewertung verwendet. Andernfalls wird ein Hinweispaar per Zufall ausgewählt.</p>
 <p>Über den <b>Chat</b> könnt Sie sich innerhalb Ihrer Gruppe koordinieren.</p>
 {{ if number_pairs > 0}}
 <table class="table table-striped">
@@ -28,7 +28,7 @@
 </table>
 {{ else }}
 </br>
-<p><b>Es wurden keine gültigen Hinweispaare von Ihnen und Ihren Mitspielenden geschrieben.</b></p>
+<p><b>Es wurden keine gültigen Hinweispaare von Ihnen und Ihren Mitspielenden erstellt.</b></p>
 <p>Sie können also nicht über das finale Hinweispaar abstimmen. Bitte warten Sie, bis die anderen Gruppen über ihre Hinweispaare abgestimmt haben.</p>
 </br>
 {{ endif }}
@@ -39,8 +39,8 @@
     <summary> Zusammenfassung der Regeln </summary>
 </br>
     <ul>    
-        <li> <b><span style="color: red;">Wortaufgabe 1</span></b>: Zusammen in Ihrer Gruppe viele originelle Hinweispaare generieren, anhand derer eine Person ein geheimes Wort erraten kann.</li>
-        <li> <b>Ungültige Hinweispaare</b> enthalten Hinweise, die denselben Wortstamm wie das geheime Wort oder wie eins der drei Tabuwörter haben, eine Übersetzung des geheimen Worts sind oder frei erfunden.</li>
+        <li> <b><span style="color: blue;">Wortaufgabe 1</span></b>: Zusammen in Ihrer Gruppe viele originelle Hinweispaare erstellen, anhand derer eine Person ein Zielwort erraten kann.</li>
+        <li> <b>Ungültige Hinweispaare</b> enthalten Hinweise, die denselben Wortstamm wie das Zielwort oder wie eins der drei Tabuwörter haben, eine Übersetzung des Zielworts sind oder frei erfunden.</li>
         <li>{{ if player.participant.treatment == 1 }}Sie erhalten eine Auszahlung von 13€, wenn Sie die Aufgabe abschließen. {{ elif player.participant.treatment == 2 }}Sie erhalten eine Auszahlung von bis zu 20€ in Abhängigkeit von der relativen Leistung Ihrer Gruppe in der Dimension <b>Quantität.</b> {{ elif player.participant.treatment == 3 }}Sie erhalten eine Auszahlung von bis zu 20€ in Abhängigkeit von der relativen Leistung Ihrer Gruppe in der Dimension <b>Qualität.</b> {{ else}}Sie erhalten eine Auszahlung von bis zu 20€ in Abhängigkeit von der relativen Leistung Ihrer Gruppe in der Dimension <b>Originalität.</b> {{ endif }}</li>
     </ul>  
 </details>

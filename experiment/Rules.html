@@ -1,6 +1,6 @@
 {% include '_static/global/next_button.html' %}
 {{ block title }}
-  Beispielrunde <b><span style="color: red;">Wortaufgabe 1</span></b> {{ if player.player_role == "Ratender" }} und <b><span style="color: blue;">Bewertung</span></b> {{ endif }}
+  Beispielrunde <b><span style="color: blue">Wortaufgabe 1</span></b> {{ if player.player_role == "Ratender" }} und <b><span style="color: orange;">Bewertung</span></b> {{ endif }}
 {{ endblock }}
 {{ block content }}
 
@@ -20,7 +20,7 @@
 </script>
 </br>
 <div class="info active">
-<p> <b>Geheimes Wort:</b> <i>Zeit</i> </p>
+<p> <b>Zielwort:</b> <i>Zeit</i> </p>
 </div>
 {{ if player.player_role == "Hinweisgebende" }}
 <div class="info">
@@ -28,14 +28,14 @@
 <p><i>Gegenwart, Vergangenheit, Stunde</i></p> 
 </div>
 <div class="info">
-<p> <b>Hinweispaare</b> Ihrer Gruppe: <i>Uhr + Minute, Moment + Sekunde, unendlich + Zeiger</i></p> 
+<p> <b>Hinweispaare</b> einer Beispielgruppe: <i>Uhr + Minute, Moment + Sekunde, unendlich + Zeiger</i></p> 
 </div>
 <div class="info">
-<p> <b>Finales Hinweispaar</b> Ihrer Gruppe: <i>Uhr + Minute</i></p> 
+<p> <b>Finales Hinweispaar</b> der Beispielgruppe: <i>Uhr + Minute</i></p> 
 </div>
 <div class="info">
 <p><b> Bewertung der Runde: </b></p>
-<p> Nützlichkeit: Das geheime Wort wurde im <b>1. Versuch</b> erraten. </p>
+<p> Qualität: Das Zielwort wurde im <b>1. Versuch</b> (von 3 möglichen) erraten. </p>
 <p> Originalität: Semantische Distanz = <b>90</b> (je höher die Distanz, desto origineller das Hinweispaar)</p>
 <p> Quantität: <b>3</b> gültige Hinweispaare wurden erstellt. </p>
 </br>
@@ -45,8 +45,8 @@
 {{ else}}
 <div class="info">
     </br>
-    <p><b><span style="color: red;"><u>Wortaufgabe 1:</u></span></b></p>
-    <p><b>Hinweispaar</b> einer zufällig ausgewählten Gruppe: <i>Uhr + Minute</i></p> 
+    <p><b><span style="color: blue"><u>Wortaufgabe 1:</u></span></b></p>
+    <p><b>Hinweispaar</b> einer Beispielgruppe: <i>Uhr + Minute</i></p> 
 </div>
 <div class="info">
 <p> <b>1. Rateversuch:</b> Zeiger </p>
@@ -59,13 +59,13 @@
 </div>
 <div class="info">
 </br>
-<p> <b><span style="color: blue;"><u>Bewertung Gültigkeit:</u></span></b></p>
-<p> <b>Hinweispaare einer anderen Gruppe:</b> <i>Uhr + Minute, Moment + vergänglich, unendlich + Zeiger, der + die </i> </p>
-<p> <i>der + die</i> wird als <b>ungültig</b> markiert, weil kein Zusammenhang zu <i>Zeit</i> erkennbar ist.</p>
+<p> <b><span style="color: orange"><u>Bewertung Gültigkeit:</u></span></b></p>
+<p> <b>Hinweispaare einer anderen Beispielgruppe:</b> <i>Uhr + Minute, Moment + vergänglich, unendlich + Zeiger, der + die </i> </p>
+<p> <i>der + die</i> als <b>ungültig</b> markieren, weil kein Zusammenhang zum Zielwort <i>Zeit</i> erkennbar ist.</p>
 </div>
 <div class="info">
 </br>
-<p> <b><span style="color: blue;"><u>Bewertung Kreativität:</u></span></b></p>
+<p> <b><span style="color: orange"><u>Bewertung Kreativität:</u></span></b></p>
 <p> <b>Hinweispaare:</b> <i>Uhr + Minute, Moment + vergänglich, unendlich + Zeiger</i> </p>
 <p> Jedes gültige Hinweispaar wird einzeln auf einer Skala von 1-10 nach Nützlichkeit, Originalität und Gesamtkreativität bewertet.</p>
 </br>

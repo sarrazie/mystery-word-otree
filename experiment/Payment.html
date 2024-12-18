@@ -1,6 +1,6 @@
 {% include '_static/global/next_button.html' %}
 {{ block title }}
-    Auszahlung <b><span style="color: red;">Wortaufgabe 1</span></b>
+    Auszahlung <b><span style="color: blue;">Wortaufgabe 1</span></b>
 {{ endblock }}
 {{ block content }}
 
@@ -22,11 +22,11 @@
 
 {{ if player.player_role == 'Hinweisgebende'}}
 <div class = "info active"> 
-{{ if player.participant.treatment != 1}} <p> Jedes Gruppenmitglied erhält für <b><span style="color: red;">Wortaufgabe 1</span></b>: </p>
+{{ if player.participant.treatment != 1}} <p> Jedes Gruppenmitglied erhält für <b><span style="color: blue;">Wortaufgabe 1</span></b>: </p>
 <ul>
     <li> <b>Teilnahmegebühr:</b> 5€ </li>
     <li> <b>Bonus:</b> bis zu 15€, basierend auf der Leistung der eigenen Gruppe in der Dimension <b>{{ if player.participant.treatment == 3}}Qualität {{elif player.participant.treatment == 2}}Quantität {{else}}Originalität {{endif}}</b>im Vergleich zu den 4 anderen Gruppen in dieser Session. </li>
-{{ else }} <p>Sie erhalten für Ihre Teilnahme an <b><span style="color: red;">Wortaufgabe 1</span></b> eine fixe Auszahlung in Höhe von <b>13€.</b>
+{{ else }} <p>Sie erhalten für Ihre Teilnahme an <b><span style="color: blue;">Wortaufgabe 1</span></b> eine fixe Auszahlung in Höhe von <b>13€.</b>
             <p> Alle Auszahlungen werden nur vorgenommen, wenn Sie die ganze Studie abschließen. </p>
 </br>
     <button class= "otree-btn btn btn-info" style="background-color: rgb(0, 174, 255); color: black; border: 2px solid rgb(0, 174, 255);">Weiter</button>
@@ -42,25 +42,25 @@
 
 {{ if player.participant.treatment == 3}} 
 <div class="info">
-    <p> In jeder Runde erhält Ihre Gruppe Punkte, wenn eine zufällig ausgewählte Person das geheime Wort basierend auf Ihrem finalen Hinweispaar errät. </p>
+    <p> In jeder Runde erhält Ihre Gruppe Punkte, wenn eine Person aus diesem Raum (die nicht selbst Teil einer Gruppe ist) das Zielwort basierend auf Ihrem finalen Hinweispaar errät. </p>
     <ul>
         <li>Erraten im 1. Versuch: <b>3 Punkte</b></li>
         <li>Erraten im 2. Versuch: <b>2 Punkte</b></li>
         <li>Erraten im 3. Versuch: <b>1 Punkt</b></li>
     </ul>
-    <p> Wird das geheime Wort innerhalb von drei Versuchen nicht erraten, erhält Ihre Gruppe <b>keine Punkte</b>. Nach 8 Runden werden die Punkte aus allen Runden zusammengerechnet.</p>
+    <p> Wird das Zielwort innerhalb von drei Versuchen nicht erraten, erhält Ihre Gruppe <b>keine Punkte</b>. Nach 8 Runden werden die Punkte aus allen Runden zusammengerechnet.</p>
 </div>
 {{ endif }} 
 
 {{ if player.participant.treatment == 4}}
 <div class="info">
 <p> In jeder Runde erhält das von Ihrer Gruppe ausgewählte <b>finale Hinweispaar</b> eine <b>Originalitätsbewertung</b> von einem Algorithmus, der die semantische Distanz berechnet.
-<p> Die <b>semantische Distanz</b> misst, wie weit die beiden Wörter im Hinweispaar in Bedeutung und Verwendung vom geheimen Wort entfernt sind. Je höher die Distanz, desto origineller das Paar. Nach 8 Runden werden die durchschnittlichen Originalitätsbewertungen aller Gruppen berechnet.</p>
+<p> Originalität des finalen Hinweispaars, bewertet durch einen Algorithmus, der berechnet, wie weit das Hinweispaar vom Zielwort in allen Bedeutungen und Verwendungen entfernt ist (semantische Distanz). Je höher die Distanz, desto origineller das Paar. Nach 8 Runden werden die durchschnittlichen Originalitätsbewertungen aller Gruppen berechnet.</p>
 </div>
 <div class="info">
     <p> Der Bonus wird basierend auf der durchschnittlichen Originalitätsbewertung Ihrer Gruppe im Vergleich zu den anderen Gruppen vergeben:</p>
     <table style="border-collapse:collapse;border-spacing:0;table-layout: fixed; width: 415px" class="tg"><colgroup><col style="width: 138px"><col style="width: 138px"><col style="width: 139px"></colgroup>
-        <thead><tr><th style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Platz</th><th style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Bonus</th><th style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Gesamtauszahlung</th></tr></thead>
+        <thead><tr><th style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Platz</th><th style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Ihr Bonus</th><th style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Ihre Gesamtauszahlung</th></tr></thead>
         <tbody><tr><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">1.</td><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>15€</b></td><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>20€</b></td></tr>
         <tr><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">2.</td><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>10€</b></td><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>15€</b></td></tr>
         <tr><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">3.</td><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b> 7€</b></td><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>12€</b></td></tr>
@@ -78,7 +78,7 @@
 <div class="info">
     <p> Der Bonus wird basierend auf der Gesamtpunktzahl Ihrer Gruppe im Vergleich zu den anderen Gruppen vergeben:</p>
     <table style="border-collapse:collapse;border-spacing:0;table-layout: fixed; width: 415px" class="tg"><colgroup><col style="width: 138px"><col style="width: 138px"><col style="width: 139px"></colgroup>
-        <thead><tr><th style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Platz</th><th style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Bonus</th><th style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Gesamtauszahlung</th></tr></thead>
+        <thead><tr><th style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Platz</th><th style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Ihr Bonus</th><th style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Ihre Gesamtauszahlung</th></tr></thead>
         <tbody><tr><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">1.</td><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>15€</b></td><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>20€</b></td></tr>
         <tr><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">2.</td><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>10€</b></td><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>15€</b></td></tr>
         <tr><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">3.</td><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b> 7€</b></td><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>12€</b></td></tr>
@@ -101,20 +101,20 @@
 </ul>
 </div>
 <div class="info">
-    <p> In jeder Runde erhalten Sie Punkte, wenn Sie das geheime Wort erraten. </p>
+    <p> In jeder Runde erhalten Sie Punkte, wenn Sie das Zielwort erraten. </p>
     <ul>
         <li>Erraten im 1. Versuch: <b>3 Punkte</b></li>
         <li>Erraten im 2. Versuch: <b>2 Punkte</b></li>
         <li>Erraten im 3. Versuch: <b>1 Punkt</b></li>
     </ul>
-    <p> Wenn Sie das geheime Wort nicht innerhalb von 3 Versuchen erraten, erhalten Sie <b>keine Punkte</b>. Es muss jeweils exakt das <i>eine</i> geheime Wort sein, zu dem die Gruppen die Hinweispaare generiert haben.</p>
+    <p> Wenn Sie das Zielwort nicht innerhalb von 3 Versuchen erraten, erhalten Sie <b>keine Punkte</b>. Es muss jeweils exakt das <i>eine</i> Zielwort sein, zu dem die Gruppen die Hinweispaare erstellt haben.</p>
     <p> Nach 8 Runden werden die Punkte aus allen Runden zusammengerechnet.</p>
 </div>
 
 <div class="info">
     <p> Der Bonus wird basierend auf der Gesamtpunktzahl im Vergleich zu den anderen Teilnehmenden vergeben:</p>
     <table style="border-collapse:collapse;border-spacing:0;table-layout: fixed; width: 415px" class="tg"><colgroup><col style="width: 138px"><col style="width: 138px"><col style="width: 139px"></colgroup>
-        <thead><tr><th style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Platz</th><th style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Bonus</th><th style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Gesamtauszahlung</th></tr></thead>
+        <thead><tr><th style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Platz</th><th style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Ihr Bonus</th><th style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"> Ihre Gesamtauszahlung</th></tr></thead>
         <tbody><tr><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">1.</td><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>15€</b></td><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>20€</b></td></tr>
         <tr><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">2.</td><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>10€</b></td><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>15€</b></td></tr>
         <tr><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">3.</td><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b> 7€</b></td><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><b>12€</b></td></tr>

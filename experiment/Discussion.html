@@ -19,7 +19,7 @@
     });
 </script>
 </br>
-<p>Folgende <b>Hinweispaare</b> wurden von Ihren Mitspielenden geschrieben.</p>
+<p>Folgende <b>Hinweispaare</b> wurden von Ihren Mitspielenden erstellt.</p>
 <p><b>Bewerten</b> Sie, wie gut Sie das jeweilige Hinweispaar finden und machen Sie <b>Vorschläge</b>, welche Hinweise Sie ersetzen würden.</p>
 </br>
 {{ if number_pairs > 0 }}
@@ -31,7 +31,7 @@
         {{ formfield 'discussion1' }}  
 </details>
 </br>
-{{ else }} <p><b>Ihre Mitspielenden haben keine gültigen Hinweispaare geschrieben.</b> </p> </br>{{ endif }}
+{{ else }} <p><b>Ihre Mitspielenden haben keine gültigen Hinweispaare erstellt.</b> </p> </br>{{ endif }}
 
 {{ if number_pairs > 1 }}
 <b>2. {{ Pair2 }}</b>
@@ -249,8 +249,8 @@
     <summary> Zusammenfassung der Regeln </summary>
 </br>
     <ul>    
-        <li> <b><span style="color: red;">Wortaufgabe 1</span></b>: Zusammen in Ihrer Gruppe viele originelle Hinweispaare generieren, anhand derer eine Person ein geheimes Wort erraten kann.</li>
-        <li> <b>Ungültige Hinweispaare</b> enthalten Hinweise, die denselben Wortstamm wie das geheime Wort oder wie eins der drei Tabuwörter haben, eine Übersetzung des geheimen Worts sind oder frei erfunden.</li>
+        <li> <b><span style="color: blue">Wortaufgabe 1</span></b>: Zusammen in Ihrer Gruppe viele originelle Hinweispaare erstellen, anhand derer eine Person ein Zielwort erraten kann.</li>
+        <li> <b>Ungültige Hinweispaare</b> enthalten Hinweise, die denselben Wortstamm wie das Zielwort oder wie eins der drei Tabuwörter haben, eine Übersetzung des Zielworts sind oder frei erfunden.</li>
         <li>{{ if player.participant.treatment == 1 }}Sie erhalten eine Auszahlung von 13€, wenn Sie die Aufgabe abschließen. {{ elif player.participant.treatment == 2 }}Sie erhalten eine Auszahlung von bis zu 20€ in Abhängigkeit von der relativen Leistung Ihrer Gruppe in der Dimension <b>Quantität.</b> {{ elif player.participant.treatment == 3 }}Sie erhalten eine Auszahlung von bis zu 20€ in Abhängigkeit von der relativen Leistung Ihrer Gruppe in der Dimension <b>Qualität.</b> {{ else}}Sie erhalten eine Auszahlung von bis zu 20€ in Abhängigkeit von der relativen Leistung Ihrer Gruppe in der Dimension <b>Originalität.</b> {{ endif }}</li>
     </ul>  
 </details>

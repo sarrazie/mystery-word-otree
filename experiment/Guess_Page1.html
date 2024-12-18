@@ -24,7 +24,7 @@
     <ul>
         <p><b>{{ vote_group }}</b></p>
     </ul>
-<p> Bitte geben Sie Ihre erste <b>Vermutung</b> für das geheime Wort ein. {{ formfield 'guess1' }} </p>
+<p> Bitte geben Sie Ihre erste <b>Vermutung</b> für das Zielwort ein. {{ formfield 'guess1' }} </p>
 {{ else }}
 <p>Leider hat die für diese Runde zufällig ausgewählte Gruppe ein <b>ungültiges Hinweispaar</b> abgegeben.</p>
 <p>Dieses wurde automatisch entfernt, und daher können Sie in dieser Runde <b>nicht raten</b>.</p>  
@@ -37,11 +37,11 @@
 <details>
     <summary> Zusammenfassung der Regeln</summary>
 </br>
-    <ul>
-        <li> <b><span style="color: red;">Wortaufgabe 1</span></b>: Anhand eines gegebenen Hinweispaars in maximal <b>drei Versuchen</b> ein geheimes Wort erraten. </li>
-        <li>Es muss jeweils exakt das <i>eine</i> geheime Wort sein, zu dem die Gruppen die Hinweispaare generiert haben.</li> 
-        <li> <b><span style="color: blue;">Bewertung</span></b>: Hinweispaare zu jedem geheimen Wort auf ihre Gültigkeit überprüfen und ihre Kreativität bewerten.</li>
-    </ul>
+<ul>
+    <li> <b><span style="color: blue;">Wortaufgabe 1</span></b>: Anhand eines gegebenen Hinweispaars in maximal <b>drei Versuchen</b> ein Zielwort erraten. </li>
+    <li>Es muss jeweils exakt das <i>eine</i> Zielwort sein, zu dem die Gruppen die Hinweispaare erstellt haben.</li> 
+    <li> <b><span style="color: orange;">Bewertung</span></b>: Hinweispaare zu jedem Zielwort auf ihre Gültigkeit überprüfen und ihre Kreativität bewerten.</li>
+</ul>
 </details>
 {{ formfield_errors 'guess1' }}
 

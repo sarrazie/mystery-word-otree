@@ -168,6 +168,98 @@ class Player(BasePlayer):
     before_missing = models.BooleanField()
     before_invalid = models.IntegerField()
     after_invalid = models.IntegerField()
+    Bildende_Kunst = models.BooleanField(blank=True, initial=False)
+    Musik = models.BooleanField(blank=True, initial=False)
+    Tanz = models.BooleanField(blank=True, initial=False)
+    Architektur = models.BooleanField(blank=True, initial=False)
+    Literatur = models.BooleanField(blank=True, initial=False)
+    Humor = models.BooleanField(blank=True, initial=False)
+    Erfindungen = models.BooleanField(blank=True, initial=False)
+    Wissenschaftliche_Entdeckungen = models.BooleanField(blank=True, initial=False)
+    Theater_und_Film = models.BooleanField(blank=True, initial=False)
+    Kochen = models.BooleanField(blank=True, initial=False)
+    Bildende_Kunst_2_1 = models.IntegerField(blank=True)
+    Bildende_Kunst_2_2 = models.IntegerField(blank=True)
+    Bildende_Kunst_2_3 = models.IntegerField(blank=True)
+    Bildende_Kunst_2_4 = models.IntegerField(blank=True)
+    Bildende_Kunst_2_5 = models.IntegerField(blank=True)
+    Bildende_Kunst_2_6 = models.IntegerField(blank=True)
+    Bildende_Kunst_2_7 = models.IntegerField(blank=True)
+    Musik_2_1 = models.IntegerField(blank=True) 
+    Musik_2_2 = models.IntegerField(blank=True)
+    Musik_2_3 = models.IntegerField(blank=True)
+    Musik_2_4 = models.IntegerField(blank=True)
+    Musik_2_5 = models.IntegerField(blank=True)
+    Musik_2_6 = models.IntegerField(blank=True)
+    Musik_2_7 = models.IntegerField(blank=True) 
+    Tanz_2_1 = models.IntegerField(blank=True)
+    Tanz_2_2 = models.IntegerField(blank=True)
+    Tanz_2_3 = models.IntegerField(blank=True)
+    Tanz_2_4 = models.IntegerField(blank=True)
+    Tanz_2_5 = models.IntegerField(blank=True)
+    Tanz_2_6 = models.IntegerField(blank=True)
+    Tanz_2_7 = models.IntegerField(blank=True)
+    Architektur_2_1 = models.IntegerField(blank=True)
+    Architektur_2_2 = models.IntegerField(blank=True)
+    Architektur_2_3 = models.IntegerField(blank=True)
+    Architektur_2_4 = models.IntegerField(blank=True)
+    Architektur_2_5 = models.IntegerField(blank=True)
+    Architektur_2_6 = models.IntegerField(blank=True)
+    Architektur_2_7 = models.IntegerField(blank=True)
+    Literatur_2_1 = models.IntegerField(blank=True)
+    Literatur_2_2 = models.IntegerField(blank=True)
+    Literatur_2_3 = models.IntegerField(blank=True)
+    Literatur_2_4 = models.IntegerField(blank=True)
+    Literatur_2_5 = models.IntegerField(blank=True)
+    Literatur_2_6 = models.IntegerField(blank=True)
+    Literatur_2_7 = models.IntegerField(blank=True)
+    Humor_2_1 = models.IntegerField(blank=True)
+    Humor_2_2 = models.IntegerField(blank=True)
+    Humor_2_3 = models.IntegerField(blank=True)
+    Humor_2_4 = models.IntegerField(blank=True)
+    Humor_2_5 = models.IntegerField(blank=True)
+    Humor_2_6 = models.IntegerField(blank=True)
+    Humor_2_7 = models.IntegerField(blank=True)
+    Erfindungen_2_1 = models.IntegerField(blank=True)
+    Erfindungen_2_2 = models.IntegerField(blank=True)
+    Erfindungen_2_3 = models.IntegerField(blank=True)
+    Erfindungen_2_4 = models.IntegerField(blank=True)
+    Erfindungen_2_5 = models.IntegerField(blank=True)
+    Erfindungen_2_6 = models.IntegerField(blank=True)
+    Erfindungen_2_7 = models.IntegerField(blank=True)
+    Wissenschaftliche_Entdeckungen_2_1 = models.IntegerField(blank=True)
+    Wissenschaftliche_Entdeckungen_2_2 = models.IntegerField(blank=True)
+    Wissenschaftliche_Entdeckungen_2_3 = models.IntegerField(blank=True)
+    Wissenschaftliche_Entdeckungen_2_4 = models.IntegerField(blank=True)
+    Wissenschaftliche_Entdeckungen_2_5 = models.IntegerField(blank=True)
+    Wissenschaftliche_Entdeckungen_2_6 = models.IntegerField(blank=True)
+    Wissenschaftliche_Entdeckungen_2_7 = models.IntegerField(blank=True)
+    Theater_und_Film_2_1 = models.IntegerField(blank=True)
+    Theater_und_Film_2_2 = models.IntegerField(blank=True)
+    Theater_und_Film_2_3 = models.IntegerField(blank=True)
+    Theater_und_Film_2_4 = models.IntegerField(blank=True)
+    Theater_und_Film_2_5 = models.IntegerField(blank=True)
+    Theater_und_Film_2_6 = models.IntegerField(blank=True)
+    Theater_und_Film_2_7 = models.IntegerField(blank=True)
+    Kochen_2_1 = models.IntegerField(blank=True)
+    Kochen_2_2 = models.IntegerField(blank=True)
+    Kochen_2_3 = models.IntegerField(blank=True)
+    Kochen_2_4 = models.IntegerField(blank=True)
+    Kochen_2_5 = models.IntegerField(blank=True)
+    Kochen_2_6 = models.IntegerField(blank=True)
+    Kochen_2_7 = models.IntegerField(blank=True)
+    word1 = models.StringField(label= '', initial='', blank=False)
+    word2 = models.StringField(label= '', initial='', blank=False)
+    word3 = models.StringField(label= '', initial='', blank=False)
+    word4 = models.StringField(label= '', initial='', blank=False)
+    word5 = models.StringField(label= '', initial='', blank=False)
+    word6 = models.StringField(label= '', initial='', blank=False)
+    word7 = models.StringField(label= '', initial='', blank=False)
+    word8 = models.StringField(label= '', initial='', blank=False)
+    word9 = models.StringField(label= '', initial='', blank=False)
+    word10 = models.StringField(label= '', initial='', blank=False)
+    circle_overlap = models.FloatField(label="Overlap Percentage",blank=True)
+    invalid_DAT = models.BooleanField()
 
 def creating_session(subsession: Subsession):
     session = subsession.session
@@ -1195,6 +1287,41 @@ class Voting_Page(Page):
         if number_pairs > 14:
             Pair15 = pairsafter[14]
         return dict(mystery_word = mystery_word, taboo_words= taboo_words, number_pairs = number_pairs, Pair1 = Pair1, Pair2 = Pair2, Pair3 = Pair3, Pair4 = Pair4, Pair5 = Pair5, Pair6 = Pair6, Pair7 = Pair7, Pair8 = Pair8, Pair9 = Pair9, Pair10 = Pair10, Pair11 = Pair11, Pair12 = Pair12, Pair13 = Pair13, Pair14 = Pair14, Pair15 = Pair15, pairs = pairsafter)
+
+class Identification(Page):
+    timeout_seconds = 270
+    def is_displayed(player):
+        return player.player_role == 'Hinweisgebende' and player.round_number == C.NUM_ROUNDS
+    form_model = 'player'
+    form_fields = ['circle_overlap']
+ 
+    def js_vars(player: Player):
+        return {}
+    
+class DAT(Page):
+    timeout_seconds = 270
+    def is_displayed(player):
+        return player.round_number == C.NUM_ROUNDS
+    form_model = 'player'
+    form_fields = ['word1', 'word2', 'word3', 'word4', 'word5', 'word6', 'word7', 'word8', 'word9', 'word10']
+    def before_next_page(player, timeout_happened):
+        if timeout_happened:
+            player.invalid_DAT = True
+            return player.invalid_DAT
+        else:
+            player.invalid_DAT = False
+            return player.invalid_DAT
+        
+class CreativeActivities(Page):
+    timeout_seconds = 1000
+    def is_displayed(player):
+        return player.round_number == C.NUM_ROUNDS
+    def vars_for_template(player):
+        choices = [1, 2, 3, 4, 5, 6, 7]
+        ratings = [player.Bildende_Kunst, player.Musik, player.Tanz, player.Architektur, player.Literatur, player.Humor, player.Erfindungen, player.Wissenschaftliche_Entdeckungen, player.Theater_und_Film, player.Kochen]
+        return dict(ratings = ratings, choices = choices)
+    form_model = 'player'
+    form_fields = ['Bildende_Kunst_2_1', 'Bildende_Kunst_2_2', 'Bildende_Kunst_2_3', 'Bildende_Kunst_2_4', 'Bildende_Kunst_2_5', 'Bildende_Kunst_2_6', 'Bildende_Kunst_2_7', 'Musik_2_1', 'Musik_2_2', 'Musik_2_3', 'Musik_2_4', 'Musik_2_5', 'Musik_2_6', 'Musik_2_7', 'Tanz_2_1', 'Tanz_2_2', 'Tanz_2_3', 'Tanz_2_4', 'Tanz_2_5', 'Tanz_2_6', 'Tanz_2_7', 'Architektur_2_1', 'Architektur_2_2', 'Architektur_2_3', 'Architektur_2_4', 'Architektur_2_5', 'Architektur_2_6', 'Architektur_2_7', 'Literatur_2_1', 'Literatur_2_2', 'Literatur_2_3', 'Literatur_2_4', 'Literatur_2_5', 'Literatur_2_6', 'Literatur_2_7', 'Humor_2_1', 'Humor_2_2', 'Humor_2_3', 'Humor_2_4', 'Humor_2_5', 'Humor_2_6', 'Humor_2_7', 'Erfindungen_2_1', 'Erfindungen_2_2', 'Erfindungen_2_3', 'Erfindungen_2_4', 'Erfindungen_2_5', 'Erfindungen_2_6', 'Erfindungen_2_7', 'Wissenschaftliche_Entdeckungen_2_1', 'Wissenschaftliche_Entdeckungen_2_2', 'Wissenschaftliche_Entdeckungen_2_3', 'Wissenschaftliche_Entdeckungen_2_4', 'Wissenschaftliche_Entdeckungen_2_5', 'Wissenschaftliche_Entdeckungen_2_6', 'Wissenschaftliche_Entdeckungen_2_7', 'Theater_und_Film_2_1', 'Theater_und_Film_2_2', 'Theater_und_Film_2_3', 'Theater_und_Film_2_4', 'Theater_und_Film_2_5', 'Theater_und_Film_2_6', 'Theater_und_Film_2_7', 'Kochen_2_1', 'Kochen_2_2', 'Kochen_2_3', 'Kochen_2_4', 'Kochen_2_5', 'Kochen_2_6', 'Kochen_2_7']
 
 class VotingResultWaitPage(WaitPage):
     title_text = "Vielen Dank für Ihre Abstimmung!"

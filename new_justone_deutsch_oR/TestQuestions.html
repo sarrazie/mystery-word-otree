@@ -23,6 +23,22 @@
  <p> Bitte beantworten Sie die folgenden <b>Fragen</b> oder geben Sie Ihr <b>Zustimmungsniveau</b> zu den folgenden Aussagen an. </p>
 {{formfields }}
 </br>
+<p><b>Wählen Sie alle Bereiche aus, bei denen Sie das Gefühl haben, mehr Talent, Begabung oder Training als eine durchschnittliche Person zu haben.</b></p>
+{{ for field in C.ACHIEVEMENTS }}
+<label>
+    <input type="checkbox" name="{{ field }}" value="1">
+    {% if field == "Bildende_Kunst" %}
+        <label> Bildende Kunst</label>
+    {% elif field == "Wissenschaftliche_Entdeckungen" %}
+        <label> Wissenschaftliche Entdeckungen</label>
+    {% elif field == "Theater_und_Film" %}
+        <label> Theater und Film</label>
+    {% else %}
+        <label> {{ field }}</label>
+    {% endif %}
+    <br>
+{{ endfor }} 
+</br>
 <button class= "otree-btn btn btn-info">Weiter</button>
 
 {{ endblock }}

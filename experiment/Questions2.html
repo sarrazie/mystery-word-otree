@@ -24,22 +24,14 @@
 {{ formfield 'gender' }} 
 {{ formfield 'study' }} 
 {{ formfield 'german'}}
-</br>
-<p>Stellen Sie sich vor, Sie haben 100€ zur Verfügung und können einen beliebigen Teil dieses Betrags in eine Anlage mit einer <b>Erfolgschance von 50%</b> investieren, die im Erfolgsfall das 2,5-fache des investierten Betrags auszahlt; den nicht investierten Betrag können Sie behalten. </p>
 {{ formfield 'risk' }}
-<p>Stellen Sie sich vor, Sie haben 100€ zur Verfügung und können einen beliebigen Teil dieses Betrags in eine Anlage mit <b>unbekannter Erfolgschance</b> investieren, die im Erfolgsfall das 2,5-fache des investierten Betrags auszahlt; den nicht investierten Betrag können Sie behalten. </p>
-{{ formfield 'ambiguity' }}
-</br>
 {{ formfield 'creative_self1' }}
 {{ formfield 'creative_self2' }}
 {{ formfield 'creative_self3' }}
-{{ formfield 'creative_self4' }}
-{{ formfield 'creative_self5' }}
 {{ formfield 'cognitive1' }}
 {{ formfield 'cognitive2' }}
 {{ formfield 'cognitive3' }}
 {{ formfield 'cognitive4' }}
-{{ formfield 'cognitive5' }}
 {{ formfield 'general_motivation1'}}
 {{ formfield 'general_motivation2'}}
 {{ if player.player_role == 'Hinweisgebende'}}
@@ -48,22 +40,6 @@
 {{ formfield 'general_group3' }}
 {{ endif }}
 </br>  
-<p><b>Wählen Sie alle Bereiche aus, bei denen Sie das Gefühl haben, mehr Talent, Begabung oder Training als eine durchschnittliche Person zu haben.</b></p>
-{{ for field in C.ACHIEVEMENTS }}
-<label>
-    <input type="checkbox" name="{{ field }}" value="1">
-    {% if field == "Bildende_Kunst" %}
-        <label> Bildende Kunst</label>
-    {% elif field == "Wissenschaftliche_Entdeckungen" %}
-        <label> Wissenschaftliche Entdeckungen</label>
-    {% elif field == "Theater_und_Film" %}
-        <label> Theater und Film</label>
-    {% else %}
-        <label> {{ field }}</label>
-    {% endif %}
-    <br>
-{{ endfor }} 
-</br>
 <button class= "otree-btn btn btn-info" style="background-color: rgb(0, 174, 255); color: black; border: 2px solid rgb(0, 174, 255);">Weiter</button>
 
 {{ endblock }}

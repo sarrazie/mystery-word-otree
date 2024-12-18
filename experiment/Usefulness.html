@@ -1,5 +1,5 @@
 {{ block title }}
-    <b><span style="color: blue;">Bewertung</span></b> Nützlichkeit
+    <b><span style="color: orange">Bewertung</span></b> Nützlichkeit
 {{ endblock }}
 {{ block content }}
 
@@ -19,8 +19,8 @@
     });
 </script>
 </br>
-<p> Geheimes Wort: <b>{{ mystery_word }}</b>.
-<p> Bewerten Sie bitte folgende Hinweispaare, inwieweit sie bei der Erratung des geheimen Wortes <b>nützlich</b> sind.</p>
+<p> Zielwort: <b>{{ mystery_word }}</b>.
+<p> Bewerten Sie bitte folgende Hinweispaare, inwieweit sie bei der Erratung des Zielworts <b>nützlich</b> sind.</p>
 <p> <b>Bitte wählen Sie für jedes Hinweispaar eine Antwort aus.</b> </p>
 </br>
 {% if number_pairs == 0 %}
@@ -81,9 +81,9 @@
     <summary> Zusammenfassung der Regeln</summary>
 </br>
     <ul>
-        <li> <b><span style="color: red;">Wortaufgabe 1</span></b>: Anhand eines gegebenen Hinweispaars in maximal <b>drei Versuchen</b> ein geheimes Wort erraten. </li>
-        <li>Es muss jeweils exakt das <i>eine</i> geheime Wort sein, zu dem die Gruppen die Hinweispaare generiert haben.</li> 
-        <li> <b><span style="color: blue;">Bewertung</span></b>: Hinweispaare zu jedem geheimen Wort auf ihre Gültigkeit überprüfen und ihre Kreativität bewerten.</li>
+        <li> <b><span style="color: blue;">Wortaufgabe 1</span></b>: Anhand eines gegebenen Hinweispaars in maximal <b>drei Versuchen</b> ein Zielwort erraten. </li>
+        <li>Es muss jeweils exakt das <i>eine</i> Zielwort sein, zu dem die Gruppen die Hinweispaare erstellt haben.</li> 
+        <li> <b><span style="color: orange;">Bewertung</span></b>: Hinweispaare zu jedem Zielwort auf ihre Gültigkeit überprüfen und ihre Kreativität bewerten.</li>
     </ul>
 </details>
 {{ endblock }}
