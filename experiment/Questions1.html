@@ -45,15 +45,16 @@
 {{ formfield 'group5'}}
 {{ formfield 'group6'}}
 {{ formfield 'group7'}}
-{{ formfield 'group8'}}
 {{ formfield 'motivation1'}}
 {{ formfield 'motivation2'}}
 {{ formfield 'guesser_rating'}}
+{{ formfield 'guesser_imagine'}}
 {{ if player.participant.treatment != 1 }}
 {{ formfield 'motivation3'}}
 {{ formfield 'motivation4'}}
+{{ formfield 'group8'}}
 {{ formfield 'group9'}}
-{{ formfield 'group10'}}
+
 <label>{{ incentives1_label|safe }}</label>
 <div>
     {{ form.incentives1 }}

@@ -25,7 +25,7 @@
 {{ if player.participant.treatment != 1}} <p> Jedes Gruppenmitglied erhält für <b><span style="color: blue;">Wortaufgabe 1</span></b>: </p>
 <ul>
     <li> <b>Teilnahmegebühr:</b> 5€ </li>
-    <li> <b>Bonus:</b> bis zu 15€, basierend auf der Leistung der eigenen Gruppe in der Dimension <b>{{ if player.participant.treatment == 3}}Qualität {{elif player.participant.treatment == 2}}Quantität {{else}}Originalität {{endif}}</b>im Vergleich zu den 4 anderen Gruppen in dieser Session. </li>
+    <li> <b>Bonus:</b> bis zu 15€, basierend auf der Leistung der eigenen Gruppe in der Dimension <b>{{ if player.participant.treatment == 3}}Qualität {{elif player.participant.treatment == 2}}Quantität {{else}}Originalität {{endif}}</b>im Vergleich zu den <b>4 anderen Gruppen</b> in dieser Session. </li>
 {{ else }} <p>Sie erhalten für Ihre Teilnahme an <b><span style="color: blue;">Wortaufgabe 1</span></b> eine fixe Auszahlung in Höhe von <b>13€.</b>
             <p> Alle Auszahlungen werden nur vorgenommen, wenn Sie die ganze Studie abschließen. </p>
 </br>

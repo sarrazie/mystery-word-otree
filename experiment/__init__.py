@@ -104,6 +104,7 @@ class Player(BasePlayer):
     general_group1 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>15. </b>Ich arbeite grundsätzlich lieber in einer Gruppe als alleine.', widget=widgets.RadioSelectHorizontal, blank=True)
     general_group2 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>16. </b>Menschen in einer Gruppe sind in der Regel produktiver als Menschen, die allein arbeiten.', widget=widgets.RadioSelectHorizontal, blank=True)
     general_group3 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>17. </b>Menschen in einer Gruppe sollten bereit sein, Opfer zu bringen, um das Wohl der Gruppe zu fördern. ', widget=widgets.RadioSelectHorizontal, blank=True)
+    general_group4 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>18. </b>Damit eine Gruppe eine gute Entscheidung treffen kann, muss immer jemand die Führung übernehmen.', widget=widgets.RadioSelectHorizontal, blank=True)
     cognitive1 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>9. </b>Kreatives Arbeiten ist hauptsächlich „Trial and Error“ ohne präzises Ziel und detaillierten Plan.', widget=widgets.RadioSelectHorizontal, blank=False)
     cognitive2 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>10. </b>Ich finde es langweilig, immer die gleichen alten Gesichter zu sehen.', widget=widgets.RadioSelectHorizontal, blank=False)
     cognitive3 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>11. </b>Ich arbeite kreativ, um etwas zu produzieren, das einen Zweck erfüllt.', widget=widgets.RadioSelectHorizontal, blank=False)
@@ -373,19 +374,19 @@ class Player(BasePlayer):
     feedback4 = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>8. </b>Ich habe mich und meine Ideen wertgeschätzt gefühlt.', widget=widgets.RadioSelectHorizontal, blank=True)
     group1 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>9. </b>Unsere Zusammenarbeit in der Gruppe war produktiv.', widget=widgets.RadioSelectHorizontal, blank=True)
     group2 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>10. </b>Eine Person war dominant in der Führung der Gruppe.', widget=widgets.RadioSelectHorizontal, blank=True) 
-    group3 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>11. </b>Damit eine Gruppe eine gute Entscheidung treffen kann, muss immer jemand die Führung übernehmen.', widget=widgets.RadioSelectHorizontal, blank=True)
-    group4 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>12. </b>Meine Gruppe hat einen echten Teamgeist entwickelt.', widget=widgets.RadioSelectHorizontal, blank=True)
-    group5 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>13. </b>Unsere individuellen Fähigkeiten und Perspektiven haben sich gut ergänzt.', widget=widgets.RadioSelectHorizontal, blank=True)
-    group6 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>14. </b>Alle Gruppenmitglieder haben sich angestrengt.', widget=widgets.RadioSelectHorizontal, blank=True)
-    group7 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>15. </b>Alle Gruppenmitglieder haben gleich viel beigetragen.', widget=widgets.RadioSelectHorizontal, blank=True)
-    group8 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>16. </b>Im Allgemeinen stimme ich der Mehrheit lieber zu, anstatt Konflikte zu verursachen. ', widget=widgets.RadioSelectHorizontal, blank=True)
-    group9 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>22. </b>Da unsere Bezahlung vom Gruppenerfolg abhing, haben wir uns gegenseitig stark unterstützt.', widget=widgets.RadioSelectHorizontal, blank=True)
-    group10 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>23. </b>Da unsere Bezahlung vom Gruppenerfolg abhing, fühlten wir uns alle verpflichtet, unser Bestes zu geben. ', widget=widgets.RadioSelectHorizontal, blank=True)
-    motivation1 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>17. </b>Mir hat die Aufgabe Spaß gemacht.', widget=widgets.RadioSelectHorizontal, blank=True)
-    motivation2 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>18. </b>Ich wollte nicht weniger beitragen als die anderen in meiner Gruppe.', widget=widgets.RadioSelectHorizontal, blank=True)
+    group3 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>11. </b>Meine Gruppe hat einen echten Teamgeist entwickelt.', widget=widgets.RadioSelectHorizontal, blank=True)
+    group4 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>12. </b>Unsere individuellen Fähigkeiten und Perspektiven haben sich gut ergänzt.', widget=widgets.RadioSelectHorizontal, blank=True)
+    group5 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>13. </b>Alle Gruppenmitglieder haben sich angestrengt.', widget=widgets.RadioSelectHorizontal, blank=True)
+    group6 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>14. </b>Alle Gruppenmitglieder haben gleich viel beigetragen.', widget=widgets.RadioSelectHorizontal, blank=True)
+    group7 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>15. </b>Im Allgemeinen stimme ich der Mehrheit lieber zu, anstatt Konflikte zu verursachen. ', widget=widgets.RadioSelectHorizontal, blank=True)
+    group8 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>22. </b>Da unsere Bezahlung vom Gruppenerfolg abhing, haben wir uns gegenseitig stark unterstützt.', widget=widgets.RadioSelectHorizontal, blank=True)
+    group9 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>23. </b>Da unsere Bezahlung vom Gruppenerfolg abhing, fühlten wir uns alle verpflichtet, unser Bestes zu geben. ', widget=widgets.RadioSelectHorizontal, blank=True)
+    motivation1 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>16. </b>Mir hat die Aufgabe Spaß gemacht.', widget=widgets.RadioSelectHorizontal, blank=True)
+    motivation2 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>17. </b>Ich wollte nicht weniger beitragen als die anderen in meiner Gruppe.', widget=widgets.RadioSelectHorizontal, blank=True)
     motivation3 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>20. </b>Der Wettkampf mit den anderen Gruppen hat mich motiviert.', widget=widgets.RadioSelectHorizontal, blank=True)    
     motivation4 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>21. </b>Die Bonuszahlung hat mich motiviert.', widget=widgets.RadioSelectHorizontal, blank=True)
-    guesser_rating = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>19. </b>Die Leistung der ratenden Personen entsprach meinen Erwartungen.',widget=widgets.RadioSelectHorizontal, blank=True)
+    guesser_rating = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>18. </b>Die Leistung der ratenden Personen entsprach meinen Erwartungen.',widget=widgets.RadioSelectHorizontal, blank=True)
+    guesser_imagine = models.IntegerField(choices=[[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], label='<b>19. </b>Wir haben uns vorgestellt, wie die ratende Personen sein könnten, und unsere Hinweispaare darauf abgestimmt.', widget=widgets.RadioSelectHorizontal, blank=True)
     incentives1 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=True)
     incentives2 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=True)
     incentives3 = models.IntegerField(choices = [[2, 'stimme vollkommen zu'], [1, 'stimme zu'], [0, 'neutral'], [-1, 'stimme nicht zu'], [-2, 'stimme überhaupt nicht zu']], widget=widgets.RadioSelectHorizontal, blank=True)
@@ -1493,7 +1494,7 @@ class Questions1(Page):
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
     form_model = 'player'
-    form_fields = ['ideagen1', 'ideagen2', 'ideagen3', 'ideagen4', 'feedback1', 'feedback2', 'feedback3', 'feedback4', 'group1', 'group2', 'group3', 'group4', 'group5', 'group6', 'group7', 'group8', 'group9', 'group10', 'motivation1', 'motivation2', 'motivation3', 'motivation4', 'incentives1', 'incentives2', 'incentives3','guesser_rating', 'guesser1', 'guesser2', 'guesser3', 'guesser4', 'guesser5', 'guesser6', 'guesser7', 'guesser8', 'guesser9', 'guesser10', 'guesser11', 'guesser12']
+    form_fields = ['ideagen1', 'ideagen2', 'ideagen3', 'ideagen4', 'feedback1', 'feedback2', 'feedback3', 'feedback4', 'group1', 'group2', 'group3', 'group4', 'group5', 'group6', 'group7', 'group8', 'group9', 'motivation1', 'motivation2', 'motivation3', 'motivation4', 'incentives1', 'incentives2', 'incentives3','guesser_rating', 'guesser_imagine', 'guesser1', 'guesser2', 'guesser3', 'guesser4', 'guesser5', 'guesser6', 'guesser7', 'guesser8', 'guesser9', 'guesser10', 'guesser11', 'guesser12']
     def error_message(player, values):
         if player.player_role == 'Hinweisgebende':            
             for i in range(1, 5):
@@ -1502,30 +1503,34 @@ class Questions1(Page):
             for i in range(1, 5):
                 if values[f'feedback{i}'] == None:
                     return f'Bitte beantworten Sie Frage {i+4}!'
-            for i in range(1, 9):
+            for i in range(1, 8):
                 if values[f'group{i}'] == None:
                     return f'Bitte beantworten Sie Frage {i+8}!'
             if player.participant.treatment == 1:
                 for i in range(1, 3):
                     if values[f'motivation{i}'] == None:
-                        return f'Bitte beantworten Sie Frage {i+16}!'
+                        return f'Bitte beantworten Sie Frage {i+15}!'
                 if values ['guesser_rating'] == None:
+                    return f'Bitte beantworten Sie Frage 18!'
+                if values ['guesser_imagine'] == None:
                     return f'Bitte beantworten Sie Frage 19!'
             else:
                 for i in range(1, 3):
                     if values[f'motivation{i}'] == None:
-                        return f'Bitte beantworten Sie Frage {i+16}!'
+                        return f'Bitte beantworten Sie Frage {i+15}!'
                 if values ['guesser_rating'] == None:
+                    return f'Bitte beantworten Sie Frage 18!'
+                if values ['guesser_imagine'] == None:
                     return f'Bitte beantworten Sie Frage 19!'
                 for i in range(1, 3):
                     if values [f'motivation{i+2}'] == None:
-                        return f'Bitte beantworten Sie Frage {i+18}!'
+                        return f'Bitte beantworten Sie Frage {i+19}!'
                 for i in range(1, 3):
-                    if values[f'group{i+8}'] == None:
-                        return f'Bitte beantworten Sie Frage {i+20}!'
+                    if values[f'group{i+7}'] == None:
+                        return f'Bitte beantworten Sie Frage {i+21}!'
                 for i in range(1, 4):
                     if values[f'incentives{i}'] == None:
-                        return f'Bitte beantworten Sie Frage {i+22}!'
+                        return f'Bitte beantworten Sie Frage {i+23}!'
         else:
             for i in range(2, 13):
                 if values[f'guesser{i}'] == None:
@@ -1556,10 +1561,10 @@ class Questions2(Page):
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
     form_model = 'player'
-    form_fields = ['age', 'gender', 'study', 'german','risk', 'creative_self1', 'creative_self2', 'creative_self3', 'cognitive1', 'cognitive2', 'cognitive3', 'cognitive4', 'general_motivation1', 'general_motivation2', 'general_group1', 'general_group2', 'general_group3']
+    form_fields = ['age', 'gender', 'study', 'german','risk', 'creative_self1', 'creative_self2', 'creative_self3', 'cognitive1', 'cognitive2', 'cognitive3', 'cognitive4', 'general_motivation1', 'general_motivation2', 'general_group1', 'general_group2', 'general_group3', 'general_group4']
     def error_message(player, values):
         if player.player_role == 'Hinweisgebende':
-            for i in range(1, 4):
+            for i in range(1, 5):
                 if values[f'general_group{i}'] == None:
                     return f'Bitte beantworten Sie Frage {i+14}!'
     
